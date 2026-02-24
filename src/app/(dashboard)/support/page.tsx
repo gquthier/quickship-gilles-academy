@@ -42,7 +42,7 @@ export default function SupportPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -68,11 +68,11 @@ export default function SupportPage() {
               onClick={() => setFilter(f)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
                 filter === f
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
+                  ? 'bg-accent text-black'
+                  : 'bg-surface/60 text-text-secondary border border-surface-border hover:bg-surface-hover'
               }`}
             >
-              {f === 'all' ? 'Tous' : f === 'open' ? 'Ouverts' : 'Fermés'}
+              {f === 'all' ? 'Tous' : f === 'open' ? 'Ouverts' : 'Ferm\u00e9s'}
               <span className="ml-1.5 text-xs opacity-70">
                 {f === 'all' ? tickets.length : f === 'open' ? tickets.filter(t => !['resolved', 'closed'].includes(t.status)).length : tickets.filter(t => ['resolved', 'closed'].includes(t.status)).length}
               </span>
@@ -87,23 +87,23 @@ export default function SupportPage() {
             description="Vous n'avez pas encore de tickets de support."
             action={
               <Link href="/support/new" className="btn-primary text-xs gap-1.5">
-                <Plus className="w-4 h-4" /> Créer un ticket
+                <Plus className="w-4 h-4" /> Cr&eacute;er un ticket
               </Link>
             }
           />
         ) : (
-          <div className="card divide-y divide-gray-100">
+          <div className="card divide-y divide-surface-border">
             {filteredTickets.map((ticket) => (
-              <Link key={ticket.id} href={`/support/${ticket.id}`} className="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors first:rounded-t-2xl last:rounded-b-2xl">
-                <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0">
-                  <MessageSquare className="w-5 h-5 text-purple-600" />
+              <Link key={ticket.id} href={`/support/${ticket.id}`} className="flex items-center gap-4 p-4 hover:bg-surface-hover transition-colors first:rounded-t-2xl last:rounded-b-2xl">
+                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <MessageSquare className="w-5 h-5 text-accent" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
-                    <h3 className="text-sm font-medium text-gray-900 truncate">{ticket.subject}</h3>
+                    <h3 className="text-sm font-medium text-text-primary truncate">{ticket.subject}</h3>
                     <StatusBadge status={ticket.priority} />
                   </div>
-                  <p className="text-xs text-gray-400 flex items-center gap-2">
+                  <p className="text-xs text-text-muted flex items-center gap-2">
                     {(ticket as any).project?.name && <span>{(ticket as any).project.name}</span>}
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" /> {formatDate(ticket.created_at)}

@@ -46,7 +46,7 @@ export default function AdminSupportPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -63,7 +63,7 @@ export default function AdminSupportPage() {
               key={f}
               onClick={() => setFilter(f)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                filter === f ? 'bg-purple-600 text-white' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
+                filter === f ? 'bg-accent text-black' : 'bg-surface text-text-secondary border border-surface-border hover:bg-surface-hover'
               }`}
             >
               {f === 'all' ? 'Tous' : f === 'open' ? 'Ouverts' : 'Fermés'}
@@ -74,39 +74,39 @@ export default function AdminSupportPage() {
         <div className="card overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left text-xs font-semibold text-gray-500 p-4">Ticket</th>
-                <th className="text-left text-xs font-semibold text-gray-500 p-4">Client</th>
-                <th className="text-left text-xs font-semibold text-gray-500 p-4">Projet</th>
-                <th className="text-left text-xs font-semibold text-gray-500 p-4">Priorité</th>
-                <th className="text-left text-xs font-semibold text-gray-500 p-4">Statut</th>
-                <th className="text-left text-xs font-semibold text-gray-500 p-4">Date</th>
-                <th className="text-left text-xs font-semibold text-gray-500 p-4">Actions</th>
+              <tr className="border-b border-surface-border">
+                <th className="text-left text-xs font-semibold text-text-muted p-4">Ticket</th>
+                <th className="text-left text-xs font-semibold text-text-muted p-4">Client</th>
+                <th className="text-left text-xs font-semibold text-text-muted p-4">Projet</th>
+                <th className="text-left text-xs font-semibold text-text-muted p-4">Priorité</th>
+                <th className="text-left text-xs font-semibold text-text-muted p-4">Statut</th>
+                <th className="text-left text-xs font-semibold text-text-muted p-4">Date</th>
+                <th className="text-left text-xs font-semibold text-text-muted p-4">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
+            <tbody className="divide-y divide-surface-border">
               {filtered.map((ticket) => (
-                <tr key={ticket.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={ticket.id} className="hover:bg-surface-hover transition-colors">
                   <td className="p-4">
-                    <p className="text-sm font-medium text-gray-900">{ticket.subject}</p>
-                    <p className="text-xs text-gray-400 truncate max-w-xs">{ticket.description}</p>
+                    <p className="text-sm font-medium text-text-primary">{ticket.subject}</p>
+                    <p className="text-xs text-text-muted truncate max-w-xs">{ticket.description}</p>
                   </td>
                   <td className="p-4">
                     <div className="flex items-center gap-2">
                       <Avatar name={(ticket.client as any)?.full_name || 'C'} src={(ticket.client as any)?.avatar_url} size="sm" />
                       <div>
                         <p className="text-sm">{(ticket.client as any)?.full_name}</p>
-                        <p className="text-xs text-gray-400">{(ticket.client as any)?.company}</p>
+                        <p className="text-xs text-text-muted">{(ticket.client as any)?.company}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="p-4 text-sm text-gray-600">{(ticket as any).project?.name || '—'}</td>
+                  <td className="p-4 text-sm text-text-secondary">{(ticket as any).project?.name || '—'}</td>
                   <td className="p-4"><StatusBadge status={ticket.priority} /></td>
                   <td className="p-4"><StatusBadge status={ticket.status} /></td>
-                  <td className="p-4 text-xs text-gray-400">{formatDateTime(ticket.created_at)}</td>
+                  <td className="p-4 text-xs text-text-muted">{formatDateTime(ticket.created_at)}</td>
                   <td className="p-4">
                     <select
-                      className="text-xs border border-gray-200 rounded-lg px-2 py-1"
+                      className="text-xs bg-surface border border-surface-border text-text-primary rounded-lg px-2 py-1"
                       value={ticket.status}
                       onChange={(e) => handleStatusChange(ticket.id, e.target.value)}
                     >

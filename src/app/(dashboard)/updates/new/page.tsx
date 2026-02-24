@@ -59,7 +59,7 @@ export default function NewUpdatePage() {
       <TopBar title="Nouvelle demande" subtitle="Demandez une modification sur votre projet" />
 
       <div className="p-8 max-w-2xl">
-        <Link href="/updates" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
+        <Link href="/updates" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour
         </Link>
 
@@ -68,7 +68,7 @@ export default function NewUpdatePage() {
             <div>
               <label className="label">Projet</label>
               <select className="input" value={projectId} onChange={(e) => setProjectId(e.target.value)} required>
-                <option value="">Sélectionner un projet</option>
+                <option value="">S\u00e9lectionner un projet</option>
                 {projects.map((p) => (
                   <option key={p.id} value={p.id}>{p.name}</option>
                 ))}
@@ -88,7 +88,7 @@ export default function NewUpdatePage() {
             </div>
 
             <div>
-              <label className="label">Priorité</label>
+              <label className="label">Priorit\u00e9</label>
               <div className="flex gap-2">
                 {['low', 'medium', 'high', 'urgent'].map((p) => (
                   <button
@@ -96,7 +96,7 @@ export default function NewUpdatePage() {
                     type="button"
                     onClick={() => setPriority(p)}
                     className={`px-4 py-2 rounded-xl text-xs font-medium transition-colors ${
-                      priority === p ? 'bg-purple-600 text-white' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
+                      priority === p ? 'bg-accent text-black' : 'bg-surface/60 text-text-secondary border border-surface-border hover:bg-surface-hover'
                     }`}
                   >
                     {p === 'low' ? 'Basse' : p === 'medium' ? 'Moyenne' : p === 'high' ? 'Haute' : 'Urgente'}
@@ -106,10 +106,10 @@ export default function NewUpdatePage() {
             </div>
 
             <div>
-              <label className="label">Description détaillée</label>
+              <label className="label">Description d\u00e9taill\u00e9e</label>
               <textarea
                 className="input min-h-[150px] resize-y"
-                placeholder="Décrivez en détail les modifications souhaitées..."
+                placeholder="D\u00e9crivez en d\u00e9tail les modifications souhait\u00e9es..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required

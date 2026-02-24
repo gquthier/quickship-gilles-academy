@@ -43,7 +43,7 @@ export default function NewClientPage() {
       <TopBar title="Nouveau client" subtitle="Créer un compte client" />
 
       <div className="p-8 max-w-2xl">
-        <Link href="/admin/clients" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
+        <Link href="/admin/clients" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux clients
         </Link>
 
@@ -73,11 +73,11 @@ export default function NewClientPage() {
             <div>
               <label className="label">Mot de passe initial *</label>
               <input type="text" className="input" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="Mot de passe temporaire" minLength={8} />
-              <p className="text-xs text-gray-400 mt-1">Le client pourra le changer dans ses paramètres.</p>
+              <p className="text-xs text-text-muted mt-1">Le client pourra le changer dans ses paramètres.</p>
             </div>
 
             {error && (
-              <div className="bg-red-50 text-red-500 text-sm px-4 py-3 rounded-xl">{error}</div>
+              <div className="bg-red-500/10 text-red-400 text-sm px-4 py-3 rounded-xl">{error}</div>
             )}
 
             <div className="flex justify-end gap-3 pt-4">

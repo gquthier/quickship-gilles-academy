@@ -45,17 +45,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FC]">
+      <div className="min-h-screen flex items-center justify-center bg-bg">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
-          <p className="text-sm text-gray-400 font-body">Chargement...</p>
+          <div className="w-10 h-10 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
+          <p className="text-sm text-text-muted font-body">Chargement...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9FC]">
+    <div className="min-h-screen bg-bg">
       <ClientSidebar user={user} onSignOut={handleSignOut} />
       <main className="ml-[260px] animate-fade-in">
         {children}

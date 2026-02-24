@@ -77,20 +77,20 @@ export default function SettingsPage() {
   if (!profile) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
 
   return (
     <>
-      <TopBar title="Paramètres" subtitle="Gérez votre compte" />
+      <TopBar title="Param\u00e8tres" subtitle="G\u00e9rez votre compte" />
 
       <div className="p-8 max-w-2xl space-y-8">
         {/* Profile */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <User className="w-5 h-5 text-purple-600" />
+            <User className="w-5 h-5 text-accent" />
             <h2 className="font-display font-bold text-lg">Profil</h2>
           </div>
           <form onSubmit={handleSave} className="space-y-4">
@@ -100,21 +100,21 @@ export default function SettingsPage() {
             </div>
             <div>
               <label className="label">Email</label>
-              <input type="email" className="input bg-gray-50" value={profile.email} disabled />
-              <p className="text-xs text-gray-400 mt-1">Contactez le support pour modifier votre email.</p>
+              <input type="email" className="input bg-surface-hover" value={profile.email} disabled />
+              <p className="text-xs text-text-muted mt-1">Contactez le support pour modifier votre email.</p>
             </div>
             <div>
               <label className="label">Entreprise</label>
               <input type="text" className="input" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Nom de votre entreprise" />
             </div>
             <div>
-              <label className="label">Téléphone</label>
+              <label className="label">T\u00e9l\u00e9phone</label>
               <input type="tel" className="input" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+33 6 12 34 56 78" />
             </div>
             <div className="flex justify-end pt-2">
               <button type="submit" disabled={saving} className="btn-primary gap-1.5">
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                {saved ? 'Enregistré !' : 'Enregistrer'}
+                {saved ? 'Enregistr\u00e9 !' : 'Enregistrer'}
               </button>
             </div>
           </form>
@@ -123,19 +123,19 @@ export default function SettingsPage() {
         {/* Password */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <Lock className="w-5 h-5 text-purple-600" />
+            <Lock className="w-5 h-5 text-accent" />
             <h2 className="font-display font-bold text-lg">Mot de passe</h2>
           </div>
           <form onSubmit={handlePasswordChange} className="space-y-4">
             <div>
               <label className="label">Nouveau mot de passe</label>
-              <input type="password" className="input" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Minimum 8 caractères" required minLength={8} />
+              <input type="password" className="input" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Minimum 8 caract\u00e8res" required minLength={8} />
             </div>
             {passwordError && (
-              <div className="bg-red-50 text-red-500 text-sm px-4 py-3 rounded-xl">{passwordError}</div>
+              <div className="bg-red-500/10 text-red-400 text-sm px-4 py-3 rounded-xl">{passwordError}</div>
             )}
             {passwordSuccess && (
-              <div className="bg-green-50 text-emerald-500 text-sm px-4 py-3 rounded-xl">Mot de passe mis à jour avec succès.</div>
+              <div className="bg-emerald-500/10 text-emerald-400 text-sm px-4 py-3 rounded-xl">Mot de passe mis \u00e0 jour avec succ\u00e8s.</div>
             )}
             <div className="flex justify-end pt-2">
               <button type="submit" disabled={passwordSaving} className="btn-primary gap-1.5">

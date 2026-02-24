@@ -72,7 +72,7 @@ export default function AdminDashboardPage() {
   if (loading || !data) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -84,9 +84,9 @@ export default function AdminDashboardPage() {
       <div className="p-8 space-y-8">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard label="Clients" value={data.totalClients} icon={Users} color="purple" />
+          <StatCard label="Clients" value={data.totalClients} icon={Users} color="accent" />
           <StatCard label="Projets" value={data.totalProjects} icon={FolderKanban} color="blue" />
-          <StatCard label="Tickets ouverts" value={data.openTickets} icon={LifeBuoy} color="rose" />
+          <StatCard label="Tickets ouverts" value={data.openTickets} icon={LifeBuoy} color="red" />
           <StatCard label="Abonnements actifs" value={data.activeSubscriptions} icon={CreditCard} color="emerald" />
         </div>
 
@@ -95,19 +95,19 @@ export default function AdminDashboardPage() {
           <div className="lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-display font-bold text-lg">Projets récents</h2>
-              <Link href="/admin/projects" className="text-sm text-purple-600 font-medium hover:underline flex items-center gap-1">
+              <Link href="/admin/projects" className="text-sm text-accent font-medium hover:text-accent-hover flex items-center gap-1">
                 Voir tous <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="card divide-y divide-gray-100">
+            <div className="card divide-y divide-surface-border">
               {data.recentProjects.map((project) => (
-                <Link key={project.id} href={`/admin/projects/${project.id}`} className="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors first:rounded-t-2xl last:rounded-b-2xl">
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0">
-                    <FolderKanban className="w-5 h-5 text-purple-600" />
+                <Link key={project.id} href={`/admin/projects/${project.id}`} className="flex items-center gap-4 p-4 hover:bg-surface-hover transition-colors first:rounded-t-2xl last:rounded-b-2xl">
+                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <FolderKanban className="w-5 h-5 text-accent" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-medium text-gray-900 truncate">{project.name}</h3>
-                    <p className="text-xs text-gray-400">
+                    <h3 className="text-sm font-medium text-text-primary truncate">{project.name}</h3>
+                    <p className="text-xs text-text-muted">
                       {(project.client as any)?.full_name || 'Client'} · {formatDate(project.created_at)}
                     </p>
                   </div>
@@ -121,19 +121,19 @@ export default function AdminDashboardPage() {
           <div>
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-display font-bold text-lg">Nouveaux clients</h2>
-              <Link href="/admin/clients" className="text-sm text-purple-600 font-medium hover:underline flex items-center gap-1">
+              <Link href="/admin/clients" className="text-sm text-accent font-medium hover:text-accent-hover flex items-center gap-1">
                 Voir tous <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
             <div className="card space-y-3">
               {data.recentClients.map((client) => (
-                <Link key={client.id} href={`/admin/clients/${client.id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                <Link key={client.id} href={`/admin/clients/${client.id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-hover transition-colors">
                   <Avatar name={client.full_name} src={client.avatar_url} size="sm" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">{client.full_name}</p>
-                    <p className="text-xs text-gray-400 truncate">{client.company || client.email}</p>
+                    <p className="text-sm font-medium text-text-primary truncate">{client.full_name}</p>
+                    <p className="text-xs text-text-muted truncate">{client.company || client.email}</p>
                   </div>
-                  <span className="text-xs text-gray-300">{formatDate(client.created_at)}</span>
+                  <span className="text-xs text-text-muted">{formatDate(client.created_at)}</span>
                 </Link>
               ))}
             </div>
@@ -144,20 +144,20 @@ export default function AdminDashboardPage() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-display font-bold text-lg flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 text-orange-500" />
+              <AlertCircle className="w-5 h-5 text-orange-400" />
               Tickets à traiter
             </h2>
-            <Link href="/admin/support" className="text-sm text-purple-600 font-medium hover:underline flex items-center gap-1">
+            <Link href="/admin/support" className="text-sm text-accent font-medium hover:text-accent-hover flex items-center gap-1">
               Voir tous <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="card divide-y divide-gray-100">
+          <div className="card divide-y divide-surface-border">
             {data.recentTickets.filter(t => !['resolved', 'closed'].includes(t.status)).slice(0, 5).map((ticket) => (
-              <Link key={ticket.id} href={`/admin/support/${ticket.id}`} className="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors first:rounded-t-2xl last:rounded-b-2xl">
+              <Link key={ticket.id} href={`/admin/support/${ticket.id}`} className="flex items-center gap-4 p-4 hover:bg-surface-hover transition-colors first:rounded-t-2xl last:rounded-b-2xl">
                 <Avatar name={(ticket.client as any)?.full_name || 'C'} src={(ticket.client as any)?.avatar_url} size="sm" />
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-medium text-gray-900 truncate">{ticket.subject}</h3>
-                  <p className="text-xs text-gray-400">
+                  <h3 className="text-sm font-medium text-text-primary truncate">{ticket.subject}</h3>
+                  <p className="text-xs text-text-muted">
                     {(ticket.client as any)?.full_name} · {formatDateTime(ticket.created_at)}
                   </p>
                 </div>

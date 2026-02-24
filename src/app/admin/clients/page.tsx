@@ -53,7 +53,7 @@ export default function ClientsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -102,28 +102,28 @@ export default function ClientsPage() {
                 <div className="flex items-start gap-4 mb-4">
                   <Avatar name={client.full_name} src={client.avatar_url} size="lg" />
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-display font-semibold text-gray-900 truncate">{client.full_name}</h3>
+                    <h3 className="font-display font-semibold text-text-primary truncate">{client.full_name}</h3>
                     {client.company && (
-                      <p className="text-sm text-gray-500 flex items-center gap-1 truncate">
+                      <p className="text-sm text-text-secondary flex items-center gap-1 truncate">
                         <Building2 className="w-3.5 h-3.5" /> {client.company}
                       </p>
                     )}
                   </div>
-                  <span className={`w-2.5 h-2.5 rounded-full ${client.is_active ? 'bg-emerald-500' : 'bg-gray-300'}`} title={client.is_active ? 'Actif' : 'Inactif'} />
+                  <span className={`w-2.5 h-2.5 rounded-full ${client.is_active ? 'bg-emerald-400' : 'bg-text-muted'}`} title={client.is_active ? 'Actif' : 'Inactif'} />
                 </div>
 
-                <div className="space-y-2 text-sm text-gray-500">
+                <div className="space-y-2 text-sm text-text-secondary">
                   <p className="flex items-center gap-2 truncate">
-                    <Mail className="w-4 h-4 text-gray-400" /> {client.email}
+                    <Mail className="w-4 h-4 text-text-muted" /> {client.email}
                   </p>
                   {client.phone && (
                     <p className="flex items-center gap-2">
-                      <Phone className="w-4 h-4 text-gray-400" /> {client.phone}
+                      <Phone className="w-4 h-4 text-text-muted" /> {client.phone}
                     </p>
                   )}
                 </div>
 
-                <div className="flex items-center justify-between pt-4 mt-4 border-t border-gray-100 text-xs text-gray-400">
+                <div className="flex items-center justify-between pt-4 mt-4 border-t border-surface-border text-xs text-text-muted">
                   <span>{client.project_count} projet{(client.project_count || 0) !== 1 ? 's' : ''}</span>
                   <span>Depuis le {formatDate(client.created_at)}</span>
                 </div>

@@ -62,24 +62,24 @@ export default function NewTicketPage() {
 
   return (
     <>
-      <TopBar title="Nouveau ticket" subtitle="Contactez notre équipe de support" />
+      <TopBar title="Nouveau ticket" subtitle="Contactez notre \u00e9quipe de support" />
 
       <div className="p-8 max-w-2xl">
-        <Link href="/support" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
+        <Link href="/support" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour au support
         </Link>
 
         <div className="card">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="label">Projet concerné</label>
+              <label className="label">Projet concern&eacute;</label>
               <select
                 className="input"
                 value={projectId}
                 onChange={(e) => setProjectId(e.target.value)}
                 required
               >
-                <option value="">Sélectionner un projet</option>
+                <option value="">S&eacute;lectionner un projet</option>
                 {projects.map((p) => (
                   <option key={p.id} value={p.id}>{p.name}</option>
                 ))}
@@ -91,7 +91,7 @@ export default function NewTicketPage() {
               <input
                 type="text"
                 className="input"
-                placeholder="Résumé de votre demande"
+                placeholder="R&eacute;sum&eacute; de votre demande"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
                 required
@@ -99,25 +99,25 @@ export default function NewTicketPage() {
             </div>
 
             <div>
-              <label className="label">Catégorie</label>
+              <label className="label">Cat&eacute;gorie</label>
               <select
                 className="input"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <option value="">Général</option>
+                <option value="">G&eacute;n&eacute;ral</option>
                 <option value="bug">Bug / Erreur</option>
-                <option value="feature">Nouvelle fonctionnalité</option>
+                <option value="feature">Nouvelle fonctionnalit&eacute;</option>
                 <option value="design">Design / UI</option>
                 <option value="performance">Performance</option>
-                <option value="hosting">Hébergement</option>
+                <option value="hosting">H&eacute;bergement</option>
                 <option value="billing">Facturation</option>
                 <option value="other">Autre</option>
               </select>
             </div>
 
             <div>
-              <label className="label">Priorité</label>
+              <label className="label">Priorit&eacute;</label>
               <div className="flex gap-2">
                 {['low', 'medium', 'high', 'urgent'].map((p) => (
                   <button
@@ -126,8 +126,8 @@ export default function NewTicketPage() {
                     onClick={() => setPriority(p)}
                     className={`px-4 py-2 rounded-xl text-xs font-medium transition-colors ${
                       priority === p
-                        ? 'bg-purple-600 text-white'
-                        : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
+                        ? 'bg-accent text-black'
+                        : 'bg-surface/60 text-text-secondary border border-surface-border hover:bg-surface-hover'
                     }`}
                   >
                     {p === 'low' ? 'Basse' : p === 'medium' ? 'Moyenne' : p === 'high' ? 'Haute' : 'Urgente'}
@@ -140,7 +140,7 @@ export default function NewTicketPage() {
               <label className="label">Description</label>
               <textarea
                 className="input min-h-[150px] resize-y"
-                placeholder="Décrivez votre problème ou demande en détail..."
+                placeholder="D&eacute;crivez votre probl&egrave;me ou demande en d&eacute;tail..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required

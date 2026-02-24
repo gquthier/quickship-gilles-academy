@@ -56,7 +56,7 @@ export default function AdminSettingsPage() {
   if (!profile) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -69,7 +69,7 @@ export default function AdminSettingsPage() {
         {/* Admin Profile */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <User className="w-5 h-5 text-purple-600" />
+            <User className="w-5 h-5 text-accent" />
             <h2 className="font-display font-bold text-lg">Profil admin</h2>
           </div>
           <form onSubmit={handleSaveProfile} className="space-y-4">
@@ -79,7 +79,7 @@ export default function AdminSettingsPage() {
             </div>
             <div>
               <label className="label">Email</label>
-              <input type="email" className="input bg-gray-50" value={profile.email} disabled />
+              <input type="email" className="input bg-surface-hover" value={profile.email} disabled />
             </div>
             <div className="flex justify-end">
               <button type="submit" disabled={saving} className="btn-primary gap-1.5">
@@ -93,7 +93,7 @@ export default function AdminSettingsPage() {
         {/* API Tokens */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <Key className="w-5 h-5 text-purple-600" />
+            <Key className="w-5 h-5 text-accent" />
             <h2 className="font-display font-bold text-lg">Tokens API</h2>
           </div>
           <form onSubmit={handleSaveTokens} className="space-y-4">
@@ -106,7 +106,7 @@ export default function AdminSettingsPage() {
                 onChange={(e) => setVercelToken(e.target.value)}
                 placeholder="Votre token Vercel API"
               />
-              <p className="text-xs text-gray-400 mt-1">Utilisé pour récupérer les statuts de déploiement.</p>
+              <p className="text-xs text-text-muted mt-1">Utilisé pour récupérer les statuts de déploiement.</p>
             </div>
             <div>
               <label className="label">Token GitHub</label>
@@ -117,7 +117,7 @@ export default function AdminSettingsPage() {
                 onChange={(e) => setGithubToken(e.target.value)}
                 placeholder="Votre token GitHub (PAT)"
               />
-              <p className="text-xs text-gray-400 mt-1">Utilisé pour accéder aux repositories clients.</p>
+              <p className="text-xs text-text-muted mt-1">Utilisé pour accéder aux repositories clients.</p>
             </div>
             <div className="flex justify-end">
               <button type="submit" disabled={tokensSaving} className="btn-primary gap-1.5">
@@ -131,13 +131,13 @@ export default function AdminSettingsPage() {
         {/* Platform Settings */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <Globe className="w-5 h-5 text-purple-600" />
+            <Globe className="w-5 h-5 text-accent" />
             <h2 className="font-display font-bold text-lg">Configuration plateforme</h2>
           </div>
           <div className="space-y-4">
             <div>
               <label className="label">Domaine de la plateforme</label>
-              <input type="text" className="input bg-gray-50" value="app.quickship.fr" disabled />
+              <input type="text" className="input bg-surface-hover" value="app.quickship.fr" disabled />
             </div>
             <div>
               <label className="label">Organisation GitHub par défaut</label>
@@ -153,7 +153,7 @@ export default function AdminSettingsPage() {
         {/* Notification Settings */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <Bell className="w-5 h-5 text-purple-600" />
+            <Bell className="w-5 h-5 text-accent" />
             <h2 className="font-display font-bold text-lg">Notifications</h2>
           </div>
           <div className="space-y-3">
@@ -163,12 +163,12 @@ export default function AdminSettingsPage() {
               { label: 'Nouveau client inscrit', description: 'Être notifié quand un nouveau client est créé' },
               { label: 'Erreur de déploiement', description: 'Alerte si un déploiement Vercel échoue' },
             ].map((notif, i) => (
-              <label key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 cursor-pointer">
+              <label key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-surface-hover cursor-pointer">
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{notif.label}</p>
-                  <p className="text-xs text-gray-400">{notif.description}</p>
+                  <p className="text-sm font-medium text-text-primary">{notif.label}</p>
+                  <p className="text-xs text-text-muted">{notif.description}</p>
                 </div>
-                <input type="checkbox" defaultChecked className="w-5 h-5 rounded text-purple-600 focus:ring-purple-500 accent-purple-600" />
+                <input type="checkbox" defaultChecked className="w-5 h-5 rounded text-accent focus:ring-accent accent-accent" />
               </label>
             ))}
           </div>

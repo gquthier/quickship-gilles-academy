@@ -68,7 +68,7 @@ export default function NewProjectPage() {
       <TopBar title="Nouveau projet" subtitle="Créer un projet client" />
 
       <div className="p-8 max-w-3xl">
-        <Link href="/admin/projects" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
+        <Link href="/admin/projects" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux projets
         </Link>
 
@@ -76,11 +76,11 @@ export default function NewProjectPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* General */}
             <div>
-              <h3 className="font-display font-semibold text-sm text-gray-900 mb-4">Informations générales</h3>
+              <h3 className="font-display font-semibold text-sm text-text-primary mb-4">Informations générales</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
                   <label className="label">Client *</label>
-                  <select className="input" value={clientId} onChange={(e) => setClientId(e.target.value)} required>
+                  <select className="input bg-surface border-surface-border text-text-primary" value={clientId} onChange={(e) => setClientId(e.target.value)} required>
                     <option value="">Sélectionner un client</option>
                     {clients.map((c) => (
                       <option key={c.id} value={c.id}>{c.full_name} {c.company ? `(${c.company})` : ''}</option>
@@ -102,11 +102,11 @@ export default function NewProjectPage() {
                 <div>
                   <label className="label">Stack technique</label>
                   <input type="text" className="input" value={techStack} onChange={(e) => setTechStack(e.target.value)} placeholder="Next.js, Tailwind, Supabase" />
-                  <p className="text-xs text-gray-400 mt-1">Séparez par des virgules</p>
+                  <p className="text-xs text-text-muted mt-1">Séparez par des virgules</p>
                 </div>
                 <div>
                   <label className="label">Statut</label>
-                  <select className="input" value={status} onChange={(e) => setStatus(e.target.value)}>
+                  <select className="input bg-surface border-surface-border text-text-primary" value={status} onChange={(e) => setStatus(e.target.value)}>
                     <option value="draft">Brouillon</option>
                     <option value="in_progress">En cours</option>
                     <option value="review">En revue</option>
@@ -119,7 +119,7 @@ export default function NewProjectPage() {
 
             {/* Deployment */}
             <div>
-              <h3 className="font-display font-semibold text-sm text-gray-900 mb-4">Déploiement & Hébergement</h3>
+              <h3 className="font-display font-semibold text-sm text-text-primary mb-4">Déploiement & Hébergement</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="label">Vercel Project ID</label>
@@ -142,7 +142,7 @@ export default function NewProjectPage() {
 
             {/* GitHub */}
             <div>
-              <h3 className="font-display font-semibold text-sm text-gray-900 mb-4">GitHub</h3>
+              <h3 className="font-display font-semibold text-sm text-text-primary mb-4">GitHub</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="label">Organisation GitHub</label>
@@ -155,7 +155,7 @@ export default function NewProjectPage() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
+            <div className="flex justify-end gap-3 pt-4 border-t border-surface-border">
               <Link href="/admin/projects" className="btn-secondary">Annuler</Link>
               <button type="submit" disabled={submitting} className="btn-primary gap-1.5">
                 {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <FolderPlus className="w-4 h-4" />}

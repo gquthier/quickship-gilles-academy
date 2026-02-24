@@ -34,20 +34,20 @@ export default function SubscriptionsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
 
   const planFeatures: Record<string, string[]> = {
-    starter: ['Hébergement inclus', 'Support email', '1 modification/mois', 'Certificat SSL'],
-    pro: ['Hébergement inclus', 'Support prioritaire', '5 modifications/mois', 'Certificat SSL', 'Analytics avancées', 'Backups quotidiens'],
-    enterprise: ['Hébergement dédié', 'Support 24/7', 'Modifications illimitées', 'Certificat SSL', 'Analytics avancées', 'Backups quotidiens', 'SLA garanti', 'Account manager dédié'],
+    starter: ['H\u00e9bergement inclus', 'Support email', '1 modification/mois', 'Certificat SSL'],
+    pro: ['H\u00e9bergement inclus', 'Support prioritaire', '5 modifications/mois', 'Certificat SSL', 'Analytics avanc\u00e9es', 'Backups quotidiens'],
+    enterprise: ['H\u00e9bergement d\u00e9di\u00e9', 'Support 24/7', 'Modifications illimit\u00e9es', 'Certificat SSL', 'Analytics avanc\u00e9es', 'Backups quotidiens', 'SLA garanti', 'Account manager d\u00e9di\u00e9'],
   }
 
   return (
     <>
-      <TopBar title="Abonnements" subtitle="Gérez vos plans et abonnements" />
+      <TopBar title="Abonnements" subtitle="G\u00e9rez vos plans et abonnements" />
 
       <div className="p-8">
         {subscriptions.length === 0 ? (
@@ -63,21 +63,21 @@ export default function SubscriptionsPage() {
                 <div className="flex items-start justify-between mb-6">
                   <div>
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className="font-display font-bold text-xl text-gray-900">
+                      <h3 className="font-display font-bold text-xl text-text-primary">
                         Plan {getStatusLabel(sub.plan)}
                       </h3>
                       <StatusBadge status={sub.status} />
                     </div>
                     {sub.project && (
-                      <p className="text-sm text-gray-500">
-                        {(sub.project as any).name} {(sub.project as any).domain && `· ${(sub.project as any).domain}`}
+                      <p className="text-sm text-text-secondary">
+                        {(sub.project as any).name} {(sub.project as any).domain && `\u00b7 ${(sub.project as any).domain}`}
                       </p>
                     )}
                   </div>
                   {sub.price_monthly && (
                     <div className="text-right">
-                      <p className="font-display font-bold text-2xl text-gray-900">{sub.price_monthly} &euro;</p>
-                      <p className="text-xs text-gray-400">/ mois</p>
+                      <p className="font-display font-bold text-2xl text-text-primary">{sub.price_monthly} &euro;</p>
+                      <p className="text-xs text-text-muted">/ mois</p>
                     </div>
                   )}
                 </div>
@@ -85,16 +85,16 @@ export default function SubscriptionsPage() {
                 {/* Plan features */}
                 <div className="grid grid-cols-2 gap-2 mb-6">
                   {(planFeatures[sub.plan] || []).map((feature) => (
-                    <div key={feature} className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                    <div key={feature} className="flex items-center gap-2 text-sm text-text-secondary">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                       {feature}
                     </div>
                   ))}
                 </div>
 
                 {/* Dates */}
-                <div className="flex items-center gap-6 pt-4 border-t border-gray-100 text-xs text-gray-400">
-                  <span>Début : {formatDate(sub.start_date)}</span>
+                <div className="flex items-center gap-6 pt-4 border-t border-surface-border text-xs text-text-muted">
+                  <span>D\u00e9but : {formatDate(sub.start_date)}</span>
                   {sub.end_date && <span>Fin : {formatDate(sub.end_date)}</span>}
                 </div>
               </div>

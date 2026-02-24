@@ -15,12 +15,12 @@ const sizeMap = {
 }
 
 const bgColors = [
-  'bg-purple-100 text-purple-700',
-  'bg-amber-100 text-amber-700',
-  'bg-emerald-100 text-emerald-700',
-  'bg-blue-100 text-blue-700',
-  'bg-rose-100 text-rose-700',
-  'bg-teal-100 text-teal-700',
+  'bg-accent/10 text-accent',
+  'bg-amber-500/10 text-amber-400',
+  'bg-emerald-500/10 text-emerald-400',
+  'bg-blue-500/10 text-blue-400',
+  'bg-rose-500/10 text-rose-400',
+  'bg-purple-500/10 text-purple-400',
 ]
 
 function getColorFromName(name: string) {
@@ -35,13 +35,15 @@ export function Avatar({ name, src, size = 'md' }: AvatarProps) {
       <img
         src={src}
         alt={name}
-        className={`${sizeMap[size]} rounded-full object-cover ring-2 ring-white`}
+        className={`${sizeMap[size]} rounded-lg object-cover ring-1 ring-surface-border`}
       />
     )
   }
 
   return (
-    <div className={`${sizeMap[size]} ${getColorFromName(name)} rounded-full font-display font-bold flex items-center justify-center ring-2 ring-white`}>
+    <div
+      className={`${sizeMap[size]} ${getColorFromName(name)} rounded-lg font-mono font-bold flex items-center justify-center ring-1 ring-surface-border`}
+    >
       {getInitials(name)}
     </div>
   )

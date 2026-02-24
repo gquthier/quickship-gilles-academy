@@ -86,7 +86,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
   if (loading || !client) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -96,7 +96,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
       <TopBar title={client.full_name} subtitle={client.company || client.email} />
 
       <div className="p-8">
-        <Link href="/admin/clients" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
+        <Link href="/admin/clients" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux clients
         </Link>
 
@@ -108,7 +108,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
                 <Avatar name={client.full_name} src={client.avatar_url} size="lg" />
                 <div>
                   <h2 className="font-display font-bold text-lg">{client.full_name}</h2>
-                  <p className="text-sm text-gray-500">{client.company || 'Particulier'}</p>
+                  <p className="text-sm text-text-secondary">{client.company || 'Particulier'}</p>
                 </div>
               </div>
 
@@ -135,22 +135,22 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Mail className="w-4 h-4 text-gray-400" /> {client.email}
+                  <div className="flex items-center gap-2 text-sm text-text-secondary">
+                    <Mail className="w-4 h-4 text-text-muted" /> {client.email}
                   </div>
                   {client.phone && (
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Phone className="w-4 h-4 text-gray-400" /> {client.phone}
+                    <div className="flex items-center gap-2 text-sm text-text-secondary">
+                      <Phone className="w-4 h-4 text-text-muted" /> {client.phone}
                     </div>
                   )}
                   {client.company && (
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Building2 className="w-4 h-4 text-gray-400" /> {client.company}
+                    <div className="flex items-center gap-2 text-sm text-text-secondary">
+                      <Building2 className="w-4 h-4 text-text-muted" /> {client.company}
                     </div>
                   )}
-                  <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+                  <div className="flex items-center gap-2 pt-3 border-t border-surface-border">
                     <button onClick={() => setEditMode(true)} className="btn-secondary text-xs flex-1 justify-center">Modifier</button>
-                    <button onClick={toggleActive} className={`text-xs flex items-center gap-1 px-3 py-2 rounded-xl ${client.is_active ? 'text-emerald-500' : 'text-gray-400'}`}>
+                    <button onClick={toggleActive} className={`text-xs flex items-center gap-1 px-3 py-2 rounded-xl ${client.is_active ? 'text-emerald-400' : 'text-text-muted'}`}>
                       {client.is_active ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
                       {client.is_active ? 'Actif' : 'Inactif'}
                     </button>
@@ -158,7 +158,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
                 </div>
               )}
 
-              <div className="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-400">
+              <div className="mt-4 pt-4 border-t border-surface-border text-xs text-text-muted">
                 Client depuis le {formatDate(client.created_at)}
               </div>
             </div>
@@ -170,19 +170,19 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
             <div className="card">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-display font-bold flex items-center gap-2">
-                  <FolderKanban className="w-5 h-5 text-purple-600" /> Projets ({projects.length})
+                  <FolderKanban className="w-5 h-5 text-accent" /> Projets ({projects.length})
                 </h3>
-                <Link href={`/admin/projects/new?client=${client.id}`} className="text-xs text-purple-600 hover:underline">+ Ajouter</Link>
+                <Link href={`/admin/projects/new?client=${client.id}`} className="text-xs text-accent hover:text-accent-hover">+ Ajouter</Link>
               </div>
               {projects.length === 0 ? (
-                <p className="text-sm text-gray-400 text-center py-4">Aucun projet</p>
+                <p className="text-sm text-text-muted text-center py-4">Aucun projet</p>
               ) : (
-                <div className="divide-y divide-gray-100">
+                <div className="divide-y divide-surface-border">
                   {projects.map((p) => (
-                    <Link key={p.id} href={`/admin/projects/${p.id}`} className="flex items-center gap-3 py-3 hover:bg-gray-50 px-2 rounded-lg transition-colors">
+                    <Link key={p.id} href={`/admin/projects/${p.id}`} className="flex items-center gap-3 py-3 hover:bg-surface-hover px-2 rounded-lg transition-colors">
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate">{p.name}</p>
-                        <p className="text-xs text-gray-400">{p.domain || 'Pas de domaine'}</p>
+                        <p className="text-xs text-text-muted">{p.domain || 'Pas de domaine'}</p>
                       </div>
                       <StatusBadge status={p.status} />
                     </Link>
@@ -194,17 +194,17 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
             {/* Subscriptions */}
             <div className="card">
               <h3 className="font-display font-bold flex items-center gap-2 mb-4">
-                <CreditCard className="w-5 h-5 text-emerald-500" /> Abonnements ({subscriptions.length})
+                <CreditCard className="w-5 h-5 text-emerald-400" /> Abonnements ({subscriptions.length})
               </h3>
               {subscriptions.length === 0 ? (
-                <p className="text-sm text-gray-400 text-center py-4">Aucun abonnement</p>
+                <p className="text-sm text-text-muted text-center py-4">Aucun abonnement</p>
               ) : (
-                <div className="divide-y divide-gray-100">
+                <div className="divide-y divide-surface-border">
                   {subscriptions.map((s) => (
                     <div key={s.id} className="flex items-center gap-3 py-3">
                       <div className="flex-1">
                         <p className="text-sm font-medium capitalize">{s.plan}</p>
-                        <p className="text-xs text-gray-400">{(s.project as any)?.name || 'Général'}</p>
+                        <p className="text-xs text-text-muted">{(s.project as any)?.name || 'Général'}</p>
                       </div>
                       {s.price_monthly && <p className="text-sm font-bold">{s.price_monthly}&euro;/mois</p>}
                       <StatusBadge status={s.status} />
@@ -217,17 +217,17 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
             {/* Recent Tickets */}
             <div className="card">
               <h3 className="font-display font-bold flex items-center gap-2 mb-4">
-                <LifeBuoy className="w-5 h-5 text-orange-500" /> Tickets récents ({tickets.length})
+                <LifeBuoy className="w-5 h-5 text-orange-400" /> Tickets récents ({tickets.length})
               </h3>
               {tickets.length === 0 ? (
-                <p className="text-sm text-gray-400 text-center py-4">Aucun ticket</p>
+                <p className="text-sm text-text-muted text-center py-4">Aucun ticket</p>
               ) : (
-                <div className="divide-y divide-gray-100">
+                <div className="divide-y divide-surface-border">
                   {tickets.slice(0, 5).map((t) => (
                     <div key={t.id} className="flex items-center gap-3 py-3">
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate">{t.subject}</p>
-                        <p className="text-xs text-gray-400">{formatDate(t.created_at)}</p>
+                        <p className="text-xs text-text-muted">{formatDate(t.created_at)}</p>
                       </div>
                       <StatusBadge status={t.status} />
                     </div>

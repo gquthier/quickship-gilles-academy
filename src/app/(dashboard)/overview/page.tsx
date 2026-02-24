@@ -49,7 +49,7 @@ export default function OverviewPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -65,16 +65,16 @@ export default function OverviewPage() {
       <div className="p-8 space-y-8">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <StatCard label="Projets actifs" value={activeProjects.length} icon={FolderKanban} color="purple" />
-          <StatCard label="Tickets ouverts" value={openTickets.length} icon={LifeBuoy} color="rose" />
-          <StatCard label="Modifications en cours" value={pendingUpdates.length} icon={RefreshCw} color="teal" />
+          <StatCard label="Projets actifs" value={activeProjects.length} icon={FolderKanban} color="accent" />
+          <StatCard label="Tickets ouverts" value={openTickets.length} icon={LifeBuoy} color="red" />
+          <StatCard label="Modifications en cours" value={pendingUpdates.length} icon={RefreshCw} color="blue" />
         </div>
 
         {/* Projects */}
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-display font-bold text-lg">Mes projets</h2>
-            <Link href="/projects" className="text-sm text-purple-600 font-medium hover:underline">
+            <Link href="/projects" className="text-sm text-accent font-medium hover:text-accent-hover">
               Voir tous
             </Link>
           </div>
@@ -83,9 +83,9 @@ export default function OverviewPage() {
               <Link key={project.id} href={`/projects/${project.id}`} className="card hover:shadow-card-hover transition-shadow">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-display font-semibold text-gray-900">{project.name}</h3>
+                    <h3 className="font-display font-semibold text-text-primary">{project.name}</h3>
                     {project.domain && (
-                      <p className="text-sm text-gray-500 flex items-center gap-1 mt-0.5">
+                      <p className="text-sm text-text-secondary flex items-center gap-1 mt-0.5">
                         <Globe className="w-3.5 h-3.5" />
                         {project.domain}
                       </p>
@@ -93,7 +93,7 @@ export default function OverviewPage() {
                   </div>
                   <StatusBadge status={project.status} />
                 </div>
-                <div className="flex items-center gap-4 text-xs text-gray-400">
+                <div className="flex items-center gap-4 text-xs text-text-muted">
                   {project.deployed_url && (
                     <span className="flex items-center gap-1">
                       <ExternalLink className="w-3.5 h-3.5" /> Site en ligne
@@ -118,25 +118,25 @@ export default function OverviewPage() {
           {/* Recent Tickets */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-display font-bold text-lg">Tickets récents</h2>
-              <Link href="/support" className="text-sm text-purple-600 font-medium hover:underline">
+              <h2 className="font-display font-bold text-lg">Tickets r&eacute;cents</h2>
+              <Link href="/support" className="text-sm text-accent font-medium hover:text-accent-hover">
                 Voir tous
               </Link>
             </div>
             <div className="card space-y-3">
               {tickets.length === 0 ? (
-                <p className="text-sm text-gray-400 py-4 text-center">Aucun ticket</p>
+                <p className="text-sm text-text-muted py-4 text-center">Aucun ticket</p>
               ) : (
                 tickets.map((ticket) => (
-                  <Link key={ticket.id} href={`/support/${ticket.id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                  <Link key={ticket.id} href={`/support/${ticket.id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-hover transition-colors">
                     {['resolved', 'closed'].includes(ticket.status) ? (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                     ) : (
-                      <AlertCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                      <AlertCircle className="w-5 h-5 text-orange-400 flex-shrink-0" />
                     )}
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">{ticket.subject}</p>
-                      <p className="text-xs text-gray-400">{formatDate(ticket.created_at)}</p>
+                      <p className="text-sm font-medium text-text-primary truncate">{ticket.subject}</p>
+                      <p className="text-xs text-text-muted">{formatDate(ticket.created_at)}</p>
                     </div>
                     <StatusBadge status={ticket.status} />
                   </Link>
@@ -148,21 +148,21 @@ export default function OverviewPage() {
           {/* Recent Update Requests */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-display font-bold text-lg">Demandes récentes</h2>
-              <Link href="/updates" className="text-sm text-purple-600 font-medium hover:underline">
+              <h2 className="font-display font-bold text-lg">Demandes r&eacute;centes</h2>
+              <Link href="/updates" className="text-sm text-accent font-medium hover:text-accent-hover">
                 Voir toutes
               </Link>
             </div>
             <div className="card space-y-3">
               {updates.length === 0 ? (
-                <p className="text-sm text-gray-400 py-4 text-center">Aucune demande</p>
+                <p className="text-sm text-text-muted py-4 text-center">Aucune demande</p>
               ) : (
                 updates.map((update) => (
-                  <div key={update.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                    <RefreshCw className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                  <div key={update.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-hover transition-colors">
+                    <RefreshCw className="w-5 h-5 text-teal-400 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">{update.title}</p>
-                      <p className="text-xs text-gray-400">{formatDate(update.created_at)}</p>
+                      <p className="text-sm font-medium text-text-primary truncate">{update.title}</p>
+                      <p className="text-xs text-text-muted">{formatDate(update.created_at)}</p>
                     </div>
                     <StatusBadge status={update.status} />
                   </div>

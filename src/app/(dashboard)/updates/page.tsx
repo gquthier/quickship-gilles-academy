@@ -35,7 +35,7 @@ export default function UpdatesPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -44,7 +44,7 @@ export default function UpdatesPage() {
     <>
       <TopBar
         title="Demandes de modification"
-        subtitle="Suivez vos demandes de mise à jour"
+        subtitle="Suivez vos demandes de mise \u00e0 jour"
         actions={
           <Link href="/updates/new" className="btn-primary text-xs gap-1.5">
             <Plus className="w-4 h-4" /> Nouvelle demande
@@ -70,8 +70,8 @@ export default function UpdatesPage() {
               <div key={update.id} className="card hover:shadow-card-hover transition-shadow">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-display font-semibold text-gray-900">{update.title}</h3>
-                    <p className="text-xs text-gray-400 flex items-center gap-2 mt-1">
+                    <h3 className="font-display font-semibold text-text-primary">{update.title}</h3>
+                    <p className="text-xs text-text-muted flex items-center gap-2 mt-1">
                       {(update as any).project?.name && <span>{(update as any).project.name}</span>}
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {formatDate(update.created_at)}
@@ -83,15 +83,15 @@ export default function UpdatesPage() {
                     <StatusBadge status={update.status} />
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 line-clamp-2">{update.description}</p>
+                <p className="text-sm text-text-secondary line-clamp-2">{update.description}</p>
                 {update.estimated_hours && (
-                  <p className="text-xs text-gray-400 mt-2">
+                  <p className="text-xs text-text-muted mt-2">
                     Estimation : {update.estimated_hours}h
                   </p>
                 )}
                 {update.admin_notes && (
-                  <div className="mt-3 p-3 rounded-xl bg-purple-50 text-sm text-purple-700">
-                    <p className="text-xs font-semibold mb-1">Note de l'équipe :</p>
+                  <div className="mt-3 p-3 rounded-xl bg-accent/10 text-sm text-accent">
+                    <p className="text-xs font-semibold mb-1">Note de l'\u00e9quipe :</p>
                     {update.admin_notes}
                   </div>
                 )}
