@@ -7,13 +7,15 @@ import { StatusBadge } from '@/components/ui/StatusBadge'
 import { Avatar } from '@/components/ui/Avatar'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate, formatDateTime, getStatusLabel } from '@/lib/utils'
-import { ClipboardList, Eye, EyeOff, ChevronDown, ChevronUp, Check } from 'lucide-react'
+import { ClipboardList, Eye, EyeOff, ChevronDown, ChevronUp, Check, Copy, CheckCheck, Zap } from 'lucide-react'
+import { generateProjectPrompt } from '@/lib/generate-prompt'
 import type { OnboardingResponse, Profile } from '@/types'
 
 export default function OnboardingPage() {
   const [responses, setResponses] = useState<OnboardingResponse[]>([])
   const [typeFilter, setTypeFilter] = useState<string>('all')
   const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
@@ -44,6 +46,13 @@ export default function OnboardingPage() {
     }).eq('id', id)
 
     setResponses(prev => prev.map(r => r.id === id ? { ...r, reviewed_at: new Date().toISOString(), reviewed_by: session.user.id } : r))
+  }
+
+  function handleCopyPrompt(response: OnboardingResponse) {
+    const prompt = generateProjectPrompt(response)
+    navigator.clipboard.writeText(prompt)
+    setCopiedId(response.id)
+    setTimeout(() => setCopiedId(null), 3000)
   }
 
   if (loading) {
@@ -115,6 +124,21 @@ export default function OnboardingPage() {
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleCopyPrompt(response) }}
+                        className={`inline-flex items-center gap-1.5 text-xs font-mono px-3 py-2 rounded-lg transition-all duration-200 ${
+                          copiedId === response.id
+                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                            : 'bg-accent/10 text-accent border border-accent/20 hover:bg-accent/20'
+                        }`}
+                        title="Copier le prompt IA pour créer ce projet"
+                      >
+                        {copiedId === response.id ? (
+                          <><CheckCheck className="w-3.5 h-3.5" /> Copié !</>
+                        ) : (
+                          <><Zap className="w-3.5 h-3.5" /> Prompt IA</>
+                        )}
+                      </button>
                       {!response.reviewed_at && (
                         <button
                           onClick={(e) => { e.stopPropagation(); markReviewed(response.id) }}
