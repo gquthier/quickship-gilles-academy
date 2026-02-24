@@ -89,7 +89,7 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
   if (loading || !project) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     )
   }
@@ -120,7 +120,7 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
       />
 
       <div className="p-8">
-        <Link href="/admin/projects" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-6">
+        <Link href="/admin/projects" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux projets
         </Link>
 
@@ -166,13 +166,13 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div><span className="text-slate-400 text-xs block mb-0.5">Statut</span><StatusBadge status={project.status} /></div>
-                  <div><span className="text-slate-400 text-xs block mb-0.5">Domaine</span>{project.domain || '—'}</div>
-                  <div><span className="text-slate-400 text-xs block mb-0.5">Production</span>{project.deployed_url ? <a href={project.deployed_url} className="text-purple hover:underline" target="_blank">{project.deployed_url}</a> : '—'}</div>
-                  <div><span className="text-slate-400 text-xs block mb-0.5">Staging</span>{project.staging_url || '—'}</div>
-                  <div><span className="text-slate-400 text-xs block mb-0.5">Vercel</span>{project.vercel_project_id || '—'}</div>
-                  <div><span className="text-slate-400 text-xs block mb-0.5">GitHub</span>{project.github_repo ? <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} className="text-purple hover:underline" target="_blank">{project.github_org}/{project.github_repo}</a> : '—'}</div>
-                  {project.notes && <div className="col-span-2"><span className="text-slate-400 text-xs block mb-0.5">Notes</span>{project.notes}</div>}
+                  <div><span className="text-gray-400 text-xs block mb-0.5">Statut</span><StatusBadge status={project.status} /></div>
+                  <div><span className="text-gray-400 text-xs block mb-0.5">Domaine</span>{project.domain || '—'}</div>
+                  <div><span className="text-gray-400 text-xs block mb-0.5">Production</span>{project.deployed_url ? <a href={project.deployed_url} className="text-purple-600 hover:underline" target="_blank">{project.deployed_url}</a> : '—'}</div>
+                  <div><span className="text-gray-400 text-xs block mb-0.5">Staging</span>{project.staging_url || '—'}</div>
+                  <div><span className="text-gray-400 text-xs block mb-0.5">Vercel</span>{project.vercel_project_id || '—'}</div>
+                  <div><span className="text-gray-400 text-xs block mb-0.5">GitHub</span>{project.github_repo ? <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} className="text-purple-600 hover:underline" target="_blank">{project.github_org}/{project.github_repo}</a> : '—'}</div>
+                  {project.notes && <div className="col-span-2"><span className="text-gray-400 text-xs block mb-0.5">Notes</span>{project.notes}</div>}
                 </div>
               )}
             </div>
@@ -181,24 +181,24 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
             <div className="card">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-display font-bold flex items-center gap-2">
-                  <Server className="w-5 h-5 text-slate-400" /> Déploiements
+                  <Server className="w-5 h-5 text-gray-400" /> Déploiements
                 </h3>
                 {project.vercel_project_id && (
-                  <button onClick={() => fetchDeployments(project.vercel_project_id!, project.vercel_team_id)} className="text-xs text-purple hover:underline flex items-center gap-1">
+                  <button onClick={() => fetchDeployments(project.vercel_project_id!, project.vercel_team_id)} className="text-xs text-purple-600 hover:underline flex items-center gap-1">
                     <RefreshCw className="w-3.5 h-3.5" /> Actualiser
                   </button>
                 )}
               </div>
               {deployments.length === 0 ? (
-                <p className="text-sm text-slate-400 text-center py-6">Aucun déploiement</p>
+                <p className="text-sm text-gray-400 text-center py-6">Aucun déploiement</p>
               ) : (
                 <div className="space-y-2">
                   {deployments.slice(0, 8).map((d) => (
-                    <a key={d.uid} href={`https://${d.url}`} target="_blank" className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
-                      {d.state === 'READY' ? <CheckCircle2 className="w-4 h-4 text-accent-green" /> : d.state === 'ERROR' ? <XCircle className="w-4 h-4 text-accent-red" /> : <Clock className="w-4 h-4 text-accent-yellow" />}
+                    <a key={d.uid} href={`https://${d.url}`} target="_blank" className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                      {d.state === 'READY' ? <CheckCircle2 className="w-4 h-4 text-emerald-500" /> : d.state === 'ERROR' ? <XCircle className="w-4 h-4 text-red-500" /> : <Clock className="w-4 h-4 text-amber-500" />}
                       <div className="flex-1 min-w-0">
                         <p className="text-xs font-medium truncate">{d.meta?.githubCommitMessage || d.url}</p>
-                        <p className="text-xs text-slate-400">{formatDateTime(new Date(d.created))}</p>
+                        <p className="text-xs text-gray-400">{formatDateTime(new Date(d.created))}</p>
                       </div>
                       <span className="text-xs font-medium">{d.state}</span>
                     </a>
@@ -210,33 +210,33 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
             {/* Update Requests */}
             <div className="card">
               <h3 className="font-display font-bold flex items-center gap-2 mb-4">
-                <RefreshCw className="w-5 h-5 text-teal" /> Demandes de modification ({updates.length})
+                <RefreshCw className="w-5 h-5 text-teal-500" /> Demandes de modification ({updates.length})
               </h3>
               {updates.length === 0 ? (
-                <p className="text-sm text-slate-400 text-center py-4">Aucune demande</p>
+                <p className="text-sm text-gray-400 text-center py-4">Aucune demande</p>
               ) : (
                 <div className="space-y-3">
                   {updates.map((u) => (
-                    <div key={u.id} className="p-3 rounded-xl border border-slate-100">
+                    <div key={u.id} className="p-3 rounded-xl border border-gray-100">
                       <div className="flex items-start justify-between mb-2">
                         <div>
                           <p className="text-sm font-medium">{u.title}</p>
-                          <p className="text-xs text-slate-400">{formatDate(u.created_at)}</p>
+                          <p className="text-xs text-gray-400">{formatDate(u.created_at)}</p>
                         </div>
                         <StatusBadge status={u.status} />
                       </div>
-                      <p className="text-xs text-slate-600 mb-2">{u.description}</p>
+                      <p className="text-xs text-gray-600 mb-2">{u.description}</p>
                       {u.status === 'pending' && (
                         <div className="flex gap-2">
-                          <button onClick={() => handleUpdateRequestStatus(u.id, 'accepted')} className="text-xs text-accent-green hover:underline">Accepter</button>
-                          <button onClick={() => handleUpdateRequestStatus(u.id, 'rejected')} className="text-xs text-accent-red hover:underline">Refuser</button>
+                          <button onClick={() => handleUpdateRequestStatus(u.id, 'accepted')} className="text-xs text-emerald-500 hover:underline">Accepter</button>
+                          <button onClick={() => handleUpdateRequestStatus(u.id, 'rejected')} className="text-xs text-red-500 hover:underline">Refuser</button>
                         </div>
                       )}
                       {u.status === 'accepted' && (
-                        <button onClick={() => handleUpdateRequestStatus(u.id, 'in_progress')} className="text-xs text-purple hover:underline">Passer en cours</button>
+                        <button onClick={() => handleUpdateRequestStatus(u.id, 'in_progress')} className="text-xs text-purple-600 hover:underline">Passer en cours</button>
                       )}
                       {u.status === 'in_progress' && (
-                        <button onClick={() => handleUpdateRequestStatus(u.id, 'completed')} className="text-xs text-accent-green hover:underline">Marquer terminé</button>
+                        <button onClick={() => handleUpdateRequestStatus(u.id, 'completed')} className="text-xs text-emerald-500 hover:underline">Marquer terminé</button>
                       )}
                     </div>
                   ))}
@@ -251,11 +251,11 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
             <div className="card">
               <h3 className="font-display font-semibold mb-3">Client</h3>
               {client && (
-                <Link href={`/admin/clients/${project.client_id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
+                <Link href={`/admin/clients/${project.client_id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
                   <Avatar name={client.full_name} size="md" />
                   <div>
                     <p className="text-sm font-medium">{client.full_name}</p>
-                    <p className="text-xs text-slate-400">{client.company || client.email}</p>
+                    <p className="text-xs text-gray-400">{client.company || client.email}</p>
                   </div>
                 </Link>
               )}
@@ -266,13 +266,13 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
               <h3 className="font-display font-semibold mb-3">Liens</h3>
               <div className="space-y-2">
                 {project.deployed_url && (
-                  <a href={project.deployed_url} target="_blank" className="flex items-center gap-2 text-sm text-slate-600 hover:text-purple p-2 rounded-lg hover:bg-slate-50">
-                    <Globe className="w-4 h-4" /> Production <ExternalLink className="w-3 h-3 ml-auto text-slate-300" />
+                  <a href={project.deployed_url} target="_blank" className="flex items-center gap-2 text-sm text-gray-600 hover:text-purple-600 p-2 rounded-lg hover:bg-gray-50">
+                    <Globe className="w-4 h-4" /> Production <ExternalLink className="w-3 h-3 ml-auto text-gray-300" />
                   </a>
                 )}
                 {project.github_repo && (
-                  <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} target="_blank" className="flex items-center gap-2 text-sm text-slate-600 hover:text-purple p-2 rounded-lg hover:bg-slate-50">
-                    <Github className="w-4 h-4" /> GitHub <ExternalLink className="w-3 h-3 ml-auto text-slate-300" />
+                  <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} target="_blank" className="flex items-center gap-2 text-sm text-gray-600 hover:text-purple-600 p-2 rounded-lg hover:bg-gray-50">
+                    <Github className="w-4 h-4" /> GitHub <ExternalLink className="w-3 h-3 ml-auto text-gray-300" />
                   </a>
                 )}
               </div>
@@ -281,7 +281,7 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
             {/* Recent Tickets */}
             <div className="card">
               <h3 className="font-display font-semibold flex items-center gap-2 mb-3">
-                <LifeBuoy className="w-4 h-4 text-coral" /> Tickets ({tickets.length})
+                <LifeBuoy className="w-4 h-4 text-orange-500" /> Tickets ({tickets.length})
               </h3>
               {tickets.slice(0, 5).map((t) => (
                 <div key={t.id} className="flex items-center gap-2 py-2 text-sm">

@@ -35,7 +35,7 @@ export default function UpdatesPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     )
   }
@@ -67,11 +67,11 @@ export default function UpdatesPage() {
         ) : (
           <div className="space-y-4">
             {updates.map((update) => (
-              <div key={update.id} className="card hover:shadow-md transition-shadow">
+              <div key={update.id} className="card hover:shadow-card-hover transition-shadow">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-display font-semibold text-slate-900">{update.title}</h3>
-                    <p className="text-xs text-slate-400 flex items-center gap-2 mt-1">
+                    <h3 className="font-display font-semibold text-gray-900">{update.title}</h3>
+                    <p className="text-xs text-gray-400 flex items-center gap-2 mt-1">
                       {(update as any).project?.name && <span>{(update as any).project.name}</span>}
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {formatDate(update.created_at)}
@@ -83,9 +83,9 @@ export default function UpdatesPage() {
                     <StatusBadge status={update.status} />
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 line-clamp-2">{update.description}</p>
+                <p className="text-sm text-gray-600 line-clamp-2">{update.description}</p>
                 {update.estimated_hours && (
-                  <p className="text-xs text-slate-400 mt-2">
+                  <p className="text-xs text-gray-400 mt-2">
                     Estimation : {update.estimated_hours}h
                   </p>
                 )}

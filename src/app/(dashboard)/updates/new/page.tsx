@@ -59,7 +59,7 @@ export default function NewUpdatePage() {
       <TopBar title="Nouvelle demande" subtitle="Demandez une modification sur votre projet" />
 
       <div className="p-8 max-w-2xl">
-        <Link href="/updates" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-6">
+        <Link href="/updates" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour
         </Link>
 
@@ -96,7 +96,7 @@ export default function NewUpdatePage() {
                     type="button"
                     onClick={() => setPriority(p)}
                     className={`px-4 py-2 rounded-xl text-xs font-medium transition-colors ${
-                      priority === p ? 'bg-purple text-white' : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50'
+                      priority === p ? 'bg-purple-600 text-white' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
                     }`}
                   >
                     {p === 'low' ? 'Basse' : p === 'medium' ? 'Moyenne' : p === 'high' ? 'Haute' : 'Urgente'}

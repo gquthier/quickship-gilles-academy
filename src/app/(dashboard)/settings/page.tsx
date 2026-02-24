@@ -77,7 +77,7 @@ export default function SettingsPage() {
   if (!profile) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     )
   }
@@ -90,7 +90,7 @@ export default function SettingsPage() {
         {/* Profile */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <User className="w-5 h-5 text-purple" />
+            <User className="w-5 h-5 text-purple-600" />
             <h2 className="font-display font-bold text-lg">Profil</h2>
           </div>
           <form onSubmit={handleSave} className="space-y-4">
@@ -100,8 +100,8 @@ export default function SettingsPage() {
             </div>
             <div>
               <label className="label">Email</label>
-              <input type="email" className="input bg-slate-50" value={profile.email} disabled />
-              <p className="text-xs text-slate-400 mt-1">Contactez le support pour modifier votre email.</p>
+              <input type="email" className="input bg-gray-50" value={profile.email} disabled />
+              <p className="text-xs text-gray-400 mt-1">Contactez le support pour modifier votre email.</p>
             </div>
             <div>
               <label className="label">Entreprise</label>
@@ -123,7 +123,7 @@ export default function SettingsPage() {
         {/* Password */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">
-            <Lock className="w-5 h-5 text-purple" />
+            <Lock className="w-5 h-5 text-purple-600" />
             <h2 className="font-display font-bold text-lg">Mot de passe</h2>
           </div>
           <form onSubmit={handlePasswordChange} className="space-y-4">
@@ -132,10 +132,10 @@ export default function SettingsPage() {
               <input type="password" className="input" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Minimum 8 caractères" required minLength={8} />
             </div>
             {passwordError && (
-              <div className="bg-red-50 text-accent-red text-sm px-4 py-3 rounded-xl">{passwordError}</div>
+              <div className="bg-red-50 text-red-500 text-sm px-4 py-3 rounded-xl">{passwordError}</div>
             )}
             {passwordSuccess && (
-              <div className="bg-green-50 text-accent-green text-sm px-4 py-3 rounded-xl">Mot de passe mis à jour avec succès.</div>
+              <div className="bg-green-50 text-emerald-500 text-sm px-4 py-3 rounded-xl">Mot de passe mis à jour avec succès.</div>
             )}
             <div className="flex justify-end pt-2">
               <button type="submit" disabled={passwordSaving} className="btn-primary gap-1.5">

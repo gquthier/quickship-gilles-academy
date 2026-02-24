@@ -99,10 +99,10 @@ export function getInitials(name: string): string {
 
 export function getPriorityColor(priority: string): string {
   const colors: Record<string, string> = {
-    low: 'text-slate-500',
-    medium: 'text-accent-yellow',
-    high: 'text-coral',
-    urgent: 'text-accent-red',
+    low: 'text-gray-500',
+    medium: 'text-amber-500',
+    high: 'text-orange-500',
+    urgent: 'text-red-500',
   }
-  return colors[priority] || 'text-slate-500'
+  return colors[priority] || 'text-gray-500'
 }

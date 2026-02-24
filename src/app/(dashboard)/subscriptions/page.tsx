@@ -34,7 +34,7 @@ export default function SubscriptionsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     )
   }
@@ -63,21 +63,21 @@ export default function SubscriptionsPage() {
                 <div className="flex items-start justify-between mb-6">
                   <div>
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className="font-display font-bold text-xl text-slate-900">
+                      <h3 className="font-display font-bold text-xl text-gray-900">
                         Plan {getStatusLabel(sub.plan)}
                       </h3>
                       <StatusBadge status={sub.status} />
                     </div>
                     {sub.project && (
-                      <p className="text-sm text-slate-500">
+                      <p className="text-sm text-gray-500">
                         {(sub.project as any).name} {(sub.project as any).domain && `· ${(sub.project as any).domain}`}
                       </p>
                     )}
                   </div>
                   {sub.price_monthly && (
                     <div className="text-right">
-                      <p className="font-display font-bold text-2xl text-slate-900">{sub.price_monthly} &euro;</p>
-                      <p className="text-xs text-slate-400">/ mois</p>
+                      <p className="font-display font-bold text-2xl text-gray-900">{sub.price_monthly} &euro;</p>
+                      <p className="text-xs text-gray-400">/ mois</p>
                     </div>
                   )}
                 </div>
@@ -85,15 +85,15 @@ export default function SubscriptionsPage() {
                 {/* Plan features */}
                 <div className="grid grid-cols-2 gap-2 mb-6">
                   {(planFeatures[sub.plan] || []).map((feature) => (
-                    <div key={feature} className="flex items-center gap-2 text-sm text-slate-600">
-                      <CheckCircle2 className="w-4 h-4 text-accent-green flex-shrink-0" />
+                    <div key={feature} className="flex items-center gap-2 text-sm text-gray-600">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                       {feature}
                     </div>
                   ))}
                 </div>
 
                 {/* Dates */}
-                <div className="flex items-center gap-6 pt-4 border-t border-slate-100 text-xs text-slate-400">
+                <div className="flex items-center gap-6 pt-4 border-t border-gray-100 text-xs text-gray-400">
                   <span>Début : {formatDate(sub.start_date)}</span>
                   {sub.end_date && <span>Fin : {formatDate(sub.end_date)}</span>}
                 </div>

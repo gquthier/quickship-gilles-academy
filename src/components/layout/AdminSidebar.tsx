@@ -12,7 +12,6 @@ import {
   LogOut,
   Shield,
 } from 'lucide-react'
-import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
 import { cn } from '@/lib/utils'
 
@@ -34,34 +33,38 @@ export function AdminSidebar({ user, onSignOut }: AdminSidebarProps) {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-slate-900 flex flex-col z-30">
+    <aside className="fixed left-0 top-0 bottom-0 w-[260px] flex flex-col z-30 bg-gradient-to-b from-gray-900 via-gray-900 to-purple-950 relative overflow-hidden">
+      {/* Decorative circles */}
+      <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-purple-600/[0.07]" />
+      <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-purple-500/[0.05]" />
+
       {/* Logo */}
-      <div className="h-16 flex items-center px-6 border-b border-slate-800">
-        <Link href="/admin/dashboard" className="font-display font-extrabold text-2xl tracking-tight">
-          <span className="text-purple-light">Quick</span>
+      <div className="h-[72px] flex items-center gap-2.5 px-7 border-b border-white/[0.06] relative z-10">
+        <Link href="/admin/dashboard" className="font-display font-extrabold text-[22px] tracking-[-0.04em]">
+          <span className="text-purple-400">Quick</span>
           <span className="text-white">Ship</span>
         </Link>
-        <span className="ml-2 text-xs bg-purple/30 text-purple-light px-2 py-0.5 rounded-full font-semibold">
-          Admin
+        <span className="text-[10px] bg-purple-500/30 text-purple-300 px-2.5 py-1 rounded-full font-display font-bold tracking-wide">
+          ADMIN
         </span>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-4 py-5 space-y-1 overflow-y-auto relative z-10">
         {navigation.map((item) => {
-          const isActive = pathname.startsWith(item.href)
+          const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
           return (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors',
+                'flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200',
                 isActive
-                  ? 'bg-purple/20 text-purple-light'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                  ? 'bg-purple-500/20 text-purple-300 font-semibold'
+                  : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.05]'
               )}
             >
-              <item.icon className="w-5 h-5" />
+              <item.icon className={cn('w-[18px] h-[18px]', isActive ? 'text-purple-400' : 'text-gray-500')} />
               {item.name}
             </Link>
           )
@@ -69,24 +72,24 @@ export function AdminSidebar({ user, onSignOut }: AdminSidebarProps) {
       </nav>
 
       {/* Admin Badge */}
-      <div className="px-3 pb-3">
-        <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-800 text-slate-400 text-xs">
-          <Shield className="w-4 h-4 text-purple-light" />
+      <div className="px-4 pb-3 relative z-10">
+        <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-gray-400 text-[11px]">
+          <Shield className="w-3.5 h-3.5 text-purple-400" />
           <span>Panneau d'administration</span>
         </div>
       </div>
 
       {/* User Profile */}
-      <div className="border-t border-slate-800 p-3">
-        <div className="flex items-center gap-3 px-3 py-2">
+      <div className="border-t border-white/[0.06] px-4 py-4 relative z-10">
+        <div className="flex items-center gap-3">
           <Avatar name={user.full_name} src={user.avatar_url} size="sm" />
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white truncate">{user.full_name}</p>
-            <p className="text-xs text-slate-400 truncate">{user.email}</p>
+            <p className="text-[13px] font-semibold text-white truncate">{user.full_name}</p>
+            <p className="text-[11px] text-gray-500 truncate">{user.email}</p>
           </div>
           <button
             onClick={onSignOut}
-            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-xl text-gray-600 hover:text-gray-300 hover:bg-white/[0.06] transition-all duration-200"
             title="Se déconnecter"
           >
             <LogOut className="w-4 h-4" />

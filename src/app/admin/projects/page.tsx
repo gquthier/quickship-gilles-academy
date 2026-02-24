@@ -44,7 +44,7 @@ export default function AdminProjectsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     )
   }
@@ -78,8 +78,8 @@ export default function AdminProjectsPage() {
                 onClick={() => setStatusFilter(s)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                   statusFilter === s
-                    ? 'bg-purple text-white'
-                    : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50'
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
                 }`}
               >
                 {s === 'all' ? 'Tous' : s.replace('_', ' ')}
@@ -98,51 +98,51 @@ export default function AdminProjectsPage() {
           <div className="card overflow-hidden">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-100">
-                  <th className="text-left text-xs font-semibold text-slate-500 p-4">Projet</th>
-                  <th className="text-left text-xs font-semibold text-slate-500 p-4">Client</th>
-                  <th className="text-left text-xs font-semibold text-slate-500 p-4">Domaine</th>
-                  <th className="text-left text-xs font-semibold text-slate-500 p-4">Statut</th>
-                  <th className="text-left text-xs font-semibold text-slate-500 p-4">Liens</th>
-                  <th className="text-left text-xs font-semibold text-slate-500 p-4">Mis à jour</th>
+                <tr className="border-b border-gray-100">
+                  <th className="text-left text-xs font-semibold text-gray-500 p-4">Projet</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 p-4">Client</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 p-4">Domaine</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 p-4">Statut</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 p-4">Liens</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 p-4">Mis à jour</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-50">
+              <tbody className="divide-y divide-gray-50">
                 {filtered.map((project) => (
-                  <tr key={project.id} className="hover:bg-slate-50 transition-colors">
+                  <tr key={project.id} className="hover:bg-gray-50 transition-colors">
                     <td className="p-4">
-                      <Link href={`/admin/projects/${project.id}`} className="text-sm font-medium text-slate-900 hover:text-purple">
+                      <Link href={`/admin/projects/${project.id}`} className="text-sm font-medium text-gray-900 hover:text-purple-600">
                         {project.name}
                       </Link>
                     </td>
                     <td className="p-4">
-                      <p className="text-sm text-slate-600">{(project.client as any)?.full_name || '—'}</p>
-                      <p className="text-xs text-slate-400">{(project.client as any)?.company || ''}</p>
+                      <p className="text-sm text-gray-600">{(project.client as any)?.full_name || '—'}</p>
+                      <p className="text-xs text-gray-400">{(project.client as any)?.company || ''}</p>
                     </td>
                     <td className="p-4">
                       {project.domain ? (
-                        <span className="text-sm text-slate-600 flex items-center gap-1">
+                        <span className="text-sm text-gray-600 flex items-center gap-1">
                           <Globe className="w-3.5 h-3.5" /> {project.domain}
                         </span>
-                      ) : <span className="text-sm text-slate-300">—</span>}
+                      ) : <span className="text-sm text-gray-300">—</span>}
                     </td>
                     <td className="p-4"><StatusBadge status={project.status} /></td>
                     <td className="p-4">
                       <div className="flex items-center gap-2">
                         {project.deployed_url && (
-                          <a href={project.deployed_url} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-purple">
+                          <a href={project.deployed_url} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-600">
                             <Globe className="w-4 h-4" />
                           </a>
                         )}
                         {project.github_repo && (
-                          <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-purple">
+                          <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-600">
                             <Github className="w-4 h-4" />
                           </a>
                         )}
                       </div>
                     </td>
                     <td className="p-4">
-                      <span className="text-xs text-slate-400 flex items-center gap-1">
+                      <span className="text-xs text-gray-400 flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {formatDate(project.updated_at)}
                       </span>
                     </td>

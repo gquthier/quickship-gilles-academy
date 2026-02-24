@@ -61,7 +61,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     )
   }
@@ -69,17 +69,17 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
   if (!project) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-slate-500">Projet introuvable</p>
+        <p className="text-gray-500">Projet introuvable</p>
       </div>
     )
   }
 
   function getDeploymentIcon(state: string) {
     switch (state) {
-      case 'READY': return <CheckCircle2 className="w-5 h-5 text-accent-green" />
-      case 'ERROR': return <XCircle className="w-5 h-5 text-accent-red" />
-      case 'BUILDING': return <Loader2 className="w-5 h-5 text-accent-yellow animate-spin" />
-      default: return <Clock className="w-5 h-5 text-slate-400" />
+      case 'READY': return <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+      case 'ERROR': return <XCircle className="w-5 h-5 text-red-500" />
+      case 'BUILDING': return <Loader2 className="w-5 h-5 text-amber-500 animate-spin" />
+      default: return <Clock className="w-5 h-5 text-gray-400" />
     }
   }
 
@@ -105,7 +105,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       />
 
       <div className="p-8">
-        <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-6">
+        <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux projets
         </Link>
 
@@ -120,30 +120,30 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <p className="text-xs text-slate-500 mb-1">Domaine</p>
+                  <p className="text-xs text-gray-500 mb-1">Domaine</p>
                   <p className="text-sm font-medium">{project.domain || '—'}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 mb-1">Stack technique</p>
+                  <p className="text-xs text-gray-500 mb-1">Stack technique</p>
                   <div className="flex flex-wrap gap-1">
                     {project.tech_stack.length > 0 ? project.tech_stack.map((t) => (
-                      <span key={t} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">{t}</span>
-                    )) : <span className="text-sm text-slate-400">—</span>}
+                      <span key={t} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">{t}</span>
+                    )) : <span className="text-sm text-gray-400">—</span>}
                   </div>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 mb-1">Créé le</p>
+                  <p className="text-xs text-gray-500 mb-1">Créé le</p>
                   <p className="text-sm font-medium">{formatDate(project.created_at)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 mb-1">Dernière mise à jour</p>
+                  <p className="text-xs text-gray-500 mb-1">Dernière mise à jour</p>
                   <p className="text-sm font-medium">{formatDate(project.updated_at)}</p>
                 </div>
               </div>
               {project.description && (
-                <div className="mt-6 pt-6 border-t border-slate-100">
-                  <p className="text-xs text-slate-500 mb-1">Description</p>
-                  <p className="text-sm text-slate-700">{project.description}</p>
+                <div className="mt-6 pt-6 border-t border-gray-100">
+                  <p className="text-xs text-gray-500 mb-1">Description</p>
+                  <p className="text-sm text-gray-700">{project.description}</p>
                 </div>
               )}
             </div>
@@ -152,13 +152,13 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <div className="card">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-display font-bold text-lg flex items-center gap-2">
-                  <Server className="w-5 h-5 text-slate-400" />
+                  <Server className="w-5 h-5 text-gray-400" />
                   Déploiements Vercel
                 </h2>
                 {project.vercel_project_id && (
                   <button
                     onClick={() => fetchDeployments(project.vercel_project_id!, project.vercel_team_id)}
-                    className="text-xs text-purple hover:underline flex items-center gap-1"
+                    className="text-xs text-purple-600 hover:underline flex items-center gap-1"
                   >
                     <RefreshCw className="w-3.5 h-3.5" /> Actualiser
                   </button>
@@ -166,13 +166,13 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               </div>
 
               {!project.vercel_project_id ? (
-                <p className="text-sm text-slate-400 text-center py-8">Aucun projet Vercel lié</p>
+                <p className="text-sm text-gray-400 text-center py-8">Aucun projet Vercel lié</p>
               ) : deploymentsLoading ? (
                 <div className="flex justify-center py-8">
-                  <Loader2 className="w-6 h-6 text-purple animate-spin" />
+                  <Loader2 className="w-6 h-6 text-purple-600 animate-spin" />
                 </div>
               ) : deployments.length === 0 ? (
-                <p className="text-sm text-slate-400 text-center py-8">Aucun déploiement récent</p>
+                <p className="text-sm text-gray-400 text-center py-8">Aucun déploiement récent</p>
               ) : (
                 <div className="space-y-3">
                   {deployments.slice(0, 10).map((d) => (
@@ -181,19 +181,19 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                       href={`https://${d.url}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors"
+                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors"
                     >
                       {getDeploymentIcon(d.state)}
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-slate-900 truncate">
+                        <p className="text-sm font-medium text-gray-900 truncate">
                           {d.meta?.githubCommitMessage || d.url}
                         </p>
-                        <p className="text-xs text-slate-400">
+                        <p className="text-xs text-gray-400">
                           {d.meta?.githubCommitRef && `${d.meta.githubCommitRef} · `}
                           {formatDateTime(new Date(d.created))}
                         </p>
                       </div>
-                      <span className={`text-xs font-medium ${d.state === 'READY' ? 'text-accent-green' : d.state === 'ERROR' ? 'text-accent-red' : 'text-accent-yellow'}`}>
+                      <span className={`text-xs font-medium ${d.state === 'READY' ? 'text-emerald-500' : d.state === 'ERROR' ? 'text-red-500' : 'text-amber-500'}`}>
                         {d.state}
                       </span>
                     </a>
@@ -210,24 +210,24 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               <h3 className="font-display font-semibold mb-4">Liens rapides</h3>
               <div className="space-y-2">
                 {project.deployed_url && (
-                  <a href={project.deployed_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors text-sm">
-                    <Globe className="w-5 h-5 text-accent-green" />
+                  <a href={project.deployed_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors text-sm">
+                    <Globe className="w-5 h-5 text-emerald-500" />
                     <span>Site en production</span>
-                    <ExternalLink className="w-4 h-4 text-slate-300 ml-auto" />
+                    <ExternalLink className="w-4 h-4 text-gray-300 ml-auto" />
                   </a>
                 )}
                 {project.staging_url && (
-                  <a href={project.staging_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors text-sm">
-                    <Globe className="w-5 h-5 text-accent-yellow" />
+                  <a href={project.staging_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors text-sm">
+                    <Globe className="w-5 h-5 text-amber-500" />
                     <span>Site de staging</span>
-                    <ExternalLink className="w-4 h-4 text-slate-300 ml-auto" />
+                    <ExternalLink className="w-4 h-4 text-gray-300 ml-auto" />
                   </a>
                 )}
                 {project.github_repo && (
-                  <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors text-sm">
-                    <Github className="w-5 h-5 text-slate-700" />
+                  <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors text-sm">
+                    <Github className="w-5 h-5 text-gray-700" />
                     <span>Repository GitHub</span>
-                    <ExternalLink className="w-4 h-4 text-slate-300 ml-auto" />
+                    <ExternalLink className="w-4 h-4 text-gray-300 ml-auto" />
                   </a>
                 )}
               </div>

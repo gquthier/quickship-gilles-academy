@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase-browser'
 import { useRouter } from 'next/navigation'
-import { Loader2, Zap } from 'lucide-react'
+import { Loader2, Zap, Globe, Shield, RefreshCw } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -26,7 +26,6 @@ export default function LoginPage() {
       return
     }
 
-    // Fetch role to redirect
     const { data: { session } } = await supabase.auth.getSession()
     if (session) {
       const { data: profile } = await supabase
@@ -36,7 +35,7 @@ export default function LoginPage() {
         .single()
 
       if (profile?.role === 'admin') {
-        router.push('/dashboard')
+        router.push('/admin/dashboard')
       } else {
         router.push('/overview')
       }
@@ -45,56 +44,87 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left — Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-purple via-purple-dark to-purple-darker relative overflow-hidden">
-        {/* Decorative circles */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5" />
-        <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-white/5" />
-        <div className="absolute top-1/4 right-1/4 w-48 h-48 rounded-full bg-white/3" />
+      {/* Left — Branding Panel */}
+      <div className="hidden lg:flex lg:w-[55%] relative overflow-hidden">
+        {/* Gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900" />
 
-        <div className="relative z-10 flex flex-col justify-center px-16">
-          <div className="mb-8">
-            <span className="font-display font-extrabold text-4xl tracking-tight text-white">
-              Quick<span className="text-accent-yellow">Ship</span>
+        {/* Decorative circles */}
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-white/[0.06]" />
+        <div className="absolute -bottom-20 -left-20 w-[350px] h-[350px] rounded-full bg-white/[0.04]" />
+        <div className="absolute top-[20%] right-[15%] w-[200px] h-[200px] rounded-full bg-white/[0.03] animate-float" />
+        <div className="absolute bottom-[30%] left-[10%] w-[120px] h-[120px] rounded-full bg-white/[0.03]" />
+
+        <div className="relative z-10 flex flex-col justify-between p-16 w-full">
+          {/* Top: Logo */}
+          <div>
+            <span className="font-display font-extrabold text-4xl tracking-[-0.04em]">
+              <span className="text-amber-400">Quick</span>
+              <span className="text-white">Ship</span>
             </span>
           </div>
-          <h2 className="font-display font-bold text-3xl text-white leading-tight mb-4">
-            Votre espace de gestion<br />de projet web
-          </h2>
-          <p className="text-white/70 text-lg max-w-md leading-relaxed">
-            Suivez vos projets en temps réel, demandez des modifications
-            et contactez notre équipe en un clic.
-          </p>
 
-          {/* Feature pills */}
-          <div className="flex flex-wrap gap-3 mt-8">
-            {['Suivi en temps réel', 'Support dédié', 'Mises à jour rapides'].map((f) => (
-              <div key={f} className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm">
-                <Zap className="w-4 h-4 text-accent-yellow" />
-                {f}
-              </div>
-            ))}
+          {/* Center: Hero text */}
+          <div>
+            <h2 className="font-display font-extrabold text-[42px] text-white leading-[1.08] tracking-[-0.04em] mb-5">
+              Votre espace de<br />
+              gestion de projet<br />
+              <span className="text-amber-400">web</span>
+            </h2>
+            <p className="text-white/60 text-lg max-w-md leading-relaxed font-body">
+              Suivez vos projets en temps réel, demandez des modifications
+              et contactez notre équipe en un clic.
+            </p>
+
+            {/* Feature pills */}
+            <div className="flex flex-wrap gap-3 mt-10">
+              {[
+                { icon: Zap, text: 'Suivi en temps réel' },
+                { icon: Shield, text: 'Support dédié' },
+                { icon: RefreshCw, text: 'Mises à jour rapides' },
+              ].map((f) => (
+                <div key={f.text} className="flex items-center gap-2.5 bg-white/[0.1] backdrop-blur-xl border border-white/[0.1] px-5 py-2.5 rounded-full text-white/90 text-[13px] font-medium">
+                  <f.icon className="w-4 h-4 text-amber-400" />
+                  {f.text}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom: Social proof */}
+          <div className="flex items-center gap-3">
+            <div className="flex -space-x-2">
+              {['P', 'M', 'S', 'A'].map((letter, i) => (
+                <div key={i} className={`w-9 h-9 rounded-full ring-2 ring-purple-700 flex items-center justify-center text-[11px] font-bold text-white ${['bg-amber-500', 'bg-emerald-500', 'bg-blue-500', 'bg-rose-500'][i]}`}>
+                  {letter}
+                </div>
+              ))}
+            </div>
+            <div>
+              <p className="text-white/80 text-[13px] font-semibold">Rejoint par 50+ entrepreneurs</p>
+              <p className="text-white/40 text-[11px]">qui font confiance à QuickShip</p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Right — Form */}
-      <div className="flex-1 flex items-center justify-center px-8">
-        <div className="w-full max-w-md">
+      <div className="flex-1 flex items-center justify-center px-8 bg-[#F8F9FC]">
+        <div className="w-full max-w-[400px] animate-fade-in">
           {/* Mobile logo */}
-          <div className="lg:hidden mb-8 text-center">
-            <span className="font-display font-extrabold text-3xl tracking-tight">
-              <span className="text-purple">Quick</span>
-              <span className="text-slate-900">Ship</span>
+          <div className="lg:hidden mb-10 text-center">
+            <span className="font-display font-extrabold text-3xl tracking-[-0.04em]">
+              <span className="text-purple-600">Quick</span>
+              <span className="text-gray-900">Ship</span>
             </span>
           </div>
 
           <div className="mb-8">
-            <h1 className="font-display font-bold text-2xl text-slate-900 mb-2">
+            <h1 className="font-display font-extrabold text-[28px] tracking-[-0.03em] text-gray-900 mb-2">
               Connexion
             </h1>
-            <p className="text-slate-500">
-              Accédez à votre espace de gestion QuickShip.
+            <p className="text-gray-500 text-[15px]">
+              Accédez à votre espace de gestion.
             </p>
           </div>
 
@@ -123,7 +153,7 @@ export default function LoginPage() {
             </div>
 
             {error && (
-              <div className="bg-red-50 text-accent-red text-sm px-4 py-3 rounded-xl">
+              <div className="bg-red-50 text-red-600 text-[13px] font-medium px-4 py-3 rounded-2xl ring-1 ring-red-200/50">
                 {error}
               </div>
             )}
@@ -131,7 +161,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full justify-center py-3.5"
+              className="btn-primary w-full justify-center py-3.5 text-[14px]"
             >
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
@@ -141,8 +171,8 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="text-center text-xs text-slate-400 mt-8">
-            Vous n'avez pas de compte ? Contactez votre gestionnaire de projet.
+          <p className="text-center text-[12px] text-gray-400 mt-10">
+            Pas de compte ? Contactez votre gestionnaire de projet.
           </p>
         </div>
       </div>

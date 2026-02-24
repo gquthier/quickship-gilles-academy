@@ -49,7 +49,7 @@ export default function OnboardingPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     )
   }
@@ -70,8 +70,8 @@ export default function OnboardingPage() {
               onClick={() => setTypeFilter(t)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
                 typeFilter === t
-                  ? 'bg-purple text-white'
-                  : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50'
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
               }`}
             >
               {t === 'all' ? 'Tous' : getStatusLabel(t)}
@@ -102,7 +102,7 @@ export default function OnboardingPage() {
                     <Avatar name={client?.full_name || 'C'} src={client?.avatar_url} size="md" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <h3 className="text-sm font-semibold text-slate-900">{client?.full_name || 'Client inconnu'}</h3>
+                        <h3 className="text-sm font-semibold text-gray-900">{client?.full_name || 'Client inconnu'}</h3>
                         <span className="badge-purple">{getStatusLabel(response.questionnaire_type)}</span>
                         {response.reviewed_at && (
                           <span className="badge-success flex items-center gap-1">
@@ -110,7 +110,7 @@ export default function OnboardingPage() {
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-gray-400">
                         {client?.company || client?.email} · {project?.name || 'Pas de projet lié'} · {formatDateTime(response.created_at)}
                       </p>
                     </div>
@@ -123,20 +123,20 @@ export default function OnboardingPage() {
                           <Eye className="w-3.5 h-3.5" /> Marquer revu
                         </button>
                       )}
-                      {isExpanded ? <ChevronUp className="w-5 h-5 text-slate-400" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
+                      {isExpanded ? <ChevronUp className="w-5 h-5 text-gray-400" /> : <ChevronDown className="w-5 h-5 text-gray-400" />}
                     </div>
                   </div>
 
                   {/* Expanded Content */}
                   {isExpanded && (
-                    <div className="mt-6 pt-6 border-t border-slate-100">
+                    <div className="mt-6 pt-6 border-t border-gray-100">
                       <div className="space-y-4">
                         {Object.entries(response.responses).map(([key, value]) => (
                           <div key={key}>
-                            <p className="text-xs font-semibold text-slate-500 mb-1">
+                            <p className="text-xs font-semibold text-gray-500 mb-1">
                               {key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                             </p>
-                            <p className="text-sm text-slate-700 bg-slate-50 p-3 rounded-xl">
+                            <p className="text-sm text-gray-700 bg-gray-50 p-3 rounded-xl">
                               {typeof value === 'object' ? JSON.stringify(value, null, 2) : String(value)}
                             </p>
                           </div>
@@ -145,7 +145,7 @@ export default function OnboardingPage() {
 
                       {response.notes && (
                         <div className="mt-4 p-3 rounded-xl bg-purple-50">
-                          <p className="text-xs font-semibold text-purple mb-1">Notes</p>
+                          <p className="text-xs font-semibold text-purple-600 mb-1">Notes</p>
                           <p className="text-sm text-purple-700">{response.notes}</p>
                         </div>
                       )}

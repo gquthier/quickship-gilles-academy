@@ -29,7 +29,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       if (profile) {
         setUser(profile as Profile)
         if (profile.role === 'admin') {
-          router.push('/dashboard')
+          router.push('/admin/dashboard')
           return
         }
       }
@@ -45,16 +45,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FC]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+          <p className="text-sm text-gray-400 font-body">Chargement...</p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#F8F9FC]">
       <ClientSidebar user={user} onSignOut={handleSignOut} />
-      <main className="ml-64">
+      <main className="ml-[260px] animate-fade-in">
         {children}
       </main>
     </div>

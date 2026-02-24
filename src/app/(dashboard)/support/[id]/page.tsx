@@ -84,7 +84,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
   if (!ticket) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-[3px] border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     )
   }
@@ -94,7 +94,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
       <TopBar title={ticket.subject} />
 
       <div className="p-8 max-w-3xl">
-        <Link href="/support" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 mb-6">
+        <Link href="/support" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour au support
         </Link>
 
@@ -105,12 +105,12 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
               <StatusBadge status={ticket.status} />
               <StatusBadge status={ticket.priority} />
               {(ticket as any).project?.name && (
-                <span className="text-xs text-slate-400">{(ticket as any).project.name}</span>
+                <span className="text-xs text-gray-400">{(ticket as any).project.name}</span>
               )}
             </div>
-            <span className="text-xs text-slate-400">{formatDateTime(ticket.created_at)}</span>
+            <span className="text-xs text-gray-400">{formatDateTime(ticket.created_at)}</span>
           </div>
-          <p className="text-sm text-slate-700">{ticket.description}</p>
+          <p className="text-sm text-gray-700">{ticket.description}</p>
         </div>
 
         {/* Messages */}
@@ -123,16 +123,16 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                 <Avatar name={sender?.full_name || 'U'} src={sender?.avatar_url} size="sm" />
                 <div className={`max-w-[70%] ${isOwn ? 'text-right' : ''}`}>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-medium text-slate-700">{sender?.full_name || 'Utilisateur'}</span>
+                    <span className="text-xs font-medium text-gray-700">{sender?.full_name || 'Utilisateur'}</span>
                     {sender?.role === 'admin' && (
-                      <span className="text-xs bg-purple-50 text-purple px-1.5 py-0.5 rounded">Équipe</span>
+                      <span className="text-xs bg-purple-50 text-purple-600 px-1.5 py-0.5 rounded">Équipe</span>
                     )}
-                    <span className="text-xs text-slate-400">{formatDateTime(msg.created_at)}</span>
+                    <span className="text-xs text-gray-400">{formatDateTime(msg.created_at)}</span>
                   </div>
                   <div className={`p-3 rounded-xl text-sm ${
                     isOwn
-                      ? 'bg-purple text-white rounded-tr-sm'
-                      : 'bg-white border border-slate-200 text-slate-700 rounded-tl-sm'
+                      ? 'bg-purple-600 text-white rounded-tr-sm'
+                      : 'bg-white border border-gray-200 text-gray-700 rounded-tl-sm'
                   }`}>
                     {msg.message}
                   </div>
