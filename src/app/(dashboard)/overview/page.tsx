@@ -19,8 +19,10 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import type { Project, SupportTicket, UpdateRequest } from '@/types'
+import { useMobileMenu } from '../layout'
 
 export default function OverviewPage() {
+  const onMenuToggle = useMobileMenu()
   const [projects, setProjects] = useState<Project[]>([])
   const [tickets, setTickets] = useState<SupportTicket[]>([])
   const [updates, setUpdates] = useState<UpdateRequest[]>([])
@@ -60,11 +62,11 @@ export default function OverviewPage() {
 
   return (
     <>
-      <TopBar title="Vue d'ensemble" subtitle="Bienvenue sur votre espace QuickShip" />
+      <TopBar title="Vue d'ensemble" subtitle="Bienvenue sur votre espace QuickShip" onMenuToggle={onMenuToggle} />
 
-      <div className="p-8 space-y-8">
+      <div className="p-4 md:p-8 space-y-4 md:space-y-8">
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
           <StatCard label="Projets actifs" value={activeProjects.length} icon={FolderKanban} color="accent" />
           <StatCard label="Tickets ouverts" value={openTickets.length} icon={LifeBuoy} color="red" />
           <StatCard label="Modifications en cours" value={pendingUpdates.length} icon={RefreshCw} color="blue" />
@@ -78,7 +80,7 @@ export default function OverviewPage() {
               Voir tous
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {projects.slice(0, 4).map((project) => (
               <Link key={project.id} href={`/projects/${project.id}`} className="card hover:shadow-card-hover transition-shadow">
                 <div className="flex items-start justify-between mb-3">
@@ -114,7 +116,7 @@ export default function OverviewPage() {
         </div>
 
         {/* Recent Activity */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
           {/* Recent Tickets */}
           <div>
             <div className="flex items-center justify-between mb-4">

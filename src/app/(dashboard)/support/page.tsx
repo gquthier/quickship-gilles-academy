@@ -9,8 +9,10 @@ import { formatDate, getStatusLabel } from '@/lib/utils'
 import { LifeBuoy, Plus, MessageSquare, Clock } from 'lucide-react'
 import Link from 'next/link'
 import type { SupportTicket } from '@/types'
+import { useMobileMenu } from '../layout'
 
 export default function SupportPage() {
+  const onMenuToggle = useMobileMenu()
   const [tickets, setTickets] = useState<SupportTicket[]>([])
   const [filter, setFilter] = useState<string>('all')
   const [loading, setLoading] = useState(true)
@@ -52,6 +54,7 @@ export default function SupportPage() {
       <TopBar
         title="Support"
         subtitle="Vos tickets de support"
+        onMenuToggle={onMenuToggle}
         actions={
           <Link href="/support/new" className="btn-primary text-xs gap-1.5">
             <Plus className="w-4 h-4" /> Nouveau ticket
@@ -59,7 +62,7 @@ export default function SupportPage() {
         }
       />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {/* Filters */}
         <div className="flex items-center gap-2 mb-6">
           {['all', 'open', 'closed'].map((f) => (

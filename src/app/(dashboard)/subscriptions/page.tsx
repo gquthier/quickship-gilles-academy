@@ -8,8 +8,10 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate, getStatusLabel } from '@/lib/utils'
 import { CreditCard, CheckCircle2 } from 'lucide-react'
 import type { Subscription } from '@/types'
+import { useMobileMenu } from '../layout'
 
 export default function SubscriptionsPage() {
+  const onMenuToggle = useMobileMenu()
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([])
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
@@ -47,9 +49,9 @@ export default function SubscriptionsPage() {
 
   return (
     <>
-      <TopBar title="Abonnements" subtitle="G\u00e9rez vos plans et abonnements" />
+      <TopBar title="Abonnements" subtitle="G\u00e9rez vos plans et abonnements" onMenuToggle={onMenuToggle} />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {subscriptions.length === 0 ? (
           <EmptyState
             icon={CreditCard}
@@ -57,7 +59,7 @@ export default function SubscriptionsPage() {
             description="Vous n'avez pas encore d'abonnement actif."
           />
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-3 md:space-y-6">
             {subscriptions.map((sub) => (
               <div key={sub.id} className="card">
                 <div className="flex items-start justify-between mb-6">
@@ -93,7 +95,7 @@ export default function SubscriptionsPage() {
                 </div>
 
                 {/* Dates */}
-                <div className="flex items-center gap-6 pt-4 border-t border-surface-border text-xs text-text-muted">
+                <div className="flex items-center gap-3 md:gap-6 pt-4 border-t border-surface-border text-xs text-text-muted">
                   <span>D\u00e9but : {formatDate(sub.start_date)}</span>
                   {sub.end_date && <span>Fin : {formatDate(sub.end_date)}</span>}
                 </div>

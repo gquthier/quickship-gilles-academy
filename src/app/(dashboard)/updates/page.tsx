@@ -9,8 +9,10 @@ import { formatDate } from '@/lib/utils'
 import { RefreshCw, Plus, Clock } from 'lucide-react'
 import Link from 'next/link'
 import type { UpdateRequest } from '@/types'
+import { useMobileMenu } from '../layout'
 
 export default function UpdatesPage() {
+  const onMenuToggle = useMobileMenu()
   const [updates, setUpdates] = useState<UpdateRequest[]>([])
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
@@ -45,6 +47,7 @@ export default function UpdatesPage() {
       <TopBar
         title="Demandes de modification"
         subtitle="Suivez vos demandes de mise \u00e0 jour"
+        onMenuToggle={onMenuToggle}
         actions={
           <Link href="/updates/new" className="btn-primary text-xs gap-1.5">
             <Plus className="w-4 h-4" /> Nouvelle demande
@@ -52,7 +55,7 @@ export default function UpdatesPage() {
         }
       />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {updates.length === 0 ? (
           <EmptyState
             icon={RefreshCw}

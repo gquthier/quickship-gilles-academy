@@ -1,14 +1,20 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase-browser'
 import { ClientSidebar } from '@/components/layout/ClientSidebar'
 import type { Profile } from '@/types'
 
+export const MobileMenuContext = createContext<(() => void) | undefined>(undefined)
+export function useMobileMenu() {
+  return useContext(MobileMenuContext)
+}
+
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
@@ -56,9 +62,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen bg-bg">
-      <ClientSidebar user={user} onSignOut={handleSignOut} />
-      <main className="ml-[260px] animate-fade-in">
-        {children}
+      <ClientSidebar
+        user={user}
+        onSignOut={handleSignOut}
+        mobileOpen={mobileMenuOpen}
+        onMobileClose={() => setMobileMenuOpen(false)}
+      />
+      <main className="md:ml-[260px] animate-fade-in">
+        <MobileMenuContext.Provider value={() => setMobileMenuOpen(true)}>
+          {children}
+        </MobileMenuContext.Provider>
       </main>
     </div>
   )

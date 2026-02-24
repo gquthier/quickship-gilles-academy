@@ -19,8 +19,10 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import type { Project, VercelDeployment } from '@/types'
+import { useMobileMenu } from '../../layout'
 
 export default function ProjectDetailPage({ params }: { params: { id: string } }) {
+  const onMenuToggle = useMobileMenu()
   const [project, setProject] = useState<Project | null>(null)
   const [deployments, setDeployments] = useState<VercelDeployment[]>([])
   const [loading, setLoading] = useState(true)
@@ -88,6 +90,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       <TopBar
         title={project.name}
         subtitle={project.domain || undefined}
+        onMenuToggle={onMenuToggle}
         actions={
           <div className="flex items-center gap-2">
             {project.deployed_url && (
@@ -104,21 +107,21 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
         }
       />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux projets
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
           {/* Main Info */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-3 md:space-y-6">
             {/* Project Info Card */}
             <div className="card">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-display font-bold text-lg">Informations du projet</h2>
                 <StatusBadge status={project.status} />
               </div>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-3 md:gap-6">
                 <div>
                   <p className="text-xs text-text-secondary mb-1">Domaine</p>
                   <p className="text-sm font-medium">{project.domain || '\u2014'}</p>
@@ -204,7 +207,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-3 md:space-y-6">
             {/* Quick Links */}
             <div className="card">
               <h3 className="font-display font-semibold mb-4">Liens rapides</h3>

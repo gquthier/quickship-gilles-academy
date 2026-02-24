@@ -1,14 +1,20 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, createContext, useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase-browser'
 import { AdminSidebar } from '@/components/layout/AdminSidebar'
 import type { Profile } from '@/types'
 
+export const AdminMobileMenuContext = createContext<(() => void) | undefined>(undefined)
+export function useAdminMobileMenu() {
+  return useContext(AdminMobileMenuContext)
+}
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
@@ -56,9 +62,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen bg-bg">
-      <AdminSidebar user={user} onSignOut={handleSignOut} />
-      <main className="ml-[260px] animate-fade-in">
-        {children}
+      <AdminSidebar
+        user={user}
+        onSignOut={handleSignOut}
+        mobileOpen={mobileMenuOpen}
+        onMobileClose={() => setMobileMenuOpen(false)}
+      />
+      <main className="md:ml-[260px] animate-fade-in">
+        <AdminMobileMenuContext.Provider value={() => setMobileMenuOpen(true)}>
+          {children}
+        </AdminMobileMenuContext.Provider>
       </main>
     </div>
   )

@@ -5,8 +5,10 @@ import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
 import { Loader2, Save, User, Lock } from 'lucide-react'
 import type { Profile } from '@/types'
+import { useMobileMenu } from '../layout'
 
 export default function SettingsPage() {
+  const onMenuToggle = useMobileMenu()
   const [profile, setProfile] = useState<Profile | null>(null)
   const [fullName, setFullName] = useState('')
   const [company, setCompany] = useState('')
@@ -84,9 +86,9 @@ export default function SettingsPage() {
 
   return (
     <>
-      <TopBar title="Param\u00e8tres" subtitle="G\u00e9rez votre compte" />
+      <TopBar title="Param\u00e8tres" subtitle="G\u00e9rez votre compte" onMenuToggle={onMenuToggle} />
 
-      <div className="p-8 max-w-2xl space-y-8">
+      <div className="p-4 md:p-8 max-w-2xl space-y-4 md:space-y-8">
         {/* Profile */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">

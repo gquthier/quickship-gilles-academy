@@ -8,12 +8,14 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate } from '@/lib/utils'
 import { Users, Plus, Mail, Building2, Phone } from 'lucide-react'
 import Link from 'next/link'
+import { useAdminMobileMenu } from '../layout'
 import type { Profile } from '@/types'
 
 export default function ClientsPage() {
   const [clients, setClients] = useState<(Profile & { project_count?: number })[]>([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
+  const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
   useEffect(() => {
@@ -63,6 +65,7 @@ export default function ClientsPage() {
       <TopBar
         title="Clients"
         subtitle={`${clients.length} client${clients.length !== 1 ? 's' : ''}`}
+        onMenuToggle={onMenuToggle}
         actions={
           <Link href="/admin/clients/new" className="btn-primary text-xs gap-1.5">
             <Plus className="w-4 h-4" /> Nouveau client
@@ -70,7 +73,7 @@ export default function ClientsPage() {
         }
       />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {/* Search */}
         <div className="mb-6">
           <input
@@ -96,7 +99,7 @@ export default function ClientsPage() {
             }
           />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((client) => (
               <Link key={client.id} href={`/admin/clients/${client.id}`} className="card hover:shadow-card-hover transition-shadow group">
                 <div className="flex items-start gap-4 mb-4">

@@ -9,8 +9,10 @@ import { formatDateTime } from '@/lib/utils'
 import { ArrowLeft, Send, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import type { SupportTicket, TicketMessage, Profile } from '@/types'
+import { useMobileMenu } from '../../layout'
 
 export default function TicketDetailPage({ params }: { params: { id: string } }) {
+  const onMenuToggle = useMobileMenu()
   const [ticket, setTicket] = useState<SupportTicket | null>(null)
   const [messages, setMessages] = useState<TicketMessage[]>([])
   const [newMessage, setNewMessage] = useState('')
@@ -91,9 +93,9 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
 
   return (
     <>
-      <TopBar title={ticket.subject} />
+      <TopBar title={ticket.subject} onMenuToggle={onMenuToggle} />
 
-      <div className="p-8 max-w-3xl">
+      <div className="p-4 md:p-8 max-w-3xl">
         <Link href="/support" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour au support
         </Link>
@@ -121,7 +123,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
             return (
               <div key={msg.id} className={`flex gap-3 ${isOwn ? 'flex-row-reverse' : ''}`}>
                 <Avatar name={sender?.full_name || 'U'} src={sender?.avatar_url} size="sm" />
-                <div className={`max-w-[70%] ${isOwn ? 'text-right' : ''}`}>
+                <div className={`max-w-[85%] sm:max-w-[70%] ${isOwn ? 'text-right' : ''}`}>
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xs font-medium text-text-primary">{sender?.full_name || 'Utilisateur'}</span>
                     {sender?.role === 'admin' && (

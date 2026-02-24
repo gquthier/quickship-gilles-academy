@@ -8,12 +8,14 @@ import { Avatar } from '@/components/ui/Avatar'
 import { formatDateTime } from '@/lib/utils'
 import { LifeBuoy, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
+import { useAdminMobileMenu } from '../layout'
 import type { SupportTicket } from '@/types'
 
 export default function AdminSupportPage() {
   const [tickets, setTickets] = useState<SupportTicket[]>([])
   const [filter, setFilter] = useState('open')
   const [loading, setLoading] = useState(true)
+  const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
   useEffect(() => {
@@ -53,9 +55,9 @@ export default function AdminSupportPage() {
 
   return (
     <>
-      <TopBar title="Support" subtitle={`${tickets.filter(t => !['resolved', 'closed'].includes(t.status)).length} tickets ouverts`} />
+      <TopBar title="Support" subtitle={`${tickets.filter(t => !['resolved', 'closed'].includes(t.status)).length} tickets ouverts`} onMenuToggle={onMenuToggle} />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {/* Filters */}
         <div className="flex items-center gap-2 mb-6">
           {['all', 'open', 'closed'].map((f) => (

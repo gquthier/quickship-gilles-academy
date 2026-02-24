@@ -8,6 +8,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate } from '@/lib/utils'
 import { FolderKanban, Plus, Globe, Github, Clock } from 'lucide-react'
 import Link from 'next/link'
+import { useAdminMobileMenu } from '../layout'
 import type { Project } from '@/types'
 
 export default function AdminProjectsPage() {
@@ -15,6 +16,7 @@ export default function AdminProjectsPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
+  const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export default function AdminProjectsPage() {
       <TopBar
         title="Projets"
         subtitle={`${projects.length} projet${projects.length !== 1 ? 's' : ''} au total`}
+        onMenuToggle={onMenuToggle}
         actions={
           <Link href="/admin/projects/new" className="btn-primary text-xs gap-1.5">
             <Plus className="w-4 h-4" /> Nouveau projet
@@ -61,7 +64,7 @@ export default function AdminProjectsPage() {
         }
       />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {/* Filters */}
         <div className="flex items-center gap-4 mb-6 flex-wrap">
           <input

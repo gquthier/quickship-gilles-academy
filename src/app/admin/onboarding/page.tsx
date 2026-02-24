@@ -9,6 +9,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate, formatDateTime, getStatusLabel } from '@/lib/utils'
 import { ClipboardList, Eye, EyeOff, ChevronDown, ChevronUp, Check, Copy, CheckCheck, Zap } from 'lucide-react'
 import { generateProjectPrompt } from '@/lib/generate-prompt'
+import { useAdminMobileMenu } from '../layout'
 import type { OnboardingResponse, Profile } from '@/types'
 
 export default function OnboardingPage() {
@@ -17,6 +18,7 @@ export default function OnboardingPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const [copiedId, setCopiedId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
   useEffect(() => {
@@ -68,9 +70,10 @@ export default function OnboardingPage() {
       <TopBar
         title="Questionnaires d'onboarding"
         subtitle={`${responses.length} réponse${responses.length !== 1 ? 's' : ''}`}
+        onMenuToggle={onMenuToggle}
       />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {/* Filters */}
         <div className="flex items-center gap-2 mb-6">
           {['all', 'mvp', 'website', 'redesign'].map((t) => (

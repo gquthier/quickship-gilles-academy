@@ -9,8 +9,10 @@ import { formatDate } from '@/lib/utils'
 import { FolderKanban, Globe, ExternalLink, Github, Clock } from 'lucide-react'
 import Link from 'next/link'
 import type { Project } from '@/types'
+import { useMobileMenu } from '../layout'
 
 export default function ProjectsPage() {
+  const onMenuToggle = useMobileMenu()
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
@@ -42,9 +44,9 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <TopBar title="Mes projets" subtitle={`${projects.length} projet${projects.length !== 1 ? 's' : ''}`} />
+      <TopBar title="Mes projets" subtitle={`${projects.length} projet${projects.length !== 1 ? 's' : ''}`} onMenuToggle={onMenuToggle} />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         {projects.length === 0 ? (
           <EmptyState
             icon={FolderKanban}
@@ -52,7 +54,7 @@ export default function ProjectsPage() {
             description="Vous n'avez pas encore de projet. Votre gestionnaire de projet vous attribuera un acc&egrave;s."
           />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {projects.map((project) => (
               <Link key={project.id} href={`/projects/${project.id}`} className="card hover:shadow-card-hover transition-shadow group">
                 {/* Header */}

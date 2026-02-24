@@ -22,6 +22,7 @@ import {
   Edit3,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useAdminMobileMenu } from '../../layout'
 import type { Project, SupportTicket, UpdateRequest, VercelDeployment } from '@/types'
 
 export default function AdminProjectDetailPage({ params }: { params: { id: string } }) {
@@ -33,6 +34,7 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [editData, setEditData] = useState<Partial<Project>>({})
+  const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
   useEffect(() => {
@@ -101,6 +103,7 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
       <TopBar
         title={project.name}
         subtitle={project.domain || client?.full_name}
+        onMenuToggle={onMenuToggle}
         actions={
           <div className="flex gap-2">
             {!editing ? (
@@ -119,13 +122,13 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
         }
       />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <Link href="/admin/projects" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux projets
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
+          <div className="lg:col-span-2 space-y-3 md:space-y-6">
             {/* Project Info */}
             <div className="card">
               <h3 className="font-display font-bold mb-4">Informations</h3>
@@ -246,7 +249,7 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-3 md:space-y-6">
             {/* Client */}
             <div className="card">
               <h3 className="font-display font-semibold mb-3">Client</h3>

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { TopBar } from '@/components/layout/TopBar'
 import { ArrowLeft, UserPlus, Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { useAdminMobileMenu } from '../../layout'
 
 export default function NewClientPage() {
   const [email, setEmail] = useState('')
@@ -14,6 +15,7 @@ export default function NewClientPage() {
   const [password, setPassword] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const onMenuToggle = useAdminMobileMenu()
   const router = useRouter()
 
   async function handleSubmit(e: React.FormEvent) {
@@ -40,9 +42,9 @@ export default function NewClientPage() {
 
   return (
     <>
-      <TopBar title="Nouveau client" subtitle="Créer un compte client" />
+      <TopBar title="Nouveau client" subtitle="Créer un compte client" onMenuToggle={onMenuToggle} />
 
-      <div className="p-8 max-w-2xl">
+      <div className="p-4 md:p-8 max-w-2xl">
         <Link href="/admin/clients" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux clients
         </Link>

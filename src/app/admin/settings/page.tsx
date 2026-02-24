@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
 import { Loader2, Save, User, Key, Globe, Bell } from 'lucide-react'
+import { useAdminMobileMenu } from '../layout'
 import type { Profile } from '@/types'
 
 export default function AdminSettingsPage() {
@@ -17,6 +18,7 @@ export default function AdminSettingsPage() {
   const [tokensSaving, setTokensSaving] = useState(false)
   const [tokensSaved, setTokensSaved] = useState(false)
 
+  const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
   useEffect(() => {
@@ -63,9 +65,9 @@ export default function AdminSettingsPage() {
 
   return (
     <>
-      <TopBar title="Paramètres" subtitle="Configuration de la plateforme" />
+      <TopBar title="Paramètres" subtitle="Configuration de la plateforme" onMenuToggle={onMenuToggle} />
 
-      <div className="p-8 max-w-2xl space-y-8">
+      <div className="p-4 md:p-8 max-w-2xl space-y-4 md:space-y-8">
         {/* Admin Profile */}
         <div className="card">
           <div className="flex items-center gap-3 mb-6">

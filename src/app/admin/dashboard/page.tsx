@@ -18,6 +18,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useAdminMobileMenu } from '../layout'
 import type { Project, SupportTicket, Profile } from '@/types'
 
 interface DashboardData {
@@ -33,6 +34,7 @@ interface DashboardData {
 export default function AdminDashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
+  const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
   useEffect(() => {
@@ -79,18 +81,18 @@ export default function AdminDashboardPage() {
 
   return (
     <>
-      <TopBar title="Dashboard Admin" subtitle="Vue d'ensemble de votre activité" />
+      <TopBar title="Dashboard Admin" subtitle="Vue d'ensemble de votre activité" onMenuToggle={onMenuToggle} />
 
-      <div className="p-8 space-y-8">
+      <div className="p-4 md:p-8 space-y-4 md:space-y-8">
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           <StatCard label="Clients" value={data.totalClients} icon={Users} color="accent" />
           <StatCard label="Projets" value={data.totalProjects} icon={FolderKanban} color="blue" />
           <StatCard label="Tickets ouverts" value={data.openTickets} icon={LifeBuoy} color="red" />
           <StatCard label="Abonnements actifs" value={data.activeSubscriptions} icon={CreditCard} color="emerald" />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
           {/* Recent Projects */}
           <div className="lg:col-span-2">
             <div className="flex items-center justify-between mb-4">

@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { TopBar } from '@/components/layout/TopBar'
 import { ArrowLeft, FolderPlus, Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { useAdminMobileMenu } from '../../layout'
 type ClientOption = { id: string; full_name: string; company: string | null }
 
 export default function NewProjectPage() {
@@ -23,6 +24,7 @@ export default function NewProjectPage() {
   const [techStack, setTechStack] = useState('')
   const [status, setStatus] = useState('draft')
   const [submitting, setSubmitting] = useState(false)
+  const onMenuToggle = useAdminMobileMenu()
   const router = useRouter()
   const searchParams = useSearchParams()
   const supabase = createClient()
@@ -65,15 +67,15 @@ export default function NewProjectPage() {
 
   return (
     <>
-      <TopBar title="Nouveau projet" subtitle="Créer un projet client" />
+      <TopBar title="Nouveau projet" subtitle="Créer un projet client" onMenuToggle={onMenuToggle} />
 
-      <div className="p-8 max-w-3xl">
+      <div className="p-4 md:p-8 max-w-3xl">
         <Link href="/admin/projects" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux projets
         </Link>
 
         <div className="card">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-3 md:space-y-6">
             {/* General */}
             <div>
               <h3 className="font-display font-semibold text-sm text-text-primary mb-4">Informations générales</h3>

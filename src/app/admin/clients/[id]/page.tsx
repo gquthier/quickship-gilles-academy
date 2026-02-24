@@ -20,6 +20,7 @@ import {
   ToggleRight,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useAdminMobileMenu } from '../../layout'
 import type { Profile, Project, Subscription, SupportTicket } from '@/types'
 
 export default function ClientDetailPage({ params }: { params: { id: string } }) {
@@ -31,6 +32,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
   const [saving, setSaving] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const [editData, setEditData] = useState({ full_name: '', company: '', phone: '' })
+  const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
   useEffect(() => {
@@ -93,16 +95,16 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
 
   return (
     <>
-      <TopBar title={client.full_name} subtitle={client.company || client.email} />
+      <TopBar title={client.full_name} subtitle={client.company || client.email} onMenuToggle={onMenuToggle} />
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <Link href="/admin/clients" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux clients
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
           {/* Client Info */}
-          <div className="space-y-6">
+          <div className="space-y-3 md:space-y-6">
             <div className="card">
               <div className="flex items-center gap-4 mb-6">
                 <Avatar name={client.full_name} src={client.avatar_url} size="lg" />
@@ -165,7 +167,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
           </div>
 
           {/* Projects & Activity */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-3 md:space-y-6">
             {/* Projects */}
             <div className="card">
               <div className="flex items-center justify-between mb-4">
