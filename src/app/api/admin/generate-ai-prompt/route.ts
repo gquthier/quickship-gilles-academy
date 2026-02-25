@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
   // Fetch the onboarding response with relations
   const { data: onboarding, error: fetchError } = await adminClient
     .from('onboarding_responses')
-    .select('*, client:profiles(full_name, email, company), project:projects(name)')
+    .select('*, client:profiles!client_id(full_name, email, company), project:projects(name)')
     .eq('id', onboarding_response_id)
     .single()
 
