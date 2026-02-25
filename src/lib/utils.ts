@@ -48,6 +48,10 @@ export function getStatusColor(status: string): string {
     accepted: 'badge-info',
     completed: 'badge-success',
     rejected: 'badge-error',
+    // Delivery status
+    not_started: 'badge-info',
+    v1_ready: 'badge-warning',
+    v2: 'badge-purple',
   }
   return colors[status] || 'badge-info'
 }
@@ -84,6 +88,10 @@ export function getStatusLabel(status: string): string {
     mvp: 'MVP',
     website: 'Site Web',
     redesign: 'Refonte',
+    // Delivery status
+    not_started: 'Pas commencé',
+    v1_ready: 'V1 disponible',
+    v2: 'V2',
   }
   return labels[status] || status
 }

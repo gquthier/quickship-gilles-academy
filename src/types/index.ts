@@ -39,6 +39,7 @@ export interface Project {
   github_org: string | null
   tech_stack: string[]
   status: ProjectStatus
+  delivery_status: string | null
   deployed_url: string | null
   staging_url: string | null
   notes: string | null

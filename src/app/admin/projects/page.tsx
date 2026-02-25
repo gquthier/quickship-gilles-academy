@@ -5,15 +5,24 @@ import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { formatDate } from '@/lib/utils'
+import { formatDate, getStatusLabel } from '@/lib/utils'
 import { FolderKanban, Plus, Globe, Github, Clock } from 'lucide-react'
 import Link from 'next/link'
 import { useAdminMobileMenu } from '../layout'
 import type { Project } from '@/types'
 
+const DELIVERY_STATUSES = [
+  { value: 'all', label: 'Tous' },
+  { value: 'not_started', label: 'Pas commencé' },
+  { value: 'v1_ready', label: 'V1 disponible' },
+  { value: 'v2', label: 'V2' },
+  { value: 'completed', label: 'Terminé' },
+]
+
 export default function AdminProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [statusFilter, setStatusFilter] = useState<string>('all')
+  const [deliveryFilter, setDeliveryFilter] = useState<string>('all')
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
   const onMenuToggle = useAdminMobileMenu()
@@ -36,6 +45,7 @@ export default function AdminProjectsPage() {
 
   const filtered = projects
     .filter(p => statusFilter === 'all' || p.status === statusFilter)
+    .filter(p => deliveryFilter === 'all' || p.delivery_status === deliveryFilter)
     .filter(p =>
       !search ||
       p.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -66,28 +76,48 @@ export default function AdminProjectsPage() {
 
       <div className="p-4 md:p-8">
         {/* Filters */}
-        <div className="flex items-center gap-4 mb-6 flex-wrap">
-          <input
-            type="text"
-            className="input max-w-xs"
-            placeholder="Rechercher..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <div className="flex gap-1.5 flex-wrap">
-            {statuses.map((s) => (
-              <button
-                key={s}
-                onClick={() => setStatusFilter(s)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                  statusFilter === s
-                    ? 'bg-accent text-black'
-                    : 'bg-surface text-text-secondary border border-surface-border hover:bg-surface-hover'
-                }`}
-              >
-                {s === 'all' ? 'Tous' : s.replace('_', ' ')}
-              </button>
-            ))}
+        <div className="space-y-3 mb-6">
+          <div className="flex items-center gap-4 flex-wrap">
+            <input
+              type="text"
+              className="input max-w-xs"
+              placeholder="Rechercher..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className="flex gap-1.5 flex-wrap">
+              {statuses.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setStatusFilter(s)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                    statusFilter === s
+                      ? 'bg-accent text-black'
+                      : 'bg-surface text-text-secondary border border-surface-border hover:bg-surface-hover'
+                  }`}
+                >
+                  {s === 'all' ? 'Tous' : getStatusLabel(s)}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-text-muted font-medium">Livraison :</span>
+            <div className="flex gap-1.5 flex-wrap">
+              {DELIVERY_STATUSES.map((s) => (
+                <button
+                  key={s.value}
+                  onClick={() => setDeliveryFilter(s.value)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                    deliveryFilter === s.value
+                      ? 'bg-accent text-black'
+                      : 'bg-surface text-text-secondary border border-surface-border hover:bg-surface-hover'
+                  }`}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -95,7 +125,7 @@ export default function AdminProjectsPage() {
           <EmptyState
             icon={FolderKanban}
             title="Aucun projet"
-            description={search || statusFilter !== 'all' ? "Aucun résultat." : "Aucun projet pour l'instant."}
+            description={search || statusFilter !== 'all' || deliveryFilter !== 'all' ? "Aucun résultat." : "Aucun projet pour l'instant."}
           />
         ) : (
           <div className="card overflow-hidden">
@@ -106,6 +136,7 @@ export default function AdminProjectsPage() {
                   <th className="text-left text-xs font-semibold text-text-muted p-4">Client</th>
                   <th className="text-left text-xs font-semibold text-text-muted p-4">Domaine</th>
                   <th className="text-left text-xs font-semibold text-text-muted p-4">Statut</th>
+                  <th className="text-left text-xs font-semibold text-text-muted p-4">Livraison</th>
                   <th className="text-left text-xs font-semibold text-text-muted p-4">Liens</th>
                   <th className="text-left text-xs font-semibold text-text-muted p-4">Mis à jour</th>
                 </tr>
@@ -130,6 +161,13 @@ export default function AdminProjectsPage() {
                       ) : <span className="text-sm text-text-muted">—</span>}
                     </td>
                     <td className="p-4"><StatusBadge status={project.status} /></td>
+                    <td className="p-4">
+                      {project.delivery_status ? (
+                        <StatusBadge status={project.delivery_status} />
+                      ) : (
+                        <span className="text-sm text-text-muted">—</span>
+                      )}
+                    </td>
                     <td className="p-4">
                       <div className="flex items-center gap-2">
                         {project.deployed_url && (
