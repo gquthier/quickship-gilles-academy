@@ -8,6 +8,12 @@ export function generateProjectPrompt(response: OnboardingResponse): string {
 
   const typeLabel = type === 'mvp' ? 'MVP / Application Web' : type === 'website' ? 'Site Web Vitrine' : 'Refonte de Site'
 
+  // Fallback to responses JSONB when client/project not yet linked
+  const clientName = client?.full_name || r?.fullname || r?.full_name || 'Non renseigné'
+  const clientEmail = client?.email || r?.email || 'Non renseigné'
+  const clientCompany = client?.company || r?.project_name || 'Non renseigné'
+  const projectName = project?.name || r?.project_name || ''
+
   // Build the responses summary
   const responsesBlock = Object.entries(r)
     .map(([key, value]) => {
@@ -20,11 +26,11 @@ export function generateProjectPrompt(response: OnboardingResponse): string {
   return `# Projet QuickShip — Création One-Shot
 
 ## Contexte Client
-- **Client** : ${client?.full_name || 'Non renseigné'}
-- **Email** : ${client?.email || 'Non renseigné'}
-- **Entreprise** : ${client?.company || 'Non renseigné'}
+- **Client** : ${clientName}
+- **Email** : ${clientEmail}
+- **Entreprise** : ${clientCompany}
 - **Type de projet** : ${typeLabel}
-${project?.name ? `- **Nom du projet** : ${project.name}` : ''}
+${projectName ? `- **Nom du projet** : ${projectName}` : ''}
 
 ## Réponses du questionnaire d'onboarding
 ${responsesBlock}

@@ -66,30 +66,48 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Email manquant dans les réponses d\'onboarding' }, { status: 400 })
   }
 
-  // 2. Create the auth user
   const tempPassword = generatePassword()
+  let clientId: string
 
-  const { data: authData, error: authError } = await adminClient.auth.admin.createUser({
-    email,
-    password: tempPassword,
-    email_confirm: true,
-    user_metadata: {
-      full_name: fullName,
-      role: 'client',
-    },
-  })
+  // 2. Check if user already exists
+  const { data: existingUsers } = await adminClient.auth.admin.listUsers({ page: 1, perPage: 1000 })
+  const existingUser = existingUsers?.users?.find(u => u.email === email)
 
-  if (authError) {
-    return NextResponse.json({ error: `Erreur création utilisateur: ${authError.message}` }, { status: 400 })
+  if (existingUser) {
+    clientId = existingUser.id
+  } else {
+    // Create the auth user
+    const { data: authData, error: authError } = await adminClient.auth.admin.createUser({
+      email,
+      password: tempPassword,
+      email_confirm: true,
+      user_metadata: {
+        full_name: fullName,
+        role: 'client',
+      },
+    })
+
+    if (authError) {
+      return NextResponse.json({ error: `Erreur création utilisateur: ${authError.message}` }, { status: 400 })
+    }
+
+    clientId = authData.user.id
   }
 
-  const clientId = authData.user.id
-
-  // 3. Update the profile
-  await adminClient.from('profiles').update({
+  // 3. Ensure profile exists (upsert in case trigger didn't fire)
+  const { error: profileError } = await adminClient.from('profiles').upsert({
+    id: clientId,
+    email,
+    full_name: fullName,
     phone,
     company: projectName,
-  }).eq('id', clientId)
+    role: 'client',
+    is_active: true,
+  }, { onConflict: 'id' })
+
+  if (profileError) {
+    return NextResponse.json({ error: `Erreur profil: ${profileError.message}` }, { status: 400 })
+  }
 
   // 4. Create the project
   const { data: projectData, error: projectError } = await adminClient
@@ -97,7 +115,7 @@ export async function POST(request: NextRequest) {
     .insert({
       client_id: clientId,
       name: projectName,
-      domain: domainName,
+      domain: domainName === 'oui' || domainName === 'non' ? null : domainName,
       status: 'draft',
       delivery_status: 'not_started',
       tech_stack: ['Next.js', 'Tailwind CSS', 'TypeScript'],
@@ -118,6 +136,6 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({
     client_id: clientId,
     project_id: projectData.id,
-    temp_password: tempPassword,
+    temp_password: existingUser ? null : tempPassword,
   })
 }
