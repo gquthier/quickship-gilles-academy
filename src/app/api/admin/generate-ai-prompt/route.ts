@@ -66,10 +66,17 @@ export async function POST(request: NextRequest) {
   // Build the full prompt for Gemini
   const fullPrompt = META_PROMPT.replace('{base_prompt}', basePrompt)
 
-  // Call Gemini API
-  const geminiKey = process.env.GEMINI_API_KEY
+  // Clé Gemini : priorité au settings DB, sinon env var
+  let geminiKey = process.env.GEMINI_API_KEY
   if (!geminiKey) {
-    return NextResponse.json({ error: 'GEMINI_API_KEY non configurée' }, { status: 500 })
+    const { data: { user: adminUser } } = await adminClient.auth.admin.getUserById(session.user.id)
+    geminiKey = adminUser?.user_metadata?.gemini_key ?? null
+  }
+  if (!geminiKey) {
+    return NextResponse.json(
+      { error: 'Clé API Gemini non configurée. Ajoutez-la dans Paramètres → IA.' },
+      { status: 500 }
+    )
   }
 
   try {

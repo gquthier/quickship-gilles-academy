@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
-import { Loader2, Save, User, Key, Globe, Bell } from 'lucide-react'
+import { Loader2, Save, User, Key, Globe, Bell, Sparkles, Eye, EyeOff } from 'lucide-react'
 import { useAdminMobileMenu } from '../layout'
 import type { Profile } from '@/types'
 
@@ -18,6 +18,14 @@ export default function AdminSettingsPage() {
   const [tokensSaving, setTokensSaving] = useState(false)
   const [tokensSaved, setTokensSaved] = useState(false)
 
+  const [geminiKey, setGeminiKey] = useState('')
+  const [geminiKeyPreview, setGeminiKeyPreview] = useState<string | null>(null)
+  const [hasGeminiKey, setHasGeminiKey] = useState(false)
+  const [showGeminiKey, setShowGeminiKey] = useState(false)
+  const [geminiSaving, setGeminiSaving] = useState(false)
+  const [geminiSaved, setGeminiSaved] = useState(false)
+  const [geminiError, setGeminiError] = useState('')
+
   const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
@@ -30,6 +38,14 @@ export default function AdminSettingsPage() {
       if (data) {
         setProfile(data as Profile)
         setFullName(data.full_name)
+      }
+
+      // Load AI settings
+      const settingsRes = await fetch('/api/admin/settings')
+      if (settingsRes.ok) {
+        const s = await settingsRes.json()
+        setHasGeminiKey(s.has_gemini_key)
+        setGeminiKeyPreview(s.gemini_key_preview)
       }
     }
     load()
@@ -53,6 +69,45 @@ export default function AdminSettingsPage() {
     setTokensSaving(false)
     setTokensSaved(true)
     setTimeout(() => setTokensSaved(false), 3000)
+  }
+
+  async function handleSaveGeminiKey(e: React.FormEvent) {
+    e.preventDefault()
+    setGeminiError('')
+    if (!geminiKey && !hasGeminiKey) return
+    setGeminiSaving(true)
+    try {
+      const res = await fetch('/api/admin/settings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gemini_key: geminiKey }),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        setGeminiError(err.error || 'Erreur sauvegarde')
+        return
+      }
+      setHasGeminiKey(geminiKey.length > 0)
+      setGeminiKeyPreview(geminiKey ? geminiKey.slice(0, 8) + '••••••••••••••••••••' : null)
+      setGeminiKey('')
+      setGeminiSaved(true)
+      setTimeout(() => setGeminiSaved(false), 3000)
+    } finally {
+      setGeminiSaving(false)
+    }
+  }
+
+  async function handleDeleteGeminiKey() {
+    setGeminiSaving(true)
+    await fetch('/api/admin/settings', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ gemini_key: '' }),
+    })
+    setHasGeminiKey(false)
+    setGeminiKeyPreview(null)
+    setGeminiKey('')
+    setGeminiSaving(false)
   }
 
   if (!profile) {
@@ -125,6 +180,80 @@ export default function AdminSettingsPage() {
               <button type="submit" disabled={tokensSaving} className="btn-primary gap-1.5">
                 {tokensSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 {tokensSaved ? 'Enregistré !' : 'Sauvegarder les tokens'}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* AI Settings */}
+        <div className="card">
+          <div className="flex items-center gap-3 mb-6">
+            <Sparkles className="w-5 h-5 text-accent" />
+            <h2 className="font-display font-bold text-lg">Intelligence artificielle</h2>
+          </div>
+          <form onSubmit={handleSaveGeminiKey} className="space-y-4">
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <label className="label">Clé API Google Gemini</label>
+                {hasGeminiKey && (
+                  <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
+                    Configurée
+                  </span>
+                )}
+              </div>
+              {hasGeminiKey && !geminiKey && (
+                <div className="flex items-center gap-2 mb-2">
+                  <code className="text-xs text-text-muted font-mono bg-surface-hover px-3 py-2 rounded-lg flex-1">
+                    {geminiKeyPreview}
+                  </code>
+                  <button
+                    type="button"
+                    onClick={handleDeleteGeminiKey}
+                    disabled={geminiSaving}
+                    className="text-xs text-red-400 hover:text-red-300 px-3 py-2 border border-red-400/30 hover:border-red-400/60 rounded-lg transition-colors"
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              )}
+              <div className="relative">
+                <input
+                  type={showGeminiKey ? 'text' : 'password'}
+                  className="input pr-10"
+                  value={geminiKey}
+                  onChange={(e) => setGeminiKey(e.target.value)}
+                  placeholder={hasGeminiKey ? 'Nouvelle clé pour remplacer…' : 'AIzaSy…'}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowGeminiKey(v => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors"
+                >
+                  {showGeminiKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+              <p className="text-xs text-text-muted mt-1">
+                Utilisée pour enrichir les prompts IA via Gemini.{' '}
+                <a
+                  href="https://aistudio.google.com/apikey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline"
+                >
+                  Obtenir une clé →
+                </a>
+              </p>
+              {geminiError && <p className="text-xs text-red-400 mt-1">{geminiError}</p>}
+            </div>
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                disabled={geminiSaving || !geminiKey}
+                className="btn-primary gap-1.5"
+              >
+                {geminiSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                {geminiSaved ? 'Enregistrée !' : 'Sauvegarder la clé'}
               </button>
             </div>
           </form>
