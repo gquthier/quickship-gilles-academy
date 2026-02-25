@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-black scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickShip — Questionnaire pré-call</title>
+    <meta name="description" content="Remplissez ce court questionnaire avant votre call de découverte QuickShip.">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'heading': ['Clash Display', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        surface: '#121212',
+                        surfaceBorder: '#262626',
+                        accent: '#CCFF00',
+                        accentHover: '#b3e600'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background-color: #CCFF00; color: #000; }
+        body { background-color: #050505; color: #E5E5E5; overflow-x: hidden; }
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+        .title-uppercase { text-transform: uppercase; letter-spacing: -0.02em; }
+
+        /* Step transitions */
+        .step { display: none; opacity: 0; transform: translateY(20px); }
+        .step.active { display: block; animation: stepIn 0.4s ease-out forwards; }
+        .step.exit { display: block; animation: stepOut 0.25s ease-in forwards; }
+        @keyframes stepIn { to { opacity: 1; transform: translateY(0); } }
+        @keyframes stepOut { to { opacity: 0; transform: translateY(-20px); } }
+
+        /* Choice buttons */
+        .choice-btn { transition: all 0.2s ease; }
+        .choice-btn:hover { border-color: #CCFF00; color: #fff; }
+        .choice-btn.selected { border-color: #CCFF00; background: rgba(204,255,0,0.08); color: #fff; }
+
+        /* Checkbox items */
+        .check-item { transition: all 0.2s ease; cursor: pointer; }
+        .check-item:hover { border-color: #CCFF00; }
+        .check-item.checked { border-color: #CCFF00; background: rgba(204,255,0,0.08); }
+        .check-item.checked .check-box { background: #CCFF00; }
+        .check-item.checked .check-box::after { content: '✓'; color: #000; font-size: 12px; font-weight: bold; }
+
+        textarea:focus { outline: none; border-color: #CCFF00; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+    </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '791100870085010');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=791100870085010&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+
+<body class="font-sans antialiased selection:bg-accent selection:text-black min-h-screen flex flex-col">
+
+    <div class="fixed inset-0 bg-grid z-0 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="border-b border-surfaceBorder relative z-20 bg-black/80 backdrop-blur-lg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="/" class="font-heading font-bold text-xl sm:text-2xl tracking-tight text-white">
+                    QUICK<span class="text-accent">SHIP.</span>
+                </a>
+                <button onclick="openVideoRecorder()" class="font-mono text-xs text-accent uppercase border border-accent px-3 py-2 hover:bg-accent hover:text-black transition-colors">
+                    🎥 Réponses en vidéo
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="relative z-10 flex-1 flex items-center">
+        <div class="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+
+            <!-- =============================== -->
+            <!-- STEP 0: Video intro -->
+            <!-- =============================== -->
+            <div class="step active" data-step="0">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ INTRODUCTION ]</div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    COMMENT ÇA MARCHE.
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">
+                    Regardez cette vidéo de 2 minutes pour comprendre comment on fonctionne, puis lancez le questionnaire.
+                </p>
+                
+                <div class="relative w-full aspect-video mb-8 border border-surfaceBorder bg-surface">
+                    <iframe src="https://www.loom.com/embed/6e9d0909b9564ef6b2db25c3d3e0672e" 
+                        frameborder="0" 
+                        webkitallowfullscreen 
+                        mozallowfullscreen 
+                        allowfullscreen
+                        class="absolute top-0 left-0 w-full h-full">
+                    </iframe>
+                </div>
+                
+                <button onclick="nextStep()" class="w-full py-5 bg-accent text-black font-heading font-bold text-lg uppercase hover:bg-accentHover transition-colors">
+                    COMMENCER LE QUESTIONNAIRE →
+                </button>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 1: Describe your idea -->
+            <!-- =============================== -->
+            <div class="step" data-step="1">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ QUESTION 01 ]</div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    DÉCRIVEZ VOTRE IDÉE.
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">
+                    Expliquez votre projet le plus précisément possible. Quelles sont les fonctionnalités clés ? Quel problème résolvez-vous et pour qui ?
+                </p>
+                <textarea id="q-idea" rows="6" placeholder="Ex: Une app SaaS qui permet aux freelances de générer des factures automatiquement. Features clés : création de factures, suivi des paiements, dashboard analytics, export PDF..."
+                    class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 sm:p-6 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+                <button onclick="nextStep()" class="mt-6 w-full sm:w-auto px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">
+                    CONTINUER →
+                </button>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 2: Competitors -->
+            <!-- =============================== -->
+            <div class="step" data-step="2">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ QUESTION 02 ]</div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    DES CONCURRENTS EN TÊTE ?
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">
+                    Connaissez-vous des produits ou services qui font quelque chose de similaire ? Listez les noms ou URLs si possible.
+                </p>
+                <textarea id="q-competitors" rows="4" placeholder="Ex: Stripe Invoicing, Facture.net, Tiime... Ou 'Je n'en connais pas encore'"
+                    class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 sm:p-6 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+                <button onclick="nextStep()" class="mt-6 w-full sm:w-auto px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">
+                    CONTINUER →
+                </button>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 3: Internal or commercial -->
+            <!-- =============================== -->
+            <div class="step" data-step="3">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ QUESTION 03 ]</div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    USAGE INTERNE OU COMMERCIAL ?
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">
+                    Ce produit est destiné à être utilisé en interne (outil pour votre équipe) ou commercialisé auprès de clients ?
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="q-usage">
+                    <button onclick="selectChoice(this, 'q-usage')" data-value="interne"
+                        class="choice-btn border border-surfaceBorder bg-surface p-6 text-left group">
+                        <div class="font-mono text-xs text-gray-500 uppercase mb-2">Option A</div>
+                        <div class="font-heading font-bold text-lg text-gray-300 uppercase">Produit interne</div>
+                        <p class="text-gray-500 text-xs mt-2 font-sans">Outil pour mon équipe / ma boîte</p>
+                    </button>
+                    <button onclick="selectChoice(this, 'q-usage')" data-value="commercial"
+                        class="choice-btn border border-surfaceBorder bg-surface p-6 text-left group">
+                        <div class="font-mono text-xs text-gray-500 uppercase mb-2">Option B</div>
+                        <div class="font-heading font-bold text-lg text-gray-300 uppercase">Produit commercial</div>
+                        <p class="text-gray-500 text-xs mt-2 font-sans">À vendre / monétiser auprès de clients</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 4: Maturity -->
+            <!-- =============================== -->
+            <div class="step" data-step="4">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ QUESTION 04 ]</div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    OÙ EN ÊTES-VOUS ?
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">
+                    Sélectionnez tout ce qui s'applique à votre projet aujourd'hui.
+                </p>
+                <div class="space-y-3" id="q-maturity">
+                    <div onclick="toggleCheck(this)" data-value="domaine" class="check-item flex items-center gap-4 border border-surfaceBorder bg-surface p-4">
+                        <div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div>
+                        <span class="text-sm text-gray-300 font-sans">J'ai déjà acheté un nom de domaine</span>
+                    </div>
+                    <div onclick="toggleCheck(this)" data-value="branding" class="check-item flex items-center gap-4 border border-surfaceBorder bg-surface p-4">
+                        <div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div>
+                        <span class="text-sm text-gray-300 font-sans">J'ai déjà un logo / branding</span>
+                    </div>
+                    <div onclick="toggleCheck(this)" data-value="dev_commence" class="check-item flex items-center gap-4 border border-surfaceBorder bg-surface p-4">
+                        <div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div>
+                        <span class="text-sm text-gray-300 font-sans">J'ai déjà commencé à développer</span>
+                    </div>
+                    <div onclick="toggleCheck(this)" data-value="maquettes" class="check-item flex items-center gap-4 border border-surfaceBorder bg-surface p-4">
+                        <div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div>
+                        <span class="text-sm text-gray-300 font-sans">J'ai des maquettes / wireframes</span>
+                    </div>
+                    <div onclick="toggleCheck(this)" data-value="clients" class="check-item flex items-center gap-4 border border-surfaceBorder bg-surface p-4">
+                        <div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div>
+                        <span class="text-sm text-gray-300 font-sans">J'ai déjà des clients / utilisateurs potentiels</span>
+                    </div>
+                    <div onclick="toggleCheck(this)" data-value="rien" class="check-item flex items-center gap-4 border border-surfaceBorder bg-surface p-4">
+                        <div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div>
+                        <span class="text-sm text-gray-300 font-sans">J'en suis au tout début — juste l'idée</span>
+                    </div>
+                </div>
+                <button onclick="nextStep()" class="mt-6 w-full sm:w-auto px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">
+                    CONTINUER →
+                </button>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 5: Pricing validation -->
+            <!-- =============================== -->
+            <div class="step" data-step="5">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ QUESTION 05 ]</div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    LE PRICING VOUS CONVIENT ?
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">
+                    Notre offre MVP est à <strong class="text-white">990€ tout compris</strong>, livré en 48h. Êtes-vous OK avec ce tarif si nous délivrons bien le produit dans les délais ?
+                </p>
+                <div class="space-y-3" id="q-pricing">
+                    <button onclick="selectChoice(this, 'q-pricing')" data-value="oui_parfait"
+                        class="choice-btn w-full border border-surfaceBorder bg-surface p-5 text-left flex items-center gap-4">
+                        <span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span>
+                        <span class="text-sm text-gray-300 font-sans">Oui, 990€ c'est parfait pour moi</span>
+                    </button>
+                    <button onclick="selectChoice(this, 'q-pricing')" data-value="oui_si_qualite"
+                        class="choice-btn w-full border border-surfaceBorder bg-surface p-5 text-left flex items-center gap-4">
+                        <span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span>
+                        <span class="text-sm text-gray-300 font-sans">Oui, si la qualité est au rendez-vous</span>
+                    </button>
+                    <button onclick="selectChoice(this, 'q-pricing')" data-value="besoin_details"
+                        class="choice-btn w-full border border-surfaceBorder bg-surface p-5 text-left flex items-center gap-4">
+                        <span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span>
+                        <span class="text-sm text-gray-300 font-sans">J'ai besoin de plus de détails avant de me décider</span>
+                    </button>
+                    <button onclick="selectChoice(this, 'q-pricing')" data-value="non"
+                        class="choice-btn w-full border border-red-500/30 bg-surface p-5 text-left flex items-center gap-4">
+                        <span class="w-8 h-8 border border-red-500/30 flex items-center justify-center font-mono text-xs text-red-400 flex-shrink-0">D</span>
+                        <span class="text-sm text-gray-300 font-sans">Non, ce n'est pas dans mon budget</span>
+                    </button>
+                </div>
+                <p class="mt-6 font-mono text-[11px] text-gray-600 leading-relaxed border-l-2 border-surfaceBorder pl-4">
+                    Si le pricing ne vous convient pas, nous vous recommandons d'<a href="https://calendly.com/gauthierthiry" class="text-gray-400 underline hover:text-accent">annuler votre call sur Calendly</a> pour ne perdre le temps de personne. Merci de votre honnêteté.
+                </p>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 6: Serious? -->
+            <!-- =============================== -->
+            <div class="step" data-step="6">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ QUESTION 06 ]</div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    PRÊT À VOUS LANCER ?
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">
+                    Nous réalisons seulement <strong class="text-white">5 projets par mois</strong> à ce tarif. Êtes-vous sérieux dans votre démarche et en mesure de donner une réponse à l'issue de notre appel ?
+                </p>
+                <div class="space-y-3" id="q-serious">
+                    <button onclick="selectChoice(this, 'q-serious')" data-value="oui"
+                        class="choice-btn w-full border border-surfaceBorder bg-surface p-5 text-left flex items-center gap-4">
+                        <span class="w-8 h-8 border border-accent/30 bg-accent/5 flex items-center justify-center font-mono text-xs text-accent flex-shrink-0">✓</span>
+                        <span class="text-sm text-gray-300 font-sans"><strong class="text-white">Oui</strong> — je suis prêt à me lancer et à décider après le call</span>
+                    </button>
+                    <button onclick="selectChoice(this, 'q-serious')" data-value="peut-etre"
+                        class="choice-btn w-full border border-surfaceBorder bg-surface p-5 text-left flex items-center gap-4">
+                        <span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">~</span>
+                        <span class="text-sm text-gray-300 font-sans"><strong class="text-white">Peut-être</strong> — j'ai encore quelques questions à clarifier</span>
+                    </button>
+                    <button onclick="selectChoice(this, 'q-serious')" data-value="non"
+                        class="choice-btn w-full border border-surfaceBorder bg-surface p-5 text-left flex items-center gap-4">
+                        <span class="w-8 h-8 border border-red-500/30 flex items-center justify-center font-mono text-xs text-red-400 flex-shrink-0">✗</span>
+                        <span class="text-sm text-gray-300 font-sans"><strong class="text-white">Non</strong> — je suis juste curieux pour l'instant</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 7: Email + Submit -->
+            <!-- =============================== -->
+            <div class="step" data-step="7">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ DERNIÈRE ÉTAPE ]</div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    VOTRE EMAIL.
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">
+                    Pour qu'on puisse vous recontacter et préparer votre call.
+                </p>
+                <input type="email" id="q-email" placeholder="votre@email.com"
+                    class="w-full bg-surface border border-surfaceBorder text-white font-mono text-sm p-4 sm:p-5 placeholder-gray-600 focus:outline-none focus:border-accent">
+                <input type="text" id="q-name" placeholder="Votre prénom (optionnel)"
+                    class="w-full bg-surface border border-surfaceBorder text-white font-mono text-sm p-4 sm:p-5 placeholder-gray-600 focus:outline-none focus:border-accent mt-3">
+                <button onclick="submitForm()" id="submit-btn"
+                    class="mt-6 w-full px-8 py-5 bg-accent text-black font-heading font-bold text-lg uppercase hover:bg-accentHover transition-colors">
+                    ENVOYER MES RÉPONSES
+                </button>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 8: Thank You -->
+            <!-- =============================== -->
+            <div class="step" data-step="8">
+                <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-20 h-20 border-2 border-accent bg-accent/10 mb-8">
+                        <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <h2 class="font-heading title-uppercase text-3xl sm:text-5xl font-semibold text-white mb-4">
+                        C'EST ENVOYÉ.
+                    </h2>
+                    <p class="text-gray-400 text-base font-sans mb-8 leading-relaxed max-w-md mx-auto">
+                        Merci pour vos réponses. On prépare votre call — à très vite.
+                    </p>
+                    <a href="/"
+                        class="inline-flex items-center gap-2 font-mono text-sm text-gray-500 hover:text-accent transition-colors uppercase">
+                        ← Retour à l'accueil
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- PROGRESS BAR -->
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-t border-surfaceBorder">
+        <div class="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <div class="flex-1 h-1.5 bg-surfaceBorder overflow-hidden">
+                <div id="progress-bar" class="h-full bg-accent transition-all duration-500 ease-out" style="width: 0%"></div>
+            </div>
+            <div id="progress-text" class="font-mono text-xs text-gray-500 uppercase flex-shrink-0">0%</div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentStep = 0;
+        const totalSteps = 8; // 8 steps total: 0 (video) + 7 questions
+        const answers = {};
+
+        // Webhook URL (Railway)
+        const WEBHOOK_URL = 'https://webhook-production-b9fc.up.railway.app/submit';
+
+        async function insertToSupabase(data) {
+            try {
+                await fetch('https://app.quickship.fun/api/onboarding/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        questionnaire_type: 'website',
+                        submitted_at: data.submitted_at,
+                        responses: data
+                    })
+                });
+            } catch (e) { console.error('Submit error:', e); }
+        }
+
+        function stopLoomVideo() {
+            // Stop Loom iframe video by replacing with empty
+            const loomFrame = document.querySelector('[data-step="0"] iframe');
+            if (loomFrame) {
+                loomFrame.src = 'about:blank';
+            }
+        }
+
+        function updateProgress() {
+            const pct = Math.round((currentStep / totalSteps) * 100);
+            document.getElementById('progress-bar').style.width = pct + '%';
+            document.getElementById('progress-text').textContent = pct + '%';
+        }
+
+        function goToStep(n) {
+            const current = document.querySelector('.step.active');
+            const next = document.querySelector(`[data-step="${n}"]`);
+            if (!next || !current) return;
+
+            current.classList.remove('active');
+            current.classList.add('exit');
+
+            setTimeout(() => {
+                current.classList.remove('exit');
+                current.style.display = 'none';
+                next.classList.add('active');
+                currentStep = n;
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 250);
+        }
+
+        function nextStep() {
+            // Stop Loom video when leaving step 0
+            if (currentStep === 0) {
+                stopLoomVideo();
+            }
+            
+            // Save textarea answers for current step
+            if (currentStep === 1) {
+                const v = document.getElementById('q-idea').value.trim();
+                if (!v) { shakeEl(document.getElementById('q-idea')); return; }
+                answers.idea = v;
+            }
+            if (currentStep === 2) {
+                answers.competitors = document.getElementById('q-competitors').value.trim() || 'Non renseigné';
+            }
+            if (currentStep === 4) {
+                const checked = document.querySelectorAll('#q-maturity .check-item.checked');
+                answers.maturity = Array.from(checked).map(el => el.dataset.value);
+                if (answers.maturity.length === 0) answers.maturity = ['non_renseigné'];
+            }
+            goToStep(currentStep + 1);
+        }
+
+        function selectChoice(btn, groupId) {
+            // Deselect all in group
+            document.querySelectorAll(`#${groupId} .choice-btn`).forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            answers[groupId.replace('q-', '')] = btn.dataset.value;
+
+            // Auto-advance after short delay
+            setTimeout(() => nextStep(), 400);
+        }
+
+        function toggleCheck(el) {
+            el.classList.toggle('checked');
+        }
+
+        function shakeEl(el) {
+            el.style.borderColor = '#ef4444';
+            el.classList.add('animate-shake');
+            setTimeout(() => {
+                el.style.borderColor = '';
+                el.classList.remove('animate-shake');
+            }, 600);
+        }
+
+        async function submitForm() {
+            const email = document.getElementById('q-email').value.trim();
+            if (!email || !email.includes('@')) {
+                shakeEl(document.getElementById('q-email'));
+                return;
+            }
+            answers.email = email;
+            answers.name = document.getElementById('q-name').value.trim() || 'Non renseigné';
+            answers.submitted_at = new Date().toISOString();
+            answers.form_type = 'questionnaire';
+
+            const btn = document.getElementById('submit-btn');
+            btn.textContent = 'ENVOI EN COURS...';
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+
+            try {
+                if (WEBHOOK_URL && WEBHOOK_URL !== '__WEBHOOK_URL__') {
+                    await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(answers)
+                    });
+                }
+            } catch (e) {
+                console.error('Webhook error:', e);
+            }
+            insertToSupabase(answers);
+
+            // Always go to thank you
+            goToStep(8);
+            // Hide progress bar
+            document.querySelector('.fixed.bottom-0').style.display = 'none';
+        }
+
+        // Keyboard shortcut: Enter to continue on textareas
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                const active = document.querySelector('.step.active');
+                if (!active) return;
+                const step = parseInt(active.dataset.step);
+                if (step === 1 || step === 2) {
+                    // Only advance with Ctrl+Enter for textareas
+                    if (e.ctrlKey || e.metaKey) {
+                        e.preventDefault();
+                        nextStep();
+                    }
+                } else if (step === 7) {
+                    e.preventDefault();
+                    submitForm();
+                }
+            }
+        });
+    </script>
+
+    <!-- VIDEO RECORDER MODAL -->
+    <div id="video-modal" class="fixed inset-0 z-[100] bg-black/95 overflow-y-auto hidden">
+        <div class="min-h-full flex flex-col">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-4 border-b border-surfaceBorder bg-black sticky top-0 z-10">
+                <div class="font-heading font-bold text-white text-lg">🎥 Réponses en vidéo</div>
+                <button onclick="closeVideoRecorder()" class="text-gray-400 hover:text-white text-2xl font-bold px-2">×</button>
+            </div>
+            
+            <!-- Video area -->
+            <div class="flex-1 flex flex-col items-center justify-start sm:justify-center p-4 pt-8">
+                <!-- Video preview -->
+                <div id="video-container" class="relative w-full max-w-lg aspect-video bg-surface border-2 border-surfaceBorder mb-4">
+                    <video id="video-preview" autoplay muted playsinline class="w-full h-full object-cover"></video>
+                    <video id="video-playback" controls class="w-full h-full object-cover hidden"></video>
+                    
+                    <!-- Recording indicator -->
+                    <div id="rec-indicator" class="absolute top-4 right-4 hidden">
+                        <span class="flex items-center gap-2 bg-red-500/20 border border-red-500 px-3 py-1 rounded-full">
+                            <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                            <span class="font-mono text-xs text-red-400">REC</span>
+                        </span>
+                    </div>
+                    
+                    <!-- Start prompt -->
+                    <div id="video-prompt" class="absolute inset-0 flex items-center justify-center bg-black/60">
+                        <button onclick="startVideoRecording()" class="px-8 py-4 bg-accent text-black font-heading font-bold text-lg uppercase hover:bg-accentHover transition-colors">
+                            🎬 COMMENCER L'ENREGISTREMENT
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Question display -->
+                <div id="video-question" class="w-full max-w-lg text-center mb-4">
+                    <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-2" id="video-q-label">[ QUESTION 01 ]</div>
+                    <div class="font-heading text-2xl text-white uppercase" id="video-q-text">Décrivez votre idée</div>
+                </div>
+                
+                <!-- Controls -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-lg">
+                    <button onclick="prevVideoQuestion()" id="btn-prev-video" class="w-full sm:w-auto px-4 py-3 sm:py-2 border border-surfaceBorder text-gray-400 font-mono text-sm uppercase hover:border-white hover:text-white transition-colors">
+                        ← Précédent
+                    </button>
+                    
+                    <button onclick="restartVideoRecording()" class="w-full sm:w-auto px-4 py-3 sm:py-2 border border-red-500/30 text-red-400 font-mono text-sm uppercase hover:border-red-500 hover:text-red-400 transition-colors">
+                        🔄 Recommencer
+                    </button>
+                    
+                    <button onclick="toggleRecording()" id="btn-record" class="hidden w-full sm:w-auto px-6 py-3 bg-red-500 text-white font-heading font-bold text-sm uppercase hover:bg-red-600 transition-colors">
+                        ⏺ REC
+                    </button>
+                    
+                    <button onclick="stopRecording()" id="btn-stop" class="hidden w-full sm:w-auto px-6 py-3 border border-red-500 text-red-400 font-heading font-bold text-sm uppercase hover:bg-red-500 hover:text-white transition-colors">
+                        ⏹ ARRÊTER
+                    </button>
+                    
+                    <button onclick="playRecording()" id="btn-play" class="hidden w-full sm:w-auto px-4 py-3 sm:py-2 border border-accent text-accent font-mono text-sm uppercase hover:bg-accent hover:text-black transition-colors">
+                        ▶ REVOIR
+                    </button>
+                    
+                    <button onclick="nextVideoQuestion()" id="btn-next-video" class="w-full sm:w-auto px-6 py-3 sm:py-2 bg-accent text-black font-mono text-sm uppercase font-bold hover:bg-accentHover transition-colors">
+                        Suivant →
+                    </button>
+                </div>
+                
+                <!-- Progress dots -->
+                <div id="video-progress" class="flex items-center justify-center gap-2 mt-6">
+                    <!-- Generated by JS -->
+                </div>
+                
+                <!-- Done button -->
+                <button onclick="finishVideoRecording()" id="btn-finish-video" class="hidden w-full sm:w-auto mt-4 px-8 py-4 bg-accent text-black font-heading font-bold text-lg uppercase hover:bg-accentHover transition-colors">
+                    ✅ TERMINER & ENVOYER
+                </button>
+            </div>
+            
+            <!-- Back to text -->
+            <div class="p-4 pb-20 border-t border-surfaceBorder text-center bg-black">
+                <button onclick="closeVideoRecorder()" class="font-mono text-xs text-gray-500 hover:text-accent uppercase">
+                    ← Retour au questionnaire texte
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Video recording state
+        let mediaStream = null;
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let videoBlobs = [];
+        let currentVideoQuestion = 0;
+        let isRecording = false;
+        
+        const videoQuestions = [
+            { label: 'QUESTION 01', text: 'Décrivez votre idée en 30 secondes' },
+            { label: 'QUESTION 02', text: 'Qui sont vos concurrents ?' },
+            { label: 'QUESTION 03', text: 'Usage interne ou commercial ?' },
+            { label: 'QUESTION 04', text: 'Où en êtes-vous ? (domaine, branding, dev...)' },
+            { label: 'QUESTION 05', text: 'Le pricing à 990€ vous convient-il ?' },
+            { label: 'QUESTION 06', text: 'Êtes-vous prêt à vous lancer ?' },
+            { label: 'QUESTION 07', text: 'Votre email pour vous recontacter' }
+        ];
+        
+        function openVideoRecorder() {
+            document.getElementById('video-modal').classList.remove('hidden');
+            currentVideoQuestion = 0;
+            videoBlobs = [];
+            updateVideoQuestion();
+            generateVideoProgressDots();
+        }
+        
+        function closeVideoRecorder() {
+            document.getElementById('video-modal').classList.add('hidden');
+            stopCamera();
+        }
+        
+        async function startVideoRecording() {
+            try {
+                mediaStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'user' }, 
+                    audio: true 
+                });
+                
+                const videoPreview = document.getElementById('video-preview');
+                videoPreview.srcObject = mediaStream;
+                
+                document.getElementById('video-prompt').classList.add('hidden');
+                document.getElementById('rec-indicator').classList.remove('hidden');
+                document.getElementById('btn-record').classList.remove('hidden');
+                
+                isRecording = true;
+                recordedChunks = [];
+                
+                // Start recording
+                const options = { mimeType: 'video/webm;codecs=vp9,opus' };
+                try {
+                    mediaRecorder = new MediaRecorder(mediaStream, options);
+                } catch (e) {
+                    mediaRecorder = new MediaRecorder(mediaStream); // Fallback
+                }
+                
+                mediaRecorder.ondataavailable = (e) => {
+                    if (e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+                
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    videoBlobs[currentVideoQuestion] = blob;
+                    
+                    // Check if this was triggered by clicking "Suivant" (next question)
+                    const wasMovingToNext = document.getElementById('btn-next-video').dataset.waiting === 'true';
+                    
+                    if (wasMovingToNext && currentVideoQuestion < videoQuestions.length - 1) {
+                        // Auto-advance to next question and keep recording
+                        document.getElementById('btn-next-video').dataset.waiting = '';
+                        currentVideoQuestion++;
+                        updateVideoQuestion();
+                        keepCameraRunning();
+                        // Auto-start recording for next question
+                        setTimeout(() => startVideoRecording(), 500);
+                        return;
+                    }
+                    
+                    // Show playback
+                    document.getElementById('video-preview').classList.add('hidden');
+                    const playback = document.getElementById('video-playback');
+                    playback.src = URL.createObjectURL(blob);
+                    playback.classList.remove('hidden');
+                    
+                    document.getElementById('btn-record').classList.add('hidden');
+                    document.getElementById('btn-stop').classList.add('hidden');
+                    document.getElementById('btn-play').classList.remove('hidden');
+                    document.getElementById('btn-next-video').classList.remove('hidden');
+                    
+                    // Show finish button if last question
+                    if (currentVideoQuestion === videoQuestions.length - 1) {
+                        document.getElementById('btn-next-video').classList.add('hidden');
+                        document.getElementById('btn-finish-video').classList.remove('hidden');
+                    }
+                };
+                
+                mediaRecorder.start(1000); // Capture every second
+                
+            } catch (err) {
+                console.error('Camera error:', err);
+                alert('Impossible d\'accéder à la caméra. Veuillez autoriser l\'accès à la caméra et réessayer.');
+            }
+        }
+        
+        function toggleRecording() {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.pause();
+                document.getElementById('btn-record').textContent = '▶ REPRENDRE';
+            } else if (mediaRecorder && mediaRecorder.state === 'paused') {
+                mediaRecorder.resume();
+                document.getElementById('btn-record').textContent = '⏸ PAUSE';
+            }
+        }
+        
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+        }
+        
+        function playRecording() {
+            const playback = document.getElementById('video-playback');
+            playback.currentTime = 0;
+            playback.play();
+        }
+        
+        function stopCamera() {
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(track => track.stop());
+                mediaStream = null;
+            }
+            if (mediaRecorder) {
+                mediaRecorder = null;
+            }
+            
+            // Reset UI
+            document.getElementById('video-preview').classList.remove('hidden');
+            document.getElementById('video-playback').classList.add('hidden');
+            document.getElementById('video-prompt').classList.remove('hidden');
+            document.getElementById('rec-indicator').classList.add('hidden');
+            document.getElementById('btn-record').classList.add('hidden');
+            document.getElementById('btn-stop').classList.add('hidden');
+            document.getElementById('btn-play').classList.add('hidden');
+            document.getElementById('btn-finish-video').classList.add('hidden');
+        }
+        
+        function nextVideoQuestion() {
+            // If currently recording, stop and save first
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                document.getElementById('btn-next-video').dataset.waiting = 'true';
+                mediaRecorder.stop();
+                return; // onstop will handle moving to next question
+            }
+            
+            // If we have a recorded video for current question, just move to next
+            if (currentVideoQuestion < videoQuestions.length - 1) {
+                currentVideoQuestion++;
+                updateVideoQuestion();
+                // Don't restart camera - keep it running for continuous recording
+                keepCameraRunning();
+            }
+        }
+        
+        function keepCameraRunning() {
+            // Keep the camera stream active for continuous recording
+            if (mediaStream && mediaStream.active) {
+                document.getElementById('video-preview').classList.remove('hidden');
+                document.getElementById('video-playback').classList.add('hidden');
+                document.getElementById('video-prompt').classList.add('hidden');
+                document.getElementById('rec-indicator').classList.remove('hidden');
+                document.getElementById('btn-record').classList.remove('hidden');
+                document.getElementById('btn-record').textContent = '⏺ ENREGISTRER';
+                document.getElementById('btn-stop').classList.add('hidden');
+                document.getElementById('btn-play').classList.add('hidden');
+                document.getElementById('btn-next-video').classList.add('hidden');
+                document.getElementById('btn-finish-video').classList.add('hidden');
+            }
+        }
+        
+        function prevVideoQuestion() {
+            if (currentVideoQuestion > 0) {
+                currentVideoQuestion--;
+                updateVideoQuestion();
+                restartRecordingForNewQuestion();
+            }
+        }
+        
+        function updateVideoQuestion() {
+            const q = videoQuestions[currentVideoQuestion];
+            document.getElementById('video-q-label').textContent = '[ ' + q.label + ' ]';
+            document.getElementById('video-q-text').textContent = q.text;
+            
+            // Update progress dots
+            generateVideoProgressDots();
+            
+            // Show replay if video exists
+            if (videoBlobs[currentVideoQuestion]) {
+                document.getElementById('video-preview').classList.add('hidden');
+                const playback = document.getElementById('video-playback');
+                playback.src = URL.createObjectURL(videoBlobs[currentVideoQuestion]);
+                playback.classList.remove('hidden');
+                document.getElementById('btn-play').classList.remove('hidden');
+                document.getElementById('btn-record').classList.add('hidden');
+                document.getElementById('btn-next-video').classList.remove('hidden');
+                
+                if (currentVideoQuestion === videoQuestions.length - 1) {
+                    document.getElementById('btn-next-video').classList.add('hidden');
+                    document.getElementById('btn-finish-video').classList.remove('hidden');
+                }
+            } else {
+                // Reset to prompt - but keep next button visible
+                document.getElementById('video-preview').classList.remove('hidden');
+                document.getElementById('video-playback').classList.add('hidden');
+                document.getElementById('video-prompt').classList.remove('hidden');
+                document.getElementById('btn-record').classList.add('hidden');
+                document.getElementById('btn-play').classList.add('hidden');
+                document.getElementById('btn-next-video').classList.remove('hidden');
+            }
+            
+            // Hide prev on first question
+            document.getElementById('btn-prev-video').style.visibility = currentVideoQuestion === 0 ? 'hidden' : 'visible';
+        }
+        
+        function generateVideoProgressDots() {
+            const container = document.getElementById('video-progress');
+            container.innerHTML = '';
+            
+            videoQuestions.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'w-3 h-3 rounded-full transition-colors ' + 
+                    (i === currentVideoQuestion ? 'bg-accent' : 
+                     videoBlobs[i] ? 'bg-green-500' : 'bg-surfaceBorder');
+                container.appendChild(dot);
+            });
+        }
+        
+        async function restartVideoRecording() {
+            if (!confirm('Êtes-vous sûr de vouloir recommencer ? Toutes les vidéos seront supprimées.')) {
+                return;
+            }
+            
+            // Stop camera if running
+            stopCamera();
+            
+            // Clear all recordings
+            videoBlobs = [];
+            currentVideoQuestion = 0;
+            
+            // Update UI
+            updateVideoQuestion();
+            
+            // Restart camera
+            await startVideoRecording();
+        }
+        
+        async function restartRecordingForNewQuestion() {
+            // Stop current recording if any
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            
+            // If we have a blob for current question, don't re-record
+            if (videoBlobs[currentVideoQuestion]) {
+                return;
+            }
+            
+            // Restart camera for new question
+            await startVideoRecording();
+        }
+        
+        async function finishVideoRecording() {
+            // Check all questions have videos
+            const missing = videoQuestions.filter((_, i) => !videoBlobs[i]);
+            
+            if (missing.length > 0) {
+                if (!confirm(`${missing.length} question(s) n'ont pas de réponse en vidéo. Voulez-vous continuer quand même ?`)) {
+                    return;
+                }
+            }
+            
+            // Convert blobs to files and send
+            const formData = new FormData();
+            formData.append('name', document.getElementById('q-name')?.value || 'Video Respondent');
+            formData.append('email', document.getElementById('q-email')?.value || '');
+            formData.append('video_mode', 'true');
+            
+            for (let i = 0; i < videoBlobs.length; i++) {
+                if (videoBlobs[i]) {
+                    formData.append(`question_${i}`, videoBlobs[i], `question_${i}.webm`);
+                }
+            }
+            
+            // Upload videos
+            try {
+                // Note: Need a server endpoint that handles file uploads
+                // For now, we'll submit the form data as JSON with video references
+                const data = {
+                    name: document.getElementById('q-name')?.value || '',
+                    email: document.getElementById('q-email')?.value || '',
+                    video_mode: true,
+                    questions_answered: videoBlobs.filter(b => b).length,
+                    total_questions: videoQuestions.length
+                };
+                
+                await fetch('https://webhook-production-b9fc.up.railway.app/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+            } catch (e) {
+                console.error('Upload error:', e);
+            }
+            
+            // Close modal and show thank you
+            closeVideoRecorder();
+            goToStep(8);
+            document.querySelector('.fixed.bottom-0').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

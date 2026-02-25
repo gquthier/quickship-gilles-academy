@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-black scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickShip — Onboarding Site Web</title>
+    <meta name="description" content="Formulaire d'onboarding pour votre projet de site web QuickShip. Branding, domaine, hébergement, contenu.">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'heading': ['Clash Display', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        surface: '#121212',
+                        surfaceBorder: '#262626',
+                        accent: '#CCFF00',
+                        accentHover: '#b3e600'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background-color: #CCFF00; color: #000; }
+        body { background-color: #050505; color: #E5E5E5; overflow-x: hidden; }
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+        .title-uppercase { text-transform: uppercase; letter-spacing: -0.02em; }
+        .step { display: none; opacity: 0; transform: translateY(20px); }
+        .step.active { display: block; animation: stepIn 0.4s ease-out forwards; }
+        .step.exit { display: block; animation: stepOut 0.25s ease-in forwards; }
+        @keyframes stepIn { to { opacity: 1; transform: translateY(0); } }
+        @keyframes stepOut { to { opacity: 0; transform: translateY(-20px); } }
+        .choice-btn { transition: all 0.2s ease; }
+        .choice-btn:hover { border-color: #CCFF00; color: #fff; }
+        .choice-btn.selected { border-color: #CCFF00; background: rgba(204,255,0,0.08); color: #fff; }
+        .check-item { transition: all 0.2s ease; cursor: pointer; }
+        .check-item:hover { border-color: #CCFF00; }
+        .check-item.checked { border-color: #CCFF00; background: rgba(204,255,0,0.08); }
+        .check-item.checked .check-box { background: #CCFF00; }
+        .check-item.checked .check-box::after { content: '✓'; color: #000; font-size: 12px; font-weight: bold; }
+        .color-preview { width: 40px; height: 40px; border: 2px solid #262626; cursor: pointer; position: relative; overflow: hidden; }
+        .color-preview input[type="color"] { position: absolute; inset: -8px; width: calc(100% + 16px); height: calc(100% + 16px); cursor: pointer; border: none; padding: 0; }
+        textarea:focus, input:focus, select:focus { outline: none; border-color: #CCFF00; }
+        .conditional { display: none; }
+        .conditional.visible { display: block; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+    </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '791100870085010');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=791100870085010&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body class="font-sans antialiased selection:bg-accent selection:text-black min-h-screen flex flex-col">
+    <div class="fixed inset-0 bg-grid z-0 pointer-events-none"></div>
+    <header class="border-b border-surfaceBorder relative z-20 bg-black/80 backdrop-blur-lg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="/" class="font-heading font-bold text-xl sm:text-2xl tracking-tight text-white">
+                    QUICK<span class="text-accent">SHIP.</span>
+                </a>
+                <span class="font-mono text-xs text-accent uppercase border border-accent px-3 py-2">Site Web</span>
+            </div>
+        </div>
+    </header>
+    <main class="relative z-10 flex-1 flex items-center">
+        <div class="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+
+<!-- STEP 1 -->
+<div class="step active" data-step="1">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 01 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">VOTRE PROJET WEB.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Parlez-nous de votre projet. Ces informations nous permettront de comprendre votre activité et vos besoins fondamentaux.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Nom du projet / entreprise *</label>
+      <input type="text" id="q-project-name" placeholder="Ex: QuickShip, Ma Boutique Bio..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Décrivez votre activité en 2-3 phrases *</label>
+      <textarea id="q-activity" rows="3" placeholder="Ex: Nous sommes une agence de marketing digital spécialisée dans l'accompagnement des startups..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quel est votre secteur d'activité ?</label>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="q-sector">
+        <button onclick="selectChoice(this, 'q-sector')" data-value="tech" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Tech</div></button>
+        <button onclick="selectChoice(this, 'q-sector')" data-value="sante" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Santé</div></button>
+        <button onclick="selectChoice(this, 'q-sector')" data-value="finance" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Finance</div></button>
+        <button onclick="selectChoice(this, 'q-sector')" data-value="immobilier" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Immobilier</div></button>
+        <button onclick="selectChoice(this, 'q-sector')" data-value="mode-beaute" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Mode & Beauté</div></button>
+        <button onclick="selectChoice(this, 'q-sector')" data-value="food-restauration" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Food & Restauration</div></button>
+        <button onclick="selectChoice(this, 'q-sector')" data-value="education" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Éducation</div></button>
+        <button onclick="selectChoice(this, 'q-sector')" data-value="sport-bien-etre" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Sport & Bien-être</div></button>
+        <button onclick="selectChoice(this, 'q-sector')" data-value="autre" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Autre</div></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quel est l'objectif principal du site ? *</label>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="q-objective">
+        <button onclick="selectChoice(this, 'q-objective')" data-value="vitrine" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Vitrine</div></button>
+        <button onclick="selectChoice(this, 'q-objective')" data-value="e-commerce" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">E-commerce</div></button>
+        <button onclick="selectChoice(this, 'q-objective')" data-value="blog" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Blog</div></button>
+        <button onclick="selectChoice(this, 'q-objective')" data-value="portfolio" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Portfolio</div></button>
+        <button onclick="selectChoice(this, 'q-objective')" data-value="landing-page" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Landing page</div></button>
+        <button onclick="selectChoice(this, 'q-objective')" data-value="application-web" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Application web</div></button>
+        <button onclick="selectChoice(this, 'q-objective')" data-value="autre" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Autre</div></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Avez-vous un site existant ?</label>
+      <div class="flex gap-3" id="q-existing-site">
+        <button onclick="selectChoice(this, 'q-existing-site'); toggleConditional('existing-site-url', false)" data-value="non" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Non</div></button>
+        <button onclick="selectChoice(this, 'q-existing-site'); toggleConditional('existing-site-url', true)" data-value="oui" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Oui</div></button>
+      </div>
+      <div id="existing-site-url" class="conditional mt-3">
+        <input type="url" id="q-existing-site-url" placeholder="https://www.monsite.com" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Si oui, pourquoi souhaitez-vous un nouveau site ?</label>
+      <div class="space-y-2" id="q-site-reason">
+        <button onclick="selectChoice(this, 'q-site-reason')" data-value="refonte" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Refonte complète (design obsolète)</span></button>
+        <button onclick="selectChoice(this, 'q-site-reason')" data-value="migration" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Migration de plateforme</span></button>
+        <button onclick="selectChoice(this, 'q-site-reason')" data-value="conversion" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Le site actuel ne convertit pas</span></button>
+        <button onclick="selectChoice(this, 'q-site-reason')" data-value="nouveau-projet" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">D</span><span class="text-sm text-gray-300 font-sans">Nouveau projet, nouveau départ</span></button>
+      </div>
+    </div>
+  </div>
+  <button onclick="validateAndNext(1)" class="mt-8 w-full sm:w-auto px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="step" data-step="2">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 02 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">CIBLE & STRATÉGIE.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Définissons votre audience cible et vos objectifs stratégiques pour concevoir un site qui convertit vraiment.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Qui est votre client idéal ? Décrivez votre cible. *</label>
+      <textarea id="q-target-audience" rows="4" placeholder="Ex: Entrepreneurs 25-40 ans, CSP+, basés en France, qui cherchent à digitaliser leur activité..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quelle tranche d'âge visez-vous principalement ?</label>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="q-age-range">
+        <button onclick="selectChoice(this, 'q-age-range')" data-value="18-25" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">18-25</div></button>
+        <button onclick="selectChoice(this, 'q-age-range')" data-value="25-35" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">25-35</div></button>
+        <button onclick="selectChoice(this, 'q-age-range')" data-value="35-50" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">35-50</div></button>
+        <button onclick="selectChoice(this, 'q-age-range')" data-value="50+" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">50+</div></button>
+        <button onclick="selectChoice(this, 'q-age-range')" data-value="toutes" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Toutes</div></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Votre cible est plutôt...</label>
+      <div class="flex gap-3" id="q-target-type">
+        <button onclick="selectChoice(this, 'q-target-type')" data-value="b2b" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">B2B (Entreprises)</div></button>
+        <button onclick="selectChoice(this, 'q-target-type')" data-value="b2c" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">B2C (Particuliers)</div></button>
+        <button onclick="selectChoice(this, 'q-target-type')" data-value="les-deux" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Les deux</div></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quel est l'objectif business n°1 du site ? *</label>
+      <div class="space-y-2" id="q-business-goal">
+        <button onclick="selectChoice(this, 'q-business-goal')" data-value="leads" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Générer des leads / prospects</span></button>
+        <button onclick="selectChoice(this, 'q-business-goal')" data-value="vendre" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Vendre en ligne</span></button>
+        <button onclick="selectChoice(this, 'q-business-goal')" data-value="credibilite" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Renforcer la crédibilité / notoriété</span></button>
+        <button onclick="selectChoice(this, 'q-business-goal')" data-value="informer" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">D</span><span class="text-sm text-gray-300 font-sans">Informer / éduquer mon audience</span></button>
+        <button onclick="selectChoice(this, 'q-business-goal')" data-value="rdv" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">E</span><span class="text-sm text-gray-300 font-sans">Prendre des rendez-vous / réservations</span></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quelle action principale attendez-vous d'un visiteur ?</label>
+      <div class="space-y-2" id="q-main-cta">
+        <button onclick="selectChoice(this, 'q-main-cta')" data-value="formulaire" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Remplir un formulaire de contact</span></button>
+        <button onclick="selectChoice(this, 'q-main-cta')" data-value="acheter" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Acheter un produit</span></button>
+        <button onclick="selectChoice(this, 'q-main-cta')" data-value="inscrire" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">S'inscrire / créer un compte</span></button>
+        <button onclick="selectChoice(this, 'q-main-cta')" data-value="appeler-rdv" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">D</span><span class="text-sm text-gray-300 font-sans">Appeler ou prendre RDV</span></button>
+        <button onclick="selectChoice(this, 'q-main-cta')" data-value="telecharger" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">E</span><span class="text-sm text-gray-300 font-sans">Télécharger un document</span></button>
+        <button onclick="selectChoice(this, 'q-main-cta')" data-value="newsletter" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">F</span><span class="text-sm text-gray-300 font-sans">S'abonner à la newsletter</span></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Avez-vous déjà une stratégie de communication digitale ?</label>
+      <div class="space-y-2" id="q-digital-strategy">
+        <button onclick="selectChoice(this, 'q-digital-strategy')" data-value="oui" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Oui, bien établie</span></button>
+        <button onclick="selectChoice(this, 'q-digital-strategy')" data-value="en-cours" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">En cours de construction</span></button>
+        <button onclick="selectChoice(this, 'q-digital-strategy')" data-value="non" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Non, je pars de zéro</span></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quels canaux utilisez-vous pour acquérir des clients aujourd'hui ?</label>
+      <div class="space-y-2" id="q-acquisition-channels">
+        <div onclick="toggleCheck(this)" data-value="bouche-a-oreille" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Bouche-à-oreille</span></div>
+        <div onclick="toggleCheck(this)" data-value="reseaux-sociaux" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Réseaux sociaux</span></div>
+        <div onclick="toggleCheck(this)" data-value="seo" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">SEO (Google)</span></div>
+        <div onclick="toggleCheck(this)" data-value="ads" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Publicité en ligne (Ads)</span></div>
+        <div onclick="toggleCheck(this)" data-value="email" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Email marketing</span></div>
+        <div onclick="toggleCheck(this)" data-value="evenements" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Événements / salons</span></div>
+        <div onclick="toggleCheck(this)" data-value="aucun" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Aucun pour l'instant</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(1)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="validateAndNext(2)" class="flex-1 sm:flex-none px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button></div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step" data-step="3">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 03 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">BRANDING & IDENTITÉ VISUELLE.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Votre identité visuelle est le premier contact avec vos visiteurs. Aidez-nous à cerner votre univers graphique.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Avez-vous un logo ? *</label>
+      <div class="flex gap-3" id="q-logo">
+        <button onclick="selectChoice(this, 'q-logo')" data-value="oui" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Oui, je l'enverrai</div></button>
+        <button onclick="selectChoice(this, 'q-logo')" data-value="non" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Non, à créer</div></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Avez-vous une charte graphique / brand book ?</label>
+      <div class="flex gap-3" id="q-brandbook">
+        <button onclick="selectChoice(this, 'q-brandbook')" data-value="oui" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Oui, je l'enverrai</div></button>
+        <button onclick="selectChoice(this, 'q-brandbook')" data-value="non" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Non</div></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Couleurs de marque</label>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="color-preview"><input type="color" id="q-color-primary" value="#000000" onchange="document.getElementById('q-color-primary-hex').value = this.value"></div>
+          <input type="text" id="q-color-primary-hex" placeholder="#000000" value="#000000" class="flex-1 bg-surface border border-surfaceBorder text-white font-mono text-sm p-3 placeholder-gray-600" oninput="if(this.value.match(/^#[0-9A-Fa-f]{6}$/)) document.getElementById('q-color-primary').value = this.value">
+          <span class="font-mono text-xs text-gray-600">Principale</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="color-preview"><input type="color" id="q-color-secondary" value="#ffffff" onchange="document.getElementById('q-color-secondary-hex').value = this.value"></div>
+          <input type="text" id="q-color-secondary-hex" placeholder="#ffffff" value="#ffffff" class="flex-1 bg-surface border border-surfaceBorder text-white font-mono text-sm p-3 placeholder-gray-600" oninput="if(this.value.match(/^#[0-9A-Fa-f]{6}$/)) document.getElementById('q-color-secondary').value = this.value">
+          <span class="font-mono text-xs text-gray-600">Secondaire</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Couleurs à absolument éviter ?</label>
+      <input type="text" id="q-color-avoid" placeholder="Ex: Pas de rose, pas de orange..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Typographies souhaitées</label>
+      <input type="text" id="q-typography" placeholder="Ex: Montserrat, Playfair Display... ou 'Pas de préférence'" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Décrivez votre marque en 3 adjectifs *</label>
+      <input type="text" id="q-brand-adjectives" placeholder="Ex: Moderne, fiable, innovant" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Quel message principal doit transmettre votre site ?</label>
+      <textarea id="q-brand-message" rows="2" placeholder="Ex: Nous rendons la technologie accessible à tous les entrepreneurs" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Éléments visuels que vous pouvez fournir</label>
+      <div class="grid grid-cols-2 gap-2" id="q-visual-assets">
+        <div onclick="toggleCheck(this)" data-value="logo-hd" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Logo HD (SVG/PNG)</span></div>
+        <div onclick="toggleCheck(this)" data-value="charte-graphique" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Charte graphique PDF</span></div>
+        <div onclick="toggleCheck(this)" data-value="photos-produits" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Photos produits</span></div>
+        <div onclick="toggleCheck(this)" data-value="photos-equipe" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Photos équipe</span></div>
+        <div onclick="toggleCheck(this)" data-value="videos" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Vidéos promotionnelles</span></div>
+        <div onclick="toggleCheck(this)" data-value="illustrations" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Illustrations</span></div>
+        <div onclick="toggleCheck(this)" data-value="icones" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Icônes personnalisées</span></div>
+        <div onclick="toggleCheck(this)" data-value="textes" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Textes et contenus rédigés</span></div>
+        <div onclick="toggleCheck(this)" data-value="rien" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Rien pour l'instant</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(2)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="validateAndNext(3)" class="flex-1 sm:flex-none px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button></div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step" data-step="4">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 04 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">STYLE & DIRECTION ARTISTIQUE.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Définissons l'identité visuelle de votre site. Vos réponses nous permettront de créer un design parfaitement aligné avec votre vision.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quel univers visuel correspond le mieux à votre projet ? *</label>
+      <div class="grid grid-cols-2 gap-3" id="q-style-universe">
+        <button onclick="selectChoice(this, 'q-style-universe')" data-value="corporate" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Professionnel & Corporate</div><p class="text-xs text-gray-500 mt-1">Sérieux, structuré, confiance</p></button>
+        <button onclick="selectChoice(this, 'q-style-universe')" data-value="minimal" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Moderne & Minimal</div><p class="text-xs text-gray-500 mt-1">Épuré, aéré, élégant</p></button>
+        <button onclick="selectChoice(this, 'q-style-universe')" data-value="creative" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Créatif & Artistique</div><p class="text-xs text-gray-500 mt-1">Audacieux, original, expressif</p></button>
+        <button onclick="selectChoice(this, 'q-style-universe')" data-value="tech" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Tech & Futuriste</div><p class="text-xs text-gray-500 mt-1">Innovation, dark UI, dynamique</p></button>
+        <button onclick="selectChoice(this, 'q-style-universe')" data-value="luxury" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Luxe & Premium</div><p class="text-xs text-gray-500 mt-1">Raffiné, haut de gamme, exclusif</p></button>
+        <button onclick="selectChoice(this, 'q-style-universe')" data-value="organic" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Naturel & Organique</div><p class="text-xs text-gray-500 mt-1">Doux, chaleureux, éco-friendly</p></button>
+        <button onclick="selectChoice(this, 'q-style-universe')" data-value="bold" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Bold & Énergique</div><p class="text-xs text-gray-500 mt-1">Couleurs vives, impact, jeune</p></button>
+        <button onclick="selectChoice(this, 'q-style-universe')" data-value="retro" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Rétro & Vintage</div><p class="text-xs text-gray-500 mt-1">Nostalgie, authentique, artisanal</p></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Préférence de couleur dominante pour le site</label>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="q-color-mood">
+        <button onclick="selectChoice(this, 'q-color-mood')" data-value="light" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Tons clairs</div></button>
+        <button onclick="selectChoice(this, 'q-color-mood')" data-value="dark" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Tons sombres</div></button>
+        <button onclick="selectChoice(this, 'q-color-mood')" data-value="colorful" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Coloré & vibrant</div></button>
+        <button onclick="selectChoice(this, 'q-color-mood')" data-value="neutral" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Neutre & sobre</div></button>
+        <button onclick="selectChoice(this, 'q-color-mood')" data-value="no-pref" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Pas de préférence</div></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Sites d'inspiration qui vous plaisent visuellement</label>
+      <textarea id="q-inspiration-sites" rows="4" placeholder="Collez les URLs de sites que vous aimez et précisez ce qui vous plaît :&#10;&#10;Ex:&#10;https://stripe.com — J'aime le côté épuré et les animations&#10;https://apple.com — La mise en avant des produits est top" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quels éléments de design vous attirent ?</label>
+      <div class="grid grid-cols-2 gap-2" id="q-design-elements">
+        <div onclick="toggleCheck(this)" data-value="animations" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Animations / transitions fluides</span></div>
+        <div onclick="toggleCheck(this)" data-value="typography" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Typographies imposantes</span></div>
+        <div onclick="toggleCheck(this)" data-value="whitespace" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Beaucoup d'espace blanc</span></div>
+        <div onclick="toggleCheck(this)" data-value="fullscreen-photos" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Photos plein écran</span></div>
+        <div onclick="toggleCheck(this)" data-value="video-bg" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Vidéo en arrière-plan</span></div>
+        <div onclick="toggleCheck(this)" data-value="illustrations" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Illustrations custom</span></div>
+        <div onclick="toggleCheck(this)" data-value="animated-icons" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Icônes animées</span></div>
+        <div onclick="toggleCheck(this)" data-value="parallax" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Effets parallaxe</span></div>
+        <div onclick="toggleCheck(this)" data-value="asymmetric-grid" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Grille asymétrique</span></div>
+        <div onclick="toggleCheck(this)" data-value="3d-design" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Design 3D</span></div>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Sites ou styles que vous n'aimez PAS ?</label>
+      <textarea id="q-design-dislikes" rows="3" placeholder="Ex: Je n'aime pas les sites trop chargés, les pop-ups agressifs, le style trop corporate..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Niveau de complexité pour les animations ?</label>
+      <div class="space-y-2" id="q-animation-level">
+        <button onclick="selectChoice(this, 'q-animation-level')" data-value="sober" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Sobre — transitions simples et élégantes</span></button>
+        <button onclick="selectChoice(this, 'q-animation-level')" data-value="moderate" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Modéré — quelques animations au scroll</span></button>
+        <button onclick="selectChoice(this, 'q-animation-level')" data-value="dynamic" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Dynamique — animations riches, effets parallaxe</span></button>
+        <button onclick="selectChoice(this, 'q-animation-level')" data-value="no-opinion" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">D</span><span class="text-sm text-gray-300 font-sans">Pas d'avis</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(3)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="validateAndNext(4)" class="flex-1 sm:flex-none px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button></div>
+</div>
+
+<!-- STEP 5 -->
+<div class="step" data-step="5">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 05 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">CONTENU & PAGES.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Définissons la structure de votre site et les fonctionnalités dont vous avez besoin.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Pages souhaitées *</label>
+      <div class="grid grid-cols-2 gap-2" id="q-pages">
+        <div onclick="toggleCheck(this)" data-value="accueil" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Accueil</span></div>
+        <div onclick="toggleCheck(this)" data-value="a-propos" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">À propos</span></div>
+        <div onclick="toggleCheck(this)" data-value="services" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Services / Offres</span></div>
+        <div onclick="toggleCheck(this)" data-value="contact" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Contact</span></div>
+        <div onclick="toggleCheck(this)" data-value="blog" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Blog</span></div>
+        <div onclick="toggleCheck(this)" data-value="portfolio" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Portfolio / Réalisations</span></div>
+        <div onclick="toggleCheck(this)" data-value="tarifs" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Tarifs</span></div>
+        <div onclick="toggleCheck(this)" data-value="faq" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">FAQ</span></div>
+        <div onclick="toggleCheck(this)" data-value="temoignages" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Témoignages / Avis</span></div>
+        <div onclick="toggleCheck(this)" data-value="eshop" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">E-shop / Boutique</span></div>
+        <div onclick="toggleCheck(this)" data-value="mentions-legales" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Mentions légales</span></div>
+        <div onclick="toggleCheck(this); toggleConditional('pages-other-detail', this.classList.contains('checked'))" data-value="autre" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Autre</span></div>
+      </div>
+      <div id="pages-other-detail" class="conditional mt-3">
+        <textarea id="q-pages-other" rows="3" placeholder="Décrivez les pages supplémentaires que vous souhaitez (ex: page équipe, page partenaires, page événements...)" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Avez-vous déjà les textes du site ?</label>
+      <div class="space-y-2" id="q-texts">
+        <button onclick="selectChoice(this, 'q-texts')" data-value="ready" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Oui, les textes sont prêts</span></button>
+        <button onclick="selectChoice(this, 'q-texts')" data-value="partial" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Partiellement — j'ai des ébauches</span></button>
+        <button onclick="selectChoice(this, 'q-texts')" data-value="need-help" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Non, j'ai besoin d'aide pour la rédaction</span></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Fonctionnalités souhaitées</label>
+      <div class="grid grid-cols-2 gap-2" id="q-features">
+        <div onclick="toggleCheck(this)" data-value="contact-form" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Formulaire de contact</span></div>
+        <div onclick="toggleCheck(this)" data-value="newsletter" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Newsletter</span></div>
+        <div onclick="toggleCheck(this)" data-value="chat" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Chat en ligne</span></div>
+        <div onclick="toggleCheck(this)" data-value="booking" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Réservation / Calendrier</span></div>
+        <div onclick="toggleCheck(this)" data-value="payment" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Paiement en ligne</span></div>
+        <div onclick="toggleCheck(this)" data-value="member-area" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Espace membre / connexion</span></div>
+        <div onclick="toggleCheck(this)" data-value="gallery" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Galerie photos / vidéos</span></div>
+        <div onclick="toggleCheck(this)" data-value="testimonials" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Témoignages / avis clients</span></div>
+        <div onclick="toggleCheck(this)" data-value="google-maps" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Carte Google Maps</span></div>
+        <div onclick="toggleCheck(this)" data-value="social-media" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Intégration réseaux sociaux</span></div>
+        <div onclick="toggleCheck(this)" data-value="blog-integrated" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Blog intégré</span></div>
+        <div onclick="toggleCheck(this)" data-value="search-bar" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Barre de recherche</span></div>
+        <div onclick="toggleCheck(this)" data-value="multi-lang" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Multi-langue</span></div>
+        <div onclick="toggleCheck(this)" data-value="admin" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Espace admin / back-office</span></div>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Langues du site</label>
+      <div class="flex flex-wrap gap-2" id="q-languages">
+        <div onclick="toggleCheck(this)" data-value="francais" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface px-4 py-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Français</span></div>
+        <div onclick="toggleCheck(this)" data-value="anglais" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface px-4 py-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Anglais</span></div>
+        <div onclick="toggleCheck(this)" data-value="espagnol" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface px-4 py-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Espagnol</span></div>
+        <div onclick="toggleCheck(this)" data-value="arabe" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface px-4 py-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Arabe</span></div>
+        <div onclick="toggleCheck(this)" data-value="autre" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface px-4 py-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Autre</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(4)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="validateAndNext(5)" class="flex-1 sm:flex-none px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button></div>
+</div>
+
+<!-- STEP 6 -->
+<div class="step" data-step="6">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 06 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">COPYWRITING & TON DE VOIX.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Les mots comptent autant que le design. Aidez-nous à trouver la voix parfaite pour votre audience.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Quel ton souhaitez-vous pour les textes du site ? *</label>
+      <div class="grid grid-cols-2 gap-3" id="q-tone">
+        <button onclick="selectChoice(this, 'q-tone')" data-value="professional" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Professionnel & formel</div></button>
+        <button onclick="selectChoice(this, 'q-tone')" data-value="friendly" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Amical & accessible</div></button>
+        <button onclick="selectChoice(this, 'q-tone')" data-value="inspiring" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Inspirant & motivant</div></button>
+        <button onclick="selectChoice(this, 'q-tone')" data-value="technical" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Technique & expert</div></button>
+        <button onclick="selectChoice(this, 'q-tone')" data-value="humorous" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Décalé & humoristique</div></button>
+        <button onclick="selectChoice(this, 'q-tone')" data-value="luxury" class="choice-btn border border-surfaceBorder bg-surface p-4 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Luxe & raffiné</div></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Votre slogan ou phrase d'accroche actuelle</label>
+      <input type="text" id="q-slogan" placeholder="Si vous en avez un, sinon nous pouvons en créer un" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Vos 3 arguments de vente principaux *</label>
+      <textarea id="q-selling-points" rows="4" placeholder="Ex:&#10;1. Livraison en 24h partout en France&#10;2. Service client disponible 7j/7&#10;3. Garantie satisfait ou remboursé 30 jours" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Qu'est-ce qui vous différencie de vos concurrents ?</label>
+      <textarea id="q-differentiator" rows="3" placeholder="Votre avantage compétitif, votre proposition de valeur unique..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Mots-clés importants pour votre SEO ?</label>
+      <textarea id="q-seo-keywords" rows="3" placeholder="Ex: agence web Paris, création site internet, développeur freelance..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Appel à l'action principal souhaité sur le site ?</label>
+      <input type="text" id="q-cta-text" placeholder="Ex: 'Demander un devis', 'Réserver ma place', 'Commencer gratuitement'..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Termes ou expressions à éviter ?</label>
+      <input type="text" id="q-words-avoid" placeholder="Ex: pas de 'cheap', pas de tutoiement..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(5)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="validateAndNext(6)" class="flex-1 sm:flex-none px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button></div>
+</div>
+
+<!-- STEP 7 -->
+<div class="step" data-step="7">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 07 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">DOMAINE & HÉBERGEMENT.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Faisons le point sur votre infrastructure technique.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Avez-vous un nom de domaine ? *</label>
+      <div class="space-y-2" id="q-domain">
+        <button onclick="selectChoice(this, 'q-domain'); toggleConditional('domain-details', true); toggleConditional('domain-wanted', false)" data-value="oui" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Oui, j'ai déjà un domaine</span></button>
+        <button onclick="selectChoice(this, 'q-domain'); toggleConditional('domain-details', false); toggleConditional('domain-wanted', true)" data-value="non" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Non, j'en veux un</span></button>
+      </div>
+      <div id="domain-details" class="conditional mt-3 space-y-3">
+        <input type="text" id="q-domain-name" placeholder="Ex: monsite.com" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+        <input type="text" id="q-domain-registrar" placeholder="Registrar : OVH, Namecheap, GoDaddy, Google Domains..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+      </div>
+      <div id="domain-wanted" class="conditional mt-3">
+        <input type="text" id="q-domain-wished" placeholder="Nom de domaine souhaité, ex: monentreprise.com" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Avez-vous un hébergement ?</label>
+      <div class="space-y-2" id="q-hosting">
+        <button onclick="selectChoice(this, 'q-hosting'); toggleConditional('hosting-details', true)" data-value="oui" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Oui</span></button>
+        <button onclick="selectChoice(this, 'q-hosting'); toggleConditional('hosting-details', false)" data-value="non" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Non, QuickShip s'en occupe</span></button>
+      </div>
+      <div id="hosting-details" class="conditional mt-3">
+        <input type="text" id="q-hosting-provider" placeholder="Hébergeur : OVH, o2switch, Vercel, Netlify..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Emails professionnels ?</label>
+      <div class="space-y-2" id="q-emails">
+        <button onclick="selectChoice(this, 'q-emails'); toggleConditional('emails-details', true)" data-value="oui" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Oui</span></button>
+        <button onclick="selectChoice(this, 'q-emails'); toggleConditional('emails-details', false)" data-value="non-veux" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Non, j'en veux</span></button>
+        <button onclick="selectChoice(this, 'q-emails'); toggleConditional('emails-details', false)" data-value="pas-besoin" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Pas besoin</span></button>
+      </div>
+      <div id="emails-details" class="conditional mt-3">
+        <input type="text" id="q-email-service" placeholder="Service: Google Workspace, Microsoft 365, OVH..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Google Analytics / Search Console ?</label>
+      <div class="flex gap-3" id="q-analytics">
+        <button onclick="selectChoice(this, 'q-analytics')" data-value="oui" class="choice-btn border border-surfaceBorder bg-surface px-6 py-3 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Oui</div></button>
+        <button onclick="selectChoice(this, 'q-analytics')" data-value="non" class="choice-btn border border-surfaceBorder bg-surface px-6 py-3 text-center"><div class="font-heading font-bold text-sm text-gray-300 uppercase">Non</div></button>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(6)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="validateAndNext(7)" class="flex-1 sm:flex-none px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button></div>
+</div>
+
+<!-- STEP 8 -->
+<div class="step" data-step="8">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 08 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">ACCÈS & RESSOURCES.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Pour assurer une transition fluide, indiquez-nous les accès dont vous disposez.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Accès au registrar domaine</label>
+      <div class="space-y-2" id="q-access-registrar">
+        <button onclick="selectChoice(this, 'q-access-registrar')" data-value="peut-fournir" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Je peux les fournir</span></button>
+        <button onclick="selectChoice(this, 'q-access-registrar')" data-value="ne-sait-pas" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Je ne sais pas comment faire</span></button>
+        <button onclick="selectChoice(this, 'q-access-registrar')" data-value="na" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Pas applicable</span></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Accès hébergement actuel</label>
+      <div class="space-y-2" id="q-access-hosting">
+        <button onclick="selectChoice(this, 'q-access-hosting')" data-value="peut-fournir" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Je peux les fournir</span></button>
+        <button onclick="selectChoice(this, 'q-access-hosting')" data-value="ne-sait-pas" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Je ne sais pas comment faire</span></button>
+        <button onclick="selectChoice(this, 'q-access-hosting')" data-value="na" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Pas applicable</span></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Accès Google Analytics / Search Console</label>
+      <div class="space-y-2" id="q-access-analytics">
+        <button onclick="selectChoice(this, 'q-access-analytics')" data-value="peut-fournir" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Je peux les fournir</span></button>
+        <button onclick="selectChoice(this, 'q-access-analytics')" data-value="pas-configure" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Pas encore configuré</span></button>
+        <button onclick="selectChoice(this, 'q-access-analytics')" data-value="na" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Pas applicable</span></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Réseaux sociaux à intégrer</label>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="q-socials">
+        <div onclick="toggleCheck(this)" data-value="instagram" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Instagram</span></div>
+        <div onclick="toggleCheck(this)" data-value="facebook" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Facebook</span></div>
+        <div onclick="toggleCheck(this)" data-value="linkedin" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">LinkedIn</span></div>
+        <div onclick="toggleCheck(this)" data-value="twitter-x" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">Twitter / X</span></div>
+        <div onclick="toggleCheck(this)" data-value="tiktok" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">TikTok</span></div>
+        <div onclick="toggleCheck(this)" data-value="youtube" class="check-item flex items-center gap-3 border border-surfaceBorder bg-surface p-3"><div class="check-box w-5 h-5 border border-surfaceBorder flex items-center justify-center flex-shrink-0"></div><span class="text-sm text-gray-300 font-sans">YouTube</span></div>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Autres accès ou comptes à transférer</label>
+      <textarea id="q-other-access" rows="3" placeholder="Ex: Mailchimp, HubSpot, CRM, Stripe..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+    <div class="border border-surfaceBorder bg-surface/50 p-4">
+      <div class="font-mono text-xs text-accent uppercase mb-2">Documents & fichiers à préparer</div>
+      <p class="text-gray-500 text-xs font-sans leading-relaxed">Après soumission, pensez à nous transmettre : logo HD (SVG/PNG), charte graphique, photos (produits, équipe, locaux), vidéos, textes rédigés, accès aux comptes existants. Plus vous nous fournissez d'éléments, plus le résultat sera fidèle à votre vision.</p>
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(7)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="validateAndNext(8)" class="flex-1 sm:flex-none px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button></div>
+</div>
+
+<!-- STEP 9: Documents & Dernières demandes -->
+<div class="step" data-step="9">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 09 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">VOS DOCUMENTS & DERNIÈRES DEMANDES.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Partagez-nous vos fichiers visuels et dites-nous s'il y a quoi que ce soit d'autre que vous aimeriez.</p>
+  <div class="space-y-6">
+    <!-- Google Drive -->
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Lien Google Drive avec vos documents visuels</label>
+      <p class="text-gray-500 text-xs font-sans mb-3 leading-relaxed">Uploadez tous vos fichiers (logo, photos, vidéos, charte graphique, textes...) dans un dossier Google Drive et partagez-nous le lien en accès éditeur.</p>
+      <div class="border border-surfaceBorder bg-surface/50 p-4 mb-4">
+        <div class="font-mono text-xs text-accent uppercase mb-3">Comment faire en 4 clics :</div>
+        <ol class="text-gray-400 text-xs font-sans leading-relaxed space-y-2 list-decimal list-inside">
+          <li>Allez sur <span class="text-white">drive.google.com</span> et créez un nouveau dossier (bouton <span class="text-white">+ Nouveau</span> → <span class="text-white">Nouveau dossier</span>)</li>
+          <li>Glissez-déposez tous vos fichiers (logo, photos, vidéos, textes, charte...) dans ce dossier</li>
+          <li>Clic droit sur le dossier → <span class="text-white">Partager</span> → <span class="text-white">Obtenir le lien</span></li>
+          <li>Changez l'accès en <span class="text-white">« Tous les utilisateurs ayant le lien »</span> → rôle <span class="text-white">« Éditeur »</span> → copiez le lien</li>
+        </ol>
+      </div>
+      <input type="url" id="q-drive-link" placeholder="https://drive.google.com/drive/folders/..." class="w-full bg-surface border border-surfaceBorder text-white font-mono text-sm p-4 placeholder-gray-600">
+    </div>
+    <!-- Autre chose -->
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Y a-t-il autre chose que vous souhaitez pour votre site ?</label>
+      <textarea id="q-anything-else" rows="4" placeholder="Fonctionnalité spécifique, intégration particulière, contrainte technique, idée que vous n'avez pas pu exprimer dans les étapes précédentes... Dites-nous tout !" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(8)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="validateAndNext(9)" class="flex-1 sm:flex-none px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase hover:bg-accentHover transition-colors">CONTINUER →</button></div>
+</div>
+
+<!-- STEP 10: Contact -->
+<div class="step" data-step="10">
+  <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">[ ÉTAPE 10 / 10 ]</div>
+  <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">CONTACT & FINALISATION.</h2>
+  <p class="text-gray-400 text-sm sm:text-base font-sans mb-8 leading-relaxed">Dernière ligne droite. Vos coordonnées et quelques détails pour finaliser votre brief.</p>
+  <div class="space-y-6">
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Nom complet *</label>
+      <input type="text" id="q-fullname" placeholder="Jean Dupont" class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Email *</label>
+      <input type="email" id="q-email" placeholder="votre@email.com" class="w-full bg-surface border border-surfaceBorder text-white font-mono text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Téléphone (optionnel)</label>
+      <input type="tel" id="q-phone" placeholder="+33 6 12 34 56 78" class="w-full bg-surface border border-surfaceBorder text-white font-mono text-sm p-4 placeholder-gray-600">
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-3">Comment avez-vous entendu parler de QuickShip ?</label>
+      <div class="space-y-2" id="q-referral">
+        <button onclick="selectChoice(this, 'q-referral')" data-value="reseaux-sociaux" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">A</span><span class="text-sm text-gray-300 font-sans">Réseaux sociaux</span></button>
+        <button onclick="selectChoice(this, 'q-referral')" data-value="recommandation" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">B</span><span class="text-sm text-gray-300 font-sans">Recommandation</span></button>
+        <button onclick="selectChoice(this, 'q-referral')" data-value="google" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">C</span><span class="text-sm text-gray-300 font-sans">Recherche Google</span></button>
+        <button onclick="selectChoice(this, 'q-referral')" data-value="publicite" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">D</span><span class="text-sm text-gray-300 font-sans">Publicité</span></button>
+        <button onclick="selectChoice(this, 'q-referral')" data-value="autre" class="choice-btn w-full border border-surfaceBorder bg-surface p-4 text-left flex items-center gap-4"><span class="w-8 h-8 border border-surfaceBorder flex items-center justify-center font-mono text-xs text-gray-500 flex-shrink-0">E</span><span class="text-sm text-gray-300 font-sans">Autre</span></button>
+      </div>
+    </div>
+    <div>
+      <label class="block font-mono text-xs text-gray-500 uppercase mb-2">Notes ou commentaires</label>
+      <textarea id="q-notes" rows="3" placeholder="Quelque chose à ajouter ?..." class="w-full bg-surface border border-surfaceBorder text-white font-sans text-sm p-4 resize-none placeholder-gray-600 leading-relaxed"></textarea>
+    </div>
+  </div>
+  <div class="mt-8 flex gap-3"><button onclick="goToStep(9)" class="px-6 py-4 border border-surfaceBorder text-gray-400 font-heading font-bold text-sm uppercase hover:border-white hover:text-white transition-colors">← RETOUR</button><button onclick="submitForm()" id="submit-btn" class="flex-1 px-8 py-5 bg-accent text-black font-heading font-bold text-lg uppercase hover:bg-accentHover transition-colors">ENVOYER MON BRIEF →</button></div>
+</div>
+
+<!-- STEP 11: BRIEF -->
+<div class="step" data-step="11">
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-20 h-20 border-2 border-accent bg-accent/10 mb-8">
+      <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h2 class="font-heading title-uppercase text-3xl sm:text-5xl font-semibold text-white mb-4">BRIEF ENVOYÉ.</h2>
+    <p class="text-gray-400 text-base font-sans mb-8 leading-relaxed max-w-md mx-auto">Merci ! Voici un récapitulatif de votre brief. Vous pouvez le copier pour vos dossiers.</p>
+  </div>
+  <div class="relative">
+    <button onclick="copyBrief()" id="copy-btn" class="absolute top-3 right-3 font-mono text-xs text-accent border border-accent px-3 py-1.5 hover:bg-accent hover:text-black transition-colors z-10">COPIER</button>
+    <pre id="brief-output" class="bg-surface border border-surfaceBorder p-6 pt-12 text-sm text-gray-300 font-mono whitespace-pre-wrap leading-relaxed overflow-x-auto max-h-[60vh] overflow-y-auto"></pre>
+  </div>
+  <div class="mt-8 text-center"><a href="/" class="inline-flex items-center gap-2 font-mono text-sm text-gray-500 hover:text-accent transition-colors uppercase">← Retour à l'accueil</a></div>
+</div>
+
+        </div>
+    </main>
+    <div id="progress-container" class="fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-t border-surfaceBorder">
+        <div class="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <div class="flex-1 h-1.5 bg-surfaceBorder overflow-hidden">
+                <div id="progress-bar" class="h-full bg-accent transition-all duration-500 ease-out" style="width: 0%"></div>
+            </div>
+            <div id="progress-text" class="font-mono text-xs text-gray-500 uppercase flex-shrink-0">Étape 1/9</div>
+        </div>
+    </div>
+    <script>
+        let currentStep = 1;
+        const totalSteps = 10;
+        const WEBHOOK_URL = 'https://webhook-production-b9fc.up.railway.app/submit';
+
+        async function insertToSupabase(data) {
+            try {
+                await fetch('https://app.quickship.fun/api/onboarding/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        questionnaire_type: 'website',
+                        submitted_at: data.submitted_at,
+                        responses: data
+                    })
+                });
+            } catch (e) { console.error('Submit error:', e); }
+        }
+
+        function getValue(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+        function getCheckboxValues(gid) { return Array.from(document.querySelectorAll('#'+gid+' .check-item.checked')).map(el => el.dataset.value); }
+        function getChoiceValue(gid) { const s = document.querySelector('#'+gid+' .choice-btn.selected'); return s ? s.dataset.value : ''; }
+
+        function updateProgress() {
+            const pct = Math.round((currentStep / totalSteps) * 100);
+            document.getElementById('progress-bar').style.width = pct + '%';
+            document.getElementById('progress-text').textContent = 'Étape ' + currentStep + '/' + totalSteps;
+        }
+        function goToStep(n) {
+            const cur = document.querySelector('.step.active'), nxt = document.querySelector('[data-step="'+n+'"]');
+            if (!nxt || !cur) return;
+            cur.classList.remove('active'); cur.classList.add('exit');
+            setTimeout(() => { cur.classList.remove('exit'); cur.style.display='none'; nxt.classList.add('active'); currentStep=n; updateProgress(); window.scrollTo({top:0,behavior:'smooth'}); }, 250);
+        }
+        function selectChoice(btn, gid) { document.querySelectorAll('#'+gid+' .choice-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); }
+        function toggleCheck(el) { el.classList.toggle('checked'); }
+        function toggleConditional(id, show) { const el=document.getElementById(id); if(!el) return; show ? el.classList.add('visible') : el.classList.remove('visible'); }
+        function shakeEl(el) { el.style.borderColor='#ef4444'; el.style.transition='border-color 0.3s'; setTimeout(()=>{el.style.borderColor='';},1500); }
+        function shakeGroup(sel) { document.querySelectorAll(sel).forEach(b=>{b.style.borderColor='#ef4444';}); setTimeout(()=>document.querySelectorAll(sel).forEach(b=>{b.style.borderColor='';}),1500); }
+
+        function validateAndNext(step) {
+            if (step===1) {
+                if (!getValue('q-project-name')) { shakeEl(document.getElementById('q-project-name')); return; }
+                if (!getValue('q-activity')) { shakeEl(document.getElementById('q-activity')); return; }
+                if (!getChoiceValue('q-objective')) { shakeGroup('#q-objective .choice-btn'); return; }
+            }
+            if (step===2) {
+                if (!getValue('q-target-audience')) { shakeEl(document.getElementById('q-target-audience')); return; }
+                if (!getChoiceValue('q-business-goal')) { shakeGroup('#q-business-goal .choice-btn'); return; }
+            }
+            if (step===3) {
+                if (!getChoiceValue('q-logo')) { shakeGroup('#q-logo .choice-btn'); return; }
+                if (!getValue('q-brand-adjectives')) { shakeEl(document.getElementById('q-brand-adjectives')); return; }
+            }
+            if (step===4) {
+                if (!getChoiceValue('q-style-universe')) { shakeGroup('#q-style-universe .choice-btn'); return; }
+            }
+            if (step===5) {
+                if (getCheckboxValues('q-pages').length===0) { shakeGroup('#q-pages .check-item'); return; }
+            }
+            if (step===6) {
+                if (!getChoiceValue('q-tone')) { shakeGroup('#q-tone .choice-btn'); return; }
+                if (!getValue('q-selling-points')) { shakeEl(document.getElementById('q-selling-points')); return; }
+            }
+            if (step===7) {
+                if (!getChoiceValue('q-domain')) { shakeGroup('#q-domain .choice-btn'); return; }
+            }
+            goToStep(step + 1);
+        }
+
+        function collectAllData() {
+            return {
+                project_name: getValue('q-project-name'), activity: getValue('q-activity'), sector: getChoiceValue('q-sector'),
+                objective: getChoiceValue('q-objective'), existing_site: getChoiceValue('q-existing-site'), existing_site_url: getValue('q-existing-site-url'),
+                site_reason: getChoiceValue('q-site-reason'),
+                target_audience: getValue('q-target-audience'), age_range: getChoiceValue('q-age-range'), target_type: getChoiceValue('q-target-type'),
+                business_goal: getChoiceValue('q-business-goal'), main_cta: getChoiceValue('q-main-cta'), digital_strategy: getChoiceValue('q-digital-strategy'),
+                acquisition_channels: getCheckboxValues('q-acquisition-channels'),
+                logo: getChoiceValue('q-logo'), brandbook: getChoiceValue('q-brandbook'),
+                color_primary: getValue('q-color-primary-hex'), color_secondary: getValue('q-color-secondary-hex'), color_avoid: getValue('q-color-avoid'),
+                typography: getValue('q-typography'), brand_adjectives: getValue('q-brand-adjectives'), brand_message: getValue('q-brand-message'),
+                visual_assets: getCheckboxValues('q-visual-assets'),
+                style_universe: getChoiceValue('q-style-universe'), color_mood: getChoiceValue('q-color-mood'),
+                inspiration_sites: getValue('q-inspiration-sites'), design_elements: getCheckboxValues('q-design-elements'),
+                design_dislikes: getValue('q-design-dislikes'), animation_level: getChoiceValue('q-animation-level'),
+                pages: getCheckboxValues('q-pages'), pages_other: getValue('q-pages-other'), texts_ready: getChoiceValue('q-texts'), features: getCheckboxValues('q-features'),
+                languages: getCheckboxValues('q-languages'),
+                tone: getChoiceValue('q-tone'), slogan: getValue('q-slogan'), selling_points: getValue('q-selling-points'),
+                differentiator: getValue('q-differentiator'), seo_keywords: getValue('q-seo-keywords'),
+                cta_text: getValue('q-cta-text'), words_avoid: getValue('q-words-avoid'),
+                domain: getChoiceValue('q-domain'), domain_name: getValue('q-domain-name'), domain_registrar: getValue('q-domain-registrar'),
+                domain_wished: getValue('q-domain-wished'), hosting: getChoiceValue('q-hosting'), hosting_provider: getValue('q-hosting-provider'),
+                emails: getChoiceValue('q-emails'), email_service: getValue('q-email-service'), analytics: getChoiceValue('q-analytics'),
+                access_registrar: getChoiceValue('q-access-registrar'), access_hosting: getChoiceValue('q-access-hosting'),
+                access_analytics: getChoiceValue('q-access-analytics'), socials: getCheckboxValues('q-socials'),
+                other_access: getValue('q-other-access'),
+                drive_link: getValue('q-drive-link'), anything_else: getValue('q-anything-else'),
+                fullname: getValue('q-fullname'), email: getValue('q-email'), phone: getValue('q-phone'),
+                referral: getChoiceValue('q-referral'),
+                notes: getValue('q-notes'),
+                submitted_at: new Date().toISOString(), form_type: 'onboarding-website'
+            };
+        }
+
+        function generateBrief(d) {
+            const l = (k,v) => v ? '  '+k+': '+v : '';
+            const a = (k,arr) => arr && arr.length ? '  '+k+': '+arr.join(', ') : '';
+            return [
+'════════════════════════════════════════════',
+'  BRIEF SITE WEB — QUICKSHIP',
+'  Généré le '+new Date().toLocaleDateString('fr-FR'),
+'════════════════════════════════════════════',
+'',
+'▸ 1. PROJET',
+l('Nom',d.project_name), l('Activité',d.activity), l('Secteur',d.sector), l('Objectif',d.objective),
+l('Site existant',d.existing_site==='oui'?'Oui — '+d.existing_site_url:'Non'),
+l('Raison refonte',d.site_reason),
+'',
+'▸ 2. CIBLE & STRATÉGIE',
+l('Cible',d.target_audience), l('Tranche d\'âge',d.age_range), l('Type',d.target_type),
+l('Objectif business',d.business_goal), l('CTA attendu',d.main_cta), l('Stratégie digitale',d.digital_strategy),
+a('Canaux d\'acquisition',d.acquisition_channels),
+'',
+'▸ 3. BRANDING & IDENTITÉ',
+l('Logo',d.logo==='oui'?'Oui, à fournir':'À créer'), l('Charte graphique',d.brandbook==='oui'?'Oui, à fournir':'Non'),
+l('Couleur principale',d.color_primary), l('Couleur secondaire',d.color_secondary), l('Couleurs à éviter',d.color_avoid),
+l('Typographies',d.typography||'Non renseigné'), l('3 adjectifs',d.brand_adjectives), l('Message principal',d.brand_message),
+a('Éléments visuels',d.visual_assets),
+'',
+'▸ 4. STYLE & DIRECTION ARTISTIQUE',
+l('Univers visuel',d.style_universe), l('Couleur dominante',d.color_mood),
+l('Sites d\'inspiration',d.inspiration_sites||'Non renseigné'),
+a('Éléments design',d.design_elements), l('Ce qu\'il n\'aime pas',d.design_dislikes), l('Niveau animations',d.animation_level),
+'',
+'▸ 5. CONTENU & PAGES',
+a('Pages',d.pages), l('Pages autres',d.pages_other), l('Textes prêts',d.texts_ready), a('Fonctionnalités',d.features), a('Langues',d.languages),
+'',
+'▸ 6. COPYWRITING & TON',
+l('Ton',d.tone), l('Slogan',d.slogan||'Non renseigné'), l('Arguments de vente',d.selling_points),
+l('Différenciateur',d.differentiator||'Non renseigné'), l('Mots-clés SEO',d.seo_keywords||'Non renseigné'),
+l('CTA souhaité',d.cta_text||'Non renseigné'), l('Mots à éviter',d.words_avoid||'Non renseigné'),
+'',
+'▸ 7. DOMAINE & HÉBERGEMENT',
+l('Domaine',d.domain==='oui'?'Oui — '+d.domain_name:'Non — souhaité: '+d.domain_wished),
+l('Registrar',d.domain_registrar), l('Hébergement',d.hosting==='oui'?'Oui — '+d.hosting_provider:'QuickShip'),
+l('Emails pro',d.emails), l('Service email',d.email_service), l('Analytics',d.analytics),
+'',
+'▸ 8. ACCÈS & RESSOURCES',
+l('Accès registrar',d.access_registrar), l('Accès hébergement',d.access_hosting), l('Accès Analytics',d.access_analytics),
+a('Réseaux sociaux',d.socials), l('Autres accès',d.other_access||'Aucun'),
+'',
+'▸ 9. DOCUMENTS & DERNIÈRES DEMANDES',
+l('Lien Google Drive',d.drive_link||'Non fourni'), l('Autre chose souhaitée',d.anything_else||'Rien'),
+'',
+'▸ 10. CONTACT',
+l('Nom',d.fullname), l('Email',d.email), l('Téléphone',d.phone||'Non renseigné'),
+l('Source',d.referral), l('Notes',d.notes||'Aucune'),
+'',
+'════════════════════════════════════════════'
+            ].filter(x=>x!==undefined).join('\n').replace(/\n{3,}/g,'\n\n');
+        }
+
+        async function submitForm() {
+            if (!getValue('q-fullname')) { shakeEl(document.getElementById('q-fullname')); return; }
+            const email = getValue('q-email');
+            if (!email||!email.includes('@')) { shakeEl(document.getElementById('q-email')); return; }
+            const btn = document.getElementById('submit-btn');
+            btn.textContent='ENVOI EN COURS...'; btn.disabled=true; btn.style.opacity='0.6';
+            const data = collectAllData();
+            document.getElementById('brief-output').textContent = generateBrief(data);
+            try { fetch(WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) }); } catch(e) { console.error('Webhook error:',e); }
+            insertToSupabase(data);
+            goToStep(11);
+            document.getElementById('progress-container').style.display='none';
+        }
+
+        function copyBrief() {
+            navigator.clipboard.writeText(document.getElementById('brief-output').textContent).then(()=>{
+                const b=document.getElementById('copy-btn'); b.textContent='COPIÉ ✓'; setTimeout(()=>{b.textContent='COPIER';},2000);
+            });
+        }
+
+        document.addEventListener('keydown',(e)=>{
+            if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){
+                e.preventDefault();
+                const a=document.querySelector('.step.active'); if(!a) return;
+                const s=parseInt(a.dataset.step);
+                if(s>=1&&s<=9) validateAndNext(s);
+                else if(s===10) submitForm();
+            }
+        });
+    </script>
+</body>
+</html>

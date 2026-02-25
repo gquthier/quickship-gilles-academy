@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShipFast — Formulaire d'Onboarding MVP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Inter', 'system-ui', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+                            400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+                            800: '#3730a3', 900: '#312e81', 950: '#1e1b4b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .cta-gradient { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+        .cta-gradient:hover { background: linear-gradient(135deg, #4338ca, #6d28d9); }
+        .step-active { border-color: #4f46e5; background-color: #eef2ff; }
+        .step-done { border-color: #22c55e; background-color: #f0fdf4; }
+        .progress-fill { transition: width 0.5s ease; }
+        textarea { min-height: 100px; }
+    </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '791100870085010');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=791100870085010&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body class="font-sans text-gray-900 antialiased bg-gray-50 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg cta-gradient flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <span class="text-xl font-bold">Ship<span class="text-brand-600">Fast</span></span>
+            </a>
+            <div class="text-sm text-gray-500">
+                Étape <span id="currentStepLabel">1</span> / 7
+            </div>
+        </div>
+        <!-- Progress Bar -->
+        <div class="h-1 bg-gray-100">
+            <div id="progressBar" class="h-full bg-brand-500 progress-fill" style="width: 14.28%"></div>
+        </div>
+    </header>
+
+    <!-- Form Container -->
+    <main class="max-w-3xl mx-auto px-4 py-8 sm:py-12">
+
+        <form id="onboardingForm" class="space-y-6">
+
+            <!-- =============================== -->
+            <!-- STEP 1: Vision & Pitch -->
+            <!-- =============================== -->
+            <div class="form-step" data-step="1">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl cta-gradient text-white font-bold flex items-center justify-center">1</div>
+                        <div>
+                            <h2 class="text-xl font-bold">Votre Vision</h2>
+                            <p class="text-sm text-gray-500">Pitchez-nous votre idée comme si on était un investisseur</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Nom du projet <span class="text-red-500">*</span></label>
+                            <input type="text" name="project_name" required placeholder="Ex: TaskFlow, FoodieApp, InvoiceHero..."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Elevator Pitch — en 2 phrases <span class="text-red-500">*</span></label>
+                            <textarea name="elevator_pitch" required placeholder="Ex: Une plateforme qui permet aux freelances de gérer leurs factures en 30 secondes. Fini les tableurs Excel et les outils compliqués."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Description détaillée du projet <span class="text-red-500">*</span></label>
+                            <textarea name="detailed_description" required placeholder="Décrivez votre idée en détail : le concept, comment ça fonctionne, ce que l'utilisateur peut faire... Plus c'est détaillé, mieux c'est."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="6"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Quel problème résolvez-vous ? <span class="text-red-500">*</span></label>
+                            <textarea name="problem_solved" required placeholder="Quel est le problème précis que vos futurs utilisateurs rencontrent aujourd'hui ? Comment le résolvent-ils actuellement ?"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="4"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Qu'est-ce qui vous différencie de la concurrence ?</label>
+                            <textarea name="differentiator" placeholder="Votre avantage unique. Pourquoi les gens utiliseraient votre solution plutôt qu'une autre ?"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Avez-vous des exemples de produits/sites qui vous inspirent ?</label>
+                            <textarea name="inspirations" placeholder="Listez des URLs ou noms de produits qui ressemblent à ce que vous voulez (même partiellement). Ex: 'Stripe pour la simplicité, Notion pour le design'"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 2: Cible & Marché -->
+            <!-- =============================== -->
+            <div class="form-step hidden" data-step="2">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl cta-gradient text-white font-bold flex items-center justify-center">2</div>
+                        <div>
+                            <h2 class="text-xl font-bold">Cible & Marché</h2>
+                            <p class="text-sm text-gray-500">Qui va utiliser votre produit ?</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Qui est votre utilisateur cible ? <span class="text-red-500">*</span></label>
+                            <textarea name="target_user" required placeholder="Décrivez votre utilisateur idéal : âge, métier, habitudes, problèmes quotidiens..."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="4"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Type de marché <span class="text-red-500">*</span></label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="market_type" value="B2B" class="sr-only peer" required>
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🏢</div>
+                                        <div class="font-semibold text-sm">B2B</div>
+                                        <div class="text-xs text-gray-500">Entreprises</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="market_type" value="B2C" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">👤</div>
+                                        <div class="font-semibold text-sm">B2C</div>
+                                        <div class="text-xs text-gray-500">Consommateurs</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="market_type" value="B2B2C" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🔄</div>
+                                        <div class="font-semibold text-sm">B2B2C</div>
+                                        <div class="text-xs text-gray-500">Les deux</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Marché géographique</label>
+                            <input type="text" name="geo_market" placeholder="Ex: France, Europe, Monde entier, Afrique francophone..."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Langue(s) de l'application</label>
+                            <input type="text" name="languages" placeholder="Ex: Français, Anglais, Multi-langue..."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Concurrents directs connus</label>
+                            <textarea name="competitors" placeholder="Listez les concurrents que vous connaissez. URLs si possible."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 3: Fonctionnalités -->
+            <!-- =============================== -->
+            <div class="form-step hidden" data-step="3">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl cta-gradient text-white font-bold flex items-center justify-center">3</div>
+                        <div>
+                            <h2 class="text-xl font-bold">Fonctionnalités</h2>
+                            <p class="text-sm text-gray-500">Décrivez ce que votre MVP doit faire</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Fonctionnalités principales (MUST HAVE) <span class="text-red-500">*</span></label>
+                            <textarea name="features_must" required placeholder="Listez les fonctionnalités indispensables pour le MVP. Une par ligne.
+Ex:
+- Inscription / connexion utilisateur
+- Dashboard avec statistiques
+- Création et gestion de projets
+- Système de paiement Stripe
+- Notifications email"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="8"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Fonctionnalités secondaires (NICE TO HAVE)</label>
+                            <textarea name="features_nice" placeholder="Les fonctionnalités que vous aimeriez avoir mais qui ne sont pas critiques pour le lancement."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="5"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Parcours utilisateur type <span class="text-red-500">*</span></label>
+                            <textarea name="user_journey" required placeholder="Décrivez le parcours typique d'un utilisateur du début à la fin.
+Ex:
+1. L'utilisateur arrive sur la landing page
+2. Il s'inscrit avec son email
+3. Il accède au dashboard
+4. Il crée un nouveau projet
+5. Il invite des collaborateurs
+6. Il suit l'avancement
+7. Il exporte les résultats"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="8"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Rôles utilisateurs</label>
+                            <textarea name="user_roles" placeholder="Ex: Admin, Utilisateur standard, Invité, Super admin...
+Décrivez ce que chaque rôle peut faire."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="4"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Nombre d'écrans/pages estimé</label>
+                            <select name="screen_count" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <option value="">Sélectionnez...</option>
+                                <option value="1-5">1 à 5 écrans (très simple)</option>
+                                <option value="5-10">5 à 10 écrans (simple)</option>
+                                <option value="10-20">10 à 20 écrans (moyen)</option>
+                                <option value="20-30">20 à 30 écrans (complexe)</option>
+                                <option value="30+">30+ écrans (très complexe)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 4: Technique -->
+            <!-- =============================== -->
+            <div class="form-step hidden" data-step="4">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl cta-gradient text-white font-bold flex items-center justify-center">4</div>
+                        <div>
+                            <h2 class="text-xl font-bold">Spécifications Techniques</h2>
+                            <p class="text-sm text-gray-500">Pas besoin d'être dev — répondez selon vos besoins</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Type de plateforme <span class="text-red-500">*</span></label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="platform" value="web" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🌐</div>
+                                        <div class="font-semibold text-sm">Web App</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="platform" value="mobile-ios" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">📱</div>
+                                        <div class="font-semibold text-sm">iOS</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="platform" value="mobile-android" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🤖</div>
+                                        <div class="font-semibold text-sm">Android</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="platform" value="desktop" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">💻</div>
+                                        <div class="font-semibold text-sm">Desktop</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Authentification requise</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="auth" value="email-password" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        📧 Email + MDP
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="auth" value="google" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🔵 Google OAuth
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="auth" value="magic-link" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        ✨ Magic Link
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="auth" value="sso" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🏢 SSO Enterprise
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="auth" value="phone" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        📱 SMS/Phone
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="auth" value="none" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🚫 Pas d'auth
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Intégrations tierces nécessaires</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="integrations" value="stripe" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        💳 Stripe (paiements)
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="integrations" value="email-sending" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        📧 Emails transac.
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="integrations" value="analytics" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        📊 Analytics
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="integrations" value="openai" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🤖 OpenAI / IA
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="integrations" value="storage" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        📁 File Storage
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="integrations" value="push" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🔔 Notif. Push
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Autres intégrations / APIs</label>
+                            <textarea name="other_integrations" placeholder="APIs spécifiques, CRM, outils tiers, webhooks..."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Dashboard admin nécessaire ?</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="admin_dashboard" value="yes" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">✅ Oui</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="admin_dashboard" value="no" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">❌ Non</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Données sensibles ? (RGPD, santé, finance...)</label>
+                            <textarea name="sensitive_data" placeholder="Décrivez le type de données que vous stockerez. Y a-t-il des exigences de conformité ?"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 5: Design & UX -->
+            <!-- =============================== -->
+            <div class="form-step hidden" data-step="5">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl cta-gradient text-white font-bold flex items-center justify-center">5</div>
+                        <div>
+                            <h2 class="text-xl font-bold">Design & Expérience</h2>
+                            <p class="text-sm text-gray-500">L'apparence et le feeling de votre produit</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Style visuel souhaité <span class="text-red-500">*</span></label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="visual_style" value="minimal" class="sr-only peer" required>
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">⬜</div>
+                                        <div class="font-semibold text-sm">Minimal</div>
+                                        <div class="text-xs text-gray-500">Clean, épuré</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="visual_style" value="modern" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">✨</div>
+                                        <div class="font-semibold text-sm">Moderne</div>
+                                        <div class="text-xs text-gray-500">Gradients, animations</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="visual_style" value="corporate" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🏢</div>
+                                        <div class="font-semibold text-sm">Corporate</div>
+                                        <div class="text-xs text-gray-500">Pro, sobre</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="visual_style" value="playful" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🎨</div>
+                                        <div class="font-semibold text-sm">Playful</div>
+                                        <div class="text-xs text-gray-500">Fun, coloré</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="visual_style" value="dark" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🌙</div>
+                                        <div class="font-semibold text-sm">Dark Mode</div>
+                                        <div class="text-xs text-gray-500">Sombre, tech</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="visual_style" value="custom" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🎯</div>
+                                        <div class="font-semibold text-sm">Custom</div>
+                                        <div class="text-xs text-gray-500">À définir</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Couleur principale de marque</label>
+                            <div class="flex items-center gap-3">
+                                <input type="color" name="brand_color" value="#4f46e5" class="w-12 h-12 rounded-xl border border-gray-200 cursor-pointer">
+                                <input type="text" name="brand_color_hex" placeholder="#4f46e5"
+                                    class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Logo existant ?</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="has_logo" value="yes" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">✅ Oui, j'en ai un</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="has_logo" value="no" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">❌ Non, à créer</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Références design (URLs de sites/apps que vous aimez visuellement)</label>
+                            <textarea name="design_references" placeholder="Collez des URLs de sites dont vous aimez le design. Ex: https://linear.app, https://notion.so..."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Notes sur le design</label>
+                            <textarea name="design_notes" placeholder="Toute info supplémentaire sur le look & feel souhaité..."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 6: Business Model -->
+            <!-- =============================== -->
+            <div class="form-step hidden" data-step="6">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl cta-gradient text-white font-bold flex items-center justify-center">6</div>
+                        <div>
+                            <h2 class="text-xl font-bold">Business Model</h2>
+                            <p class="text-sm text-gray-500">Comment votre produit va générer du revenu</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Modèle de monétisation <span class="text-red-500">*</span></label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="revenue_model" value="subscription" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🔄</div>
+                                        <div class="font-semibold text-sm">Abonnement</div>
+                                        <div class="text-xs text-gray-500">SaaS, mensuel</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="revenue_model" value="one-time" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">💰</div>
+                                        <div class="font-semibold text-sm">Paiement unique</div>
+                                        <div class="text-xs text-gray-500">One-time</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="revenue_model" value="freemium" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🆓</div>
+                                        <div class="font-semibold text-sm">Freemium</div>
+                                        <div class="text-xs text-gray-500">Free + Premium</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="revenue_model" value="marketplace" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">🏪</div>
+                                        <div class="font-semibold text-sm">Marketplace</div>
+                                        <div class="text-xs text-gray-500">Commission</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="revenue_model" value="usage" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">📊</div>
+                                        <div class="font-semibold text-sm">Usage-based</div>
+                                        <div class="text-xs text-gray-500">À la consommation</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="revenue_model" value="other" class="sr-only peer">
+                                    <div class="p-4 rounded-xl border-2 border-gray-200 text-center peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        <div class="text-2xl mb-1">❓</div>
+                                        <div class="font-semibold text-sm">Autre</div>
+                                        <div class="text-xs text-gray-500">À définir</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Prix envisagés</label>
+                            <textarea name="pricing_plan" placeholder="Ex: Free = 0€, Pro = 29€/mois, Business = 99€/mois. Ou: commission de 5% par transaction."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Objectif principal du MVP</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="mvp_goal" value="validate" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🧪 <strong>Valider l'idée</strong> — tester le marché
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="mvp_goal" value="fundraise" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        💰 <strong>Lever des fonds</strong> — impressionner des investisseurs
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="mvp_goal" value="revenue" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🚀 <strong>Générer du CA</strong> — premiers clients payants
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="mvp_goal" value="internal" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🔧 <strong>Usage interne</strong> — outil pour mon équipe
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">KPIs de succès pour le MVP</label>
+                            <textarea name="kpis" placeholder="Comment saurez-vous que le MVP est un succès ?
+Ex: 100 inscriptions en 1 mois, 10 clients payants, taux de rétention > 40%..."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =============================== -->
+            <!-- STEP 7: Infos complémentaires -->
+            <!-- =============================== -->
+            <div class="form-step hidden" data-step="7">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl cta-gradient text-white font-bold flex items-center justify-center">7</div>
+                        <div>
+                            <h2 class="text-xl font-bold">Dernières infos</h2>
+                            <p class="text-sm text-gray-500">Tout ce qu'on doit encore savoir</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Avez-vous déjà du code ou un prototype existant ?</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="existing_code" value="none" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🆕 Rien du tout
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="existing_code" value="vibe-code" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        🎪 Du vibe code
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="existing_code" value="pro-code" class="sr-only peer">
+                                    <div class="p-3 rounded-xl border-2 border-gray-200 text-center text-sm peer-checked:border-brand-500 peer-checked:bg-brand-50 transition">
+                                        💻 Du code pro
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Si vous avez du code existant, partagez le repo</label>
+                            <input type="url" name="existing_repo" placeholder="https://github.com/votre-username/votre-repo"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Résultat du vibe coding (si applicable)</label>
+                            <textarea name="vibe_code_result" placeholder="Si vous avez essayé le vibe coding, qu'est-ce qui n'a pas fonctionné ? Qu'est-ce qui manque ?"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="3"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Avez-vous un nom de domaine ?</label>
+                            <input type="text" name="domain" placeholder="Ex: monprojet.com (ou 'non, pas encore')"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Hébergement préféré ?</label>
+                            <select name="hosting" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                <option value="">Pas de préférence</option>
+                                <option value="vercel">Vercel</option>
+                                <option value="railway">Railway</option>
+                                <option value="render">Render</option>
+                                <option value="aws">AWS</option>
+                                <option value="gcp">Google Cloud</option>
+                                <option value="supabase">Supabase</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Votre email <span class="text-red-500">*</span></label>
+                            <input type="email" name="email" required placeholder="votre@email.com"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Votre nom complet <span class="text-red-500">*</span></label>
+                            <input type="text" name="full_name" required placeholder="Prénom Nom"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Notes, commentaires, tout ce qu'on doit savoir</label>
+                            <textarea name="additional_notes" placeholder="Tout ce qu'on n'a pas couvert... Lâchez-vous, plus on a d'info, mieux c'est."
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex items-center justify-between pt-4">
+                <button type="button" id="prevBtn" onclick="changeStep(-1)" class="hidden px-6 py-3 rounded-xl border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition">
+                    ← Précédent
+                </button>
+                <div class="flex-1"></div>
+                <button type="button" id="nextBtn" onclick="changeStep(1)" class="px-8 py-3 rounded-xl cta-gradient text-white font-bold hover:shadow-lg transition-all">
+                    Suivant →
+                </button>
+                <button type="submit" id="submitBtn" class="hidden px-8 py-3 rounded-xl bg-green-600 text-white font-bold hover:bg-green-700 hover:shadow-lg transition-all">
+                    ✅ Générer mon brief MVP
+                </button>
+            </div>
+
+        </form>
+
+        <!-- =============================== -->
+        <!-- GENERATED PROMPT OUTPUT -->
+        <!-- =============================== -->
+        <div id="promptOutput" class="hidden mt-8">
+            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold">🚀 Brief MVP Généré</h2>
+                    <button onclick="copyPrompt()" class="px-4 py-2 rounded-lg bg-brand-50 text-brand-600 text-sm font-semibold hover:bg-brand-100 transition">
+                        📋 Copier
+                    </button>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6 overflow-auto max-h-[600px]">
+                    <pre id="promptText" class="whitespace-pre-wrap text-sm text-gray-800 font-mono leading-relaxed"></pre>
+                </div>
+                <div class="mt-4 p-4 rounded-xl bg-green-50 border border-green-200">
+                    <p class="text-sm text-green-800">
+                        <strong>✅ Brief prêt !</strong> Copiez ce texte et envoyez-le nous. Notre IA + nos seniors vont transformer ça en MVP fonctionnel en 48h.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 7;
+
+        function changeStep(direction) {
+            const current = document.querySelector(`[data-step="${currentStep}"]`);
+
+            // Validate required fields on current step before advancing
+            if (direction > 0) {
+                const requiredFields = current.querySelectorAll('[required]');
+                let valid = true;
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.classList.add('border-red-400', 'ring-2', 'ring-red-200');
+                        valid = false;
+                    } else {
+                        field.classList.remove('border-red-400', 'ring-2', 'ring-red-200');
+                    }
+                });
+                // Check radio buttons
+                const radioGroups = current.querySelectorAll('input[type="radio"][required]');
+                radioGroups.forEach(radio => {
+                    const name = radio.name;
+                    const checked = current.querySelector(`input[name="${name}"]:checked`);
+                    if (!checked) valid = false;
+                });
+                if (!valid) return;
+            }
+
+            current.classList.add('hidden');
+            currentStep += direction;
+            const next = document.querySelector(`[data-step="${currentStep}"]`);
+            next.classList.remove('hidden');
+
+            // Update UI
+            document.getElementById('currentStepLabel').textContent = currentStep;
+            document.getElementById('progressBar').style.width = `${(currentStep / totalSteps) * 100}%`;
+            document.getElementById('prevBtn').classList.toggle('hidden', currentStep === 1);
+            document.getElementById('nextBtn').classList.toggle('hidden', currentStep === totalSteps);
+            document.getElementById('submitBtn').classList.toggle('hidden', currentStep !== totalSteps);
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('onboardingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generatePrompt();
+        });
+
+        function generatePrompt() {
+            const form = document.getElementById('onboardingForm');
+            const data = new FormData(form);
+
+            // Collect checkbox values
+            const getCheckboxValues = (name) => {
+                const vals = [];
+                form.querySelectorAll(`input[name="${name}"]:checked`).forEach(cb => vals.push(cb.value));
+                return vals.join(', ') || 'Non spécifié';
+            };
+
+            const getValue = (name) => data.get(name)?.trim() || 'Non spécifié';
+
+            const prompt = `=== BRIEF MVP — SHIPFAST ===
+Généré le: ${new Date().toLocaleDateString('fr-FR')} à ${new Date().toLocaleTimeString('fr-FR')}
+
+══════════════════════════════════════
+1. VISION & PITCH
+══════════════════════════════════════
+
+Nom du projet: ${getValue('project_name')}
+
+Elevator Pitch:
+${getValue('elevator_pitch')}
+
+Description détaillée:
+${getValue('detailed_description')}
+
+Problème résolu:
+${getValue('problem_solved')}
+
+Différenciateur:
+${getValue('differentiator')}
+
+Inspirations:
+${getValue('inspirations')}
+
+══════════════════════════════════════
+2. CIBLE & MARCHÉ
+══════════════════════════════════════
+
+Utilisateur cible:
+${getValue('target_user')}
+
+Type de marché: ${getValue('market_type')}
+Marché géographique: ${getValue('geo_market')}
+Langue(s): ${getValue('languages')}
+
+Concurrents:
+${getValue('competitors')}
+
+══════════════════════════════════════
+3. FONCTIONNALITÉS
+══════════════════════════════════════
+
+MUST HAVE:
+${getValue('features_must')}
+
+NICE TO HAVE:
+${getValue('features_nice')}
+
+Parcours utilisateur:
+${getValue('user_journey')}
+
+Rôles utilisateurs:
+${getValue('user_roles')}
+
+Nombre d'écrans estimé: ${getValue('screen_count')}
+
+══════════════════════════════════════
+4. SPÉCIFICATIONS TECHNIQUES
+══════════════════════════════════════
+
+Plateformes: ${getCheckboxValues('platform')}
+Authentification: ${getCheckboxValues('auth')}
+Intégrations: ${getCheckboxValues('integrations')}
+Autres intégrations: ${getValue('other_integrations')}
+Dashboard admin: ${getValue('admin_dashboard')}
+Données sensibles: ${getValue('sensitive_data')}
+
+══════════════════════════════════════
+5. DESIGN & UX
+══════════════════════════════════════
+
+Style visuel: ${getValue('visual_style')}
+Couleur de marque: ${getValue('brand_color_hex') || getValue('brand_color')}
+Logo existant: ${getValue('has_logo')}
+Références design: ${getValue('design_references')}
+Notes design: ${getValue('design_notes')}
+
+══════════════════════════════════════
+6. BUSINESS MODEL
+══════════════════════════════════════
+
+Monétisation: ${getCheckboxValues('revenue_model')}
+Prix envisagés: ${getValue('pricing_plan')}
+Objectif MVP: ${getValue('mvp_goal')}
+KPIs de succès: ${getValue('kpis')}
+
+══════════════════════════════════════
+7. INFOS COMPLÉMENTAIRES
+══════════════════════════════════════
+
+Code existant: ${getValue('existing_code')}
+Repo existant: ${getValue('existing_repo')}
+Résultat vibe coding: ${getValue('vibe_code_result')}
+Nom de domaine: ${getValue('domain')}
+Hébergement: ${getValue('hosting')}
+Email: ${getValue('email')}
+Nom: ${getValue('full_name')}
+
+Notes additionnelles:
+${getValue('additional_notes')}
+
+══════════════════════════════════════
+INSTRUCTIONS POUR LE DÉVELOPPEUR IA
+══════════════════════════════════════
+
+À partir de ce brief, développe un MVP complet et fonctionnel.
+
+Contraintes obligatoires :
+- Code propre, commenté, bien structuré
+- Architecture scalable (pas de code spaghetti)
+- Sécurité intégrée (auth, validation, HTTPS, CSRF, XSS)
+- Tests automatisés (unitaires + intégration)
+- Documentation complète (README, architecture, déploiement)
+- Responsive design
+- Stack moderne (Next.js/React, Node.js, PostgreSQL, Tailwind CSS recommandés)
+- Livré sur un repo GitHub avec instructions de déploiement claires
+
+Priorité : fonctionnel > beau. Le MVP doit MARCHER.
+`;
+
+            document.getElementById('promptText').textContent = prompt;
+            document.getElementById('promptOutput').classList.remove('hidden');
+
+            // Hide form, show prompt
+            document.getElementById('onboardingForm').classList.add('hidden');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            async function insertToSupabase(data) {
+                try {
+                    await fetch('https://app.quickship.fun/api/onboarding/submit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            questionnaire_type: 'mvp',
+                            submitted_at: data.submitted_at,
+                            responses: data
+                        })
+                    });
+                } catch (e) { console.error('Submit error:', e); }
+            }
+
+            // Fire-and-forget: send onboarding data to webhook
+            try {
+                const webhookData = {
+                    form_type: 'onboarding',
+                    project_name: getValue('project_name'),
+                    elevator_pitch: getValue('elevator_pitch'),
+                    detailed_description: getValue('detailed_description'),
+                    problem_solved: getValue('problem_solved'),
+                    differentiator: getValue('differentiator'),
+                    inspirations: getValue('inspirations'),
+                    target_user: getValue('target_user'),
+                    market_type: getValue('market_type'),
+                    geo_market: getValue('geo_market'),
+                    languages: getValue('languages'),
+                    competitors: getValue('competitors'),
+                    features_must: getValue('features_must'),
+                    features_nice: getValue('features_nice'),
+                    user_journey: getValue('user_journey'),
+                    user_roles: getValue('user_roles'),
+                    screen_count: getValue('screen_count'),
+                    platform: getCheckboxValues('platform'),
+                    auth: getCheckboxValues('auth'),
+                    integrations: getCheckboxValues('integrations'),
+                    other_integrations: getValue('other_integrations'),
+                    admin_dashboard: getValue('admin_dashboard'),
+                    sensitive_data: getValue('sensitive_data'),
+                    visual_style: getValue('visual_style'),
+                    brand_color: getValue('brand_color_hex') || getValue('brand_color'),
+                    has_logo: getValue('has_logo'),
+                    design_references: getValue('design_references'),
+                    revenue_model: getCheckboxValues('revenue_model'),
+                    pricing_plan: getValue('pricing_plan'),
+                    mvp_goal: getValue('mvp_goal'),
+                    kpis: getValue('kpis'),
+                    existing_code: getValue('existing_code'),
+                    existing_repo: getValue('existing_repo'),
+                    domain: getValue('domain'),
+                    hosting: getValue('hosting'),
+                    email: getValue('email'),
+                    name: getValue('full_name'),
+                    submitted_at: new Date().toISOString()
+                };
+                fetch('https://webhook-production-b9fc.up.railway.app/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(webhookData)
+                }).catch(() => {});
+                insertToSupabase(webhookData);
+            } catch (e) {
+                console.error('Webhook error:', e);
+            }
+        }
+
+        function copyPrompt() {
+            const text = document.getElementById('promptText').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                btn.textContent = '✅ Copié !';
+                setTimeout(() => btn.textContent = '📋 Copier', 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
