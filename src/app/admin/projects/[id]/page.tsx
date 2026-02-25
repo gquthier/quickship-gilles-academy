@@ -174,7 +174,7 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
         supabase.from('projects').select('*, client:profiles(full_name, company, email)').eq('id', params.id).single(),
         supabase.from('support_tickets').select('*').eq('project_id', params.id).order('created_at', { ascending: false }).limit(10),
         supabase.from('update_requests').select('*').eq('project_id', params.id).order('created_at', { ascending: false }).limit(10),
-        supabase.from('onboarding_responses').select('*, client:profiles(full_name, email, company)').eq('project_id', params.id).order('created_at', { ascending: false }).limit(1),
+        supabase.from('onboarding_responses').select('*, client:profiles!client_id(full_name, email, company)').eq('project_id', params.id).order('created_at', { ascending: false }).limit(1),
       ])
 
       if (projectData) {

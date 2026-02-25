@@ -144,7 +144,7 @@ export default function OnboardingPage() {
     async function load() {
       const { data } = await supabase
         .from('onboarding_responses')
-        .select('*, client:profiles(full_name, email, company, avatar_url), project:projects(name)')
+        .select('*, client:profiles!client_id(full_name, email, company, avatar_url), project:projects!project_id(name)')
         .order('created_at', { ascending: false })
 
       setResponses(data || [])
