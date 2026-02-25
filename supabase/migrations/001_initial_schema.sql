@@ -55,6 +55,7 @@ CREATE TABLE projects (
   deployed_url TEXT,
   staging_url TEXT,
   notes TEXT,
+  ai_prompt TEXT,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

@@ -43,6 +43,7 @@ export interface Project {
   deployed_url: string | null
   staging_url: string | null
   notes: string | null
+  ai_prompt: string | null
   created_at: string
   updated_at: string
   client?: Profile
@@ -131,6 +132,40 @@ export interface ActivityLog {
   action: string
   details: Record<string, unknown>
   created_at: string
+}
+
+// Stripe types
+export interface StripeRevenue {
+  thisMonth: number
+  lastMonth: number
+  thisWeek: number
+  mrr: number
+  trend: number | null
+}
+
+export interface StripePayment {
+  id: string
+  amount: number
+  currency: string
+  status: string
+  created: number
+  customerName: string
+  customerEmail: string | null
+}
+
+export interface StripeCustomerSpending {
+  name: string
+  email: string | null
+  totalSpent: number
+  chargeCount: number
+  matchedProfileName: string | null
+}
+
+export interface StripeData {
+  revenue: StripeRevenue
+  recentPayments: StripePayment[]
+  customerSpending: StripeCustomerSpending[]
+  activeSubscriptions: number
 }
 
 // Vercel types

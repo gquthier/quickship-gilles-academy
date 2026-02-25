@@ -6,7 +6,7 @@ import { TopBar } from '@/components/layout/TopBar'
 import { StatCard } from '@/components/ui/StatCard'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { Avatar } from '@/components/ui/Avatar'
-import { formatDate, formatDateTime } from '@/lib/utils'
+import { formatDate, formatDateTime, formatEur } from '@/lib/utils'
 import {
   Users,
   FolderKanban,
@@ -16,10 +16,13 @@ import {
   TrendingUp,
   AlertCircle,
   ArrowRight,
+  Euro,
+  BarChart3,
+  Receipt,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useAdminMobileMenu } from '../layout'
-import type { Project, SupportTicket, Profile } from '@/types'
+import type { Project, SupportTicket, Profile, StripeData } from '@/types'
 
 interface DashboardData {
   totalClients: number
@@ -34,6 +37,8 @@ interface DashboardData {
 export default function AdminDashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [stripeData, setStripeData] = useState<StripeData | null>(null)
+  const [stripeLoading, setStripeLoading] = useState(true)
   const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
 
@@ -68,7 +73,22 @@ export default function AdminDashboardPage() {
       })
       setLoading(false)
     }
+
+    async function loadStripe() {
+      try {
+        const res = await fetch('/api/admin/stripe')
+        if (res.ok) {
+          setStripeData(await res.json())
+        }
+      } catch {
+        // Stripe data non-critical
+      } finally {
+        setStripeLoading(false)
+      }
+    }
+
     load()
+    loadStripe()
   }, [])
 
   if (loading || !data) {
@@ -84,7 +104,44 @@ export default function AdminDashboardPage() {
       <TopBar title="Dashboard Admin" subtitle="Vue d'ensemble de votre activité" onMenuToggle={onMenuToggle} />
 
       <div className="p-4 md:p-8 space-y-4 md:space-y-8">
-        {/* Stats */}
+        {/* Revenue Stats */}
+        <div>
+          <h2 className="font-display font-bold text-lg flex items-center gap-2 mb-4">
+            <BarChart3 className="w-5 h-5 text-accent" />
+            Revenus Stripe
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+            {stripeLoading ? (
+              <>
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="bg-surface/60 backdrop-blur-xl border border-surface-border rounded-xl p-5 animate-pulse">
+                    <div className="h-4 w-24 bg-surface-border rounded mb-3" />
+                    <div className="h-8 w-32 bg-surface-border rounded" />
+                  </div>
+                ))}
+              </>
+            ) : stripeData ? (
+              <>
+                <StatCard
+                  label="CA ce mois"
+                  value={formatEur(stripeData.revenue.thisMonth)}
+                  icon={Euro}
+                  color="accent"
+                  trend={stripeData.revenue.trend !== null ? { value: Math.abs(stripeData.revenue.trend), positive: stripeData.revenue.trend >= 0 } : undefined}
+                />
+                <StatCard label="CA mois dernier" value={formatEur(stripeData.revenue.lastMonth)} icon={Receipt} color="blue" />
+                <StatCard label="CA cette semaine" value={formatEur(stripeData.revenue.thisWeek)} icon={TrendingUp} color="purple" />
+                <StatCard label="MRR" value={formatEur(stripeData.revenue.mrr)} icon={BarChart3} color="emerald" />
+              </>
+            ) : (
+              <div className="col-span-full text-center py-4 text-text-muted text-sm">
+                Données Stripe indisponibles
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* CRM Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           <StatCard label="Clients" value={data.totalClients} icon={Users} color="accent" />
           <StatCard label="Projets" value={data.totalProjects} icon={FolderKanban} color="blue" />
@@ -141,6 +198,64 @@ export default function AdminDashboardPage() {
             </div>
           </div>
         </div>
+
+        {/* Recent Payments */}
+        {stripeData && stripeData.recentPayments.length > 0 && (
+          <div>
+            <h2 className="font-display font-bold text-lg flex items-center gap-2 mb-4">
+              <Receipt className="w-5 h-5 text-emerald-400" />
+              Revenus récents
+            </h2>
+            <div className="card divide-y divide-surface-border">
+              {stripeData.recentPayments.map((payment) => (
+                <div key={payment.id} className="flex items-center gap-4 p-4 first:rounded-t-2xl last:rounded-b-2xl">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                    <Euro className="w-5 h-5 text-emerald-500/80" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm font-medium text-text-primary truncate">{payment.customerName}</h3>
+                    <p className="text-xs text-text-muted">
+                      {formatDateTime(new Date(payment.created * 1000))}
+                    </p>
+                  </div>
+                  <span className="text-sm font-semibold text-emerald-400">{formatEur(payment.amount)}</span>
+                  <span className="badge-success text-xs px-2 py-0.5 rounded-full">Payé</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Customer Spending */}
+        {stripeData && stripeData.customerSpending.length > 0 && (
+          <div>
+            <h2 className="font-display font-bold text-lg flex items-center gap-2 mb-4">
+              <Users className="w-5 h-5 text-blue-400" />
+              Clients & Paiements
+            </h2>
+            <div className="card divide-y divide-surface-border">
+              {stripeData.customerSpending.map((customer, i) => (
+                <div key={i} className="flex items-center gap-4 p-4 first:rounded-t-2xl last:rounded-b-2xl">
+                  <Avatar name={customer.matchedProfileName || customer.name} size="sm" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-medium text-text-primary truncate">
+                        {customer.matchedProfileName || customer.name}
+                      </h3>
+                      {customer.matchedProfileName && (
+                        <span className="badge-info text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0">Client QuickShip</span>
+                      )}
+                    </div>
+                    <p className="text-xs text-text-muted truncate">
+                      {customer.email || 'Email inconnu'} · {customer.chargeCount} paiement{customer.chargeCount > 1 ? 's' : ''}
+                    </p>
+                  </div>
+                  <span className="text-sm font-semibold text-text-primary">{formatEur(customer.totalSpent)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Open Tickets */}
         <div>

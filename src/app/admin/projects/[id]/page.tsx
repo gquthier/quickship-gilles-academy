@@ -24,6 +24,7 @@ import {
   CheckCheck,
   FileText,
   Zap,
+  Sparkles,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useAdminMobileMenu } from '../../layout'
@@ -159,6 +160,9 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
   const [saving, setSaving] = useState(false)
   const [editData, setEditData] = useState<Partial<Project>>({})
   const [promptCopied, setPromptCopied] = useState(false)
+  const [promptTab, setPromptTab] = useState<'base' | 'gemini'>('base')
+  const [generatingAiPrompt, setGeneratingAiPrompt] = useState(false)
+  const [aiPromptCopied, setAiPromptCopied] = useState(false)
   const [savingDelivery, setSavingDelivery] = useState(false)
   const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
@@ -226,10 +230,41 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
 
   function handleCopyPrompt() {
     if (!onboarding) return
-    const prompt = generateProjectPrompt(onboarding)
-    navigator.clipboard.writeText(prompt)
-    setPromptCopied(true)
-    setTimeout(() => setPromptCopied(false), 3000)
+    if (promptTab === 'gemini' && project?.ai_prompt) {
+      navigator.clipboard.writeText(project.ai_prompt)
+      setAiPromptCopied(true)
+      setTimeout(() => setAiPromptCopied(false), 3000)
+    } else {
+      const prompt = generateProjectPrompt(onboarding)
+      navigator.clipboard.writeText(prompt)
+      setPromptCopied(true)
+      setTimeout(() => setPromptCopied(false), 3000)
+    }
+  }
+
+  async function handleGenerateAiPrompt() {
+    if (!onboarding || !project) return
+    setGeneratingAiPrompt(true)
+    try {
+      const res = await fetch('/api/admin/generate-ai-prompt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          project_id: project.id,
+          onboarding_response_id: onboarding.id,
+        }),
+      })
+      const data = await res.json()
+      if (res.ok && data.ai_prompt) {
+        setProject(prev => prev ? { ...prev, ai_prompt: data.ai_prompt } : prev)
+      } else {
+        alert(data.error || 'Erreur lors de la génération')
+      }
+    } catch {
+      alert('Erreur réseau')
+    } finally {
+      setGeneratingAiPrompt(false)
+    }
   }
 
   function renderOrganizedBrief(responses: Record<string, unknown>) {
@@ -348,22 +383,90 @@ export default function AdminProjectDetailPage({ params }: { params: { id: strin
                   </h3>
                   <button
                     onClick={handleCopyPrompt}
+                    disabled={promptTab === 'gemini' && !project?.ai_prompt}
                     className={`inline-flex items-center gap-1.5 text-xs font-mono px-3 py-2 rounded-lg transition-all duration-200 ${
-                      promptCopied
+                      (promptTab === 'base' ? promptCopied : aiPromptCopied)
                         ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                        : 'bg-accent/10 text-accent border border-accent/20 hover:bg-accent/20'
+                        : promptTab === 'gemini' && !project?.ai_prompt
+                          ? 'bg-surface-hover text-text-muted border border-surface-border cursor-not-allowed'
+                          : 'bg-accent/10 text-accent border border-accent/20 hover:bg-accent/20'
                     }`}
                   >
-                    {promptCopied ? (
+                    {(promptTab === 'base' ? promptCopied : aiPromptCopied) ? (
                       <><CheckCheck className="w-3.5 h-3.5" /> Copié !</>
                     ) : (
                       <><Copy className="w-3.5 h-3.5" /> Copier le prompt</>
                     )}
                   </button>
                 </div>
-                <pre className="text-xs text-text-secondary bg-surface-hover p-4 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed max-h-96 overflow-y-auto">
-                  {generateProjectPrompt(onboarding)}
-                </pre>
+
+                {/* Tab selector */}
+                <div className="flex gap-1 mb-4 p-1 bg-surface-hover rounded-lg">
+                  <button
+                    onClick={() => setPromptTab('base')}
+                    className={`flex-1 flex items-center justify-center gap-1.5 text-xs font-medium px-3 py-2 rounded-md transition-all ${
+                      promptTab === 'base'
+                        ? 'bg-surface text-text-primary shadow-sm'
+                        : 'text-text-muted hover:text-text-secondary'
+                    }`}
+                  >
+                    <FileText className="w-3.5 h-3.5" /> Prompt de base
+                  </button>
+                  <button
+                    onClick={() => setPromptTab('gemini')}
+                    className={`flex-1 flex items-center justify-center gap-1.5 text-xs font-medium px-3 py-2 rounded-md transition-all ${
+                      promptTab === 'gemini'
+                        ? 'bg-surface text-text-primary shadow-sm'
+                        : 'text-text-muted hover:text-text-secondary'
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" /> Prompt Gemini (UX/UI)
+                  </button>
+                </div>
+
+                {promptTab === 'base' ? (
+                  <pre className="text-xs text-text-secondary bg-surface-hover p-4 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed max-h-96 overflow-y-auto">
+                    {generateProjectPrompt(onboarding)}
+                  </pre>
+                ) : (
+                  <>
+                    {project?.ai_prompt ? (
+                      <>
+                        <pre className="text-xs text-text-secondary bg-surface-hover p-4 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed max-h-96 overflow-y-auto">
+                          {project.ai_prompt}
+                        </pre>
+                        <button
+                          onClick={handleGenerateAiPrompt}
+                          disabled={generatingAiPrompt}
+                          className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-surface-hover text-text-secondary border border-surface-border hover:border-accent/30 hover:text-accent transition-all"
+                        >
+                          {generatingAiPrompt ? (
+                            <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Regénération en cours...</>
+                          ) : (
+                            <><RefreshCw className="w-3.5 h-3.5" /> Regénérer</>
+                          )}
+                        </button>
+                      </>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center py-10 text-center">
+                        <Sparkles className="w-8 h-8 text-text-muted mb-3" />
+                        <p className="text-sm text-text-muted mb-1">Aucun prompt Gemini généré</p>
+                        <p className="text-xs text-text-muted mb-4">Gemini va enrichir le prompt de base avec des directives UX/UI détaillées</p>
+                        <button
+                          onClick={handleGenerateAiPrompt}
+                          disabled={generatingAiPrompt}
+                          className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5 rounded-xl bg-accent text-black hover:bg-accent-hover transition-all"
+                        >
+                          {generatingAiPrompt ? (
+                            <><Loader2 className="w-4 h-4 animate-spin" /> Génération en cours...</>
+                          ) : (
+                            <><Sparkles className="w-4 h-4" /> Générer avec Gemini</>
+                          )}
+                        </button>
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
             )}
 

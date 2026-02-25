@@ -105,6 +105,13 @@ export function getInitials(name: string): string {
     .slice(0, 2)
 }
 
+export function formatEur(cents: number): string {
+  return new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: 'EUR',
+  }).format(cents / 100)
+}
+
 export function getPriorityColor(priority: string): string {
   const colors: Record<string, string> = {
     low: 'text-text-muted',
