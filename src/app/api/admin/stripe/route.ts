@@ -139,6 +139,10 @@ export async function GET() {
     })
   } catch (err: any) {
     console.error('Stripe API error:', err)
-    return NextResponse.json({ error: err.message || 'Erreur Stripe' }, { status: 500 })
+    return NextResponse.json({
+      error: err.message || 'Erreur Stripe',
+      type: err.type || err.name || 'unknown',
+      code: err.code || null,
+    }, { status: 500 })
   }
 }
