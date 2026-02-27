@@ -22,7 +22,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import type { Project, SupportTicket, TicketMessage, VercelDeployment } from '@/types'
-import { useMobileMenu } from '../../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 const statusProgress: Record<string, number> = {
   draft: 5,

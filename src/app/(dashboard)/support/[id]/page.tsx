@@ -9,7 +9,7 @@ import { formatDateTime } from '@/lib/utils'
 import { ArrowLeft, Send, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import type { SupportTicket, TicketMessage, Profile } from '@/types'
-import { useMobileMenu } from '../../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 export default function TicketDetailPage({ params }: { params: { id: string } }) {
   const onMenuToggle = useMobileMenu()

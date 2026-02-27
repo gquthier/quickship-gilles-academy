@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
-import { useAdminMobileMenu } from '../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import {
   Sparkles, Send, Copy, RefreshCw, User,
   Bot, Loader2, FileText, MessageSquare,

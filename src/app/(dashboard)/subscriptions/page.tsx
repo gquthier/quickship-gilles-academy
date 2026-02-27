@@ -8,7 +8,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate, getStatusLabel } from '@/lib/utils'
 import { CreditCard, CheckCircle2 } from 'lucide-react'
 import type { Subscription } from '@/types'
-import { useMobileMenu } from '../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 export default function SubscriptionsPage() {
   const onMenuToggle = useMobileMenu()

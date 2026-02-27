@@ -1,15 +1,11 @@
 'use client'
 
-import { useEffect, useState, createContext, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase-browser'
 import { AdminSidebar } from '@/components/layout/AdminSidebar'
+import { AdminMobileMenuContext } from '@/context/admin-mobile-menu'
 import type { Profile } from '@/types'
-
-export const AdminMobileMenuContext = createContext<(() => void) | undefined>(undefined)
-export function useAdminMobileMenu() {
-  return useContext(AdminMobileMenuContext)
-}
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Profile | null>(null)

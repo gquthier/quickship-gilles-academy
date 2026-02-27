@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { useMobileMenu } from '../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 const LAZYRANK_URL = 'https://www.lazyrank.io'
 const GHL_URL = 'https://www.gohighlevel.com/?fp_ref=gauthier93'

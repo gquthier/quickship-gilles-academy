@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
 import { Loader2, Save, User, Lock } from 'lucide-react'
 import type { Profile } from '@/types'
-import { useMobileMenu } from '../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 export default function SettingsPage() {
   const onMenuToggle = useMobileMenu()

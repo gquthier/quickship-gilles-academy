@@ -8,7 +8,7 @@ import {
   Lightbulb, FileText, MessageSquare,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { useMobileMenu } from '../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 interface Message {
   id: string

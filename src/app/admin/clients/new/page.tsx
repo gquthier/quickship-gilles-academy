@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { TopBar } from '@/components/layout/TopBar'
 import { ArrowLeft, UserPlus, Loader2 } from 'lucide-react'
 import Link from 'next/link'
-import { useAdminMobileMenu } from '../../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 
 export default function NewClientPage() {
   const [email, setEmail] = useState('')

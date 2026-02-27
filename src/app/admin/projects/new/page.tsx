@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { TopBar } from '@/components/layout/TopBar'
 import { ArrowLeft, FolderPlus, Loader2 } from 'lucide-react'
 import Link from 'next/link'
-import { useAdminMobileMenu } from '../../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 type ClientOption = { id: string; full_name: string; company: string | null }
 
 export default function NewProjectPage() {

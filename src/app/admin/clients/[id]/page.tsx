@@ -20,7 +20,7 @@ import {
   ToggleRight,
 } from 'lucide-react'
 import Link from 'next/link'
-import { useAdminMobileMenu } from '../../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import type { Profile, Project, Subscription, SupportTicket } from '@/types'
 
 export default function ClientDetailPage({ params }: { params: { id: string } }) {

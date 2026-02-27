@@ -8,7 +8,7 @@ import { Avatar } from '@/components/ui/Avatar'
 import { formatDateTime } from '@/lib/utils'
 import { LifeBuoy, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
-import { useAdminMobileMenu } from '../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import type { SupportTicket } from '@/types'
 
 export default function AdminSupportPage() {

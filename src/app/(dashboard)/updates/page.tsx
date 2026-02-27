@@ -9,7 +9,7 @@ import { formatDate } from '@/lib/utils'
 import { RefreshCw, Plus, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import type { UpdateRequest } from '@/types'
-import { useMobileMenu } from '../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 export default function UpdatesPage() {
   const onMenuToggle = useMobileMenu()

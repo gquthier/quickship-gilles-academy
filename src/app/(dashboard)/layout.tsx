@@ -1,15 +1,11 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase-browser'
 import { ClientSidebar } from '@/components/layout/ClientSidebar'
+import { MobileMenuContext } from '@/context/mobile-menu'
 import type { Profile } from '@/types'
-
-export const MobileMenuContext = createContext<(() => void) | undefined>(undefined)
-export function useMobileMenu() {
-  return useContext(MobileMenuContext)
-}
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Profile | null>(null)

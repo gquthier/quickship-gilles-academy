@@ -9,7 +9,7 @@ import { formatDate } from '@/lib/utils'
 import { FolderKanban, Globe, ExternalLink, Github, Clock } from 'lucide-react'
 import Link from 'next/link'
 import type { Project } from '@/types'
-import { useMobileMenu } from '../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 export default function ProjectsPage() {
   const onMenuToggle = useMobileMenu()

@@ -23,7 +23,7 @@ import {
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import type { UpdateRequest, Profile } from '@/types'
-import { useMobileMenu } from '../../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 const STATUS_TIMELINE: { key: string; label: string }[] = [
   { key: 'pending',     label: 'Soumise' },

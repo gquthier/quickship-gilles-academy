@@ -9,7 +9,7 @@ import { formatDate, getPriorityColor, getStatusLabel } from '@/lib/utils'
 import { LifeBuoy, Plus, MessageSquare, Clock, Tag, FolderKanban, AlertTriangle } from 'lucide-react'
 import Link from 'next/link'
 import type { SupportTicket } from '@/types'
-import { useMobileMenu } from '../layout'
+import { useMobileMenu } from '@/context/mobile-menu'
 
 const priorityDot: Record<string, string> = {
   low: 'bg-text-muted',

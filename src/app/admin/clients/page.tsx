@@ -8,7 +8,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate } from '@/lib/utils'
 import { Users, Plus, Mail, Building2, Phone } from 'lucide-react'
 import Link from 'next/link'
-import { useAdminMobileMenu } from '../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import type { Profile } from '@/types'
 
 export default function ClientsPage() {

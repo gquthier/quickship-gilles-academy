@@ -9,7 +9,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate, formatDateTime, getStatusLabel } from '@/lib/utils'
 import { ClipboardList, Eye, ChevronDown, ChevronUp, Check, CheckCheck, Zap, Loader2, UserPlus, Copy } from 'lucide-react'
 import { generateProjectPrompt } from '@/lib/generate-prompt'
-import { useAdminMobileMenu } from '../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import type { OnboardingResponse } from '@/types'
 
 // Mapping des réponses d'onboarding par sections

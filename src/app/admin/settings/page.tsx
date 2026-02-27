@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
 import { Loader2, Save, User, Key, Globe, Bell, Sparkles, Eye, EyeOff } from 'lucide-react'
-import { useAdminMobileMenu } from '../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import type { Profile } from '@/types'
 
 export default function AdminSettingsPage() {

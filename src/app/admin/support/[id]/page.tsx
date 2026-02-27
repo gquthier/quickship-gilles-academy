@@ -17,7 +17,7 @@ import {
   Shield,
 } from 'lucide-react'
 import Link from 'next/link'
-import { useAdminMobileMenu } from '../../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import type { SupportTicket, TicketMessage, Profile } from '@/types'
 
 export default function SupportTicketDetailPage({ params }: { params: { id: string } }) {

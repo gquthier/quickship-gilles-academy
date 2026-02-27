@@ -27,7 +27,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import Link from 'next/link'
-import { useAdminMobileMenu } from '../../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import { generateProjectPrompt } from '@/lib/generate-prompt'
 import type { Project, SupportTicket, UpdateRequest, VercelDeployment, OnboardingResponse } from '@/types'
 

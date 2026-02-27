@@ -12,7 +12,7 @@ import {
   Loader2, MoreHorizontal, Columns,
 } from 'lucide-react'
 import Link from 'next/link'
-import { useAdminMobileMenu } from '../layout'
+import { useAdminMobileMenu } from '@/context/admin-mobile-menu'
 import type { Project, ProjectStatus } from '@/types'
 import { cn } from '@/lib/utils'
 
