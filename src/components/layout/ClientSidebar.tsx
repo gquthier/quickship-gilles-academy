@@ -11,6 +11,9 @@ import {
   Settings,
   LogOut,
   X,
+  Sparkles,
+  Layers,
+  Plug,
 } from 'lucide-react'
 import { Avatar } from '@/components/ui/Avatar'
 import { cn } from '@/lib/utils'
@@ -20,6 +23,9 @@ const navigation = [
   { name: 'Mes projets', href: '/projects', icon: FolderKanban },
   { name: 'Modifications', href: '/updates', icon: RefreshCw },
   { name: 'Support', href: '/support', icon: LifeBuoy },
+  { name: 'Assistant IA', href: '/assistant', icon: Sparkles },
+  { name: 'Hub', href: '/hub', icon: Layers },
+  { name: 'Intégrations', href: '/integrations', icon: Plug },
   { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
   { name: 'Paramètres', href: '/settings', icon: Settings },
 ]

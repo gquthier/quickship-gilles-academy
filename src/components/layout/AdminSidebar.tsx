@@ -12,6 +12,7 @@ import {
   LogOut,
   Shield,
   X,
+  Sparkles,
 } from 'lucide-react'
 import { Avatar } from '@/components/ui/Avatar'
 import { cn } from '@/lib/utils'
@@ -22,6 +23,7 @@ const navigation = [
   { name: 'Projets', href: '/admin/projects', icon: FolderKanban },
   { name: 'Support', href: '/admin/support', icon: LifeBuoy },
   { name: 'Onboarding', href: '/admin/onboarding', icon: ClipboardList },
+  { name: 'Assistant IA', href: '/admin/ai-assistant', icon: Sparkles, highlight: true },
   { name: 'Paramètres', href: '/admin/settings', icon: Settings },
 ]
 
@@ -89,16 +91,23 @@ export function AdminSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Adm
                   'flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-200',
                   isActive
                     ? 'text-accent bg-accent/10 font-semibold'
+                    : (item as any).highlight && !isActive
+                    ? 'text-accent/70 hover:text-accent hover:bg-accent/5 border border-accent/10 hover:border-accent/20'
                     : 'text-text-muted hover:text-text-primary hover:bg-surface-hover'
                 )}
               >
                 <item.icon
                   className={cn(
                     'w-[18px] h-[18px]',
-                    isActive ? 'text-accent' : 'text-text-muted'
+                    isActive ? 'text-accent' : (item as any).highlight ? 'text-accent/70' : 'text-text-muted'
                   )}
                 />
                 {item.name}
+                {(item as any).highlight && !isActive && (
+                  <span className="ml-auto text-[9px] font-bold tracking-wider bg-accent/10 text-accent px-1.5 py-0.5 rounded">
+                    NEW
+                  </span>
+                )}
               </Link>
             )
           })}

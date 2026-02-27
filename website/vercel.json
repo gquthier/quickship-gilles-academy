@@ -1,0 +1,6 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/website-pricing", "destination": "/website-pricing.html" }
+  ]
+}

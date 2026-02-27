@@ -6,7 +6,7 @@ import { TopBar } from '@/components/layout/TopBar'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { formatDate } from '@/lib/utils'
-import { RefreshCw, Plus, Clock } from 'lucide-react'
+import { RefreshCw, Plus, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import type { UpdateRequest } from '@/types'
 import { useMobileMenu } from '../layout'
@@ -70,10 +70,10 @@ export default function UpdatesPage() {
         ) : (
           <div className="space-y-4">
             {updates.map((update) => (
-              <div key={update.id} className="card hover:shadow-card-hover transition-shadow">
+              <Link key={update.id} href={`/updates/${update.id}`} className="card hover:shadow-card-hover hover:border-accent/20 transition-all duration-200 block group">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-display font-semibold text-text-primary">{update.title}</h3>
+                    <h3 className="font-display font-semibold text-text-primary group-hover:text-accent transition-colors">{update.title}</h3>
                     <p className="text-xs text-text-muted flex items-center gap-2 mt-1">
                       {(update as any).project?.name && <span>{(update as any).project.name}</span>}
                       <span className="flex items-center gap-1">
@@ -84,6 +84,7 @@ export default function UpdatesPage() {
                   <div className="flex items-center gap-2">
                     <StatusBadge status={update.priority} />
                     <StatusBadge status={update.status} />
+                    <ArrowRight className="w-4 h-4 text-text-muted opacity-0 group-hover:opacity-100 group-hover:text-accent transition-all duration-200" />
                   </div>
                 </div>
                 <p className="text-sm text-text-secondary line-clamp-2">{update.description}</p>
@@ -98,7 +99,7 @@ export default function UpdatesPage() {
                     {update.admin_notes}
                   </div>
                 )}
-              </div>
+              </Link>
             ))}
           </div>
         )}

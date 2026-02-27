@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-black scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickShip — Call confirmé 🚀</title>
+    <meta name="description" content="Votre call de découverte QuickShip est confirmé. On prépare tout pour transformer votre idée en MVP en 48h.">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'heading': ['Clash Display', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        surface: '#121212',
+                        surfaceBorder: '#262626',
+                        accent: '#CCFF00',
+                        accentHover: '#b3e600'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background-color: #CCFF00; color: #000; }
+        body { background-color: #050505; color: #E5E5E5; overflow-x: hidden; }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        .brutal-border {
+            border: 1px solid #262626;
+            background: rgba(18,18,18,0.6);
+            backdrop-filter: blur(12px);
+        }
+
+        .title-uppercase { text-transform: uppercase; letter-spacing: -0.02em; }
+
+        .check-pop { animation: checkPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
+        @keyframes checkPop {
+            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .fade-up { animation: fadeUp 0.5s ease-out both; }
+        .fade-up-1 { animation-delay: 0.4s; }
+        .fade-up-2 { animation-delay: 0.6s; }
+        .fade-up-3 { animation-delay: 0.8s; }
+        .fade-up-4 { animation-delay: 1.0s; }
+        @keyframes fadeUp {
+            0% { transform: translateY(24px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+    </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '791100870085010');
+fbq('track', 'PageView');
+fbq('track', 'Schedule');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=791100870085010&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+
+<body class="font-sans antialiased selection:bg-accent selection:text-black min-h-screen flex flex-col">
+
+    <div class="fixed inset-0 bg-grid z-0 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="brutal-border border-t-0 border-l-0 border-r-0 relative z-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center h-16 sm:h-20">
+                <a href="/" class="font-heading font-bold text-xl sm:text-2xl tracking-tight text-white">
+                    QUICK<span class="text-accent">SHIP.</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="relative z-10 flex-1 flex items-center">
+        <div class="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+
+            <!-- Success Icon -->
+            <div class="text-center mb-10 sm:mb-14">
+                <div class="check-pop inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 border-2 border-accent bg-accent/10 mb-8">
+                    <svg class="w-10 h-10 sm:w-12 sm:h-12 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+
+                <h1 class="fade-up fade-up-1 font-heading title-uppercase text-3xl sm:text-5xl lg:text-6xl font-semibold text-white leading-[0.95] mb-6">
+                    CALL CONFIRMÉ.
+                </h1>
+
+                <p class="fade-up fade-up-2 text-base sm:text-lg text-gray-400 max-w-md mx-auto font-sans leading-relaxed">
+                    On a hâte de discuter de votre projet et de le transformer en MVP en <strong class="text-white border-b border-accent pb-0.5">48 heures</strong>.
+                </p>
+            </div>
+
+            <!-- What Happens Next -->
+            <div class="fade-up fade-up-3 border border-surfaceBorder bg-surface p-6 sm:p-8 mb-6">
+                <h2 class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">
+                    [ CE QUI VA SE PASSER ]
+                </h2>
+                <div class="space-y-6">
+                    <div class="flex gap-4 items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-surfaceBorder text-white flex items-center justify-center font-mono font-bold text-xs">01</div>
+                        <div>
+                            <h3 class="font-bold text-white text-sm uppercase mb-1 font-heading">Confirmation par email</h3>
+                            <p class="text-gray-400 text-sm font-sans leading-relaxed">Vous allez recevoir un email avec le lien du call et les détails. Vérifiez vos spams si besoin.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-surfaceBorder text-white flex items-center justify-center font-mono font-bold text-xs">02</div>
+                        <div>
+                            <h3 class="font-bold text-white text-sm uppercase mb-1 font-heading">Call de découverte (15 min)</h3>
+                            <p class="text-gray-400 text-sm font-sans leading-relaxed">On discute de votre idée, vos besoins, et on valide ensemble que le format MVP 48h est adapté.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-accent text-black flex items-center justify-center font-mono font-bold text-xs">03</div>
+                        <div>
+                            <h3 class="font-bold text-white text-sm uppercase mb-1 font-heading">Si c'est un match → on lance</h3>
+                            <p class="text-gray-400 text-sm font-sans leading-relaxed">Paiement, formulaire d'onboarding, et 48h plus tard : votre MVP est livré sur GitHub. Simple.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prepare for Call -->
+            <div class="fade-up fade-up-4 border border-surfaceBorder bg-surface/50 p-6 sm:p-8 mb-8">
+                <h2 class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">
+                    [ PRÉPAREZ VOTRE CALL ]
+                </h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <span class="text-accent font-mono text-sm mt-0.5">→</span>
+                        <span class="text-sm text-gray-300 font-sans"><strong class="text-white">Votre idée en 2 phrases</strong> — le problème que vous résolvez et pour qui</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-accent font-mono text-sm mt-0.5">→</span>
+                        <span class="text-sm text-gray-300 font-sans"><strong class="text-white">3-5 fonctionnalités clés</strong> — le must-have de votre MVP</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-accent font-mono text-sm mt-0.5">→</span>
+                        <span class="text-sm text-gray-300 font-sans"><strong class="text-white">Exemples de produits similaires</strong> — pour qu'on comprenne votre vision</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-accent font-mono text-sm mt-0.5">→</span>
+                        <span class="text-sm text-gray-300 font-sans"><strong class="text-white">Votre timeline</strong> — quand voulez-vous lancer ?</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-6 mb-10">
+                <div class="border border-surfaceBorder bg-surface p-4 sm:p-6 text-center">
+                    <div class="font-heading text-2xl sm:text-3xl font-semibold text-white">48h</div>
+                    <div class="font-mono text-[10px] sm:text-xs text-gray-500 uppercase mt-1">Livraison</div>
+                </div>
+                <div class="border border-surfaceBorder bg-surface p-4 sm:p-6 text-center">
+                    <div class="font-heading text-2xl sm:text-3xl font-semibold text-white">990€</div>
+                    <div class="font-mono text-[10px] sm:text-xs text-gray-500 uppercase mt-1">Prix fixe</div>
+                </div>
+                <div class="border border-surfaceBorder bg-surface p-4 sm:p-6 text-center">
+                    <div class="font-heading text-2xl sm:text-3xl font-semibold text-accent">100%</div>
+                    <div class="font-mono text-[10px] sm:text-xs text-gray-500 uppercase mt-1">Votre code</div>
+                </div>
+            </div>
+
+            <!-- Back link -->
+            <div class="text-center">
+                <a href="/" class="inline-flex items-center gap-2 font-mono text-sm text-gray-500 hover:text-accent transition-colors uppercase">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Retour à l'accueil
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-surfaceBorder bg-black py-6 sm:py-8 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="font-mono text-xs text-gray-600 uppercase">© 2025 QuickShip. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Confetti -->
+    <canvas class="confetti" id="confettiCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const colors = ['#CCFF00', '#b3e600', '#ffffff', '#262626', '#CCFF00', '#4ade80'];
+        const particles = [];
+
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+                y: canvas.height / 3,
+                vx: (Math.random() - 0.5) * 14,
+                vy: (Math.random() - 0.7) * 14,
+                size: Math.random() * 6 + 2,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                rotation: Math.random() * 360,
+                rotationSpeed: (Math.random() - 0.5) * 10,
+                gravity: 0.12,
+                opacity: 1,
+                decay: 0.006 + Math.random() * 0.008
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let alive = false;
+
+            particles.forEach(p => {
+                if (p.opacity <= 0) return;
+                alive = true;
+                p.vy += p.gravity;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.rotationSpeed;
+                p.opacity -= p.decay;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.globalAlpha = Math.max(0, p.opacity);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.5);
+                ctx.restore();
+            });
+
+            if (alive) requestAnimationFrame(animate);
+            else canvas.style.display = 'none';
+        }
+
+        animate();
+    </script>
+
+</body>
+</html>

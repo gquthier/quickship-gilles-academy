@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickShip — Admin Submissions</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        surface: '#121212',
+                        surfaceBorder: '#262626',
+                        accent: '#CCFF00',
+                        accentHover: '#b3e600',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background: #050505; color: #e5e5e5; }
+        ::selection { background: #CCFF00; color: #000; }
+        .card-expand { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .card-expand.open { max-height: 2000px; }
+    </style>
+</head>
+<body class="min-h-screen font-sans">
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="flex items-center justify-center min-h-screen px-4">
+        <div class="w-full max-w-sm">
+            <div class="text-center mb-8">
+                <div class="text-accent font-mono text-sm mb-2">QUICKSHIP</div>
+                <h1 class="text-2xl font-bold text-white">Admin Panel</h1>
+                <p class="text-neutral-500 text-sm mt-2">Entrez la clé admin pour accéder aux soumissions</p>
+            </div>
+            <div class="bg-surface border border-surfaceBorder rounded-xl p-6">
+                <label class="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Clé admin</label>
+                <input type="password" id="admin-key" placeholder="••••••••••"
+                    class="w-full bg-black border border-surfaceBorder rounded-lg px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-accent transition"
+                    onkeydown="if(event.key==='Enter') login()">
+                <button onclick="login()" class="w-full mt-4 bg-accent text-black font-bold py-3 rounded-lg hover:bg-accentHover transition text-sm">
+                    ACCÉDER
+                </button>
+                <div id="login-error" class="text-red-400 text-xs mt-3 text-center hidden">Clé invalide ou serveur inaccessible</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden">
+        <!-- Header -->
+        <header class="border-b border-surfaceBorder px-6 py-4 flex items-center justify-between sticky top-0 bg-black/90 backdrop-blur-sm z-10">
+            <div class="flex items-center gap-3">
+                <span class="text-accent font-mono text-sm font-bold">QUICKSHIP</span>
+                <span class="text-neutral-600">|</span>
+                <span class="text-neutral-400 text-sm">Submissions</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="refreshData()" class="text-neutral-500 hover:text-accent transition text-sm font-mono">REFRESH</button>
+                <button onclick="logout()" class="text-neutral-600 hover:text-red-400 transition text-sm">Logout</button>
+            </div>
+        </header>
+
+        <!-- Stats -->
+        <div class="px-6 py-6 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            <div class="bg-surface border border-surfaceBorder rounded-xl p-5">
+                <div class="text-xs text-neutral-500 uppercase tracking-wider mb-1">Total</div>
+                <div id="stat-total" class="text-3xl font-bold text-white font-mono">0</div>
+            </div>
+            <div class="bg-surface border border-surfaceBorder rounded-xl p-5">
+                <div class="text-xs text-neutral-500 uppercase tracking-wider mb-1">Questionnaires</div>
+                <div id="stat-questionnaire" class="text-3xl font-bold text-accent font-mono">0</div>
+            </div>
+            <div class="bg-surface border border-surfaceBorder rounded-xl p-5">
+                <div class="text-xs text-neutral-500 uppercase tracking-wider mb-1">Onboardings</div>
+                <div id="stat-onboarding" class="text-3xl font-bold text-blue-400 font-mono">0</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="px-6 max-w-5xl mx-auto flex gap-2 mb-6">
+            <button onclick="setFilter('all')" data-filter="all" class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium transition border border-surfaceBorder bg-surface text-white">
+                Tous
+            </button>
+            <button onclick="setFilter('questionnaire')" data-filter="questionnaire" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition border border-surfaceBorder text-neutral-500 hover:text-white">
+                Questionnaires
+            </button>
+            <button onclick="setFilter('onboarding')" data-filter="onboarding" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition border border-surfaceBorder text-neutral-500 hover:text-white">
+                Onboardings
+            </button>
+        </div>
+
+        <!-- Submissions List -->
+        <div id="submissions-list" class="px-6 max-w-5xl mx-auto pb-12 space-y-3">
+            <!-- Cards rendered by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden px-6 max-w-5xl mx-auto text-center py-16">
+            <div class="text-neutral-600 text-5xl mb-4">📭</div>
+            <div class="text-neutral-500">Aucune soumission trouvée</div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://webhook-production-b9fc.up.railway.app';
+        let adminKey = '';
+        let allSubmissions = [];
+        let currentFilter = 'all';
+
+        async function login() {
+            adminKey = document.getElementById('admin-key').value.trim();
+            if (!adminKey) return;
+
+            try {
+                const resp = await fetch(`${API_BASE}/submissions?key=${encodeURIComponent(adminKey)}`);
+                if (!resp.ok) throw new Error('Unauthorized');
+                allSubmissions = await resp.json();
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                renderDashboard();
+            } catch (e) {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        function logout() {
+            adminKey = '';
+            allSubmissions = [];
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('admin-key').value = '';
+            document.getElementById('login-error').classList.add('hidden');
+        }
+
+        async function refreshData() {
+            try {
+                const resp = await fetch(`${API_BASE}/submissions?key=${encodeURIComponent(adminKey)}`);
+                if (resp.ok) {
+                    allSubmissions = await resp.json();
+                    renderDashboard();
+                }
+            } catch (e) {
+                console.error('Refresh error:', e);
+            }
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const isActive = btn.dataset.filter === filter;
+                btn.classList.toggle('active', isActive);
+                btn.classList.toggle('bg-surface', isActive);
+                btn.classList.toggle('text-white', isActive);
+                btn.classList.toggle('text-neutral-500', !isActive);
+            });
+            renderList();
+        }
+
+        function renderDashboard() {
+            const total = allSubmissions.length;
+            const questionnaires = allSubmissions.filter(s => s.form_type === 'questionnaire' || !s.form_type).length;
+            const onboardings = allSubmissions.filter(s => s.form_type === 'onboarding').length;
+
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-questionnaire').textContent = questionnaires;
+            document.getElementById('stat-onboarding').textContent = onboardings;
+
+            renderList();
+        }
+
+        function renderList() {
+            const list = document.getElementById('submissions-list');
+            const empty = document.getElementById('empty-state');
+
+            let filtered = allSubmissions;
+            if (currentFilter === 'questionnaire') {
+                filtered = allSubmissions.filter(s => s.form_type === 'questionnaire' || !s.form_type);
+            } else if (currentFilter === 'onboarding') {
+                filtered = allSubmissions.filter(s => s.form_type === 'onboarding');
+            }
+
+            // Sort newest first
+            filtered = [...filtered].sort((a, b) => new Date(b.received_at || b.submitted_at) - new Date(a.received_at || a.submitted_at));
+
+            if (filtered.length === 0) {
+                list.classList.add('hidden');
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            list.classList.remove('hidden');
+            empty.classList.add('hidden');
+
+            list.innerHTML = filtered.map((sub, i) => {
+                const type = sub.form_type || 'questionnaire';
+                const isOnboarding = type === 'onboarding';
+                const badgeColor = isOnboarding ? 'bg-blue-500/20 text-blue-400' : 'bg-accent/20 text-accent';
+                const name = sub.name || sub.full_name || 'Anonyme';
+                const email = sub.email || 'N/A';
+                const date = sub.received_at || sub.submitted_at || 'N/A';
+                const dateFormatted = date !== 'N/A' ? new Date(date).toLocaleString('fr-FR') : 'N/A';
+                const idea = sub.idea || sub.elevator_pitch || sub.project_name || '';
+
+                // Build clean JSON excluding noisy fields
+                const cleanData = { ...sub };
+                delete cleanData.ip;
+                const jsonStr = JSON.stringify(cleanData, null, 2);
+
+                return `
+                <div class="bg-surface border border-surfaceBorder rounded-xl overflow-hidden">
+                    <div class="p-5 cursor-pointer hover:bg-white/[0.02] transition" onclick="toggleCard(${i})">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="font-semibold text-white truncate">${escapeHtml(name)}</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase ${badgeColor}">${type}</span>
+                                </div>
+                                <div class="text-sm text-neutral-500">${escapeHtml(email)}</div>
+                                ${idea ? `<div class="text-sm text-neutral-400 mt-2 line-clamp-2">${escapeHtml(idea)}</div>` : ''}
+                            </div>
+                            <div class="text-xs text-neutral-600 whitespace-nowrap">${dateFormatted}</div>
+                        </div>
+                    </div>
+                    <div id="card-detail-${i}" class="card-expand">
+                        <div class="border-t border-surfaceBorder p-5">
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider mb-2">Données complètes</div>
+                            <pre class="text-xs text-neutral-300 font-mono bg-black rounded-lg p-4 overflow-x-auto max-h-96 overflow-y-auto">${escapeHtml(jsonStr)}</pre>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function toggleCard(i) {
+            const el = document.getElementById(`card-detail-${i}`);
+            el.classList.toggle('open');
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+    </script>
+</body>
+</html>

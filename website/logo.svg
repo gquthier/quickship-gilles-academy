@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" fill="none">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#818cf8"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#818cf8"/>
+      <stop offset="50%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#c084fc"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Hexagonal icon with lightning bolt -->
+  <g transform="translate(4, 2)">
+    <!-- Hex background -->
+    <path d="M28 2 L48 14 L48 38 L28 50 L8 38 L8 14 Z" fill="url(#grad)" rx="3"/>
+    <!-- Lightning bolt -->
+    <path d="M30 10 L20 28 L27 28 L24 42 L38 22 L30 22 L34 10 Z" fill="white" opacity="0.95"/>
+  </g>
+
+  <!-- ShipFast text -->
+  <text x="62" y="40" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-weight="700" font-size="32" letter-spacing="-0.5">
+    <tspan fill="white">Ship</tspan><tspan fill="url(#grad)">Fast</tspan>
+  </text>
+</svg>

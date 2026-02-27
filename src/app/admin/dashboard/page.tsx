@@ -1,24 +1,25 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
 import { StatCard } from '@/components/ui/StatCard'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { Avatar } from '@/components/ui/Avatar'
+import { ActivityChart } from '@/components/ui/ActivityChart'
 import { formatDate, formatDateTime, formatEur } from '@/lib/utils'
 import {
   Users,
   FolderKanban,
   LifeBuoy,
   CreditCard,
-  Clock,
   TrendingUp,
   AlertCircle,
   ArrowRight,
   Euro,
   BarChart3,
   Receipt,
+  Activity,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useAdminMobileMenu } from '../layout'
@@ -32,6 +33,31 @@ interface DashboardData {
   recentProjects: Project[]
   recentTickets: (SupportTicket & { client?: Profile })[]
   recentClients: Profile[]
+  allClients: { created_at: string }[]
+  allProjects: { created_at: string }[]
+}
+
+// Build 12-week activity chart data from a list of {created_at} items
+function buildWeeklyChart(items: { created_at: string }[]): { label: string; value: number }[] {
+  const now = new Date()
+  const weeks: { label: string; value: number }[] = []
+  for (let i = 11; i >= 0; i--) {
+    const weekStart = new Date(now)
+    weekStart.setDate(now.getDate() - i * 7 - now.getDay())
+    weekStart.setHours(0, 0, 0, 0)
+    const weekEnd = new Date(weekStart)
+    weekEnd.setDate(weekStart.getDate() + 7)
+
+    const count = items.filter(item => {
+      const d = new Date(item.created_at)
+      return d >= weekStart && d < weekEnd
+    }).length
+
+    const month = weekStart.toLocaleDateString('fr-FR', { month: 'short' })
+    const day = weekStart.getDate()
+    weeks.push({ label: `${day} ${month}`, value: count })
+  }
+  return weeks
 }
 
 export default function AdminDashboardPage() {
@@ -41,6 +67,16 @@ export default function AdminDashboardPage() {
   const [stripeLoading, setStripeLoading] = useState(true)
   const onMenuToggle = useAdminMobileMenu()
   const supabase = createClient()
+
+  const clientActivityData = useMemo(() => {
+    if (!data?.allClients) return []
+    return buildWeeklyChart(data.allClients)
+  }, [data?.allClients])
+
+  const projectActivityData = useMemo(() => {
+    if (!data?.allProjects) return []
+    return buildWeeklyChart(data.allProjects)
+  }, [data?.allProjects])
 
   useEffect(() => {
     async function load() {
@@ -52,6 +88,8 @@ export default function AdminDashboardPage() {
         { data: recentProjects },
         { data: recentTickets },
         { data: recentClients },
+        { data: allClients },
+        { data: allProjects },
       ] = await Promise.all([
         supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'client'),
         supabase.from('projects').select('*', { count: 'exact', head: true }),
@@ -60,6 +98,8 @@ export default function AdminDashboardPage() {
         supabase.from('projects').select('*, client:profiles(full_name, company)').order('created_at', { ascending: false }).limit(5),
         supabase.from('support_tickets').select('*, client:profiles(full_name, avatar_url)').order('created_at', { ascending: false }).limit(5),
         supabase.from('profiles').select('*').eq('role', 'client').order('created_at', { ascending: false }).limit(5),
+        supabase.from('profiles').select('created_at').eq('role', 'client'),
+        supabase.from('projects').select('created_at'),
       ])
 
       setData({
@@ -70,6 +110,8 @@ export default function AdminDashboardPage() {
         recentProjects: recentProjects || [],
         recentTickets: recentTickets || [],
         recentClients: recentClients || [],
+        allClients: allClients || [],
+        allProjects: allProjects || [],
       })
       setLoading(false)
     }
@@ -147,6 +189,38 @@ export default function AdminDashboardPage() {
           <StatCard label="Projets" value={data.totalProjects} icon={FolderKanban} color="blue" />
           <StatCard label="Tickets ouverts" value={data.openTickets} icon={LifeBuoy} color="red" />
           <StatCard label="Abonnements actifs" value={data.activeSubscriptions} icon={CreditCard} color="emerald" />
+        </div>
+
+        {/* Activity Charts */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="card p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-display font-bold text-sm flex items-center gap-2">
+                <Activity className="w-4 h-4 text-accent" />
+                Nouveaux clients
+              </h2>
+              <span className="text-xs text-text-muted">12 semaines</span>
+            </div>
+            {clientActivityData.length > 0 ? (
+              <ActivityChart data={clientActivityData} color="#CCFF00" height={72} />
+            ) : (
+              <div className="h-24 flex items-center justify-center text-xs text-text-muted">Pas de données</div>
+            )}
+          </div>
+          <div className="card p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-display font-bold text-sm flex items-center gap-2">
+                <Activity className="w-4 h-4 text-blue-400" />
+                Nouveaux projets
+              </h2>
+              <span className="text-xs text-text-muted">12 semaines</span>
+            </div>
+            {projectActivityData.length > 0 ? (
+              <ActivityChart data={projectActivityData} color="#60a5fa" height={72} />
+            ) : (
+              <div className="h-24 flex items-center justify-center text-xs text-text-muted">Pas de données</div>
+            )}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">

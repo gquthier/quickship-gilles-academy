@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-black scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickShip x LazyRank — SEO & GEO automatisé pour votre business</title>
+    <meta name="description" content="Lancez votre site ou app avec QuickShip et attirez des clients automatiquement grâce au SEO & GEO de LazyRank. Code promo QUICKSHIP30 : -30% permanent.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'heading': ['Clash Display', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        surface: '#121212',
+                        surfaceBorder: '#262626',
+                        accent: '#CCFF00',
+                        accentHover: '#b3e600',
+                        orange: '#FF8C42',
+                        orangeHover: '#e67a30',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background-color: #CCFF00; color: #000; }
+        body { background-color: #050505; color: #E5E5E5; overflow-x: hidden; }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        .brutal-border {
+            border: 1px solid #262626;
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(12px);
+        }
+
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+        }
+
+        .title-uppercase { text-transform: uppercase; letter-spacing: -0.02em; }
+
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #404040; }
+
+        .gradient-text-green { background: linear-gradient(135deg, #CCFF00, #99cc00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-text-orange { background: linear-gradient(135deg, #FF8C42, #ff6b1a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .glow-green { box-shadow: 0 0 60px rgba(204, 255, 0, 0.08); }
+        .glow-orange { box-shadow: 0 0 60px rgba(255, 140, 66, 0.08); }
+
+        /* Coupon ticket design */
+        .coupon {
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a, #121212);
+            border: 2px dashed #CCFF00;
+        }
+        .coupon::before,
+        .coupon::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: #050505;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .coupon::before { left: -13px; border-right: 2px dashed #CCFF00; }
+        .coupon::after { right: -13px; border-left: 2px dashed #CCFF00; }
+
+        @media (max-width: 640px) {
+            .coupon::before, .coupon::after { display: none; }
+        }
+
+        .coupon-code {
+            background: #CCFF00;
+            color: #050505;
+            letter-spacing: 0.15em;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(204, 255, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(204, 255, 0, 0.5); }
+        }
+
+        .copy-feedback { transition: all 0.3s ease; }
+    </style>
+</head>
+
+<body class="font-sans antialiased selection:bg-accent selection:text-black">
+
+    <!-- Grille d'arrière-plan -->
+    <div class="fixed inset-0 bg-grid z-0 pointer-events-none"></div>
+
+    <!-- ============================================= -->
+    <!-- HEADER NAV -->
+    <!-- ============================================= -->
+    <header class="fixed top-0 w-full brutal-border border-t-0 border-l-0 border-r-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="/" class="flex items-center font-heading font-bold text-2xl tracking-tight text-white">
+                    QUICK<span class="text-accent">SHIP.</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-8 text-sm font-mono font-medium text-gray-400">
+                    <a href="#offre" class="hover:text-accent transition-colors">/OFFRE</a>
+                    <a href="#promo" class="hover:text-orange transition-colors">/CODE PROMO</a>
+                    <a href="#features" class="hover:text-accent transition-colors">/FEATURES</a>
+                    <a href="#faq" class="hover:text-accent transition-colors">/FAQ</a>
+                </nav>
+                <a href="#promo"
+                    class="hidden sm:inline-flex items-center justify-center px-6 py-3 text-sm font-mono font-bold text-black bg-accent hover:bg-accentHover transition-colors rounded-none">
+                    -30% AVEC QUICKSHIP30
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- ============================================= -->
+        <!-- HERO SECTION -->
+        <!-- ============================================= -->
+        <section class="pt-40 pb-20 sm:pt-48 sm:pb-32 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center text-center max-w-5xl mx-auto">
+
+                    <!-- Badge dual branding -->
+                    <div class="inline-flex items-center gap-3 px-4 py-2 border border-surfaceBorder bg-surface/50 font-mono text-xs font-bold uppercase tracking-widest mb-10">
+                        <span class="flex h-2 w-2 bg-accent cursor-blink"></span>
+                        <span class="text-accent">QUICKSHIP</span>
+                        <span class="text-gray-600">&times;</span>
+                        <span class="text-orange">LAZYRANK</span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 class="font-heading title-uppercase text-5xl sm:text-7xl lg:text-8xl font-semibold leading-[0.9] tracking-tight mb-8 text-white">
+                        <div class="overflow-hidden"><span class="block">ATTIREZ DES</span></div>
+                        <div class="overflow-hidden"><span class="block">CLIENTS GRÂCE</span></div>
+                        <div class="overflow-hidden"><span class="block text-outline text-transparent">AU
+                            <span class="relative inline-block px-4">
+                                <span class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-1/2 bg-accent blur-[60px] opacity-30 rounded-full scale-125"></span>
+                                <span class="relative gradient-text-green">SEO</span>
+                            </span>
+                            &
+                            <span class="relative inline-block px-4">
+                                <span class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-1/2 bg-orange blur-[60px] opacity-30 rounded-full scale-125"></span>
+                                <span class="relative gradient-text-orange">GEO</span>
+                            </span>
+                        </span></div>
+                    </h1>
+
+                    <!-- Subheadline -->
+                    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-sans font-medium leading-relaxed">
+                        QuickShip construit votre site ou app. LazyRank attire vos clients en pilote automatique
+                        avec du contenu optimisé pour <strong class="text-white font-bold border-b border-accent pb-0.5">Google</strong> et <strong class="text-white font-bold border-b border-orange pb-0.5">ChatGPT</strong>.
+                    </p>
+
+                    <!-- CTA -->
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                        <a href="#promo"
+                            class="inline-flex items-center justify-center px-8 py-4 bg-accent text-black font-heading font-bold text-sm uppercase tracking-wide hover:bg-accentHover transition-colors rounded-none">
+                            OBTENIR -30% MAINTENANT
+                        </a>
+                        <a href="#offre"
+                            class="inline-flex items-center justify-center px-8 py-4 border border-surfaceBorder text-white font-mono text-sm hover:border-orange transition-colors rounded-none">
+                            VOIR L'OFFRE
+                        </a>
+                    </div>
+
+                    <!-- Trust -->
+                    <div class="mt-14 flex flex-wrap items-center justify-center gap-6 text-xs text-gray-600 font-mono uppercase tracking-wider">
+                        <span>Sites & apps en 2 semaines</span>
+                        <span class="w-1 h-1 bg-surfaceBorder rounded-full"></span>
+                        <span>SEO automatisé 24/7</span>
+                        <span class="w-1 h-1 bg-surfaceBorder rounded-full"></span>
+                        <span>Setup gratuit LazyRank</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- PROMO CODE SECTION -->
+        <!-- ============================================= -->
+        <section id="promo" class="py-20 relative">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center mb-12">
+                    <div class="text-accent font-mono text-xs font-bold tracking-widest uppercase mb-3">/CODE PROMO EXCLUSIF</div>
+                    <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white">-30% permanent sur <span class="gradient-text-orange">tous les abonnements</span></h2>
+                </div>
+
+                <!-- Coupon ticket -->
+                <div class="coupon rounded-none px-6 sm:px-12 py-8 sm:py-10 mx-4 sm:mx-0">
+                    <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
+                        <!-- Left: info -->
+                        <div class="flex-1 text-center sm:text-left">
+                            <div class="text-orange font-mono text-xs font-bold tracking-widest uppercase mb-2">QUICKSHIP &times; LAZYRANK</div>
+                            <div class="text-white font-heading text-2xl sm:text-3xl font-bold mb-1">-30% PERMANENT</div>
+                            <div class="text-gray-400 text-sm">Sur tous les abonnements LazyRank</div>
+                            <div class="text-gray-600 text-xs mt-2 font-mono">Entrez le code au moment du paiement</div>
+                        </div>
+
+                        <!-- Separator -->
+                        <div class="hidden sm:block w-px h-24 border-l border-dashed border-surfaceBorder"></div>
+                        <div class="sm:hidden w-32 h-px border-t border-dashed border-surfaceBorder"></div>
+
+                        <!-- Right: code -->
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="coupon-code px-6 py-3 rounded-none font-mono font-bold text-xl sm:text-2xl select-all cursor-pointer" onclick="copyCode()" id="coupon-code-el">
+                                QUICKSHIP30
+                            </div>
+                            <button onclick="copyCode()" id="copy-btn" class="text-gray-500 hover:text-accent transition text-xs font-mono flex items-center gap-1.5">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                <span id="copy-text">COPIER LE CODE</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-info -->
+                <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-600 font-mono">
+                    <span class="flex items-center gap-1.5"><span class="text-accent">&#10003;</span> Réduction permanente</span>
+                    <span class="flex items-center gap-1.5"><span class="text-accent">&#10003;</span> Tous les plans LazyRank</span>
+                    <span class="flex items-center gap-1.5"><span class="text-accent">&#10003;</span> Sans engagement</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- PROBLEM / SOLUTION -->
+        <!-- ============================================= -->
+        <section class="py-24 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Problem -->
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-8 glow-green">
+                        <div class="text-accent font-mono text-xs font-bold tracking-widest uppercase mb-4">LE PROBLÈME</div>
+                        <h3 class="font-heading text-xl font-semibold text-white mb-4">Un beau site ne suffit pas</h3>
+                        <ul class="space-y-3 text-gray-400 text-sm">
+                            <li class="flex gap-3"><span class="text-red-400">&#10007;</span> Vous lancez un site, mais personne ne vient</li>
+                            <li class="flex gap-3"><span class="text-red-400">&#10007;</span> Le SEO prend des mois à mettre en place</li>
+                            <li class="flex gap-3"><span class="text-red-400">&#10007;</span> Écrire du contenu optimisé coûte cher</li>
+                            <li class="flex gap-3"><span class="text-red-400">&#10007;</span> ChatGPT et l'IA changent les règles du jeu</li>
+                        </ul>
+                    </div>
+                    <!-- Solution -->
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-8 glow-orange">
+                        <div class="text-orange font-mono text-xs font-bold tracking-widest uppercase mb-4">LA SOLUTION</div>
+                        <h3 class="font-heading text-xl font-semibold text-white mb-4">Dev + SEO en un seul pack</h3>
+                        <ul class="space-y-3 text-gray-400 text-sm">
+                            <li class="flex gap-3"><span class="text-accent">&#10003;</span> <strong class="text-white">QuickShip</strong> développe votre site web ou application</li>
+                            <li class="flex gap-3"><span class="text-accent">&#10003;</span> <strong class="text-white">LazyRank</strong> publie du contenu SEO automatiquement</li>
+                            <li class="flex gap-3"><span class="text-accent">&#10003;</span> Articles optimisés Google + GEO (ChatGPT, Perplexity...)</li>
+                            <li class="flex gap-3"><span class="text-accent">&#10003;</span> Code <span class="coupon-code px-2 py-0.5 text-xs font-mono font-bold rounded-none inline-block">QUICKSHIP30</span> = -30% permanent</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- HOW IT WORKS -->
+        <!-- ============================================= -->
+        <section class="py-24 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <div class="text-orange font-mono text-xs font-bold tracking-widest uppercase mb-3">/PROCESS</div>
+                    <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white">3 ÉTAPES, 0 PRISE DE TÊTE</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-8 text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 border border-accent text-accent font-mono font-bold text-sm mb-4">01</div>
+                        <h3 class="font-heading text-lg font-semibold text-white mb-2">QUICKSHIP BUILD</h3>
+                        <p class="text-gray-400 text-sm">On développe votre site web ou application MVP en 2 semaines. Design pro, code clean, prêt à scaler.</p>
+                    </div>
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-8 text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 border border-orange text-orange font-mono font-bold text-sm mb-4">02</div>
+                        <h3 class="font-heading text-lg font-semibold text-white mb-2">LAZYRANK SETUP</h3>
+                        <p class="text-gray-400 text-sm">On connecte LazyRank à votre site. Configuration de votre niche, mots-clés, et stratégie de contenu.</p>
+                    </div>
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-8 text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 border border-accent text-accent font-mono font-bold text-sm mb-4">03</div>
+                        <h3 class="font-heading text-lg font-semibold text-white mb-2">TRAFIC AUTO</h3>
+                        <p class="text-gray-400 text-sm">LazyRank publie 20 articles/mois optimisés SEO & GEO. Les clients viennent à vous, en pilote automatique.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- FEATURES LAZYRANK -->
+        <!-- ============================================= -->
+        <section id="features" class="py-24 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <div class="text-orange font-mono text-xs font-bold tracking-widest uppercase mb-3">/FEATURES</div>
+                    <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white">LE SEO, SANS LEVER LE PETIT DOIGT</h2>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-6 flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 border border-orange flex items-center justify-center text-orange font-mono text-sm font-bold">AI</div>
+                        <div>
+                            <h4 class="font-semibold text-white mb-1">Contenu automatisé</h4>
+                            <p class="text-gray-400 text-sm">Articles de blog générés et optimisés par IA, publiés automatiquement sur votre site.</p>
+                        </div>
+                    </div>
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-6 flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 border border-orange flex items-center justify-center text-orange font-mono text-sm font-bold">G+</div>
+                        <div>
+                            <h4 class="font-semibold text-white mb-1">Optimisation Google + GEO</h4>
+                            <p class="text-gray-400 text-sm">Chaque article est optimisé pour Google ET pour apparaître dans ChatGPT, Perplexity, et les moteurs IA.</p>
+                        </div>
+                    </div>
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-6 flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 border border-orange flex items-center justify-center text-orange font-mono text-sm font-bold">//</div>
+                        <div>
+                            <h4 class="font-semibold text-white mb-1">Analytics intégrés</h4>
+                            <p class="text-gray-400 text-sm">Dashboard pour suivre vos positions Google, le trafic organique, et les conversions.</p>
+                        </div>
+                    </div>
+                    <div class="border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-6 flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 border border-orange flex items-center justify-center text-orange font-mono text-sm font-bold">**</div>
+                        <div>
+                            <h4 class="font-semibold text-white mb-1">Multi-plateforme</h4>
+                            <p class="text-gray-400 text-sm">Compatible WordPress, Webflow, Next.js, et tout site avec un blog. Intégration en 5 minutes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- PRICING / OFFER -->
+        <!-- ============================================= -->
+        <section id="offre" class="py-24 relative">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="text-accent font-mono text-xs font-bold tracking-widest uppercase mb-3">/OFFRE PARTENAIRE</div>
+                    <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white">LE COMBO QUI CHANGE TOUT</h2>
+                </div>
+
+                <div class="border-2 border-accent/30 bg-surface/60 backdrop-blur-sm p-8 sm:p-10 relative overflow-hidden">
+                    <!-- Badge -->
+                    <div class="absolute top-0 right-0 bg-accent text-black text-xs font-mono font-bold px-4 py-2">-30%</div>
+
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-accent font-mono font-bold text-sm">QUICKSHIP</span>
+                        <span class="text-gray-600">&times;</span>
+                        <span class="text-orange font-mono font-bold text-sm">LAZYRANK</span>
+                    </div>
+
+                    <h3 class="font-heading text-2xl font-bold text-white mb-2">20 articles SEO/mois</h3>
+                    <p class="text-gray-400 text-sm mb-6">Articles optimisés Google + GEO, publiés automatiquement sur votre site développé par QuickShip.</p>
+
+                    <div class="flex items-end gap-3 mb-2">
+                        <span class="text-5xl font-bold text-white font-mono">69&#8364;</span>
+                        <span class="text-gray-500 text-sm mb-2">/mois</span>
+                        <span class="text-gray-600 line-through text-sm mb-2 ml-2">99&#8364;/mois</span>
+                    </div>
+
+                    <!-- Inline promo reminder -->
+                    <div class="flex items-center gap-2 mb-8">
+                        <span class="text-gray-600 text-xs font-mono">Avec le code</span>
+                        <span class="coupon-code px-2 py-0.5 text-xs font-mono font-bold rounded-none cursor-pointer select-all" onclick="copyCode()">QUICKSHIP30</span>
+                    </div>
+
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="text-accent font-mono">&#10003;</span> 20 articles SEO optimisés par mois
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="text-accent font-mono">&#10003;</span> Optimisation GEO (ChatGPT, Perplexity, Gemini)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="text-accent font-mono">&#10003;</span> Setup & configuration gratuits (valeur 200&#8364;)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="text-accent font-mono">&#10003;</span> Publication automatique sur votre site
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="text-accent font-mono">&#10003;</span> Dashboard analytics & suivi positions
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <span class="text-accent font-mono">&#10003;</span> Support prioritaire QuickShip + LazyRank
+                        </li>
+                    </ul>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="https://cal.com/quickship-saas/discovery"
+                           class="flex-1 text-center px-6 py-4 bg-accent text-black font-mono font-bold hover:bg-accentHover transition-colors text-sm rounded-none">
+                            RÉSERVER UN CALL
+                        </a>
+                        <a href="https://www.lazyrank.io?utm_source=quickship&utm_medium=partner&utm_campaign=quickship30" target="_blank"
+                           class="flex-1 text-center px-6 py-4 border border-orange text-orange font-mono font-bold hover:bg-orange/10 transition-colors text-sm rounded-none">
+                            DÉCOUVRIR LAZYRANK
+                        </a>
+                    </div>
+                </div>
+
+                <p class="text-center text-gray-600 text-xs mt-6 font-mono">
+                    Offre réservée aux clients QuickShip. Sans engagement, annulable à tout moment.
+                </p>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- FAQ -->
+        <!-- ============================================= -->
+        <section id="faq" class="py-24 relative">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="text-accent font-mono text-xs font-bold tracking-widest uppercase mb-3">/FAQ</div>
+                    <h2 class="font-heading title-uppercase text-3xl font-semibold text-white">QUESTIONS FRÉQUENTES</h2>
+                </div>
+
+                <div class="space-y-3">
+                    <details class="border border-surfaceBorder bg-surface/60 group">
+                        <summary class="p-5 cursor-pointer text-white font-medium text-sm flex justify-between items-center">
+                            Qu'est-ce que le GEO (Generative Engine Optimization) ?
+                            <span class="text-gray-600 group-open:rotate-45 transition-transform text-lg">+</span>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-400 text-sm">
+                            Le GEO optimise votre contenu pour être cité par les IA génératives (ChatGPT, Perplexity, Gemini...) quand des utilisateurs posent des questions liées à votre business. C'est le SEO du futur.
+                        </div>
+                    </details>
+                    <details class="border border-surfaceBorder bg-surface/60 group">
+                        <summary class="p-5 cursor-pointer text-white font-medium text-sm flex justify-between items-center">
+                            Je n'ai pas encore de site, est-ce que ça marche ?
+                            <span class="text-gray-600 group-open:rotate-45 transition-transform text-lg">+</span>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-400 text-sm">
+                            C'est le cas idéal ! QuickShip développe votre site ou app, puis on connecte directement LazyRank. Tout est intégré dès le lancement.
+                        </div>
+                    </details>
+                    <details class="border border-surfaceBorder bg-surface/60 group">
+                        <summary class="p-5 cursor-pointer text-white font-medium text-sm flex justify-between items-center">
+                            Comment utiliser le code promo QUICKSHIP30 ?
+                            <span class="text-gray-600 group-open:rotate-45 transition-transform text-lg">+</span>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-400 text-sm">
+                            Rendez-vous sur LazyRank, choisissez votre abonnement, et entrez le code <strong class="text-accent">QUICKSHIP30</strong> au moment du paiement. La réduction de 30% s'applique de manière permanente sur tous vos paiements futurs.
+                        </div>
+                    </details>
+                    <details class="border border-surfaceBorder bg-surface/60 group">
+                        <summary class="p-5 cursor-pointer text-white font-medium text-sm flex justify-between items-center">
+                            Combien de temps avant de voir des résultats SEO ?
+                            <span class="text-gray-600 group-open:rotate-45 transition-transform text-lg">+</span>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-400 text-sm">
+                            Les premiers résultats apparaissent généralement en 2-4 semaines pour le GEO, et 1-3 mois pour le SEO classique Google. Avec 20 articles/mois, vous accumulez du trafic organique de manière exponentielle.
+                        </div>
+                    </details>
+                    <details class="border border-surfaceBorder bg-surface/60 group">
+                        <summary class="p-5 cursor-pointer text-white font-medium text-sm flex justify-between items-center">
+                            Est-ce que le contenu est de bonne qualité ?
+                            <span class="text-gray-600 group-open:rotate-45 transition-transform text-lg">+</span>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-400 text-sm">
+                            Oui. LazyRank utilise des modèles IA avancés avec des guidelines SEO strictes. Chaque article est unique, bien structuré, et optimisé pour votre niche. Vous pouvez les relire et modifier avant publication.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- FINAL CTA -->
+        <!-- ============================================= -->
+        <section class="py-24">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center border border-surfaceBorder bg-surface/60 backdrop-blur-sm p-10 sm:p-16 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-center gap-3 mb-6">
+                            <span class="text-accent font-mono font-bold text-sm">QUICKSHIP</span>
+                            <span class="text-gray-600">&times;</span>
+                            <span class="text-orange font-mono font-bold text-sm">LAZYRANK</span>
+                        </div>
+                        <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-4">
+                            PRÊT À LANCER ?
+                        </h2>
+                        <p class="text-gray-400 mb-6 max-w-lg mx-auto">
+                            Réservez un call de découverte gratuit. On discute de votre projet et de comment le combo dev + SEO peut booster votre business.
+                        </p>
+
+                        <!-- Inline coupon reminder -->
+                        <div class="inline-flex items-center gap-3 px-5 py-3 border border-dashed border-accent/40 bg-black/50 mb-8">
+                            <span class="text-gray-500 text-xs font-mono">CODE PROMO</span>
+                            <span class="coupon-code px-3 py-1 text-sm font-mono font-bold rounded-none cursor-pointer select-all" onclick="copyCode()">QUICKSHIP30</span>
+                            <span class="text-gray-500 text-xs font-mono">= -30%</span>
+                        </div>
+
+                        <div class="block">
+                            <a href="https://cal.com/quickship-saas/discovery"
+                               class="inline-flex items-center justify-center px-10 py-4 bg-accent text-black font-heading font-bold text-sm uppercase tracking-wide hover:bg-accentHover transition-colors rounded-none">
+                                RÉSERVER MON CALL GRATUIT
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================= -->
+    <!-- FOOTER -->
+    <!-- ============================================= -->
+    <footer class="brutal-border border-b-0 border-l-0 border-r-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-600 font-mono">
+            <div class="flex items-center gap-3">
+                <span class="text-accent font-bold">QUICKSHIP</span>
+                <span>&times;</span>
+                <span class="text-orange font-bold">LAZYRANK</span>
+            </div>
+            <div>Partenariat officiel — 2025</div>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode() {
+            navigator.clipboard.writeText('QUICKSHIP30').then(() => {
+                const txt = document.getElementById('copy-text');
+                if (txt) {
+                    txt.textContent = 'COPIÉ !';
+                    txt.closest('button').classList.add('text-accent');
+                    setTimeout(() => {
+                        txt.textContent = 'COPIER LE CODE';
+                        txt.closest('button').classList.remove('text-accent');
+                    }, 2000);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

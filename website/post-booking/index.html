@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-black scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickShip — Call confirmé, voici la suite</title>
+    <meta name="description" content="Votre call QuickShip est confirmé. Préparez-vous pour maximiser notre temps ensemble.">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'heading': ['Clash Display', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        surface: '#121212',
+                        surfaceBorder: '#262626',
+                        accent: '#CCFF00',
+                        accentHover: '#b3e600'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background-color: #CCFF00; color: #000; }
+        body { background-color: #050505; color: #E5E5E5; overflow-x: hidden; }
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+        .title-uppercase { text-transform: uppercase; letter-spacing: -0.02em; }
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .pulse-border { animation: pulseBorder 2s ease-in-out infinite; }
+        @keyframes pulseBorder {
+            0%, 100% { border-color: #CCFF00; box-shadow: 0 0 0 0 rgba(204,255,0,0.3); }
+            50% { border-color: #b3e600; box-shadow: 0 0 20px 4px rgba(204,255,0,0.15); }
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+
+        @media print {
+            body { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none !important; }
+        }
+    </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '791100870085010');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=791100870085010&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+
+<body class="font-sans antialiased selection:bg-accent selection:text-black">
+
+    <div class="fixed inset-0 bg-grid z-0 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="border-b border-surfaceBorder relative z-20 bg-black/80 backdrop-blur-lg no-print">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="/" class="font-heading font-bold text-xl sm:text-2xl tracking-tight text-white">
+                    QUICK<span class="text-accent">SHIP.</span>
+                </a>
+                <div class="font-mono text-xs text-gray-500 uppercase tracking-widest">Call confirmé ✓</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+
+            <!-- ============================================= -->
+            <!-- CONFIRMATION -->
+            <!-- ============================================= -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center justify-center w-20 h-20 border-2 border-accent bg-accent/10 mb-8">
+                    <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <h1 class="font-heading title-uppercase text-3xl sm:text-5xl font-semibold text-white leading-tight mb-4">
+                    VOTRE CALL EST CONFIRMÉ.
+                </h1>
+                <p class="text-gray-400 text-base sm:text-lg font-sans max-w-lg mx-auto leading-relaxed">
+                    Mais avant qu'on se parle, il y a <strong class="text-white">une étape obligatoire</strong> pour qu'on ne perde pas de temps.
+                </p>
+            </div>
+
+            <!-- ============================================= -->
+            <!-- ⚠️ QUESTIONNAIRE CTA — CRITICAL -->
+            <!-- ============================================= -->
+            <div class="pulse-border border-2 border-accent bg-black p-8 sm:p-10 mb-16 relative">
+                <div class="absolute -top-4 left-6 bg-accent text-black font-mono text-[11px] font-bold px-4 py-1 uppercase">
+                    ⚠️ Étape obligatoire
+                </div>
+
+                <h2 class="font-heading title-uppercase text-2xl sm:text-3xl font-semibold text-white mb-4">
+                    REMPLISSEZ LE QUESTIONNAIRE<br>AVANT VOTRE CALL.
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base font-sans leading-relaxed mb-6">
+                    Ce formulaire de 2 minutes nous permet de <strong class="text-white">préparer votre call à l'avance</strong> et d'arriver avec des solutions concrètes dès la première minute. Sans lui, on perdra du temps à poser des questions de base.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+                    <div class="flex items-center gap-3 font-mono text-xs text-gray-300">
+                        <span class="w-6 h-6 bg-accent/10 border border-accent flex items-center justify-center text-accent">⚡</span>
+                        2 minutes max
+                    </div>
+                    <div class="flex items-center gap-3 font-mono text-xs text-gray-300">
+                        <span class="w-6 h-6 bg-accent/10 border border-accent flex items-center justify-center text-accent">6</span>
+                        6 questions simples
+                    </div>
+                    <div class="flex items-center gap-3 font-mono text-xs text-gray-300">
+                        <span class="w-6 h-6 bg-accent/10 border border-accent flex items-center justify-center text-accent">✓</span>
+                        Prépare votre MVP
+                    </div>
+                </div>
+
+                <a href="/questionnaire/"
+                    class="block w-full py-5 text-center font-heading font-bold text-black bg-accent hover:bg-accentHover transition-colors text-lg uppercase">
+                    REMPLIR LE QUESTIONNAIRE →
+                </a>
+
+                <p class="font-mono text-[11px] text-red-400/80 text-center mt-4 uppercase">
+                    Si le questionnaire n'est pas rempli avant le call, nous nous réservons le droit de reporter.
+                </p>
+            </div>
+
+            <!-- ============================================= -->
+            <!-- SOCIAL PROOF -->
+            <!-- ============================================= -->
+            <div class="mb-16">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-8 text-center">
+                    [ ILS ONT LANCÉ LEUR MVP AVEC NOUS ]
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Testimonial 1 -->
+                    <div class="border border-surfaceBorder bg-surface p-6 sm:p-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-accent/10 border border-accent flex items-center justify-center font-heading font-bold text-accent flex-shrink-0">T</div>
+                            <div>
+                                <p class="text-gray-300 text-sm font-sans leading-relaxed mb-3">
+                                    "J'avais l'idée depuis 6 mois. En 48h j'avais un produit fonctionnel que je montrais à mes premiers utilisateurs. <strong class="text-white">Le ROI est immédiat</strong> — j'aurais perdu 3 mois avec une agence classique."
+                                </p>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-white font-bold text-sm">Thomas D.</span>
+                                    <span class="text-gray-600">—</span>
+                                    <span class="font-mono text-xs text-gray-500">Fondateur SaaS B2B</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="border border-surfaceBorder bg-surface p-6 sm:p-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-accent/10 border border-accent flex items-center justify-center font-heading font-bold text-accent flex-shrink-0">S</div>
+                            <div>
+                                <p class="text-gray-300 text-sm font-sans leading-relaxed mb-3">
+                                    "Le code est clean, bien structuré, documenté. Mon CTO a validé en 10 minutes. <strong class="text-white">C'est pas du vibe code</strong> — c'est du vrai code de prod qu'on continue de faire évoluer avec Cursor."
+                                </p>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-white font-bold text-sm">Sarah L.</span>
+                                    <span class="text-gray-600">—</span>
+                                    <span class="font-mono text-xs text-gray-500">CEO startup e-commerce</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="border border-surfaceBorder bg-surface p-6 sm:p-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-accent/10 border border-accent flex items-center justify-center font-heading font-bold text-accent flex-shrink-0">M</div>
+                            <div>
+                                <p class="text-gray-300 text-sm font-sans leading-relaxed mb-3">
+                                    "990€ pour un MVP fonctionnel en 48h, c'est un no-brainer. J'avais eu des devis à 8K pour 6 semaines de délai. <strong class="text-white">QuickShip a livré exactement ce que je voulais</strong>, dans les temps."
+                                </p>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-white font-bold text-sm">Marc B.</span>
+                                    <span class="text-gray-600">—</span>
+                                    <span class="font-mono text-xs text-gray-500">Consultant indépendant</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="grid grid-cols-3 gap-3 sm:gap-4 mt-6">
+                    <div class="border border-surfaceBorder bg-surface p-4 sm:p-6 text-center">
+                        <div class="font-heading text-2xl sm:text-3xl font-semibold text-white">48h</div>
+                        <div class="font-mono text-[10px] sm:text-xs text-gray-500 uppercase mt-1">Temps moyen</div>
+                    </div>
+                    <div class="border border-surfaceBorder bg-surface p-4 sm:p-6 text-center">
+                        <div class="font-heading text-2xl sm:text-3xl font-semibold text-accent">100%</div>
+                        <div class="font-mono text-[10px] sm:text-xs text-gray-500 uppercase mt-1">Livré à temps</div>
+                    </div>
+                    <div class="border border-surfaceBorder bg-surface p-4 sm:p-6 text-center">
+                        <div class="font-heading text-2xl sm:text-3xl font-semibold text-white">4.9/5</div>
+                        <div class="font-mono text-[10px] sm:text-xs text-gray-500 uppercase mt-1">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================= -->
+            <!-- URGENCY / SCARCITY -->
+            <!-- ============================================= -->
+            <div class="border border-red-500/30 bg-red-500/5 p-6 sm:p-8 mb-16">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 bg-red-500/10 border border-red-500/40 flex items-center justify-center flex-shrink-0">
+                        <span class="text-red-400 font-mono text-sm font-bold">!</span>
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-bold text-white text-lg uppercase mb-2">Capacité limitée — 5 projets / mois</h3>
+                        <p class="text-gray-400 text-sm font-sans leading-relaxed mb-4">
+                            Pour garantir la qualité de chaque livraison, nous n'acceptons que <strong class="text-white">5 projets par mois</strong> à ce tarif. Chaque projet mobilise nos développeurs seniors pendant 48h — on ne peut pas en faire plus sans sacrifier la qualité.
+                        </p>
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1 h-2 bg-surfaceBorder overflow-hidden">
+                                <div class="h-full bg-red-400" style="width: 60%"></div>
+                            </div>
+                            <span class="font-mono text-xs text-red-400 font-bold flex-shrink-0">3/5 ce mois</span>
+                        </div>
+                        <p class="font-mono text-[11px] text-gray-600 mt-3">
+                            Si les 5 places sont prises, votre projet sera reporté au mois suivant. Le questionnaire nous aide à prioriser.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================= -->
+            <!-- PROCESS DÉTAILLÉ -->
+            <!-- ============================================= -->
+            <div class="mb-16">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-4">
+                    [ COMMENT ÇA SE PASSE CONCRÈTEMENT ]
+                </div>
+                <h2 class="font-heading title-uppercase text-3xl sm:text-4xl font-semibold text-white mb-12">
+                    DE VOTRE IDÉE À<br>LA PRODUCTION EN 48H.
+                </h2>
+
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Vertical line -->
+                    <div class="absolute left-[19px] sm:left-[23px] top-0 bottom-0 w-px bg-surfaceBorder"></div>
+
+                    <div class="space-y-10">
+
+                        <!-- Step: Pre-call -->
+                        <div class="flex gap-6 relative">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-accent text-black flex items-center justify-center font-mono font-bold text-xs flex-shrink-0 relative z-10">00</div>
+                            <div class="pt-1">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="font-heading font-bold text-white text-lg uppercase">Avant le call</h3>
+                                    <span class="font-mono text-[10px] text-accent bg-accent/10 px-2 py-0.5 uppercase">Maintenant</span>
+                                </div>
+                                <p class="text-gray-400 text-sm font-sans leading-relaxed">
+                                    Vous remplissez le questionnaire pré-call (2 min). Ça nous permet de comprendre votre idée, vos contraintes et de préparer des recommandations concrètes avant même de se parler.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step: Call -->
+                        <div class="flex gap-6 relative">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-surface border border-surfaceBorder text-white flex items-center justify-center font-mono font-bold text-xs flex-shrink-0 relative z-10">01</div>
+                            <div class="pt-1">
+                                <h3 class="font-heading font-bold text-white text-lg uppercase mb-2">Call de découverte — 15 min</h3>
+                                <p class="text-gray-400 text-sm font-sans leading-relaxed">
+                                    On valide ensemble la faisabilité, on affine les fonctionnalités et on définit le scope exact du MVP. Si votre projet est trop ambitieux pour 48h, on vous le dit honnêtement et on propose un scope adapté.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step: Payment -->
+                        <div class="flex gap-6 relative">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-surface border border-surfaceBorder text-white flex items-center justify-center font-mono font-bold text-xs flex-shrink-0 relative z-10">02</div>
+                            <div class="pt-1">
+                                <h3 class="font-heading font-bold text-white text-lg uppercase mb-2">Validation & paiement — 990€</h3>
+                                <p class="text-gray-400 text-sm font-sans leading-relaxed">
+                                    Si ça match, vous payez les 990€ et remplissez le formulaire d'onboarding détaillé (vision, cible, features, design, stack). Ce brief est la colonne vertébrale de votre MVP.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step: H0-H24 -->
+                        <div class="flex gap-6 relative">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-surface border border-surfaceBorder text-white flex items-center justify-center font-mono font-bold text-xs flex-shrink-0 relative z-10">03</div>
+                            <div class="pt-1">
+                                <h3 class="font-heading font-bold text-white text-lg uppercase mb-2">Architecture & développement — H0 à H24</h3>
+                                <p class="text-gray-400 text-sm font-sans leading-relaxed">
+                                    Notre IA génère le code initial à partir de votre brief. Nos développeurs seniors structurent l'architecture, mettent en place l'auth, la base de données, et commencent le développement des fonctionnalités core.
+                                </p>
+                                <div class="mt-3 grid grid-cols-2 gap-2">
+                                    <div class="flex items-center gap-2 font-mono text-[11px] text-gray-500 uppercase">
+                                        <span class="w-1.5 h-1.5 bg-accent"></span> Next.js / React
+                                    </div>
+                                    <div class="flex items-center gap-2 font-mono text-[11px] text-gray-500 uppercase">
+                                        <span class="w-1.5 h-1.5 bg-accent"></span> Supabase (DB + Auth)
+                                    </div>
+                                    <div class="flex items-center gap-2 font-mono text-[11px] text-gray-500 uppercase">
+                                        <span class="w-1.5 h-1.5 bg-accent"></span> Tailwind CSS
+                                    </div>
+                                    <div class="flex items-center gap-2 font-mono text-[11px] text-gray-500 uppercase">
+                                        <span class="w-1.5 h-1.5 bg-accent"></span> Vercel (deploy)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step: H24-H48 -->
+                        <div class="flex gap-6 relative">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-surface border border-surfaceBorder text-white flex items-center justify-center font-mono font-bold text-xs flex-shrink-0 relative z-10">04</div>
+                            <div class="pt-1">
+                                <h3 class="font-heading font-bold text-white text-lg uppercase mb-2">Review, tests & polish — H24 à H44</h3>
+                                <p class="text-gray-400 text-sm font-sans leading-relaxed">
+                                    Chaque ligne de code est reviewée par un développeur senior. On teste sur mobile, tablette, desktop. On optimise les performances et l'UX. On s'assure que tout fonctionne parfaitement.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step: Delivery -->
+                        <div class="flex gap-6 relative">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-accent text-black flex items-center justify-center font-mono font-bold text-xs flex-shrink-0 relative z-10">05</div>
+                            <div class="pt-1">
+                                <h3 class="font-heading font-bold text-white text-lg uppercase mb-2">Livraison en production — H48</h3>
+                                <p class="text-gray-400 text-sm font-sans leading-relaxed mb-3">
+                                    Votre MVP est déployé sur Vercel, le repo GitHub vous est transféré avec la documentation complète. Vous êtes prêt à accueillir vos premiers utilisateurs.
+                                </p>
+                                <div class="border border-accent/30 bg-accent/5 p-4">
+                                    <div class="font-mono text-xs text-accent uppercase font-bold mb-2">Vous recevez :</div>
+                                    <div class="grid sm:grid-cols-2 gap-2">
+                                        <div class="flex items-center gap-2 font-mono text-[11px] text-gray-300 uppercase">
+                                            <span class="text-accent">✓</span> Repo GitHub complet
+                                        </div>
+                                        <div class="flex items-center gap-2 font-mono text-[11px] text-gray-300 uppercase">
+                                            <span class="text-accent">✓</span> MVP déployé + URL live
+                                        </div>
+                                        <div class="flex items-center gap-2 font-mono text-[11px] text-gray-300 uppercase">
+                                            <span class="text-accent">✓</span> Documentation technique
+                                        </div>
+                                        <div class="flex items-center gap-2 font-mono text-[11px] text-gray-300 uppercase">
+                                            <span class="text-accent">✓</span> Auth + DB configurés
+                                        </div>
+                                        <div class="flex items-center gap-2 font-mono text-[11px] text-gray-300 uppercase">
+                                            <span class="text-accent">✓</span> Design responsive
+                                        </div>
+                                        <div class="flex items-center gap-2 font-mono text-[11px] text-gray-300 uppercase">
+                                            <span class="text-accent">✓</span> 100% ownership
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================= -->
+            <!-- SECOND CTA — QUESTIONNAIRE -->
+            <!-- ============================================= -->
+            <div class="border border-accent bg-black p-8 sm:p-10 text-center mb-16">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-4">
+                    [ PROCHAINE ÉTAPE ]
+                </div>
+                <h2 class="font-heading title-uppercase text-2xl sm:text-3xl font-semibold text-white mb-4">
+                    N'OUBLIEZ PAS LE QUESTIONNAIRE.
+                </h2>
+                <p class="text-gray-400 text-sm font-sans mb-8 max-w-md mx-auto leading-relaxed">
+                    Plus vos réponses sont détaillées, plus votre MVP sera exactement ce que vous imaginez. C'est 2 minutes qui font toute la différence.
+                </p>
+                <a href="/questionnaire/"
+                    class="inline-block w-full sm:w-auto px-10 py-5 text-center font-heading font-bold text-black bg-accent hover:bg-accentHover transition-colors text-lg uppercase">
+                    REMPLIR LE QUESTIONNAIRE →
+                </a>
+            </div>
+
+            <!-- ============================================= -->
+            <!-- FAQ RAPIDE -->
+            <!-- ============================================= -->
+            <div class="mb-16">
+                <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-8">
+                    [ QUESTIONS FRÉQUENTES ]
+                </div>
+
+                <div class="space-y-0">
+                    <div class="border border-surfaceBorder p-6 border-b-0">
+                        <h4 class="font-heading font-bold text-white uppercase text-sm mb-2">Et si mon projet est trop gros pour 48h ?</h4>
+                        <p class="text-gray-400 text-sm font-sans leading-relaxed">On vous le dira honnêtement pendant le call. On redéfinira un scope réaliste pour le MVP — les features les plus critiques — et on livrera ça en 48h. Vous pourrez toujours itérer ensuite.</p>
+                    </div>
+                    <div class="border border-surfaceBorder p-6 border-b-0">
+                        <h4 class="font-heading font-bold text-white uppercase text-sm mb-2">Satisfait ou retravaillé ?</h4>
+                        <p class="text-gray-400 text-sm font-sans leading-relaxed">On ne lâche pas tant que c'est pas bien. Si le livrable ne correspond pas au brief validé ensemble, on retravaille gratuitement jusqu'à ce que ça soit parfait.</p>
+                    </div>
+                    <div class="border border-surfaceBorder p-6 border-b-0">
+                        <h4 class="font-heading font-bold text-white uppercase text-sm mb-2">Je peux modifier mon MVP après livraison ?</h4>
+                        <p class="text-gray-400 text-sm font-sans leading-relaxed">100%. Le code est propre, commenté et structuré pour être repris avec Cursor, Claude, ou n'importe quel développeur. C'est votre code, votre repo.</p>
+                    </div>
+                    <div class="border border-surfaceBorder p-6">
+                        <h4 class="font-heading font-bold text-white uppercase text-sm mb-2">Pourquoi le questionnaire est obligatoire ?</h4>
+                        <p class="text-gray-400 text-sm font-sans leading-relaxed">Parce que 15 minutes de call, ça passe vite. Si on arrive préparés, on peut se concentrer sur les décisions stratégiques au lieu de poser des questions de base. Vous y gagnez autant que nous.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================= -->
+            <!-- CONTACT -->
+            <!-- ============================================= -->
+            <div class="text-center border-t border-surfaceBorder pt-10">
+                <p class="text-gray-500 font-mono text-xs uppercase mb-4">Une question avant le call ?</p>
+                <a href="mailto:gauthier@saasexpand.io" class="font-mono text-sm text-accent hover:text-accentHover transition-colors">
+                    gauthier@saasexpand.io
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-surfaceBorder bg-black py-6 sm:py-8 relative z-10">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <p class="font-mono text-xs text-gray-600 uppercase">© 2025 QuickShip. Vrai code, pas de bullshit.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -5,11 +5,18 @@ import { createClient } from '@/lib/supabase-browser'
 import { TopBar } from '@/components/layout/TopBar'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { formatDate, getStatusLabel } from '@/lib/utils'
-import { LifeBuoy, Plus, MessageSquare, Clock } from 'lucide-react'
+import { formatDate, getPriorityColor, getStatusLabel } from '@/lib/utils'
+import { LifeBuoy, Plus, MessageSquare, Clock, Tag, FolderKanban, AlertTriangle } from 'lucide-react'
 import Link from 'next/link'
 import type { SupportTicket } from '@/types'
 import { useMobileMenu } from '../layout'
+
+const priorityDot: Record<string, string> = {
+  low: 'bg-text-muted',
+  medium: 'bg-amber-400',
+  high: 'bg-orange-400',
+  urgent: 'bg-red-400',
+}
 
 export default function SupportPage() {
   const onMenuToggle = useMobileMenu()
@@ -65,7 +72,7 @@ export default function SupportPage() {
       <div className="p-4 md:p-8">
         {/* Filters */}
         <div className="flex items-center gap-2 mb-6">
-          {['all', 'open', 'closed'].map((f) => (
+          {(['all', 'open', 'closed'] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
@@ -77,7 +84,11 @@ export default function SupportPage() {
             >
               {f === 'all' ? 'Tous' : f === 'open' ? 'Ouverts' : 'Ferm\u00e9s'}
               <span className="ml-1.5 text-xs opacity-70">
-                {f === 'all' ? tickets.length : f === 'open' ? tickets.filter(t => !['resolved', 'closed'].includes(t.status)).length : tickets.filter(t => ['resolved', 'closed'].includes(t.status)).length}
+                {f === 'all'
+                  ? tickets.length
+                  : f === 'open'
+                  ? tickets.filter(t => !['resolved', 'closed'].includes(t.status)).length
+                  : tickets.filter(t => ['resolved', 'closed'].includes(t.status)).length}
               </span>
             </button>
           ))}
@@ -95,27 +106,65 @@ export default function SupportPage() {
             }
           />
         ) : (
-          <div className="card divide-y divide-surface-border">
-            {filteredTickets.map((ticket) => (
-              <Link key={ticket.id} href={`/support/${ticket.id}`} className="flex items-center gap-4 p-4 hover:bg-surface-hover transition-colors first:rounded-t-2xl last:rounded-b-2xl">
-                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <MessageSquare className="w-5 h-5 text-accent" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <h3 className="text-sm font-medium text-text-primary truncate">{ticket.subject}</h3>
-                    <StatusBadge status={ticket.priority} />
+          <div className="space-y-3">
+            {filteredTickets.map((ticket) => {
+              const projectName = (ticket as SupportTicket & { project?: { name: string } }).project?.name
+              return (
+                <Link
+                  key={ticket.id}
+                  href={`/support/${ticket.id}`}
+                  className="card hover:border-text-muted hover:shadow-card-hover transition-all duration-200 block"
+                >
+                  <div className="flex items-start gap-4">
+                    {/* Icon */}
+                    <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <MessageSquare className="w-5 h-5 text-accent" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      {/* Title row */}
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <h3 className="text-sm font-semibold text-text-primary leading-snug">{ticket.subject}</h3>
+                        <StatusBadge status={ticket.status} />
+                      </div>
+
+                      {/* Meta row */}
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                        {/* Priority */}
+                        <span className={`flex items-center gap-1.5 text-xs ${getPriorityColor(ticket.priority)}`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${priorityDot[ticket.priority] ?? 'bg-text-muted'}`} />
+                          <AlertTriangle className="w-3 h-3" />
+                          {getStatusLabel(ticket.priority)}
+                        </span>
+
+                        {/* Category */}
+                        {ticket.category && (
+                          <span className="flex items-center gap-1 text-xs text-text-muted">
+                            <Tag className="w-3 h-3" />
+                            {ticket.category}
+                          </span>
+                        )}
+
+                        {/* Project */}
+                        {projectName && (
+                          <span className="flex items-center gap-1 text-xs text-text-muted">
+                            <FolderKanban className="w-3 h-3" />
+                            {projectName}
+                          </span>
+                        )}
+
+                        {/* Date */}
+                        <span className="flex items-center gap-1 text-xs text-text-muted ml-auto">
+                          <Clock className="w-3 h-3" />
+                          {formatDate(ticket.created_at)}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-text-muted flex items-center gap-2">
-                    {(ticket as any).project?.name && <span>{(ticket as any).project.name}</span>}
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {formatDate(ticket.created_at)}
-                    </span>
-                  </p>
-                </div>
-                <StatusBadge status={ticket.status} />
-              </Link>
-            ))}
+                </Link>
+              )
+            })}
           </div>
         )}
       </div>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-black scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickShip — Votre site web sur mesure en 48h</title>
+    <meta name="description"
+        content="On crée votre site web sur mesure en 48h. Landing page, site multi-pages ou site complet — du vrai code pro, responsive, optimisé SEO. 20€/mois de maintenance.">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Cal.com -->
+    <script type="text/javascript">
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "appel-quickship-site-web", {origin:"https://app.cal.com"});
+      Cal.ns["appel-quickship-site-web"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'heading': ['Clash Display', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        surface: '#121212',
+                        surfaceBorder: '#262626',
+                        accent: '#CCFF00',
+                        accentHover: '#b3e600'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background-color: #CCFF00; color: #000; }
+        body { background-color: #050505; color: #E5E5E5; overflow-x: hidden; }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        .brutal-border {
+            border: 1px solid var(--surface-border, #262626);
+            background: rgba(18,18,18,0.6);
+            backdrop-filter: blur(12px);
+        }
+
+        .text-outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.2); }
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .title-uppercase { text-transform: uppercase; letter-spacing: -0.02em; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #404040; }
+    </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '791100870085010');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=791100870085010&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+
+<body class="font-sans antialiased selection:bg-accent selection:text-black">
+
+    <div class="fixed inset-0 bg-grid z-0 pointer-events-none"></div>
+
+    <!-- HEADER NAV -->
+    <header class="fixed top-0 w-full brutal-border border-t-0 border-l-0 border-r-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="/" class="flex items-center font-heading font-bold text-2xl tracking-tight text-white">
+                    QUICK<span class="text-accent">SHIP.</span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8 text-sm font-mono font-medium text-gray-400">
+                    <a href="#projets" class="hover:text-accent transition-colors">/PROJETS</a>
+                    <a href="#process" class="hover:text-accent transition-colors">/PROCESS</a>
+                    <a href="#features" class="hover:text-accent transition-colors">/AVANTAGES</a>
+                    <a href="#booking" class="hover:text-accent transition-colors">/RÉSERVER</a>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <a href="#booking"
+                        class="magnetic-btn hidden sm:inline-flex items-center justify-center px-6 py-3 text-sm font-mono font-bold text-black bg-accent hover:bg-accentHover transition-colors rounded-none">
+                        <span class="magnetic-text">RÉSERVER UN APPEL DESIGN</span>
+                    </a>
+                    <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5" aria-label="Menu">
+                        <span class="block w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="bar1"></span>
+                        <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="bar2"></span>
+                        <span class="block w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="bar3"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-10 transition-all duration-500 opacity-0 pointer-events-none">
+        <nav class="flex flex-col items-center gap-8 text-xl font-mono font-medium text-gray-400">
+            <a href="#projets" class="hover:text-accent transition-colors mobile-nav-link">/PROJETS</a>
+            <a href="#process" class="hover:text-accent transition-colors mobile-nav-link">/PROCESS</a>
+            <a href="#features" class="hover:text-accent transition-colors mobile-nav-link">/AVANTAGES</a>
+            <a href="#booking" class="hover:text-accent transition-colors mobile-nav-link">/RÉSERVER</a>
+        </nav>
+        <a href="#booking" class="inline-flex items-center justify-center px-8 py-4 text-sm font-mono font-bold text-black bg-accent hover:bg-accentHover transition-colors mobile-nav-link">
+            RÉSERVER UN CALL
+        </a>
+    </div>
+
+    <main class="relative z-10">
+
+        <!-- ============================================= -->
+        <!-- HERO -->
+        <!-- ============================================= -->
+        <section class="pt-40 pb-20 sm:pt-48 sm:pb-32 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center text-center max-w-5xl mx-auto gs-reveal">
+
+                    <div class="inline-flex items-center gap-3 px-4 py-2 border border-surfaceBorder bg-surface/50 text-accent font-mono text-xs font-bold uppercase tracking-widest mb-10">
+                        <span class="flex h-2 w-2 bg-accent cursor-blink"></span>
+                        Sur devis · Livré en 48h · 20€/mois maintenance
+                    </div>
+
+                    <h1 class="font-heading title-uppercase text-5xl sm:text-7xl lg:text-8xl font-semibold leading-[0.9] tracking-tight mb-8 text-white">
+                        <div class="overflow-hidden"><span class="block gs-hero-text">VOTRE SITE WEB</span></div>
+                        <div class="overflow-hidden"><span class="block gs-hero-text">SUR MESURE</span></div>
+                        <div class="overflow-hidden"><span class="block gs-hero-text text-accent">EN 48 HEURES</span></div>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-sans font-medium leading-relaxed gs-reveal">
+                        Landing page, site multi-pages ou site complet — on le construit avec du <strong class="text-white font-bold border-b border-accent pb-0.5">vrai code pro</strong>.
+                        Responsive, optimisé SEO, ultra-rapide. Pas un template WordPress.
+                    </p>
+
+                    <a href="#booking"
+                        class="magnetic-btn inline-flex items-center gap-4 px-8 py-4 bg-white text-black font-heading font-bold text-lg uppercase tracking-wide hover:bg-gray-200 transition-colors gs-reveal">
+                        <span class="magnetic-text">RÉSERVER UN CALL DE BRIEFING</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- BOOKING 1 (après hero) -->
+        <!-- ============================================= -->
+        <section class="py-24 relative border-t border-surfaceBorder bg-black">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-5 gap-12">
+                    <div class="lg:col-span-2 gs-reveal">
+                        <h2 class="font-heading title-uppercase text-3xl sm:text-5xl font-semibold text-white mb-6">
+                            RÉSERVEZ VOTRE<br><span class="text-accent">APPEL DESIGN.</span>
+                        </h2>
+                        <p class="text-gray-400 font-mono text-sm leading-relaxed mb-8">
+                            > 15 minutes pour définir votre vision.<br>
+                            > Audit de vos besoins design immédiat.<br>
+                            > Gratuit, sans engagement.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-3 gs-reveal">
+                        <div class="border border-surfaceBorder bg-surface p-2">
+                            <!-- Cal inline embed code begins -->
+                            <div style="width:100%;height:650px;overflow:scroll" id="my-cal-inline-appel-quickship-site-web-1"></div>
+                            <script type="text/javascript">
+                            (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+                            Cal("init", "appel-quickship-site-web-1", {origin:"https://app.cal.com"});
+                            Cal.ns["appel-quickship-site-web-1"]("inline", {
+                                elementOrSelector:"#my-cal-inline-appel-quickship-site-web-1",
+                                config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+                                calLink: "dutygroup/appel-quickship-site-web",
+                            });
+                            Cal.ns["appel-quickship-site-web-1"]("ui", {"styles":{"branding":{"brandColor":"#CCFF00"}},"hideEventTypeDetails":false,"layout":"month_view"});
+                            </script>
+                            <!-- Cal inline embed code ends -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- CE QU'ON CONSTRUIT -->
+        <!-- ============================================= -->
+        <section id="projets" class="py-32 relative bg-surface border-y border-surfaceBorder">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center mb-20 gs-reveal">
+                    <div class="inline-block font-mono text-accent text-xs font-bold uppercase tracking-widest mb-4">
+                        [ CE QU'ON CONSTRUIT ]
+                    </div>
+                    <h2 class="font-heading title-uppercase text-4xl sm:text-6xl font-semibold text-white">
+                        LANDING PAGE. MULTI-PAGES.<br>SITE COMPLET.
+                    </h2>
+                </div>
+
+                <!-- 3 Project Types -->
+                <div class="grid md:grid-cols-3 gap-6 gs-reveal">
+
+                    <!-- Landing Page -->
+                    <div class="border border-surfaceBorder bg-black p-8 sm:p-10 hover:border-accent transition-colors duration-500 group">
+                        <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">01.</div>
+                        <h3 class="font-heading title-uppercase text-2xl sm:text-3xl font-semibold text-white mb-4">LANDING<br>PAGE</h3>
+                        <p class="text-gray-400 text-sm font-sans leading-relaxed mb-8">
+                            Une page unique qui convertit. Hero percutant, sections de vente, CTA optimisés, formulaire de contact. Idéal pour lancer un produit, un service ou une offre.
+                        </p>
+                        <ul class="space-y-3 font-mono text-xs text-gray-300 uppercase">
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Design sur mesure</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Optimisé conversion</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Mobile-first</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> SEO on-page</li>
+                        </ul>
+                    </div>
+
+                    <!-- Multi-Pages -->
+                    <div class="border border-surfaceBorder bg-black p-8 sm:p-10 hover:border-accent transition-colors duration-500 group">
+                        <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">02.</div>
+                        <h3 class="font-heading title-uppercase text-2xl sm:text-3xl font-semibold text-white mb-4">SITE<br>MULTI-PAGES</h3>
+                        <p class="text-gray-400 text-sm font-sans leading-relaxed mb-8">
+                            Accueil, à propos, services, contact, blog... Chaque page designée et codée sur mesure. Navigation fluide, structure SEO-friendly, animations soignées.
+                        </p>
+                        <ul class="space-y-3 font-mono text-xs text-gray-300 uppercase">
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Jusqu'à 10 pages</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Navigation intuitive</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Blog intégré (option)</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Analytics prêt</li>
+                        </ul>
+                    </div>
+
+                    <!-- Site Complet -->
+                    <div class="border border-accent bg-black p-8 sm:p-10 relative group">
+                        <div class="absolute top-0 right-0 bg-accent text-black font-mono text-[10px] font-bold px-3 py-1 uppercase">POPULAIRE</div>
+                        <div class="font-mono text-accent text-xs font-bold uppercase tracking-widest mb-6">03.</div>
+                        <h3 class="font-heading title-uppercase text-2xl sm:text-3xl font-semibold text-white mb-4">SITE<br>COMPLET</h3>
+                        <p class="text-gray-400 text-sm font-sans leading-relaxed mb-8">
+                            Le package ultime. Site vitrine complet avec formulaires, intégrations (Calendly, Stripe, Mailchimp...), CMS headless si besoin. Clé en main.
+                        </p>
+                        <ul class="space-y-3 font-mono text-xs text-gray-300 uppercase">
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Pages illimitées</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Intégrations tierces</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> CMS (optionnel)</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent"></span> Performance A+</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Maintenance Banner -->
+                <div class="mt-12 border border-surfaceBorder bg-black p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 gs-reveal">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-accent/10 border border-accent flex items-center justify-center flex-shrink-0">
+                            <span class="font-mono text-accent text-lg font-bold">∞</span>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-white text-lg uppercase">Maintenance incluse</h4>
+                            <p class="text-gray-400 font-mono text-xs uppercase">Mises à jour, sécurité, hébergement, support</p>
+                        </div>
+                    </div>
+                    <div class="text-center sm:text-right flex-shrink-0">
+                        <div class="flex items-start gap-1 justify-center sm:justify-end">
+                            <span class="font-heading text-4xl sm:text-5xl font-semibold text-white leading-none">20</span>
+                            <span class="font-mono text-xl font-bold text-accent">€</span>
+                            <span class="font-mono text-gray-500 text-xs self-end mb-1">/mois</span>
+                        </div>
+                        <p class="font-mono text-[10px] text-gray-600 uppercase mt-1">Sans engagement · Annulable à tout moment</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- PROCESS -->
+        <!-- ============================================= -->
+        <section id="process" class="py-32 relative bg-black">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center mb-24 gs-reveal">
+                    <div class="inline-block font-mono text-accent text-xs font-bold uppercase tracking-widest mb-4">
+                        [ COMMENT ÇA MARCHE ]
+                    </div>
+                    <h2 class="font-heading title-uppercase text-4xl sm:text-6xl font-semibold text-white">
+                        3 ÉTAPES.<br>48 HEURES. C'EST TOUT.
+                    </h2>
+                </div>
+
+                <div class="space-y-0 font-sans gs-reveal">
+
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-12 border-b border-surfaceBorder pb-12 mb-12">
+                        <div class="font-heading text-6xl text-surfaceBorder font-bold leading-none">01</div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-white uppercase font-heading">Vous nous décrivez votre projet</h3>
+                            <p class="text-gray-400 text-lg">Un call de 15 minutes pour comprendre votre activité, votre cible, votre identité visuelle et vos objectifs. On vous envoie un devis personnalisé dans l'heure.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-12 border-b border-surfaceBorder pb-12 mb-12">
+                        <div class="font-heading text-6xl text-surfaceBorder font-bold leading-none">02</div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-white uppercase font-heading">On design & on code votre site</h3>
+                            <p class="text-gray-400 text-lg">Notre IA accélère la production, <strong class="text-white">nos développeurs seniors reviewent chaque ligne</strong>. Design sur mesure, code propre, responsive garanti.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-12">
+                        <div class="font-heading text-6xl text-accent font-bold leading-none">03</div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-white uppercase font-heading">Votre site est en ligne</h3>
+                            <p class="text-gray-400 text-lg">Déployé sur Vercel avec votre nom de domaine. HTTPS, CDN global, performances A+. Vous recevez le code source complet sur GitHub.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-24 text-center gs-reveal">
+                    <a href="#booking"
+                        class="magnetic-btn inline-flex items-center justify-center px-10 py-5 text-lg font-heading font-bold text-black bg-accent hover:bg-white transition-colors uppercase">
+                        <span class="magnetic-text">RÉSERVER MON APPEL DESIGN</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- BOOKING 2 -->
+        <!-- ============================================= -->
+        <section id="booking" class="py-24 relative bg-surface border-y border-surfaceBorder">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-5 gap-12">
+                    <div class="lg:col-span-2 gs-reveal">
+                        <h2 class="font-heading title-uppercase text-3xl sm:text-5xl font-semibold text-white mb-6">
+                            RÉSERVEZ VOTRE<br><span class="text-accent">APPEL DESIGN.</span>
+                        </h2>
+                        <p class="text-gray-400 font-mono text-sm leading-relaxed mb-8">
+                            > 15 minutes pour définir votre vision.<br>
+                            > Audit de vos besoins design immédiat.<br>
+                            > Gratuit, sans engagement.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-3 gs-reveal">
+                        <div class="border border-surfaceBorder bg-surface p-2">
+                            <!-- Cal inline embed code begins -->
+                            <div style="width:100%;height:650px;overflow:scroll" id="my-cal-inline-appel-quickship-site-web-2"></div>
+                            <script type="text/javascript">
+                            (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+                            Cal("init", "appel-quickship-site-web-2", {origin:"https://app.cal.com"});
+                            Cal.ns["appel-quickship-site-web-2"]("inline", {
+                                elementOrSelector:"#my-cal-inline-appel-quickship-site-web-2",
+                                config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+                                calLink: "dutygroup/appel-quickship-site-web",
+                            });
+                            Cal.ns["appel-quickship-site-web-2"]("ui", {"styles":{"branding":{"brandColor":"#CCFF00"}},"hideEventTypeDetails":false,"layout":"month_view"});
+                            </script>
+                            <!-- Cal inline embed code ends -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- FEATURES -->
+        <!-- ============================================= -->
+        <section id="features" class="py-32 relative bg-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- Feature 1: Speed -->
+                <div class="grid md:grid-cols-2 gap-16 items-center mb-32 gs-reveal">
+                    <div>
+                        <div class="inline-block font-mono text-white bg-surfaceBorder px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-6">
+                            [ ⚡ LIVRAISON EXPRESS ]
+                        </div>
+                        <h2 class="font-heading title-uppercase text-4xl sm:text-5xl font-semibold mb-6 text-white">
+                            48H CHRONO.<br><span class="text-outline text-transparent">VOTRE SITE EST LIVE.</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6 font-sans">
+                            Pendant que les agences mettent 4 à 8 semaines, on livre votre site en <strong class="text-white">48 heures</strong>. Design, code, déploiement — tout inclus.
+                        </p>
+                        <p class="font-mono text-sm text-gray-400 border-l-2 border-accent pl-4">
+                            <strong class="text-white uppercase text-xs">RÉSULTAT :</strong> votre site est en ligne ce week-end, pas dans 2 mois.
+                        </p>
+                    </div>
+
+                    <div class="border border-surfaceBorder bg-surface p-8 relative">
+                        <div class="absolute top-0 right-0 w-16 h-16 border-l border-b border-surfaceBorder"></div>
+                        <div class="space-y-0 font-mono text-sm uppercase">
+                            <div class="flex items-center justify-between p-4 border-b border-surfaceBorder text-gray-400">
+                                <span class="text-white font-bold">H0</span> <span>Brief validé</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border-b border-surfaceBorder text-gray-400">
+                                <span class="text-white font-bold">H4</span> <span>Maquette & design</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border-b border-surfaceBorder text-gray-400">
+                                <span class="text-white font-bold">H24</span> <span>Développement</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-accent text-black font-bold">
+                                <span>H48</span> <span>Site en ligne 🚀</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Pas du WordPress -->
+                <div class="grid md:grid-cols-2 gap-16 items-center mb-32 gs-reveal">
+                    <div class="order-2 md:order-1 border border-surfaceBorder bg-surface p-0 flex flex-col sm:flex-row">
+                        <div class="flex-1 p-6 border-b sm:border-b-0 sm:border-r border-surfaceBorder">
+                            <div class="font-mono text-xs text-red-500 font-bold uppercase mb-6 tracking-widest">❌ Template</div>
+                            <ul class="space-y-4 font-mono text-sm text-gray-500">
+                                <li>> WordPress lourd</li>
+                                <li>> Plugins qui cassent</li>
+                                <li>> Lent à charger</li>
+                                <li>> Failles de sécurité</li>
+                                <li>> Ressemble à tout le monde</li>
+                            </ul>
+                        </div>
+                        <div class="flex-1 p-6 bg-[#0a0a0a]">
+                            <div class="font-mono text-xs text-accent font-bold uppercase mb-6 tracking-widest">✅ QuickShip</div>
+                            <ul class="space-y-4 font-mono text-sm text-white">
+                                <li>> Code léger & rapide</li>
+                                <li>> Zéro plugin</li>
+                                <li>> Score 100/100</li>
+                                <li>> Sécurisé by design</li>
+                                <li>> Design 100% unique</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="inline-block font-mono text-white bg-red-900/30 border border-red-500/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-6">
+                            [ 🛡️ PAS DU WORDPRESS ]
+                        </div>
+                        <h2 class="font-heading title-uppercase text-4xl sm:text-5xl font-semibold mb-6 text-white">
+                            DU CODE SUR MESURE.<br><span class="text-outline text-transparent">PAS UN TEMPLATE.</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6 font-sans">
+                            Les templates WordPress sont <strong class="text-white">lents, vulnérables et génériques</strong>. On code votre site from scratch — rapide, sécurisé, unique.
+                        </p>
+                        <p class="font-mono text-sm text-gray-400 border-l-2 border-accent pl-4">
+                            <strong class="text-white uppercase text-xs">RÉSULTAT :</strong> un site qui charge en moins d'une seconde et qui ne ressemble à aucun autre.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3: SEO & Performance -->
+                <div class="grid md:grid-cols-2 gap-16 items-center gs-reveal">
+                    <div>
+                        <div class="inline-block font-mono text-black bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-6">
+                            [ 🚀 SEO & PERFORMANCE ]
+                        </div>
+                        <h2 class="font-heading title-uppercase text-4xl sm:text-5xl font-semibold mb-6 text-white">
+                            GOOGLE-READY.<br><span class="text-outline text-transparent">DÈS LE JOUR 1.</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6 font-sans">
+                            Chaque site est livré avec le SEO on-page optimisé : balises meta, structure HTML sémantique, sitemap, images optimisées. <strong class="text-white">Score Lighthouse 95+</strong>.
+                        </p>
+                        <p class="font-mono text-sm text-gray-400 border-l-2 border-accent pl-4">
+                            <strong class="text-white uppercase text-xs">RÉSULTAT :</strong> votre site est visible sur Google dès la première semaine.
+                        </p>
+                    </div>
+
+                    <!-- Performance Metrics -->
+                    <div class="border border-surfaceBorder bg-[#050505] overflow-hidden">
+                        <div class="flex items-center px-4 py-2 border-b border-surfaceBorder bg-surface">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full border border-[#333]"></div>
+                                <div class="w-3 h-3 rounded-full border border-[#333]"></div>
+                                <div class="w-3 h-3 rounded-full border border-[#333]"></div>
+                            </div>
+                            <div class="mx-auto font-mono text-[10px] text-gray-500 uppercase">Lighthouse — audit</div>
+                        </div>
+                        <div class="p-8 space-y-6">
+                            <div>
+                                <div class="flex justify-between font-mono text-xs uppercase mb-2">
+                                    <span class="text-gray-400">Performance</span>
+                                    <span class="text-accent font-bold">98</span>
+                                </div>
+                                <div class="h-1.5 bg-surfaceBorder"><div class="h-full bg-accent" style="width:98%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between font-mono text-xs uppercase mb-2">
+                                    <span class="text-gray-400">SEO</span>
+                                    <span class="text-accent font-bold">100</span>
+                                </div>
+                                <div class="h-1.5 bg-surfaceBorder"><div class="h-full bg-accent" style="width:100%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between font-mono text-xs uppercase mb-2">
+                                    <span class="text-gray-400">Accessibilité</span>
+                                    <span class="text-accent font-bold">95</span>
+                                </div>
+                                <div class="h-1.5 bg-surfaceBorder"><div class="h-full bg-accent" style="width:95%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between font-mono text-xs uppercase mb-2">
+                                    <span class="text-gray-400">Best Practices</span>
+                                    <span class="text-accent font-bold">100</span>
+                                </div>
+                                <div class="h-1.5 bg-surfaceBorder"><div class="h-full bg-accent" style="width:100%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-surfaceBorder bg-black py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="font-heading font-bold text-xl tracking-tight text-white">
+                QUICK<span class="text-accent">SHIP.</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="/" class="font-mono text-xs text-gray-500 hover:text-accent transition-colors uppercase">MVP en 48h</a>
+                <span class="text-surfaceBorder">|</span>
+                <a href="/sites-web/" class="font-mono text-xs text-accent uppercase">Sites Web</a>
+            </div>
+            <div class="font-mono text-xs text-gray-600 uppercase">
+                © 2025 QuickShip. Vrai code, pas de bullshit.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const bar1 = document.getElementById('bar1');
+            const bar2 = document.getElementById('bar2');
+            const bar3 = document.getElementById('bar3');
+            let menuOpen = false;
+
+            function toggleMenu() {
+                menuOpen = !menuOpen;
+                if (menuOpen) {
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                    mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+                    bar1.style.transform = 'rotate(45deg) translateY(8px)';
+                    bar2.style.opacity = '0';
+                    bar3.style.transform = 'rotate(-45deg) translateY(-8px)';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+                    bar1.style.transform = 'none';
+                    bar2.style.opacity = '1';
+                    bar3.style.transform = 'none';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => { if (menuOpen) toggleMenu(); });
+            });
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            const heroTl = gsap.timeline();
+            heroTl.from(".gs-hero-text", {
+                y: 100, opacity: 0, duration: 1, stagger: 0.1, ease: "power4.out", delay: 0.2
+            });
+
+            gsap.utils.toArray('.gs-reveal').forEach(function (elem) {
+                gsap.from(elem, {
+                    scrollTrigger: { trigger: elem, start: "top 85%" },
+                    y: 40, opacity: 0, duration: 0.8, ease: "power3.out"
+                });
+            });
+
+            const magneticBtns = document.querySelectorAll('.magnetic-btn');
+            magneticBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    gsap.fromTo(btn,
+                        { x: 0 },
+                        { x: 3, duration: 0.06, repeat: 5, yoyo: true, ease: "power2.inOut",
+                          onComplete: () => gsap.set(btn, { x: 0 }) }
+                    );
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

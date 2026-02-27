@@ -1,15 +1,17 @@
 'use client'
 
-import { Bell, Search, Menu } from 'lucide-react'
+import { Search, Menu } from 'lucide-react'
+import { NotificationBell } from '@/components/ui/NotificationBell'
 
 interface TopBarProps {
   title: string
   subtitle?: string
   actions?: React.ReactNode
   onMenuToggle?: () => void
+  showNotifications?: boolean
 }
 
-export function TopBar({ title, subtitle, actions, onMenuToggle }: TopBarProps) {
+export function TopBar({ title, subtitle, actions, onMenuToggle, showNotifications = true }: TopBarProps) {
   return (
     <header className="h-14 md:h-16 bg-bg/80 backdrop-blur-xl border-b border-surface-border flex items-center justify-between px-4 md:px-8 sticky top-0 z-20">
       <div className="flex items-center gap-3 min-w-0">
@@ -39,11 +41,8 @@ export function TopBar({ title, subtitle, actions, onMenuToggle }: TopBarProps) 
             className="pl-10 pr-4 py-2 md:py-2.5 rounded-lg bg-surface border border-surface-border text-[13px] text-text-primary focus:outline-none focus:ring-1 focus:ring-accent/30 focus:border-accent/40 w-40 md:w-56 transition-all duration-200 placeholder:text-text-muted"
           />
         </div>
-        {/* Notifications */}
-        <button className="relative p-2 md:p-2.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-hover transition-all duration-200">
-          <Bell className="w-[18px] h-[18px]" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-accent rounded-full ring-2 ring-bg" />
-        </button>
+        {/* Notifications bell (real-time) */}
+        {showNotifications && <NotificationBell />}
         {/* Custom actions */}
         {actions}
       </div>
