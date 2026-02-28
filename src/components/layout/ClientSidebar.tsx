@@ -25,9 +25,9 @@ const navigation = [
   { name: 'Support', href: '/support', icon: LifeBuoy },
   { name: 'Assistant IA', href: '/assistant', icon: Sparkles },
   { name: 'Hub', href: '/hub', icon: Layers },
-  { name: 'Intégrations', href: '/integrations', icon: Plug },
+  { name: 'Integrations', href: '/integrations', icon: Plug },
   { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
-  { name: 'Paramètres', href: '/settings', icon: Settings },
+  { name: 'Parametres', href: '/settings', icon: Settings },
 ]
 
 interface ClientSidebarProps {
@@ -45,7 +45,7 @@ export function ClientSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Cl
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-black/80 z-40 md:hidden"
           onClick={onMobileClose}
         />
       )}
@@ -53,30 +53,40 @@ export function ClientSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Cl
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed left-0 top-0 bottom-0 w-[260px] bg-bg border-r border-surface-border flex flex-col z-50 transition-transform duration-300',
+          'fixed left-0 top-0 bottom-0 w-[260px] bg-bg border-r-3 border-surface-border flex flex-col z-50 transition-transform duration-300',
           mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         )}
       >
         {/* Logo */}
-        <div className="h-16 flex items-center justify-between px-7 border-b border-surface-border">
+        <div className="h-16 flex items-center justify-between px-5 border-b-3 border-surface-border">
           <Link
             href="/overview"
-            className="font-display font-extrabold text-[22px] tracking-[-0.04em]"
+            className="flex items-center gap-2"
             onClick={onMobileClose}
           >
-            <span className="text-accent">Quick</span>
-            <span className="text-white">Ship</span>
+            <div className="w-7 h-7 bg-accent border-3 border-accent" />
+            <span className="font-display font-black text-lg uppercase tracking-tight">
+              <span className="text-accent">Quick</span>
+              <span className="text-text-primary">Ship</span>
+            </span>
           </Link>
           <button
             onClick={onMobileClose}
-            className="p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-hover md:hidden"
+            className="p-1.5 border-3 border-surface-border text-text-muted hover:border-accent hover:text-accent md:hidden transition-all duration-100"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
+        {/* Section Label */}
+        <div className="px-5 pt-5 pb-2">
+          <span className="text-[10px] font-black uppercase tracking-widest text-accent">
+            Navigation
+          </span>
+        </div>
+
         {/* Navigation */}
-        <nav className="flex-1 px-3 py-5 space-y-0.5 overflow-y-auto">
+        <nav className="flex-1 px-3 pb-4 space-y-1 overflow-y-auto">
           {navigation.map((item) => {
             const isActive =
               pathname === item.href || pathname.startsWith(item.href + '/')
@@ -86,16 +96,16 @@ export function ClientSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Cl
                 href={item.href}
                 onClick={onMobileClose}
                 className={cn(
-                  'flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-200',
+                  'flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all duration-100',
                   isActive
-                    ? 'text-accent bg-accent/10 border-l-2 border-accent font-semibold'
-                    : 'text-text-muted hover:text-text-primary hover:bg-surface-hover'
+                    ? 'bg-accent text-black border-3 border-accent'
+                    : 'text-text-muted border-3 border-transparent hover:border-accent hover:text-accent'
                 )}
               >
                 <item.icon
                   className={cn(
                     'w-[18px] h-[18px]',
-                    isActive ? 'text-accent' : 'text-text-muted'
+                    isActive ? 'text-black' : 'text-text-muted'
                   )}
                 />
                 {item.name}
@@ -105,19 +115,19 @@ export function ClientSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Cl
         </nav>
 
         {/* User Profile */}
-        <div className="border-t border-surface-border px-4 py-4">
+        <div className="border-t-3 border-surface-border px-4 py-4">
           <div className="flex items-center gap-3">
             <Avatar name={user.full_name} src={user.avatar_url} size="sm" />
             <div className="flex-1 min-w-0">
-              <p className="text-[13px] font-semibold text-text-primary truncate">
+              <p className="text-xs font-bold uppercase tracking-wider text-text-primary truncate">
                 {user.full_name}
               </p>
-              <p className="text-[11px] text-text-muted truncate">{user.email}</p>
+              <p className="text-[11px] text-text-muted font-mono truncate">{user.email}</p>
             </div>
             <button
               onClick={onSignOut}
-              className="p-2 rounded-lg text-text-muted hover:text-red-400 hover:bg-surface-hover transition-all duration-200"
-              title="Se déconnecter"
+              className="btn-danger !px-2 !py-2 !text-xs"
+              title="Se deconnecter"
             >
               <LogOut className="w-4 h-4" />
             </button>

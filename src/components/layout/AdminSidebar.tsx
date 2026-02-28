@@ -24,7 +24,7 @@ const navigation = [
   { name: 'Support', href: '/admin/support', icon: LifeBuoy },
   { name: 'Onboarding', href: '/admin/onboarding', icon: ClipboardList },
   { name: 'Assistant IA', href: '/admin/ai-assistant', icon: Sparkles, highlight: true },
-  { name: 'Paramètres', href: '/admin/settings', icon: Settings },
+  { name: 'Parametres', href: '/admin/settings', icon: Settings },
 ]
 
 interface AdminSidebarProps {
@@ -42,7 +42,7 @@ export function AdminSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Adm
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-black/80 z-40 md:hidden"
           onClick={onMobileClose}
         />
       )}
@@ -50,35 +50,45 @@ export function AdminSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Adm
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed left-0 top-0 bottom-0 w-[260px] bg-bg border-r border-surface-border flex flex-col z-50 transition-transform duration-300',
+          'fixed left-0 top-0 bottom-0 w-[260px] bg-bg border-r-3 border-surface-border flex flex-col z-50 transition-transform duration-300',
           mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         )}
       >
         {/* Logo + Admin Badge */}
-        <div className="h-16 flex items-center justify-between px-7 border-b border-surface-border">
-          <div className="flex items-center gap-2.5">
+        <div className="h-16 flex items-center justify-between px-5 border-b-3 border-surface-border">
+          <div className="flex items-center gap-3">
             <Link
               href="/admin/dashboard"
-              className="font-display font-extrabold text-[22px] tracking-[-0.04em]"
+              className="flex items-center gap-2"
               onClick={onMobileClose}
             >
-              <span className="text-accent">Quick</span>
-              <span className="text-white">Ship</span>
+              <div className="w-7 h-7 bg-accent border-3 border-accent" />
+              <span className="font-display font-black text-lg uppercase tracking-tight">
+                <span className="text-accent">Quick</span>
+                <span className="text-text-primary">Ship</span>
+              </span>
             </Link>
-            <span className="text-[10px] font-mono font-bold tracking-wider bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded-md">
+            <span className="text-[10px] font-mono font-bold tracking-wider bg-accent text-black border-3 border-accent px-2 py-0.5">
               ADMIN
             </span>
           </div>
           <button
             onClick={onMobileClose}
-            className="p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-hover md:hidden"
+            className="p-1.5 border-3 border-surface-border text-text-muted hover:border-accent hover:text-accent md:hidden transition-all duration-100"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
+        {/* Section Label */}
+        <div className="px-5 pt-5 pb-2">
+          <span className="text-[10px] font-black uppercase tracking-widest text-accent">
+            Navigation
+          </span>
+        </div>
+
         {/* Navigation */}
-        <nav className="flex-1 px-3 py-5 space-y-0.5 overflow-y-auto">
+        <nav className="flex-1 px-3 pb-4 space-y-1 overflow-y-auto">
           {navigation.map((item) => {
             const isActive =
               pathname === item.href || pathname.startsWith(item.href + '/')
@@ -88,23 +98,21 @@ export function AdminSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Adm
                 href={item.href}
                 onClick={onMobileClose}
                 className={cn(
-                  'flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-200',
+                  'flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all duration-100',
                   isActive
-                    ? 'text-accent bg-accent/10 font-semibold'
-                    : (item as any).highlight && !isActive
-                    ? 'text-accent/70 hover:text-accent hover:bg-accent/5 border border-accent/10 hover:border-accent/20'
-                    : 'text-text-muted hover:text-text-primary hover:bg-surface-hover'
+                    ? 'bg-accent text-black border-3 border-accent'
+                    : 'text-text-muted border-3 border-transparent hover:border-accent hover:text-accent'
                 )}
               >
                 <item.icon
                   className={cn(
                     'w-[18px] h-[18px]',
-                    isActive ? 'text-accent' : (item as any).highlight ? 'text-accent/70' : 'text-text-muted'
+                    isActive ? 'text-black' : 'text-text-muted'
                   )}
                 />
                 {item.name}
                 {(item as any).highlight && !isActive && (
-                  <span className="ml-auto text-[9px] font-bold tracking-wider bg-accent/10 text-accent px-1.5 py-0.5 rounded">
+                  <span className="ml-auto text-[9px] font-bold tracking-wider bg-accent text-black border-3 border-accent px-1.5 py-0.5">
                     NEW
                   </span>
                 )}
@@ -115,26 +123,26 @@ export function AdminSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Adm
 
         {/* Admin Badge */}
         <div className="px-4 pb-3">
-          <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-accent/20 text-accent/60 text-[11px]">
-            <Shield className="w-3.5 h-3.5 text-accent/60" />
-            <span className="font-mono">Panneau d&apos;administration</span>
+          <div className="flex items-center gap-2.5 px-4 py-3 border-3 border-surface-border text-text-muted text-[11px]">
+            <Shield className="w-3.5 h-3.5 text-accent" />
+            <span className="font-mono font-bold uppercase tracking-wider">Panneau Admin</span>
           </div>
         </div>
 
         {/* User Profile */}
-        <div className="border-t border-surface-border px-4 py-4">
+        <div className="border-t-3 border-surface-border px-4 py-4">
           <div className="flex items-center gap-3">
             <Avatar name={user.full_name} src={user.avatar_url} size="sm" />
             <div className="flex-1 min-w-0">
-              <p className="text-[13px] font-semibold text-text-primary truncate">
+              <p className="text-xs font-bold uppercase tracking-wider text-text-primary truncate">
                 {user.full_name}
               </p>
-              <p className="text-[11px] text-text-muted truncate">{user.email}</p>
+              <p className="text-[11px] text-text-muted font-mono truncate">{user.email}</p>
             </div>
             <button
               onClick={onSignOut}
-              className="p-2 rounded-lg text-text-muted hover:text-red-400 hover:bg-surface-hover transition-all duration-200"
-              title="Se déconnecter"
+              className="btn-danger !px-2 !py-2 !text-xs"
+              title="Se deconnecter"
             >
               <LogOut className="w-4 h-4" />
             </button>

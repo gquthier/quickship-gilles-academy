@@ -70,12 +70,12 @@ export default function UpdatesPage() {
         ) : (
           <div className="space-y-4">
             {updates.map((update) => (
-              <Link key={update.id} href={`/updates/${update.id}`} className="card hover:shadow-card-hover hover:border-accent/20 transition-all duration-200 block group">
+              <Link key={update.id} href={`/updates/${update.id}`} className="card hover:border-accent hover:shadow-brutal-xs transition-all duration-200 block group">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="font-display font-semibold text-text-primary group-hover:text-accent transition-colors">{update.title}</h3>
+                    <h3 className="font-bold text-text-primary group-hover:text-accent transition-colors">{update.title}</h3>
                     <p className="text-xs text-text-muted flex items-center gap-2 mt-1">
-                      {(update as any).project?.name && <span>{(update as any).project.name}</span>}
+                      {(update as any).project?.name && <span className="uppercase tracking-wider">{(update as any).project.name}</span>}
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {formatDate(update.created_at)}
                       </span>
@@ -89,13 +89,13 @@ export default function UpdatesPage() {
                 </div>
                 <p className="text-sm text-text-secondary line-clamp-2">{update.description}</p>
                 {update.estimated_hours && (
-                  <p className="text-xs text-text-muted mt-2">
+                  <p className="text-xs text-text-muted mt-2 font-mono">
                     Estimation : {update.estimated_hours}h
                   </p>
                 )}
                 {update.admin_notes && (
-                  <div className="mt-3 p-3 rounded-xl bg-accent/10 text-sm text-accent">
-                    <p className="text-xs font-semibold mb-1">Note de l'\u00e9quipe :</p>
+                  <div className="mt-3 p-3 border-3 border-accent/30 bg-accent/10 text-sm text-accent">
+                    <p className="text-xs font-black uppercase tracking-wider mb-1">Note de l'\u00e9quipe :</p>
                     {update.admin_notes}
                   </div>
                 )}

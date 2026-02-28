@@ -136,29 +136,29 @@ export default function AdminDashboardPage() {
   if (loading || !data) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-3 border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
 
   return (
     <>
-      <TopBar title="Dashboard Admin" subtitle="Vue d'ensemble de votre activité" onMenuToggle={onMenuToggle} />
+      <TopBar title="Dashboard Admin" subtitle="Vue d'ensemble de votre activite" onMenuToggle={onMenuToggle} />
 
       <div className="p-4 md:p-8 space-y-4 md:space-y-8">
         {/* Revenue Stats */}
         <div>
-          <h2 className="font-display font-bold text-lg flex items-center gap-2 mb-4">
+          <h2 className="font-black uppercase tracking-tight text-xl flex items-center gap-2 border-b-3 border-surface-border pb-4 mb-6">
             <BarChart3 className="w-5 h-5 text-accent" />
-            Revenus Stripe
+            REVENUS STRIPE
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {stripeLoading ? (
               <>
                 {[...Array(4)].map((_, i) => (
-                  <div key={i} className="bg-surface/60 backdrop-blur-xl border border-surface-border rounded-xl p-5 animate-pulse">
-                    <div className="h-4 w-24 bg-surface-border rounded mb-3" />
-                    <div className="h-8 w-32 bg-surface-border rounded" />
+                  <div key={i} className="bg-surface border-3 border-surface-border p-5 animate-pulse">
+                    <div className="h-4 w-24 bg-surface-border mb-3" />
+                    <div className="h-8 w-32 bg-surface-border" />
                   </div>
                 ))}
               </>
@@ -177,7 +177,7 @@ export default function AdminDashboardPage() {
               </>
             ) : (
               <div className="col-span-full text-center py-4 text-text-muted text-sm">
-                Données Stripe indisponibles
+                Donnees Stripe indisponibles
               </div>
             )}
           </div>
@@ -195,30 +195,30 @@ export default function AdminDashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div className="card p-5">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-display font-bold text-sm flex items-center gap-2">
+              <h2 className="font-black uppercase tracking-wider text-xs flex items-center gap-2">
                 <Activity className="w-4 h-4 text-accent" />
-                Nouveaux clients
+                NOUVEAUX CLIENTS
               </h2>
-              <span className="text-xs text-text-muted">12 semaines</span>
+              <span className="text-xs text-text-muted font-mono">12 semaines</span>
             </div>
             {clientActivityData.length > 0 ? (
               <ActivityChart data={clientActivityData} color="#CCFF00" height={72} />
             ) : (
-              <div className="h-24 flex items-center justify-center text-xs text-text-muted">Pas de données</div>
+              <div className="h-24 flex items-center justify-center text-xs text-text-muted">Pas de donnees</div>
             )}
           </div>
           <div className="card p-5">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-display font-bold text-sm flex items-center gap-2">
+              <h2 className="font-black uppercase tracking-wider text-xs flex items-center gap-2">
                 <Activity className="w-4 h-4 text-blue-400" />
-                Nouveaux projets
+                NOUVEAUX PROJETS
               </h2>
-              <span className="text-xs text-text-muted">12 semaines</span>
+              <span className="text-xs text-text-muted font-mono">12 semaines</span>
             </div>
             {projectActivityData.length > 0 ? (
               <ActivityChart data={projectActivityData} color="#60a5fa" height={72} />
             ) : (
-              <div className="h-24 flex items-center justify-center text-xs text-text-muted">Pas de données</div>
+              <div className="h-24 flex items-center justify-center text-xs text-text-muted">Pas de donnees</div>
             )}
           </div>
         </div>
@@ -226,20 +226,20 @@ export default function AdminDashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
           {/* Recent Projects */}
           <div className="lg:col-span-2">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-display font-bold text-lg">Projets récents</h2>
-              <Link href="/admin/projects" className="text-sm text-accent font-medium hover:text-accent-hover flex items-center gap-1">
+            <div className="flex items-center justify-between border-b-3 border-surface-border pb-4 mb-6">
+              <h2 className="font-black uppercase tracking-tight text-xl">Projets recents</h2>
+              <Link href="/admin/projects" className="text-sm text-accent font-bold uppercase tracking-wide hover:text-accent-hover flex items-center gap-1">
                 Voir tous <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="card divide-y divide-surface-border">
+            <div className="card divide-y divide-surface-border p-0">
               {data.recentProjects.map((project) => (
-                <Link key={project.id} href={`/admin/projects/${project.id}`} className="flex items-center gap-4 p-4 hover:bg-surface-hover transition-colors first:rounded-t-2xl last:rounded-b-2xl">
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                <Link key={project.id} href={`/admin/projects/${project.id}`} className="flex items-center gap-4 p-4 hover:bg-surface-hover transition-colors">
+                  <div className="w-10 h-10 bg-accent/10 border-3 border-accent/20 flex items-center justify-center flex-shrink-0">
                     <FolderKanban className="w-5 h-5 text-accent" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-medium text-text-primary truncate">{project.name}</h3>
+                    <h3 className="text-sm font-bold text-text-primary truncate">{project.name}</h3>
                     <p className="text-xs text-text-muted">
                       {(project.client as any)?.full_name || 'Client'} · {formatDate(project.created_at)}
                     </p>
@@ -252,21 +252,21 @@ export default function AdminDashboardPage() {
 
           {/* Recent Clients */}
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-display font-bold text-lg">Nouveaux clients</h2>
-              <Link href="/admin/clients" className="text-sm text-accent font-medium hover:text-accent-hover flex items-center gap-1">
+            <div className="flex items-center justify-between border-b-3 border-surface-border pb-4 mb-6">
+              <h2 className="font-black uppercase tracking-tight text-xl">Nouveaux clients</h2>
+              <Link href="/admin/clients" className="text-sm text-accent font-bold uppercase tracking-wide hover:text-accent-hover flex items-center gap-1">
                 Voir tous <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="card space-y-3">
+            <div className="card space-y-0 p-0 divide-y divide-surface-border">
               {data.recentClients.map((client) => (
-                <Link key={client.id} href={`/admin/clients/${client.id}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-hover transition-colors">
+                <Link key={client.id} href={`/admin/clients/${client.id}`} className="flex items-center gap-3 p-4 hover:bg-surface-hover transition-colors">
                   <Avatar name={client.full_name} src={client.avatar_url} size="sm" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-text-primary truncate">{client.full_name}</p>
+                    <p className="text-sm font-bold text-text-primary truncate">{client.full_name}</p>
                     <p className="text-xs text-text-muted truncate">{client.company || client.email}</p>
                   </div>
-                  <span className="text-xs text-text-muted">{formatDate(client.created_at)}</span>
+                  <span className="text-xs text-text-muted font-mono">{formatDate(client.created_at)}</span>
                 </Link>
               ))}
             </div>
@@ -276,24 +276,24 @@ export default function AdminDashboardPage() {
         {/* Recent Payments */}
         {stripeData && stripeData.recentPayments.length > 0 && (
           <div>
-            <h2 className="font-display font-bold text-lg flex items-center gap-2 mb-4">
+            <h2 className="font-black uppercase tracking-tight text-xl flex items-center gap-2 border-b-3 border-surface-border pb-4 mb-6">
               <Receipt className="w-5 h-5 text-emerald-400" />
-              Revenus récents
+              REVENUS RECENTS
             </h2>
-            <div className="card divide-y divide-surface-border">
+            <div className="card divide-y divide-surface-border p-0">
               {stripeData.recentPayments.map((payment) => (
-                <div key={payment.id} className="flex items-center gap-4 p-4 first:rounded-t-2xl last:rounded-b-2xl">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                <div key={payment.id} className="flex items-center gap-4 p-4">
+                  <div className="w-10 h-10 bg-emerald-500/10 border-3 border-emerald-500/20 flex items-center justify-center flex-shrink-0">
                     <Euro className="w-5 h-5 text-emerald-500/80" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-medium text-text-primary truncate">{payment.customerName}</h3>
+                    <h3 className="text-sm font-bold text-text-primary truncate">{payment.customerName}</h3>
                     <p className="text-xs text-text-muted">
                       {formatDateTime(new Date(payment.created * 1000))}
                     </p>
                   </div>
-                  <span className="text-sm font-semibold text-emerald-400">{formatEur(payment.amount)}</span>
-                  <span className="badge-success text-xs px-2 py-0.5 rounded-full">Payé</span>
+                  <span className="text-sm font-black text-emerald-400">{formatEur(payment.amount)}</span>
+                  <span className="badge-success text-xs px-2 py-0.5">PAYE</span>
                 </div>
               ))}
             </div>
@@ -303,28 +303,28 @@ export default function AdminDashboardPage() {
         {/* Customer Spending */}
         {stripeData && stripeData.customerSpending.length > 0 && (
           <div>
-            <h2 className="font-display font-bold text-lg flex items-center gap-2 mb-4">
+            <h2 className="font-black uppercase tracking-tight text-xl flex items-center gap-2 border-b-3 border-surface-border pb-4 mb-6">
               <Users className="w-5 h-5 text-blue-400" />
-              Clients & Paiements
+              CLIENTS & PAIEMENTS
             </h2>
-            <div className="card divide-y divide-surface-border">
+            <div className="card divide-y divide-surface-border p-0">
               {stripeData.customerSpending.map((customer, i) => (
-                <div key={i} className="flex items-center gap-4 p-4 first:rounded-t-2xl last:rounded-b-2xl">
+                <div key={i} className="flex items-center gap-4 p-4">
                   <Avatar name={customer.matchedProfileName || customer.name} size="sm" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <h3 className="text-sm font-medium text-text-primary truncate">
+                      <h3 className="text-sm font-bold text-text-primary truncate">
                         {customer.matchedProfileName || customer.name}
                       </h3>
                       {customer.matchedProfileName && (
-                        <span className="badge-info text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0">Client QuickShip</span>
+                        <span className="badge-info text-[10px] px-1.5 py-0.5 flex-shrink-0">CLIENT QS</span>
                       )}
                     </div>
                     <p className="text-xs text-text-muted truncate">
                       {customer.email || 'Email inconnu'} · {customer.chargeCount} paiement{customer.chargeCount > 1 ? 's' : ''}
                     </p>
                   </div>
-                  <span className="text-sm font-semibold text-text-primary">{formatEur(customer.totalSpent)}</span>
+                  <span className="text-sm font-black text-text-primary">{formatEur(customer.totalSpent)}</span>
                 </div>
               ))}
             </div>
@@ -333,21 +333,21 @@ export default function AdminDashboardPage() {
 
         {/* Open Tickets */}
         <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display font-bold text-lg flex items-center gap-2">
+          <div className="flex items-center justify-between border-b-3 border-surface-border pb-4 mb-6">
+            <h2 className="font-black uppercase tracking-tight text-xl flex items-center gap-2">
               <AlertCircle className="w-5 h-5 text-orange-400" />
-              Tickets à traiter
+              TICKETS A TRAITER
             </h2>
-            <Link href="/admin/support" className="text-sm text-accent font-medium hover:text-accent-hover flex items-center gap-1">
+            <Link href="/admin/support" className="text-sm text-accent font-bold uppercase tracking-wide hover:text-accent-hover flex items-center gap-1">
               Voir tous <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="card divide-y divide-surface-border">
+          <div className="card divide-y divide-surface-border p-0">
             {data.recentTickets.filter(t => !['resolved', 'closed'].includes(t.status)).slice(0, 5).map((ticket) => (
-              <Link key={ticket.id} href={`/admin/support/${ticket.id}`} className="flex items-center gap-4 p-4 hover:bg-surface-hover transition-colors first:rounded-t-2xl last:rounded-b-2xl">
+              <Link key={ticket.id} href={`/admin/support/${ticket.id}`} className="flex items-center gap-4 p-4 hover:bg-surface-hover transition-colors">
                 <Avatar name={(ticket.client as any)?.full_name || 'C'} src={(ticket.client as any)?.avatar_url} size="sm" />
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-medium text-text-primary truncate">{ticket.subject}</h3>
+                  <h3 className="text-sm font-bold text-text-primary truncate">{ticket.subject}</h3>
                   <p className="text-xs text-text-muted">
                     {(ticket.client as any)?.full_name} · {formatDateTime(ticket.created_at)}
                   </p>

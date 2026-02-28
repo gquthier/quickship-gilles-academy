@@ -28,7 +28,7 @@ const KANBAN_COLUMNS: {
   { status: 'draft',       label: 'Brouillon',    color: 'text-blue-400',    border: 'border-blue-500/30',   bg: 'bg-blue-500/5',    dot: 'bg-blue-400' },
   { status: 'in_progress', label: 'En cours',     color: 'text-amber-400',   border: 'border-amber-500/30',  bg: 'bg-amber-500/5',   dot: 'bg-amber-400' },
   { status: 'review',      label: 'En review',    color: 'text-purple-400',  border: 'border-purple-500/30', bg: 'bg-purple-500/5',  dot: 'bg-purple-400' },
-  { status: 'deployed',    label: 'Déployé',      color: 'text-emerald-400', border: 'border-emerald-500/30',bg: 'bg-emerald-500/5', dot: 'bg-emerald-400' },
+  { status: 'deployed',    label: 'Deploye',      color: 'text-emerald-400', border: 'border-emerald-500/30',bg: 'bg-emerald-500/5', dot: 'bg-emerald-400' },
   { status: 'maintenance', label: 'Maintenance',  color: 'text-teal-400',    border: 'border-teal-500/30',   bg: 'bg-teal-500/5',    dot: 'bg-teal-400' },
 ]
 
@@ -59,12 +59,12 @@ function KanbanCard({
   const isMoving = moving === project.id
 
   return (
-    <div className="group bg-surface border border-surface-border hover:border-accent/30 rounded-xl p-4 transition-all duration-150 hover:shadow-lg hover:shadow-black/40 cursor-default">
+    <div className="group bg-surface border-3 border-surface-border hover:border-accent hover:shadow-brutal-xs p-4 transition-all duration-150 cursor-default">
       {/* Header */}
       <div className="flex items-start justify-between gap-2 mb-3">
         <Link
           href={`/admin/projects/${project.id}`}
-          className="font-display font-semibold text-sm text-text-primary hover:text-accent leading-tight transition-colors line-clamp-2"
+          className="font-bold text-sm text-text-primary hover:text-accent leading-tight transition-colors line-clamp-2"
         >
           {project.name}
         </Link>
@@ -80,11 +80,11 @@ function KanbanCard({
       {/* Client */}
       {project.client && (
         <div className="flex items-center gap-1.5 mb-3">
-          <div className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+          <div className="w-5 h-5 bg-accent/20 flex items-center justify-center flex-shrink-0">
             <User className="w-3 h-3 text-accent" />
           </div>
           <div className="min-w-0">
-            <span className="text-xs text-text-secondary font-medium truncate block">
+            <span className="text-xs text-text-secondary font-bold truncate block">
               {project.client.full_name}
             </span>
             {project.client.company && (
@@ -106,7 +106,7 @@ function KanbanCard({
       {project.tech_stack.length > 0 && (
         <div className="flex gap-1 mb-3 flex-wrap">
           {project.tech_stack.slice(0, 3).map((t) => (
-            <span key={t} className="text-[10px] font-mono bg-surface-hover text-text-muted px-1.5 py-0.5 rounded">
+            <span key={t} className="text-[10px] font-mono bg-surface-hover text-text-muted px-1.5 py-0.5 border border-surface-border">
               {t}
             </span>
           ))}
@@ -117,15 +117,15 @@ function KanbanCard({
       )}
 
       {/* Footer */}
-      <div className="pt-3 border-t border-surface-border flex items-center justify-between">
+      <div className="pt-3 border-t-3 border-surface-border flex items-center justify-between">
         <div className="flex items-center gap-2">
           {/* Move buttons */}
           {prevStatus && (
             <button
               onClick={() => onStatusChange(project.id, prevStatus)}
               disabled={isMoving}
-              title={`← ${getStatusLabel(prevStatus)}`}
-              className="p-1 rounded text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors disabled:opacity-40"
+              title={`<- ${getStatusLabel(prevStatus)}`}
+              className="p-1 text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors disabled:opacity-40"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
             </button>
@@ -134,8 +134,8 @@ function KanbanCard({
             <button
               onClick={() => onStatusChange(project.id, nextStatus)}
               disabled={isMoving}
-              title={`${getStatusLabel(nextStatus)} →`}
-              className="p-1 rounded text-text-muted hover:text-accent hover:bg-accent/10 transition-colors disabled:opacity-40"
+              title={`${getStatusLabel(nextStatus)} ->`}
+              className="p-1 text-text-muted hover:text-accent hover:bg-accent/10 transition-colors disabled:opacity-40"
             >
               <ChevronRight className="w-3.5 h-3.5" />
             </button>
@@ -153,7 +153,7 @@ function KanbanCard({
               <Github className="w-3.5 h-3.5" />
             </a>
           )}
-          <span className="text-[10px] text-text-muted">{formatDate(project.updated_at)}</span>
+          <span className="text-[10px] text-text-muted font-mono">{formatDate(project.updated_at)}</span>
         </div>
       </div>
     </div>
@@ -240,7 +240,7 @@ export default function AdminProjectsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-3 border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -254,12 +254,12 @@ export default function AdminProjectsPage() {
         actions={
           <div className="flex items-center gap-2">
             {/* View toggle */}
-            <div className="flex items-center bg-surface border border-surface-border rounded-lg p-0.5 gap-0.5">
+            <div className="flex items-center bg-surface border-3 border-surface-border p-0.5 gap-0.5">
               <button
                 onClick={() => switchView('kanban')}
                 title="Vue Kanban"
                 className={cn(
-                  'p-1.5 rounded transition-colors',
+                  'p-1.5 transition-colors',
                   view === 'kanban' ? 'bg-accent text-black' : 'text-text-muted hover:text-text-primary'
                 )}
               >
@@ -269,7 +269,7 @@ export default function AdminProjectsPage() {
                 onClick={() => switchView('list')}
                 title="Vue Liste"
                 className={cn(
-                  'p-1.5 rounded transition-colors',
+                  'p-1.5 transition-colors',
                   view === 'list' ? 'bg-accent text-black' : 'text-text-muted hover:text-text-primary'
                 )}
               >
@@ -304,10 +304,10 @@ export default function AdminProjectsPage() {
                 key={s}
                 onClick={() => setStatusFilter(s)}
                 className={cn(
-                  'px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
+                  'px-3 py-1.5 text-xs font-bold uppercase tracking-wide transition-colors border-3',
                   statusFilter === s
-                    ? 'bg-accent text-black'
-                    : 'bg-surface text-text-secondary border border-surface-border hover:bg-surface-hover'
+                    ? 'bg-accent text-black border-accent'
+                    : 'bg-surface text-text-secondary border-surface-border hover:border-accent hover:text-text-primary'
                 )}
               >
                 {s === 'all' ? 'Tous' : getStatusLabel(s)}
@@ -321,17 +321,17 @@ export default function AdminProjectsPage() {
       {view === 'kanban' && (
         <div className="p-4 md:p-8 pt-4">
           {/* Column summary */}
-          <div className="flex items-center gap-2 mb-4 text-xs text-text-muted">
+          <div className="flex items-center gap-2 mb-4 text-xs text-text-muted font-mono">
             <Columns className="w-3.5 h-3.5" />
             <span>{totalKanban} projet{totalKanban !== 1 ? 's' : ''} sur le board</span>
             {outsideKanban.length > 0 && (
               <span className="text-text-muted/60">
-                · {outsideKanban.length} en pause/archivé (non affichés)
+                · {outsideKanban.length} en pause/archive (non affiches)
               </span>
             )}
           </div>
 
-          {/* Kanban grid — horizontal scroll on mobile */}
+          {/* Kanban grid -- horizontal scroll on mobile */}
           <div className="overflow-x-auto pb-4">
             <div
               className="grid gap-4 min-w-[900px]"
@@ -341,17 +341,17 @@ export default function AdminProjectsPage() {
                 <div key={col.status} className="flex flex-col gap-2">
                   {/* Column header */}
                   <div className={cn(
-                    'flex items-center justify-between px-3 py-2 rounded-xl border',
+                    'flex items-center justify-between px-3 py-2 border-3',
                     col.border, col.bg
                   )}>
                     <div className="flex items-center gap-2">
                       <span className={cn('w-2 h-2 rounded-full', col.dot)} />
-                      <span className={cn('text-xs font-semibold', col.color)}>
+                      <span className={cn('text-xs font-black uppercase tracking-wider', col.color)}>
                         {col.label}
                       </span>
                     </div>
                     <span className={cn(
-                      'text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center',
+                      'text-xs font-black px-1.5 py-0.5 min-w-[20px] text-center font-mono',
                       col.items.length > 0 ? `${col.bg} ${col.color}` : 'text-text-muted'
                     )}>
                       {col.items.length}
@@ -361,8 +361,8 @@ export default function AdminProjectsPage() {
                   {/* Cards */}
                   <div className="flex flex-col gap-2 min-h-[200px]">
                     {col.items.length === 0 ? (
-                      <div className="flex-1 flex items-center justify-center rounded-xl border border-dashed border-surface-border/50 py-10">
-                        <span className="text-xs text-text-muted/50">Aucun projet</span>
+                      <div className="flex-1 flex items-center justify-center border-3 border-dashed border-surface-border/50 py-10">
+                        <span className="text-xs text-text-muted/50 uppercase tracking-wider">Aucun projet</span>
                       </div>
                     ) : (
                       col.items.map((project) => (
@@ -383,17 +383,17 @@ export default function AdminProjectsPage() {
           {/* Paused/Archived section */}
           {outsideKanban.length > 0 && (
             <div className="mt-6">
-              <h3 className="text-xs font-semibold text-text-muted mb-3 uppercase tracking-wider">Pause / Archivé</h3>
+              <h3 className="text-xs font-black text-text-muted mb-3 uppercase tracking-widest">Pause / Archive</h3>
               <div className="flex flex-wrap gap-3">
                 {outsideKanban.map((p) => (
                   <Link
                     key={p.id}
                     href={`/admin/projects/${p.id}`}
-                    className="flex items-center gap-2 bg-surface border border-surface-border rounded-lg px-3 py-2 text-sm hover:border-accent/30 transition-colors"
+                    className="flex items-center gap-2 bg-surface border-3 border-surface-border px-3 py-2 text-sm hover:border-accent transition-colors"
                   >
                     <StatusBadge status={p.status} />
-                    <span className="text-text-secondary">{p.name}</span>
-                    <span className="text-text-muted text-xs">{p.client?.full_name || ''}</span>
+                    <span className="text-text-secondary font-bold">{p.name}</span>
+                    <span className="text-text-muted text-xs font-mono">{p.client?.full_name || ''}</span>
                   </Link>
                 ))}
               </div>
@@ -409,33 +409,33 @@ export default function AdminProjectsPage() {
             <EmptyState
               icon={FolderKanban}
               title="Aucun projet"
-              description={search || statusFilter !== 'all' ? 'Aucun résultat pour cette recherche.' : "Aucun projet pour l'instant."}
+              description={search || statusFilter !== 'all' ? 'Aucun resultat pour cette recherche.' : "Aucun projet pour l'instant."}
             />
           ) : (
-            <div className="card overflow-hidden">
+            <div className="card overflow-hidden p-0">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-surface-border">
-                    <th className="text-left text-xs font-semibold text-text-muted p-4">Projet</th>
-                    <th className="text-left text-xs font-semibold text-text-muted p-4 hidden md:table-cell">Client</th>
-                    <th className="text-left text-xs font-semibold text-text-muted p-4 hidden lg:table-cell">Domaine</th>
-                    <th className="text-left text-xs font-semibold text-text-muted p-4">Statut</th>
-                    <th className="text-left text-xs font-semibold text-text-muted p-4 hidden lg:table-cell">Liens</th>
-                    <th className="text-left text-xs font-semibold text-text-muted p-4 hidden md:table-cell">Mis à jour</th>
-                    <th className="text-left text-xs font-semibold text-text-muted p-4">Actions</th>
+                  <tr className="border-b-3 border-surface-border">
+                    <th className="text-left text-xs font-black uppercase tracking-wider text-text-muted p-4">Projet</th>
+                    <th className="text-left text-xs font-black uppercase tracking-wider text-text-muted p-4 hidden md:table-cell">Client</th>
+                    <th className="text-left text-xs font-black uppercase tracking-wider text-text-muted p-4 hidden lg:table-cell">Domaine</th>
+                    <th className="text-left text-xs font-black uppercase tracking-wider text-text-muted p-4">Statut</th>
+                    <th className="text-left text-xs font-black uppercase tracking-wider text-text-muted p-4 hidden lg:table-cell">Liens</th>
+                    <th className="text-left text-xs font-black uppercase tracking-wider text-text-muted p-4 hidden md:table-cell">Mis a jour</th>
+                    <th className="text-left text-xs font-black uppercase tracking-wider text-text-muted p-4">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-surface-border">
                   {filtered.map((project) => (
                     <tr key={project.id} className="hover:bg-surface-hover transition-colors group">
                       <td className="p-4">
-                        <Link href={`/admin/projects/${project.id}`} className="text-sm font-medium text-text-primary hover:text-accent">
+                        <Link href={`/admin/projects/${project.id}`} className="text-sm font-bold text-text-primary hover:text-accent">
                           {project.name}
                         </Link>
                         {project.tech_stack.length > 0 && (
                           <div className="flex gap-1 mt-1.5 flex-wrap">
                             {project.tech_stack.slice(0, 2).map((t) => (
-                              <span key={t} className="text-[10px] font-mono bg-surface-hover text-text-muted px-1.5 py-0.5 rounded">
+                              <span key={t} className="text-[10px] font-mono bg-surface-hover text-text-muted px-1.5 py-0.5 border border-surface-border">
                                 {t}
                               </span>
                             ))}
@@ -443,7 +443,7 @@ export default function AdminProjectsPage() {
                         )}
                       </td>
                       <td className="p-4 hidden md:table-cell">
-                        <p className="text-sm text-text-secondary">{project.client?.full_name || '—'}</p>
+                        <p className="text-sm text-text-secondary">{project.client?.full_name || '--'}</p>
                         <p className="text-xs text-text-muted">{project.client?.company || ''}</p>
                       </td>
                       <td className="p-4 hidden lg:table-cell">
@@ -451,7 +451,7 @@ export default function AdminProjectsPage() {
                           <span className="text-sm text-text-secondary flex items-center gap-1">
                             <Globe className="w-3.5 h-3.5" /> {project.domain}
                           </span>
-                        ) : <span className="text-sm text-text-muted">—</span>}
+                        ) : <span className="text-sm text-text-muted">--</span>}
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-1">
@@ -461,8 +461,8 @@ export default function AdminProjectsPage() {
                             {getAdjacentStatus(project.status, 'prev') && (
                               <button
                                 onClick={() => handleStatusChange(project.id, getAdjacentStatus(project.status, 'prev')!)}
-                                className="p-0.5 rounded text-text-muted hover:text-text-primary hover:bg-surface-hover"
-                                title={`← ${getStatusLabel(getAdjacentStatus(project.status, 'prev')!)}`}
+                                className="p-0.5 text-text-muted hover:text-text-primary hover:bg-surface-hover"
+                                title={`<- ${getStatusLabel(getAdjacentStatus(project.status, 'prev')!)}`}
                               >
                                 <ChevronLeft className="w-3.5 h-3.5" />
                               </button>
@@ -470,8 +470,8 @@ export default function AdminProjectsPage() {
                             {getAdjacentStatus(project.status, 'next') && (
                               <button
                                 onClick={() => handleStatusChange(project.id, getAdjacentStatus(project.status, 'next')!)}
-                                className="p-0.5 rounded text-text-muted hover:text-accent hover:bg-accent/10"
-                                title={`${getStatusLabel(getAdjacentStatus(project.status, 'next')!)} →`}
+                                className="p-0.5 text-text-muted hover:text-accent hover:bg-accent/10"
+                                title={`${getStatusLabel(getAdjacentStatus(project.status, 'next')!)} ->`}
                               >
                                 <ChevronRight className="w-3.5 h-3.5" />
                               </button>
@@ -494,14 +494,14 @@ export default function AdminProjectsPage() {
                         </div>
                       </td>
                       <td className="p-4 hidden md:table-cell">
-                        <span className="text-xs text-text-muted flex items-center gap-1">
+                        <span className="text-xs text-text-muted flex items-center gap-1 font-mono">
                           <Clock className="w-3 h-3" /> {formatDate(project.updated_at)}
                         </span>
                       </td>
                       <td className="p-4">
                         <Link
                           href={`/admin/projects/${project.id}`}
-                          className="text-xs text-accent hover:text-accent-hover font-medium"
+                          className="text-xs text-accent hover:text-accent-hover font-bold uppercase tracking-wide"
                         >
                           Voir →
                         </Link>

@@ -55,7 +55,7 @@ export default function ClientsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-3 border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -89,7 +89,7 @@ export default function ClientsPage() {
           <EmptyState
             icon={Users}
             title="Aucun client"
-            description={search ? "Aucun résultat pour cette recherche." : "Commencez par ajouter votre premier client."}
+            description={search ? "Aucun resultat pour cette recherche." : "Commencez par ajouter votre premier client."}
             action={
               !search ? (
                 <Link href="/admin/clients/new" className="btn-primary text-xs gap-1.5">
@@ -101,18 +101,18 @@ export default function ClientsPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((client) => (
-              <Link key={client.id} href={`/admin/clients/${client.id}`} className="card hover:shadow-card-hover transition-shadow group">
+              <Link key={client.id} href={`/admin/clients/${client.id}`} className="card hover:border-accent hover:shadow-brutal-xs transition-all group">
                 <div className="flex items-start gap-4 mb-4">
                   <Avatar name={client.full_name} src={client.avatar_url} size="lg" />
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-display font-semibold text-text-primary truncate">{client.full_name}</h3>
+                    <h3 className="font-black text-text-primary truncate uppercase tracking-tight">{client.full_name}</h3>
                     {client.company && (
                       <p className="text-sm text-text-secondary flex items-center gap-1 truncate">
                         <Building2 className="w-3.5 h-3.5" /> {client.company}
                       </p>
                     )}
                   </div>
-                  <span className={`w-2.5 h-2.5 rounded-full ${client.is_active ? 'bg-emerald-400' : 'bg-text-muted'}`} title={client.is_active ? 'Actif' : 'Inactif'} />
+                  <span className={`w-2.5 h-2.5 rounded-full ${client.is_active ? 'bg-accent' : 'bg-text-muted'}`} title={client.is_active ? 'Actif' : 'Inactif'} />
                 </div>
 
                 <div className="space-y-2 text-sm text-text-secondary">
@@ -126,7 +126,7 @@ export default function ClientsPage() {
                   )}
                 </div>
 
-                <div className="flex items-center justify-between pt-4 mt-4 border-t border-surface-border text-xs text-text-muted">
+                <div className="flex items-center justify-between pt-4 mt-4 border-t-3 border-surface-border text-xs text-text-muted font-mono">
                   <span>{client.project_count} projet{(client.project_count || 0) !== 1 ? 's' : ''}</span>
                   <span>Depuis le {formatDate(client.created_at)}</span>
                 </div>

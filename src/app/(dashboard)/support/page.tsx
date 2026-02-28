@@ -76,10 +76,10 @@ export default function SupportPage() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+              className={`px-4 py-2 text-sm font-bold uppercase tracking-wide transition-colors border-3 ${
                 filter === f
-                  ? 'bg-accent text-black'
-                  : 'bg-surface/60 text-text-secondary border border-surface-border hover:bg-surface-hover'
+                  ? 'bg-accent text-black border-accent'
+                  : 'bg-surface text-text-secondary border-surface-border hover:border-accent hover:text-text-primary'
               }`}
             >
               {f === 'all' ? 'Tous' : f === 'open' ? 'Ouverts' : 'Ferm\u00e9s'}
@@ -113,11 +113,11 @@ export default function SupportPage() {
                 <Link
                   key={ticket.id}
                   href={`/support/${ticket.id}`}
-                  className="card hover:border-text-muted hover:shadow-card-hover transition-all duration-200 block"
+                  className="card hover:border-accent hover:shadow-brutal-xs transition-all duration-200 block"
                 >
                   <div className="flex items-start gap-4">
                     {/* Icon */}
-                    <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-10 h-10 border-3 border-accent/30 bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <MessageSquare className="w-5 h-5 text-accent" />
                     </div>
 
@@ -125,7 +125,7 @@ export default function SupportPage() {
                     <div className="flex-1 min-w-0">
                       {/* Title row */}
                       <div className="flex items-start justify-between gap-3 mb-2">
-                        <h3 className="text-sm font-semibold text-text-primary leading-snug">{ticket.subject}</h3>
+                        <h3 className="text-sm font-bold text-text-primary leading-snug">{ticket.subject}</h3>
                         <StatusBadge status={ticket.status} />
                       </div>
 
@@ -133,7 +133,7 @@ export default function SupportPage() {
                       <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
                         {/* Priority */}
                         <span className={`flex items-center gap-1.5 text-xs ${getPriorityColor(ticket.priority)}`}>
-                          <span className={`w-1.5 h-1.5 rounded-full ${priorityDot[ticket.priority] ?? 'bg-text-muted'}`} />
+                          <span className={`w-1.5 h-1.5 ${priorityDot[ticket.priority] ?? 'bg-text-muted'}`} />
                           <AlertTriangle className="w-3 h-3" />
                           {getStatusLabel(ticket.priority)}
                         </span>

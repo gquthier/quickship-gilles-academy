@@ -35,8 +35,8 @@ const statusProgress: Record<string, number> = {
 }
 
 const TIMELINE_STEPS = [
-  { key: 'draft', label: 'Démarrage' },
-  { key: 'in_progress', label: 'Développement' },
+  { key: 'draft', label: 'Demarrage' },
+  { key: 'in_progress', label: 'Developpement' },
   { key: 'review', label: 'Review' },
   { key: 'deployed', label: 'Livraison' },
   { key: 'maintenance', label: 'Maintenance' },
@@ -162,14 +162,14 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       />
 
       <div className="p-4 md:p-8">
-        <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
+        <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent mb-6 font-bold uppercase tracking-wide">
           <ArrowLeft className="w-4 h-4" /> Retour aux projets
         </Link>
 
         {/* Progress Timeline */}
         <div className="card mb-6 md:mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display font-bold text-base">Avancement du projet</h2>
+            <h2 className="section-title text-base">Avancement du projet</h2>
             <div className="flex items-center gap-2">
               <StatusBadge status={project.status} />
               <span className="text-xs font-mono text-accent font-bold">{progress}%</span>
@@ -177,9 +177,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           </div>
 
           {/* Progress bar */}
-          <div className="h-1.5 bg-surface-border rounded-full overflow-hidden mb-5">
+          <div className="h-1.5 bg-surface-border overflow-hidden mb-5">
             <div
-              className="h-full bg-accent rounded-full transition-all duration-700"
+              className="h-full bg-accent transition-all duration-700"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -197,7 +197,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     <div className={`absolute top-3.5 left-1/2 w-full h-px ${isDone || isCurrent ? 'bg-accent/30' : 'bg-surface-border'}`} />
                   )}
                   {/* Circle */}
-                  <div className={`relative z-10 w-7 h-7 rounded-full border-2 flex items-center justify-center mb-2 transition-all ${
+                  <div className={`relative z-10 w-7 h-7 border-3 flex items-center justify-center mb-2 transition-all ${
                     isDone
                       ? 'bg-emerald-500/20 border-emerald-500/60'
                       : isCurrent
@@ -207,13 +207,13 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     {isDone ? (
                       <Check className="w-3.5 h-3.5 text-emerald-400" />
                     ) : isCurrent ? (
-                      <div className="w-2 h-2 rounded-full bg-accent" />
+                      <div className="w-2 h-2 bg-accent" />
                     ) : (
-                      <div className="w-2 h-2 rounded-full bg-surface-border" />
+                      <div className="w-2 h-2 bg-surface-border" />
                     )}
                   </div>
                   {/* Label */}
-                  <span className={`text-[10px] text-center leading-tight font-mono hidden sm:block ${
+                  <span className={`text-[10px] text-center leading-tight font-mono hidden sm:block uppercase tracking-wider ${
                     isCurrent ? 'text-accent font-bold' : isDone ? 'text-emerald-400' : isFuture ? 'text-text-muted' : 'text-text-muted'
                   }`}>
                     {step.label}
@@ -230,33 +230,33 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {/* Project Info Card */}
             <div className="card">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-display font-bold text-lg">Informations du projet</h2>
+                <h2 className="section-title text-lg">Informations du projet</h2>
               </div>
               <div className="grid grid-cols-2 gap-3 md:gap-6">
                 <div>
-                  <p className="text-xs text-text-secondary mb-1">Domaine</p>
+                  <p className="label">Domaine</p>
                   <p className="text-sm font-medium">{project.domain || '\u2014'}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-text-secondary mb-1">Stack technique</p>
+                  <p className="label">Stack technique</p>
                   <div className="flex flex-wrap gap-1">
                     {project.tech_stack.length > 0 ? project.tech_stack.map((t) => (
-                      <span key={t} className="text-xs bg-surface-hover text-text-secondary px-2 py-0.5 rounded-md border border-surface-border font-mono">{t}</span>
+                      <span key={t} className="pill text-xs px-2 py-0.5">{t}</span>
                     )) : <span className="text-sm text-text-muted">\u2014</span>}
                   </div>
                 </div>
                 <div>
-                  <p className="text-xs text-text-secondary mb-1">Cr&eacute;&eacute; le</p>
+                  <p className="label">Cr&eacute;&eacute; le</p>
                   <p className="text-sm font-medium">{formatDate(project.created_at)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-text-secondary mb-1">Derni&egrave;re mise &agrave; jour</p>
+                  <p className="label">Derni&egrave;re mise &agrave; jour</p>
                   <p className="text-sm font-medium">{formatDate(project.updated_at)}</p>
                 </div>
               </div>
               {project.description && (
-                <div className="mt-6 pt-6 border-t border-surface-border">
-                  <p className="text-xs text-text-secondary mb-1">Description</p>
+                <div className="mt-6 pt-6 border-t-3 border-surface-border">
+                  <p className="label">Description</p>
                   <p className="text-sm text-text-primary">{project.description}</p>
                 </div>
               )}
@@ -265,14 +265,14 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {/* Messages section */}
             <div className="card">
               <div className="flex items-center justify-between mb-5">
-                <h2 className="font-display font-bold text-lg flex items-center gap-2">
+                <h2 className="section-title text-lg flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-text-muted" />
                   Messages r&eacute;cents
                 </h2>
                 {recentTicket && (
                   <Link
                     href={`/support/${recentTicket.id}`}
-                    className="text-xs text-accent hover:text-accent-hover flex items-center gap-1 font-medium"
+                    className="text-xs text-accent hover:text-accent-hover flex items-center gap-1 font-bold uppercase tracking-wide"
                   >
                     Voir tous <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
@@ -281,7 +281,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
               {!recentTicket ? (
                 <div className="text-center py-8">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-3">
+                  <div className="w-12 h-12 border-3 border-accent/30 bg-accent/10 flex items-center justify-center mx-auto mb-3">
                     <MessageSquare className="w-5 h-5 text-accent" />
                   </div>
                   <p className="text-sm text-text-muted mb-4">Aucun message pour l&apos;instant</p>
@@ -303,14 +303,14 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     const isTeam = sender?.full_name !== undefined
                     return (
                       <div key={msg.id} className={`flex gap-3 ${isTeam ? '' : 'flex-row-reverse'}`}>
-                        <div className="w-7 h-7 rounded-lg bg-surface-hover border border-surface-border flex items-center justify-center flex-shrink-0 text-xs font-bold text-text-secondary font-mono">
+                        <div className="w-7 h-7 border-3 border-surface-border bg-surface-hover flex items-center justify-center flex-shrink-0 text-xs font-bold text-text-secondary font-mono">
                           {sender?.full_name?.charAt(0)?.toUpperCase() ?? '?'}
                         </div>
                         <div className={`flex-1 ${isTeam ? '' : 'flex flex-col items-end'}`}>
-                          <div className={`rounded-xl px-3 py-2.5 text-sm max-w-[85%] ${
+                          <div className={`border-3 px-3 py-2.5 text-sm max-w-[85%] ${
                             isTeam
-                              ? 'bg-surface-hover text-text-primary'
-                              : 'bg-accent/10 border border-accent/20 text-text-primary'
+                              ? 'border-surface-border bg-surface-hover text-text-primary'
+                              : 'border-accent/30 bg-accent/10 text-text-primary'
                           }`}>
                             {msg.message}
                           </div>
@@ -328,14 +328,14 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {/* Vercel Deployments */}
             <div className="card">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-display font-bold text-lg flex items-center gap-2">
+                <h2 className="section-title text-lg flex items-center gap-2">
                   <Server className="w-5 h-5 text-text-muted" />
                   D&eacute;ploiements Vercel
                 </h2>
                 {project.vercel_project_id && (
                   <button
                     onClick={() => fetchDeployments(project.vercel_project_id!, project.vercel_team_id)}
-                    className="text-xs text-accent hover:text-accent-hover flex items-center gap-1"
+                    className="text-xs text-accent hover:text-accent-hover flex items-center gap-1 font-bold uppercase tracking-wide"
                   >
                     <RefreshCw className="w-3.5 h-3.5" /> Actualiser
                   </button>
@@ -358,7 +358,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                       href={`https://${d.url}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-hover transition-colors"
+                      className="flex items-center gap-3 p-3 border-3 border-surface-border hover:border-accent hover:bg-surface-hover transition-all"
                     >
                       {getDeploymentIcon(d.state)}
                       <div className="flex-1 min-w-0">
@@ -370,7 +370,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                           {formatDateTime(new Date(d.created))}
                         </p>
                       </div>
-                      <span className={`text-xs font-medium font-mono ${d.state === 'READY' ? 'text-emerald-400' : d.state === 'ERROR' ? 'text-red-400' : 'text-amber-400'}`}>
+                      <span className={`text-xs font-medium font-mono uppercase ${d.state === 'READY' ? 'text-emerald-400' : d.state === 'ERROR' ? 'text-red-400' : 'text-amber-400'}`}>
                         {d.state}
                       </span>
                     </a>
@@ -384,24 +384,24 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           <div className="space-y-3 md:space-y-6">
             {/* Quick Links */}
             <div className="card">
-              <h3 className="font-display font-semibold mb-4">Liens rapides</h3>
+              <h3 className="label mb-4">Liens rapides</h3>
               <div className="space-y-2">
                 {project.deployed_url && (
-                  <a href={project.deployed_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-hover transition-colors text-sm">
+                  <a href={project.deployed_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 border-3 border-surface-border hover:border-accent hover:bg-surface-hover transition-all text-sm">
                     <Globe className="w-5 h-5 text-emerald-400" />
                     <span>Site en production</span>
                     <ExternalLink className="w-4 h-4 text-text-muted ml-auto" />
                   </a>
                 )}
                 {project.staging_url && (
-                  <a href={project.staging_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-hover transition-colors text-sm">
+                  <a href={project.staging_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 border-3 border-surface-border hover:border-accent hover:bg-surface-hover transition-all text-sm">
                     <Globe className="w-5 h-5 text-amber-400" />
                     <span>Site de staging</span>
                     <ExternalLink className="w-4 h-4 text-text-muted ml-auto" />
                   </a>
                 )}
                 {project.github_repo && (
-                  <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-hover transition-colors text-sm">
+                  <a href={`https://github.com/${project.github_org || ''}/${project.github_repo}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 border-3 border-surface-border hover:border-accent hover:bg-surface-hover transition-all text-sm">
                     <Github className="w-5 h-5 text-text-primary" />
                     <span>Repository GitHub</span>
                     <ExternalLink className="w-4 h-4 text-text-muted ml-auto" />
@@ -415,7 +415,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
             {/* Quick Actions */}
             <div className="card">
-              <h3 className="font-display font-semibold mb-4">Actions rapides</h3>
+              <h3 className="label mb-4">Actions rapides</h3>
               <div className="space-y-2">
                 <Link href={`/updates/new?project=${project.id}`} className="btn-primary w-full justify-center text-xs">
                   <RefreshCw className="w-4 h-4 mr-2" /> Demander une modification

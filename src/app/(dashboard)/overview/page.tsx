@@ -128,8 +128,8 @@ export default function OverviewPage() {
           <div className="absolute inset-0 grid-overlay opacity-50 pointer-events-none" />
           <div className="relative z-10">
             <p className="text-xs text-text-muted mb-1 font-mono">{todayCapitalized}</p>
-            <h1 className="font-display font-extrabold text-3xl md:text-[40px] tracking-tight text-text-primary leading-none mb-2">
-              Bonjour{firstName ? `, ${firstName}` : ''} 👋
+            <h1 className="font-black uppercase tracking-tight text-3xl md:text-[40px] text-text-primary leading-none mb-2">
+              Bonjour{firstName ? `, ${firstName}` : ''}
             </h1>
             <p className="text-text-secondary text-sm md:text-base mb-6">
               Voici l&apos;&eacute;tat de vos projets aujourd&apos;hui
@@ -137,12 +137,12 @@ export default function OverviewPage() {
             {/* Global progress bar */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-text-muted font-mono">Projets actifs</span>
+                <span className="text-xs text-text-muted font-mono uppercase tracking-wider">Projets actifs</span>
                 <span className="text-xs font-bold text-accent font-mono">{activeProjects.length}/{projects.length}</span>
               </div>
-              <div className="h-1.5 bg-surface-border rounded-full overflow-hidden">
+              <div className="h-1.5 bg-surface-border overflow-hidden">
                 <div
-                  className="h-full bg-accent rounded-full transition-all duration-700"
+                  className="h-full bg-accent transition-all duration-700"
                   style={{ width: `${globalProgress}%` }}
                 />
               </div>
@@ -153,51 +153,51 @@ export default function OverviewPage() {
         {/* Stats row */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
           {/* Projets */}
-          <div className="card border-accent/20 hover:border-accent/40 transition-colors">
+          <div className="card hover:border-accent transition-colors">
             <div className="flex items-start justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+              <div className="w-10 h-10 border-3 border-accent/30 bg-accent/10 flex items-center justify-center">
                 <FolderKanban className="w-5 h-5 text-accent" />
               </div>
-              <div className="flex items-center gap-1 text-xs text-emerald-400 font-mono">
+              <div className="flex items-center gap-1 text-xs text-emerald-400 font-mono uppercase tracking-wider">
                 <TrendingUp className="w-3.5 h-3.5" />
                 actifs
               </div>
             </div>
-            <p className="font-display font-extrabold text-3xl text-text-primary mb-0.5">{activeProjects.length}</p>
+            <p className="font-black text-3xl text-text-primary mb-0.5">{activeProjects.length}</p>
             <p className="text-xs text-text-muted">projets actifs sur {projects.length}</p>
           </div>
 
           {/* Tickets */}
-          <div className="card border-red-500/20 hover:border-red-500/40 transition-colors">
+          <div className="card hover:border-accent transition-colors">
             <div className="flex items-start justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
+              <div className="w-10 h-10 border-3 border-red-500/30 bg-red-500/10 flex items-center justify-center">
                 <LifeBuoy className="w-5 h-5 text-red-400" />
               </div>
               {openTickets.length > 0 && (
-                <div className="flex items-center gap-1 text-xs text-red-400 font-mono">
+                <div className="flex items-center gap-1 text-xs text-red-400 font-mono uppercase tracking-wider">
                   <Zap className="w-3.5 h-3.5" />
                   ouverts
                 </div>
               )}
             </div>
-            <p className="font-display font-extrabold text-3xl text-text-primary mb-0.5">{openTickets.length}</p>
+            <p className="font-black text-3xl text-text-primary mb-0.5">{openTickets.length}</p>
             <p className="text-xs text-text-muted">tickets ouverts</p>
           </div>
 
           {/* Modifications */}
-          <div className="card border-blue-500/20 hover:border-blue-500/40 transition-colors">
+          <div className="card hover:border-accent transition-colors">
             <div className="flex items-start justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+              <div className="w-10 h-10 border-3 border-blue-500/30 bg-blue-500/10 flex items-center justify-center">
                 <RefreshCw className="w-5 h-5 text-blue-400" />
               </div>
               {pendingUpdates.length > 0 && (
-                <div className="flex items-center gap-1 text-xs text-blue-400 font-mono">
+                <div className="flex items-center gap-1 text-xs text-blue-400 font-mono uppercase tracking-wider">
                   <Zap className="w-3.5 h-3.5" />
                   en cours
                 </div>
               )}
             </div>
-            <p className="font-display font-extrabold text-3xl text-text-primary mb-0.5">{pendingUpdates.length}</p>
+            <p className="font-black text-3xl text-text-primary mb-0.5">{pendingUpdates.length}</p>
             <p className="text-xs text-text-muted">modifications en cours</p>
           </div>
         </div>
@@ -205,18 +205,18 @@ export default function OverviewPage() {
         {/* Projects section */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display font-bold text-lg">Projets actifs</h2>
-            <Link href="/projects" className="text-sm text-accent font-medium hover:text-accent-hover flex items-center gap-1">
+            <h2 className="section-title text-lg">Projets actifs</h2>
+            <Link href="/projects" className="text-sm text-accent font-bold uppercase tracking-wide hover:text-accent-hover flex items-center gap-1">
               Voir tous <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
 
           {projects.length === 0 ? (
             <div className="card text-center py-12">
-              <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
+              <div className="w-14 h-14 border-3 border-accent/30 bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <FolderKanban className="w-7 h-7 text-accent" />
               </div>
-              <h3 className="font-display font-bold text-lg mb-2">Aucun projet</h3>
+              <h3 className="font-black uppercase tracking-tight text-lg mb-2">Aucun projet</h3>
               <p className="text-text-muted text-sm mb-6">Votre premier projet n&apos;a pas encore &eacute;t&eacute; cr&eacute;&eacute;.</p>
               <Link href="/support/new" className="btn-primary text-sm mx-auto inline-flex">
                 Contacter l&apos;&eacute;quipe
@@ -228,17 +228,17 @@ export default function OverviewPage() {
                 const progress = statusProgress[project.status] ?? 0
                 const progressColor = statusProgressColor[project.status] ?? 'bg-text-muted'
                 return (
-                  <div key={project.id} className="card hover:border-text-muted hover:shadow-card-hover transition-all duration-200 flex flex-col">
+                  <div key={project.id} className="card hover:border-accent hover:shadow-brutal-xs transition-all duration-200 flex flex-col">
                     {/* Top: badge */}
                     <div className="flex items-start justify-between mb-3">
-                      <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                      <div className="w-8 h-8 border-3 border-accent/30 bg-accent/10 flex items-center justify-center">
                         <FolderKanban className="w-4 h-4 text-accent" />
                       </div>
                       <StatusBadge status={project.status} />
                     </div>
 
                     {/* Name + description */}
-                    <h3 className="font-display font-bold text-base text-text-primary mb-1">{project.name}</h3>
+                    <h3 className="font-bold text-base text-text-primary mb-1">{project.name}</h3>
                     {project.description && (
                       <p className="text-sm text-text-secondary line-clamp-2 mb-3">{project.description}</p>
                     )}
@@ -247,7 +247,7 @@ export default function OverviewPage() {
                     {project.tech_stack.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mb-4">
                         {project.tech_stack.slice(0, 4).map((t) => (
-                          <span key={t} className="text-[11px] bg-surface-hover text-text-muted px-2 py-0.5 rounded-md font-mono border border-surface-border">{t}</span>
+                          <span key={t} className="pill text-[11px] px-2 py-0.5">{t}</span>
                         ))}
                         {project.tech_stack.length > 4 && (
                           <span className="text-[11px] text-text-muted px-2 py-0.5">+{project.tech_stack.length - 4}</span>
@@ -258,12 +258,12 @@ export default function OverviewPage() {
                     {/* Progress bar */}
                     <div className="mt-auto">
                       <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[11px] text-text-muted font-mono">Progression</span>
+                        <span className="text-[11px] text-text-muted font-mono uppercase tracking-wider">Progression</span>
                         <span className="text-[11px] font-bold text-text-secondary font-mono">{progress}%</span>
                       </div>
-                      <div className="h-1 bg-surface-border rounded-full overflow-hidden mb-4">
+                      <div className="h-1 bg-surface-border overflow-hidden mb-4">
                         <div
-                          className={`h-full ${progressColor} rounded-full transition-all duration-700`}
+                          className={`h-full ${progressColor} transition-all duration-700`}
                           style={{ width: `${progress}%` }}
                         />
                       </div>
@@ -287,7 +287,7 @@ export default function OverviewPage() {
         {/* Activity feed */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-display font-bold text-lg">Derni&egrave;re activit&eacute;</h2>
+            <h2 className="section-title text-lg">Derni&egrave;re activit&eacute;</h2>
           </div>
 
           {activityItems.length === 0 ? (
@@ -300,15 +300,15 @@ export default function OverviewPage() {
                 {activityItems.map((item) => {
                   const icon =
                     item.type === 'ticket' ? (
-                      <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 border-3 border-red-500/30 bg-red-500/10 flex items-center justify-center flex-shrink-0">
                         <MessageSquare className="w-4 h-4 text-red-400" />
                       </div>
                     ) : item.type === 'update' ? (
-                      <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 border-3 border-blue-500/30 bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                         <RefreshCw className="w-4 h-4 text-blue-400" />
                       </div>
                     ) : (
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 border-3 border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
                         <FolderKanban className="w-4 h-4 text-emerald-400" />
                       </div>
                     )
@@ -326,7 +326,7 @@ export default function OverviewPage() {
                       {icon}
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-text-primary truncate">{item.label}</p>
-                        <p className="text-xs text-text-muted">{typeLabel}</p>
+                        <p className="text-xs text-text-muted uppercase tracking-wider">{typeLabel}</p>
                       </div>
                       <span className="text-xs text-text-muted font-mono flex-shrink-0">
                         {formatDistanceToNow(new Date(item.date))}

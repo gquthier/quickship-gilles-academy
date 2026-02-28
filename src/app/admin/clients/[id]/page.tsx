@@ -88,7 +88,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
   if (loading || !client) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-[3px] border-surface-border border-t-accent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-3 border-surface-border border-t-accent rounded-full animate-spin" />
       </div>
     )
   }
@@ -98,7 +98,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
       <TopBar title={client.full_name} subtitle={client.company || client.email} onMenuToggle={onMenuToggle} />
 
       <div className="p-4 md:p-8">
-        <Link href="/admin/clients" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
+        <Link href="/admin/clients" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent font-bold uppercase tracking-wide mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour aux clients
         </Link>
 
@@ -109,7 +109,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
               <div className="flex items-center gap-4 mb-6">
                 <Avatar name={client.full_name} src={client.avatar_url} size="lg" />
                 <div>
-                  <h2 className="font-display font-bold text-lg">{client.full_name}</h2>
+                  <h2 className="font-black uppercase tracking-tight text-xl">{client.full_name}</h2>
                   <p className="text-sm text-text-secondary">{client.company || 'Particulier'}</p>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
                     <input type="text" className="input" value={editData.company} onChange={(e) => setEditData({ ...editData, company: e.target.value })} />
                   </div>
                   <div>
-                    <label className="label">Téléphone</label>
+                    <label className="label">Telephone</label>
                     <input type="tel" className="input" value={editData.phone} onChange={(e) => setEditData({ ...editData, phone: e.target.value })} />
                   </div>
                   <div className="flex gap-2 pt-2">
@@ -150,9 +150,9 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
                       <Building2 className="w-4 h-4 text-text-muted" /> {client.company}
                     </div>
                   )}
-                  <div className="flex items-center gap-2 pt-3 border-t border-surface-border">
+                  <div className="flex items-center gap-2 pt-3 border-t-3 border-surface-border">
                     <button onClick={() => setEditMode(true)} className="btn-secondary text-xs flex-1 justify-center">Modifier</button>
-                    <button onClick={toggleActive} className={`text-xs flex items-center gap-1 px-3 py-2 rounded-xl ${client.is_active ? 'text-emerald-400' : 'text-text-muted'}`}>
+                    <button onClick={toggleActive} className={`text-xs flex items-center gap-1 px-3 py-2 border-3 ${client.is_active ? 'text-accent border-accent/30' : 'text-text-muted border-surface-border'}`}>
                       {client.is_active ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
                       {client.is_active ? 'Actif' : 'Inactif'}
                     </button>
@@ -160,7 +160,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
                 </div>
               )}
 
-              <div className="mt-4 pt-4 border-t border-surface-border text-xs text-text-muted">
+              <div className="mt-4 pt-4 border-t-3 border-surface-border text-xs text-text-muted font-mono">
                 Client depuis le {formatDate(client.created_at)}
               </div>
             </div>
@@ -170,20 +170,20 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
           <div className="lg:col-span-2 space-y-3 md:space-y-6">
             {/* Projects */}
             <div className="card">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-display font-bold flex items-center gap-2">
-                  <FolderKanban className="w-5 h-5 text-accent" /> Projets ({projects.length})
+              <div className="flex items-center justify-between border-b-3 border-surface-border pb-4 mb-4">
+                <h3 className="font-black uppercase tracking-wider text-xs flex items-center gap-2">
+                  <FolderKanban className="w-5 h-5 text-accent" /> PROJETS ({projects.length})
                 </h3>
-                <Link href={`/admin/projects/new?client=${client.id}`} className="text-xs text-accent hover:text-accent-hover">+ Ajouter</Link>
+                <Link href={`/admin/projects/new?client=${client.id}`} className="text-xs text-accent hover:text-accent-hover font-bold uppercase tracking-wide">+ Ajouter</Link>
               </div>
               {projects.length === 0 ? (
                 <p className="text-sm text-text-muted text-center py-4">Aucun projet</p>
               ) : (
                 <div className="divide-y divide-surface-border">
                   {projects.map((p) => (
-                    <Link key={p.id} href={`/admin/projects/${p.id}`} className="flex items-center gap-3 py-3 hover:bg-surface-hover px-2 rounded-lg transition-colors">
+                    <Link key={p.id} href={`/admin/projects/${p.id}`} className="flex items-center gap-3 py-3 hover:bg-surface-hover px-2 transition-colors">
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{p.name}</p>
+                        <p className="text-sm font-bold truncate">{p.name}</p>
                         <p className="text-xs text-text-muted">{p.domain || 'Pas de domaine'}</p>
                       </div>
                       <StatusBadge status={p.status} />
@@ -195,8 +195,8 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
 
             {/* Subscriptions */}
             <div className="card">
-              <h3 className="font-display font-bold flex items-center gap-2 mb-4">
-                <CreditCard className="w-5 h-5 text-emerald-400" /> Abonnements ({subscriptions.length})
+              <h3 className="font-black uppercase tracking-wider text-xs flex items-center gap-2 border-b-3 border-surface-border pb-4 mb-4">
+                <CreditCard className="w-5 h-5 text-emerald-400" /> ABONNEMENTS ({subscriptions.length})
               </h3>
               {subscriptions.length === 0 ? (
                 <p className="text-sm text-text-muted text-center py-4">Aucun abonnement</p>
@@ -205,10 +205,10 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
                   {subscriptions.map((s) => (
                     <div key={s.id} className="flex items-center gap-3 py-3">
                       <div className="flex-1">
-                        <p className="text-sm font-medium capitalize">{s.plan}</p>
-                        <p className="text-xs text-text-muted">{(s.project as any)?.name || 'Général'}</p>
+                        <p className="text-sm font-bold capitalize">{s.plan}</p>
+                        <p className="text-xs text-text-muted">{(s.project as any)?.name || 'General'}</p>
                       </div>
-                      {s.price_monthly && <p className="text-sm font-bold">{s.price_monthly}&euro;/mois</p>}
+                      {s.price_monthly && <p className="text-sm font-black">{s.price_monthly}&euro;/mois</p>}
                       <StatusBadge status={s.status} />
                     </div>
                   ))}
@@ -218,8 +218,8 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
 
             {/* Recent Tickets */}
             <div className="card">
-              <h3 className="font-display font-bold flex items-center gap-2 mb-4">
-                <LifeBuoy className="w-5 h-5 text-orange-400" /> Tickets récents ({tickets.length})
+              <h3 className="font-black uppercase tracking-wider text-xs flex items-center gap-2 border-b-3 border-surface-border pb-4 mb-4">
+                <LifeBuoy className="w-5 h-5 text-orange-400" /> TICKETS RECENTS ({tickets.length})
               </h3>
               {tickets.length === 0 ? (
                 <p className="text-sm text-text-muted text-center py-4">Aucun ticket</p>
@@ -228,7 +228,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
                   {tickets.slice(0, 5).map((t) => (
                     <div key={t.id} className="flex items-center gap-3 py-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{t.subject}</p>
+                        <p className="text-sm font-bold truncate">{t.subject}</p>
                         <p className="text-xs text-text-muted">{formatDate(t.created_at)}</p>
                       </div>
                       <StatusBadge status={t.status} />

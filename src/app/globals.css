@@ -1,57 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-/* Clash Display - loaded from CDN */
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://cdn.fontshare.com/wf/XMOAXFXANPXG3OIP7VCVJ4J7MJRKMXAX/C7DFLWXRUKZ52UES47DBXQZWAVGXQQ4M/QSIVMKIXF2MFVQ7GJYXBKWBNHQPXDBKQ.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://cdn.fontshare.com/wf/XMOAXFXANPXG3OIP7VCVJ4J7MJRKMXAX/Z6RLPHTCDQP6AS72X5V4E2ZOMAQVTRLS/BFZQRHFJXHVK7RWTHZ52D7FXBFXQCKPI.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://cdn.fontshare.com/wf/XMOAXFXANPXG3OIP7VCVJ4J7MJRKMXAX/WDQHSSRTIDX5BQDCLVFEQKUTDDBVYXQU/QWSNZWDOYXE4GKRXGX7I6R3Y57KFHYKX.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://cdn.fontshare.com/wf/XMOAXFXANPXG3OIP7VCVJ4J7MJRKMXAX/JBSIDOP7FE24CNOLB563KYMUVG7EKRSG/YSVNHKXEOTODRY7VDHYPCQGFAQOXUQIS.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* ==========================================
-   QuickShip App Design System
-   Dark Theme: #050505 bg | #CCFF00 accent
-   Fonts: Clash Display + Inter + JetBrains Mono
-   Style: Cyberpunk / Brutalist
+   QuickShip — Dark Neo-Brutalism
+   Dark bg #0A0A0A | Accent #CCFF00
+   Font: Space Grotesk (bold, clean)
+   Style: Neo-Brutalism on dark canvas
    ========================================== */
 
 @layer base {
+  * {
+    box-sizing: border-box;
+  }
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply font-body text-text-primary antialiased;
-    background: #050505;
+    background-color: #0A0A0A;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    color: #EFEFEF;
+    -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
-    letter-spacing: -0.02em;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
   ::selection {
     background: #CCFF00;
@@ -60,135 +36,152 @@
 }
 
 @layer components {
-  /* ---- Buttons ---- */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 font-display font-semibold text-sm
-           bg-accent text-black
-           rounded-lg px-6 py-3
-           hover:bg-accent-hover
-           active:scale-[0.97]
-           transition-all duration-200;
-  }
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 font-body font-medium text-sm
-           bg-transparent text-text-primary
-           border border-surface-border
-           rounded-lg px-6 py-3
-           hover:bg-surface-hover hover:border-text-muted
-           active:scale-[0.97]
-           transition-all duration-200;
-  }
-  .btn-danger {
-    @apply inline-flex items-center justify-center gap-2 font-body font-semibold text-sm
-           bg-red-500/10 text-red-400 border border-red-500/20
-           rounded-lg px-6 py-3
-           hover:bg-red-500/20
-           active:scale-[0.97]
-           transition-all duration-200;
-  }
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 font-body font-medium text-sm
-           text-text-secondary hover:text-text-primary hover:bg-surface-hover
-           rounded-lg px-4 py-2.5
-           transition-all duration-200;
-  }
 
-  /* ---- Cards ---- */
+  /* ─── Brutal Cards ─── */
   .card {
-    @apply bg-surface/60 backdrop-blur-xl rounded-xl border border-surface-border p-6
-           transition-all duration-200;
+    @apply bg-surface border-3 border-surface-border p-6
+           transition-all duration-150;
   }
   .card-hover {
-    @apply card hover:border-text-muted hover:bg-surface/80
-           hover:-translate-y-0.5;
+    @apply card hover:border-accent hover:shadow-brutal-xs cursor-pointer;
   }
   .card-accent {
-    @apply bg-accent text-black rounded-xl p-6 relative overflow-hidden;
+    @apply bg-accent text-black border-3 border-accent p-6;
+  }
+  .card-brutal {
+    @apply bg-surface border-3 border-text-muted shadow-brutal-sm p-6;
   }
 
-  /* ---- Inputs ---- */
+  /* ─── Brutal Buttons ─── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-accent text-black
+           border-3 border-accent
+           px-6 py-3
+           font-bold uppercase tracking-wide text-sm
+           shadow-brutal-sm
+           hover:shadow-brutal-xs hover:translate-x-[2px] hover:translate-y-[2px]
+           active:shadow-none active:translate-x-[4px] active:translate-y-[4px]
+           transition-all duration-100 cursor-pointer;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-transparent text-text-primary
+           border-3 border-surface-border
+           px-6 py-3
+           font-bold uppercase tracking-wide text-sm
+           hover:border-text-secondary hover:text-text-primary
+           transition-all duration-100 cursor-pointer;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2
+           bg-transparent text-red-400
+           border-3 border-red-500/40
+           px-6 py-3
+           font-bold uppercase tracking-wide text-sm
+           hover:border-red-400 hover:bg-red-500/10
+           transition-all duration-100 cursor-pointer;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           text-text-secondary
+           px-4 py-2.5
+           font-medium text-sm
+           hover:text-text-primary hover:bg-surface-hover
+           transition-all duration-100 cursor-pointer;
+  }
+
+  /* ─── Inputs ─── */
   .input {
-    @apply w-full px-4 py-3 rounded-lg
-           border border-surface-border bg-surface
+    @apply w-full px-4 py-3
+           border-3 border-surface-border bg-surface
            text-text-primary font-body text-sm
            placeholder:text-text-muted
-           focus:outline-none focus:ring-1 focus:ring-accent/30 focus:border-accent/50
-           transition-all duration-200;
+           focus:outline-none focus:border-accent
+           transition-all duration-100;
   }
   .label {
-    @apply block text-sm font-medium text-text-secondary mb-1.5 font-body;
+    @apply block text-xs font-black uppercase tracking-wider text-text-secondary mb-2;
   }
 
-  /* ---- Badges ---- */
+  /* ─── Badges ─── */
   .badge {
-    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-medium font-mono;
+    @apply inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold uppercase tracking-wide font-mono border;
   }
   .badge-success {
-    @apply badge bg-emerald-500/10 text-emerald-400 border border-emerald-500/20;
+    @apply badge bg-emerald-500/10 text-emerald-400 border-emerald-500/30;
   }
   .badge-warning {
-    @apply badge bg-amber-500/10 text-amber-400 border border-amber-500/20;
+    @apply badge bg-amber-500/10 text-amber-400 border-amber-500/30;
   }
   .badge-error {
-    @apply badge bg-red-500/10 text-red-400 border border-red-500/20;
+    @apply badge bg-red-500/10 text-red-400 border-red-500/30;
   }
   .badge-info {
-    @apply badge bg-blue-500/10 text-blue-400 border border-blue-500/20;
+    @apply badge bg-blue-500/10 text-blue-400 border-blue-500/30;
   }
   .badge-purple {
-    @apply badge bg-purple-500/10 text-purple-400 border border-purple-500/20;
+    @apply badge bg-purple-500/10 text-purple-400 border-purple-500/30;
   }
   .badge-neutral {
-    @apply badge bg-white/5 text-text-secondary border border-surface-border;
+    @apply badge bg-surface-light text-text-secondary border-surface-border;
+  }
+  .badge-accent {
+    @apply badge bg-accent/10 text-accent border-accent/30;
   }
 
-  /* ---- Glass effect ---- */
+  /* ─── Tags / Pills ─── */
+  .pill {
+    @apply inline-flex items-center px-3 py-1 text-xs font-bold uppercase tracking-wide
+           border-3 border-surface-border text-text-secondary;
+  }
+
+  /* ─── Section Headers ─── */
+  .section-title {
+    @apply text-xl font-black uppercase tracking-tight text-text-primary;
+  }
+  .section-label {
+    @apply text-xs font-black uppercase tracking-widest text-accent;
+  }
+  .section-desc {
+    @apply text-sm font-medium text-text-secondary;
+  }
+
+  /* ─── Divider ─── */
+  .divider {
+    @apply border-t-3 border-surface-border;
+  }
+
+  /* ─── Glass (kept minimal for compat) ─── */
   .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl;
+    @apply bg-surface border-3 border-surface-border;
   }
 }
 
-/* ---- Scrollbar ---- */
+/* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #0A0A0A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #262626;
-  border-radius: 4px;
+  background: #2A2A2A;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #404040;
+  background: #444444;
 }
 
-/* ---- Grid overlay (decorative) ---- */
+/* ─── Grid overlay (decorative) ─── */
 .grid-overlay {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 40px 40px;
 }
-
-/* ---- Animations ---- */
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(204, 255, 0, 0.1); }
-  50% { box-shadow: 0 0 40px rgba(204, 255, 0, 0.2); }
-}
-@keyframes blink {
-  50% { opacity: 0; }
-}
-.animate-fade-in {
-  animation: fade-in 0.4s ease-out;
-}
-.animate-glow-pulse {
-  animation: glow-pulse 3s ease-in-out infinite;
-}
-.animate-blink {
-  animation: blink 1s step-end infinite;
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(204, 255, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(204, 255, 0, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
 }

@@ -96,7 +96,7 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
       <TopBar title={ticket.subject} onMenuToggle={onMenuToggle} />
 
       <div className="p-4 md:p-8 max-w-3xl">
-        <Link href="/support" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary mb-6">
+        <Link href="/support" className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent mb-6 font-bold uppercase tracking-wide">
           <ArrowLeft className="w-4 h-4" /> Retour au support
         </Link>
 
@@ -107,10 +107,10 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
               <StatusBadge status={ticket.status} />
               <StatusBadge status={ticket.priority} />
               {(ticket as any).project?.name && (
-                <span className="text-xs text-text-muted">{(ticket as any).project.name}</span>
+                <span className="text-xs text-text-muted font-mono uppercase tracking-wider">{(ticket as any).project.name}</span>
               )}
             </div>
-            <span className="text-xs text-text-muted">{formatDateTime(ticket.created_at)}</span>
+            <span className="text-xs text-text-muted font-mono">{formatDateTime(ticket.created_at)}</span>
           </div>
           <p className="text-sm text-text-primary">{ticket.description}</p>
         </div>
@@ -125,16 +125,16 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                 <Avatar name={sender?.full_name || 'U'} src={sender?.avatar_url} size="sm" />
                 <div className={`max-w-[85%] sm:max-w-[70%] ${isOwn ? 'text-right' : ''}`}>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-medium text-text-primary">{sender?.full_name || 'Utilisateur'}</span>
+                    <span className="text-xs font-bold text-text-primary uppercase tracking-wider">{sender?.full_name || 'Utilisateur'}</span>
                     {sender?.role === 'admin' && (
-                      <span className="text-xs bg-accent/10 text-accent px-1.5 py-0.5 rounded">\u00c9quipe</span>
+                      <span className="badge-accent text-[10px] px-1.5 py-0.5">\u00c9quipe</span>
                     )}
-                    <span className="text-xs text-text-muted">{formatDateTime(msg.created_at)}</span>
+                    <span className="text-xs text-text-muted font-mono">{formatDateTime(msg.created_at)}</span>
                   </div>
-                  <div className={`p-3 rounded-xl text-sm ${
+                  <div className={`p-3 border-3 text-sm ${
                     isOwn
-                      ? 'bg-accent text-black rounded-tr-sm'
-                      : 'bg-surface border border-surface-border text-text-primary rounded-tl-sm'
+                      ? 'bg-accent text-black border-accent'
+                      : 'bg-surface border-surface-border text-text-primary'
                   }`}>
                     {msg.message}
                   </div>

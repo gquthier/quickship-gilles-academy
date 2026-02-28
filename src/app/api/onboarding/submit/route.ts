@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase-server'
+import { generateProjectPrompt } from '@/lib/generate-prompt'
+import type { OnboardingResponse } from '@/types'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,6 +18,51 @@ function generatePassword(): string {
     result += chars.charAt(Math.floor(Math.random() * chars.length))
   }
   return result
+}
+
+async function generateGeminiPrompt(basePrompt: string): Promise<string | null> {
+  const geminiKey = process.env.GEMINI_API_KEY
+  if (!geminiKey) return null
+
+  const META_PROMPT = `Tu es un expert en développement web fullstack et en UX/UI design. Améliore ce brief pour qu'un agent IA puisse créer le site en one-shot. Inclure : architecture UX détaillée, UI précise (couleurs hex, typo, grid), copywriting complet, spécifications responsive. Brief :\n\n{base_prompt}\n\nRetourne UNIQUEMENT le prompt retravaillé.`
+
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: META_PROMPT.replace('{base_prompt}', basePrompt) }] }],
+        }),
+      }
+    )
+    if (!res.ok) return null
+    const data = await res.json()
+    return (data.candidates?.[0]?.content?.parts?.[0]?.text as string) ?? null
+  } catch {
+    return null
+  }
+}
+
+async function notifyBuilder(projectId: string, clientEmail: string, prompt: string): Promise<void> {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN
+  const chatId = process.env.TELEGRAM_BUILDER_CHAT_ID
+  if (!botToken || !chatId) return
+
+  const preview = prompt.slice(0, 3500)
+  const truncated = prompt.length > 3500 ? '\n[...tronqué]' : ''
+  const message = `[QuickShip] Nouveau projet a builder\n\nClient: ${clientEmail}\nProject ID: ${projectId}\n\n---PROMPT---\n${preview}${truncated}`
+
+  try {
+    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: parseInt(chatId), text: message }),
+    })
+  } catch {
+    // non-fatal
+  }
 }
 
 export async function OPTIONS() {
@@ -56,9 +103,10 @@ export async function POST(request: NextRequest) {
     }
 
     const onboardingId = onboardingRow.id
+    const email: string | undefined = responses.email
+    let projectId: string | null = null
 
     // 2. Auto-process si email présent
-    const email: string | undefined = responses.email
     if (email && email.includes('@')) {
       try {
         const fullName: string = responses.fullname || responses.full_name || 'Client'
@@ -66,7 +114,6 @@ export async function POST(request: NextRequest) {
         const projectName: string = responses.project_name || 'Projet sans nom'
         const domainName: string | null = responses.domain_name || responses.domain || null
 
-        // Vérifier si l'user existe déjà
         const { data: existingUsers } = await adminClient.auth.admin.listUsers({ page: 1, perPage: 1000 })
         const existingUser = existingUsers?.users?.find(u => u.email === email)
 
@@ -86,7 +133,6 @@ export async function POST(request: NextRequest) {
           clientId = authData.user.id
         }
 
-        // Upsert profile
         await adminClient.from('profiles').upsert({
           id: clientId,
           email,
@@ -97,7 +143,6 @@ export async function POST(request: NextRequest) {
           is_active: true,
         }, { onConflict: 'id' })
 
-        // Créer le projet
         const resolvedDomain =
           domainName && domainName !== 'oui' && domainName !== 'non' ? domainName : null
 
@@ -115,16 +160,44 @@ export async function POST(request: NextRequest) {
           .single()
 
         if (projectError) throw new Error(`Project: ${projectError.message}`)
+        projectId = projectData.id
 
-        // Lier onboarding_response au client et au projet
         await adminClient
           .from('onboarding_responses')
-          .update({ client_id: clientId, project_id: projectData.id })
+          .update({ client_id: clientId, project_id: projectId })
           .eq('id', onboardingId)
 
-        console.log(`✅ Auto-processed: ${email} → client ${clientId}, project ${projectData.id}`)
+        console.log(`✅ Auto-processed: ${email} → client ${clientId}, project ${projectId}`)
+
+        // 3. Background: generate Gemini prompt + notify builder (me / Griffe via Telegram)
+        void (async () => {
+          try {
+            const { data: onboardingFull } = await adminClient
+              .from('onboarding_responses')
+              .select('*, client:profiles!client_id(full_name, email, company), project:projects(name)')
+              .eq('id', onboardingId)
+              .single()
+
+            if (!onboardingFull) return
+
+            const basePrompt = generateProjectPrompt(onboardingFull as OnboardingResponse)
+            const aiPrompt = await generateGeminiPrompt(basePrompt)
+            const finalPrompt = aiPrompt || basePrompt
+
+            if (aiPrompt) {
+              await adminClient
+                .from('projects')
+                .update({ ai_prompt: aiPrompt })
+                .eq('id', projectId!)
+            }
+
+            await notifyBuilder(projectId!, email, finalPrompt)
+          } catch (err) {
+            console.error('Background builder trigger error (non-fatal):', err)
+          }
+        })()
+
       } catch (processErr) {
-        // Ne pas bloquer la réponse — l'entrée onboarding est déjà insérée
         console.error('Auto-process error (non-fatal):', processErr)
       }
     }

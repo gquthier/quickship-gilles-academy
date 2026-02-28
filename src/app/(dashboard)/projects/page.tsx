@@ -56,17 +56,17 @@ export default function ProjectsPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {projects.map((project) => (
-              <Link key={project.id} href={`/projects/${project.id}`} className="card hover:shadow-card-hover transition-shadow group">
+              <Link key={project.id} href={`/projects/${project.id}`} className="card hover:border-accent hover:shadow-brutal-xs transition-all group">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                  <div className="w-12 h-12 border-3 border-accent/30 bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <FolderKanban className="w-6 h-6 text-accent" />
                   </div>
                   <StatusBadge status={project.status} />
                 </div>
 
                 {/* Info */}
-                <h3 className="font-display font-semibold text-text-primary mb-1">{project.name}</h3>
+                <h3 className="font-bold text-text-primary mb-1">{project.name}</h3>
                 {project.domain && (
                   <p className="text-sm text-text-secondary flex items-center gap-1 mb-3">
                     <Globe className="w-3.5 h-3.5" />
@@ -81,7 +81,7 @@ export default function ProjectsPage() {
                 {project.tech_stack.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {project.tech_stack.map((tech) => (
-                      <span key={tech} className="text-xs bg-surface-hover text-text-secondary px-2 py-0.5 rounded-md">
+                      <span key={tech} className="pill text-xs px-2 py-0.5">
                         {tech}
                       </span>
                     ))}
@@ -89,7 +89,7 @@ export default function ProjectsPage() {
                 )}
 
                 {/* Footer */}
-                <div className="flex items-center gap-4 pt-4 border-t border-surface-border text-xs text-text-muted">
+                <div className="flex items-center gap-4 pt-4 border-t-3 border-surface-border text-xs text-text-muted">
                   {project.deployed_url && (
                     <span className="flex items-center gap-1">
                       <ExternalLink className="w-3.5 h-3.5" /> En ligne
