@@ -1,51 +1,66 @@
+import { createServerClient } from '@supabase/ssr'
+import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient, createAdminClient } from '@/lib/supabase-server'
 
+function createClient() {
+  const cookieStore = cookies()
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return cookieStore.getAll() },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            cookieStore.set(name, value, options)
+          )
+        },
+      },
+    }
+  )
+}
+
+// GET /api/notifications?limit=30
 export async function GET(request: NextRequest) {
   const supabase = createClient()
   const { data: { session } } = await supabase.auth.getSession()
-  if (!session) return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { searchParams } = new URL(request.url)
-  const unreadOnly = searchParams.get('unread') === 'true'
-  const limit = parseInt(searchParams.get('limit') || '20')
+  const limit = Number(request.nextUrl.searchParams.get('limit') ?? '30')
 
-  let query = supabase
+  const { data: notifications, error } = await supabase
     .from('notifications')
     .select('*')
     .eq('user_id', session.user.id)
     .order('created_at', { ascending: false })
     .limit(limit)
 
-  if (unreadOnly) query = query.eq('read', false)
-
-  const { data, error } = await query
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-  return NextResponse.json({ notifications: data || [] })
+  return NextResponse.json({ notifications })
 }
 
+// PATCH /api/notifications — mark as read
+// body: { id: string } | { all: true }
 export async function PATCH(request: NextRequest) {
   const supabase = createClient()
   const { data: { session } } = await supabase.auth.getSession()
-  if (!session) return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { id, all } = await request.json()
+  const body = await request.json()
 
-  if (all) {
-    const { error } = await supabase
+  if (body.all) {
+    await supabase
       .from('notifications')
       .update({ read: true })
       .eq('user_id', session.user.id)
       .eq('read', false)
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  } else if (id) {
-    const { error } = await supabase
+  } else if (body.id) {
+    await supabase
       .from('notifications')
       .update({ read: true })
-      .eq('id', id)
+      .eq('id', body.id)
       .eq('user_id', session.user.id)
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
   return NextResponse.json({ ok: true })
