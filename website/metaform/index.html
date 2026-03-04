@@ -557,20 +557,28 @@
 
   <!-- Hero -->
   <div class="hero">
-    <div class="logo-wrap" style="padding:0 0 20px">
-      <div class="logo"><span class="quick">Quick</span><span class="ship">Ship</span></div>
+    <div style="text-align:center;padding:0 0 20px;">
+      <div class="logo" style="display:inline-block;"><span class="quick">Quick</span><span class="ship">Ship</span></div>
     </div>
     <div class="hero-badge">40 Projets réalisés <span>•</span> 10 Articles de SEO offerts</div>
     <h1>Votre site-web sur-mesure en 48h,<br><em>payé uniquement si vous êtes satisfait.</em></h1>
     <p class="hero-sub">Un site web optimisé pour générer des clients et se référencer.</p>
   </div>
 
-  <!-- VSL Wistia -->
+  <!-- VSL Wistia (iframe embed — plus fiable) -->
   <div class="vsl-wrap">
-    <script src="https://fast.wistia.com/player.js" async></script>
-    <script src="https://fast.wistia.com/embed/apaamh48ky.js" async type="module"></script>
-    <style>wistia-player[media-id='apaamh48ky']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/apaamh48ky/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
-    <wistia-player media-id="apaamh48ky" aspect="1.7777777777777777" style="width:100%;display:block;"></wistia-player>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+      <iframe
+        src="https://fast.wistia.net/embed/iframe/apaamh48ky?videoFoam=true"
+        title="QuickShip — Votre site web en 48h"
+        allow="autoplay; fullscreen"
+        allowtransparency="true"
+        frameborder="0"
+        scrolling="no"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+      </iframe>
+    </div>
+    <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
   </div>
 
   <!-- CTA Arrow -->
