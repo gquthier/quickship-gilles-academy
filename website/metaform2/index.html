@@ -130,6 +130,43 @@
       will-change: transform;
     }
 
+    /* Step labels */
+    .step-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .step-label .step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .step-2-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 4px 0 20px;
+    }
+
     /* Cal embed */
     .cal-wrap {
       width: 100%;
@@ -157,6 +194,7 @@
   <!-- Hero -->
   <div class="hero">
     <div class="hero-badge">40 Projets réalisés <span>•</span> 10 Articles de SEO offerts</div>
+    <div class="step-label"><div class="step-num">1</div>Étape 1 : regarder cette vidéo.</div>
     <h1>Votre site-web sur-mesure en 48h,<br><em>payé uniquement si vous êtes satisfait.</em></h1>
     <p class="hero-sub">Réservez votre appel découverte gratuit — 20 minutes pour tout expliquer.</p>
   </div>
@@ -184,6 +222,8 @@
     }});
   })();
   </script>
+
+  <div class="step-2-label"><div class="step-num">2</div>Étape 2 : réserver un rendez-vous.</div>
 
   <!-- Cal.com inline -->
   <div class="cal-wrap">
