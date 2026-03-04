@@ -1,6 +1,19 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/website-pricing", "destination": "/website-pricing.html" }
+    { "source": "/website-pricing", "destination": "/website-pricing.html" },
+    { "source": "/metaform", "destination": "/metaform/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/metaform",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=300, stale-while-revalidate=60" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+    }
   ]
 }
