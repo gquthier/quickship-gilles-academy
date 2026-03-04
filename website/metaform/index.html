@@ -27,7 +27,10 @@
   <link rel="preconnect" href="https://fast.wistia.com">
   <link rel="dns-prefetch" href="https://connect.facebook.net">
 
-  <!-- Google Fonts — chargement non-bloquant (évite 500ms de render-blocking) -->
+  <!-- Preload thumbnail vidéo → améliore LCP significativement -->
+  <link rel="preload" as="image" href="https://embed-ssl.wistia.com/deliveries/fb1b547647e00f933894ff1a9349b72a38f0576d.jpg?image_crop_resized=960x540">
+
+  <!-- Google Fonts — chargement non-bloquant -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap"></noscript>
 
@@ -630,7 +633,13 @@
     <div class="vsl-wrap">
       <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
       <div class="wistia_embed wistia_async_apaamh48ky playbar=false settingsControl=false volumeControl=false"
-           style="width:100%;height:100%;"></div>
+           style="width:100%;height:100%;">
+        <!-- Thumbnail poster visible immédiatement → LCP rapide avant chargement Wistia -->
+        <img src="https://embed-ssl.wistia.com/deliveries/fb1b547647e00f933894ff1a9349b72a38f0576d.jpg?image_crop_resized=960x540"
+             alt="Vidéo QuickShip"
+             style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;"
+             fetchpriority="high">
+      </div>
       <div class="qs-playbar-track">
         <div class="qs-playbar-fill" id="qs-fill"></div>
       </div>
