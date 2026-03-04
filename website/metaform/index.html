@@ -431,16 +431,16 @@
     }
 
     /* ---- VSL ---- */
-    /* Outer div creates 16:9 ratio via padding-bottom (no Wistia interference) */
+    /* Outer: aspect-ratio creates 16:9 space. Wistia doesn't touch this element */
     .vsl-ratio {
       width: 100%;
       max-width: 640px;
+      aspect-ratio: 16/9;
       position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
       margin-bottom: 28px;
+      flex-shrink: 0;
     }
-    /* Inner wrap fills the ratio space + handles border-radius + playbar */
+    /* Inner: fills ratio space, handles border-radius + overflow for playbar */
     .vsl-wrap {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
