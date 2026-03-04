@@ -107,6 +107,27 @@
       width: 100%;
       max-width: 640px;
       margin-bottom: 28px;
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .wistia_embed { border-radius: var(--radius); }
+
+    .qs-playbar-track {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 8px;
+      background: rgba(204,255,0,0.18);
+      z-index: 10;
+    }
+    .qs-playbar-fill {
+      height: 100%;
+      width: 100%;
+      transform-origin: left;
+      transform: scaleX(0);
+      background: #ccff00;
+      will-change: transform;
     }
 
     /* Cal embed */
@@ -140,10 +161,29 @@
     <p class="hero-sub">Réservez votre appel découverte gratuit — 20 minutes pour tout expliquer.</p>
   </div>
 
-  <!-- VSL Wistia -->
+  <!-- VSL Wistia + playbar custom #ccff00 -->
   <div class="vsl-wrap">
-    <script src="https://fast.wistia.com/player.js" async></script><script src="https://fast.wistia.com/embed/apaamh48ky.js" async type="module"></script><style>wistia-player[media-id='apaamh48ky']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/apaamh48ky/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style><wistia-player media-id="apaamh48ky" aspect="1.7777777777777777"></wistia-player>
+    <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+    <div class="wistia_embed wistia_async_apaamh48ky videoFoam=true playbar=false settingsControl=false volumeControl=false"
+         style="width:100%;aspect-ratio:16/9;"></div>
+    <div class="qs-playbar-track">
+      <div class="qs-playbar-fill" id="qs-fill"></div>
+    </div>
   </div>
+  <script>
+  (function() {
+    window._wq = window._wq || [];
+    _wq.push({ id: 'apaamh48ky', onReady: function(v) {
+      var fill = document.getElementById('qs-fill');
+      function easeOut(x) { return 1 - Math.pow(1 - x, 2.8); }
+      v.bind('timechange', function(t) {
+        var d = v.duration();
+        if (!d || !fill) return;
+        fill.style.transform = 'scaleX(' + easeOut(Math.max(0, Math.min(1, t / d))) + ')';
+      });
+    }});
+  })();
+  </script>
 
   <!-- Cal.com inline -->
   <div class="cal-wrap">
