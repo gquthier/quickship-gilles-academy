@@ -110,6 +110,7 @@
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
+      aspect-ratio: 16/9;
     }
 
     .wistia_embed { border-radius: var(--radius); }
@@ -213,11 +214,19 @@
     window._wq = window._wq || [];
     _wq.push({ id: 'apaamh48ky', onReady: function(v) {
       var fill = document.getElementById('qs-fill');
-      function easeOut(x) { return 1 - Math.pow(1 - x, 2.8); }
+      var n = null; // exponent computed dynamically from video duration
       v.bind('timechange', function(t) {
         var d = v.duration();
         if (!d || !fill) return;
-        fill.style.transform = 'scaleX(' + easeOut(Math.max(0, Math.min(1, t / d))) + ')';
+        // Compute exponent once: ensures bar reaches ~40% at t=60s
+        // Formula: solve 1-(1-60/d)^n = 0.4 → n = log(0.6)/log(1-60/d)
+        if (n === null) {
+          var x60 = Math.max(0.01, Math.min(0.9, 60 / d));
+          n = Math.log(0.6) / Math.log(1 - x60);
+          n = Math.max(1.5, Math.min(10, n));
+        }
+        var progress = 1 - Math.pow(1 - Math.max(0, Math.min(1, t / d)), n);
+        fill.style.transform = 'scaleX(' + progress + ')';
       });
     }});
   })();
