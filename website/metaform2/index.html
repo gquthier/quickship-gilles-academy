@@ -145,7 +145,8 @@
 
     /* Step labels */
     .step-label, .step-2-label {
-      display: inline-flex;
+      display: flex;
+      justify-content: center;
       align-items: center;
       gap: 10px;
       font-size: 13px;
@@ -168,6 +169,81 @@
       font-size: 11px;
       font-weight: 800;
       flex-shrink: 0;
+    }
+
+    /* ---- Social proof ---- */
+    .social-proof {
+      width: 100%;
+      max-width: 640px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--surface-border);
+    }
+    .social-proof-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .reviews-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+    .review-stars {
+      color: #f5c518;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .review-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .review-author {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    @media (min-width: 520px) {
+      .stats-row { grid-template-columns: repeat(4, 1fr); }
+      .reviews-row { flex-direction: row; }
+      .review-card { flex: 1; }
     }
 
     /* Cal embed */
@@ -199,7 +275,7 @@
     <div class="hero-badge">40 Projets réalisés <span>•</span> 10 Articles de SEO offerts</div>
     <div class="step-label"><div class="step-num">1</div>Étape 1 : regarder cette vidéo.</div>
     <h1>Votre site-web sur-mesure en 48h,<br><em>payé uniquement si vous êtes satisfait.</em></h1>
-    <p class="hero-sub">Réservez votre appel découverte gratuit — 20 minutes pour tout expliquer.</p>
+    <p class="hero-sub">Un site web professionnel qui apporte des clients en 48h - dès 490€ TTC. On s'occupe de tout. Réservez un appel design de 25min.</p>
   </div>
 
   <!-- VSL Wistia + playbar custom #ccff00 -->
@@ -260,6 +336,48 @@
       Cal.ns["appel-quickship-site-web"]("ui", {"cssVarsPerTheme":{"dark":{"cal-brand":"#ccfd00"}},"hideEventTypeDetails":true,"layout":"month_view"});
     </script>
     <!-- Cal inline embed code ends -->
+  </div>
+
+  <!-- Social Proof -->
+  <div class="social-proof">
+    <div class="social-proof-title">Ils nous font confiance</div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">Projets réalisés</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4.8★</div>
+        <div class="stat-label">Noté sur Google</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">48h</div>
+        <div class="stat-label">Délai de livraison</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Satisfait ou remboursé</div>
+      </div>
+    </div>
+
+    <div class="reviews-row">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">«&nbsp;Site livré en 40h, exactement ce que je voulais. Très pro et réactif.&nbsp;»</div>
+        <div class="review-author">Thomas B. — Site corporate</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">«&nbsp;Super résultat, mon site génère déjà des leads après 2 semaines. Je recommande.&nbsp;»</div>
+        <div class="review-author">Laura M. — E-commerce</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">«&nbsp;Rapport qualité/prix imbattable. Site optimisé SEO, bien référencé sur Google.&nbsp;»</div>
+        <div class="review-author">Marc D. — Site vitrine</div>
+      </div>
+    </div>
   </div>
 
 </body>

@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-black scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog QuickShip — Guides Sites Web, MVP, SaaS & Developpement</title>
+<meta name="description" content="Guides techniques et strategiques pour creer votre site web, lancer votre MVP, developper votre SaaS. Par QuickShip.">
+<meta property="og:title" content="Blog QuickShip">
+<meta property="og:url" content="https://www.quickship.fun/blog">
+<link rel="canonical" href="https://www.quickship.fun/blog">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        bg: '#0A0A0A', surface: '#111111', accent: '#CCFF00',
+        'text-primary': '#EFEFEF', 'text-secondary': '#888888',
+      },
+      fontFamily: {
+        display: ['Clash Display', 'Inter', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<style>
+.article-card.hidden-filter { display: none; }
+.filter-btn.active { background: #CCFF00; color: black; }
+</style>
+</head>
+<body class="bg-[#0A0A0A] text-[#EFEFEF]" style="font-family:Inter,sans-serif">
+
+<!-- Nav -->
+<nav class="border-b border-[#262626] py-4">
+<div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+<a href="/" class="flex items-center gap-2">
+<img src="/logo.svg" alt="QuickShip" class="h-8" onerror="this.style.display='none'">
+<span class="font-bold text-xl" style="font-family:'Clash Display',sans-serif">QuickShip</span>
+</a>
+<div class="flex items-center gap-6">
+<a href="/blog" class="text-[#CCFF00] text-sm font-bold">Blog</a>
+<a href="https://cal.com/dutygroup/appel-quickship-site-web" target="_blank" class="bg-[#CCFF00] text-black font-bold px-4 py-2 text-sm hover:bg-[#B8E600] transition-colors">Reserver un Appel</a>
+</div>
+</div>
+</nav>
+
+<!-- Hero -->
+<section class="py-16 md:py-20 border-b border-[#262626]">
+<div class="max-w-6xl mx-auto px-6 text-center">
+<div class="inline-block bg-[#CCFF00]/10 border border-[#CCFF00]/20 px-4 py-1 mb-6">
+<span class="text-[#CCFF00] text-sm font-bold uppercase tracking-wider">Blog</span>
+</div>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style="font-family:'Clash Display',sans-serif">
+Guides Sites Web, MVP <br class="hidden md:block">&amp; Developpement
+</h1>
+<p class="text-[#888888] text-lg max-w-2xl mx-auto mb-8">
+150 articles pour creer votre site web, lancer votre MVP et developper votre business digital.
+</p>
+
+<!-- Search -->
+<div class="max-w-xl mx-auto relative">
+<input type="text" id="search-input" placeholder="Rechercher un article..." class="w-full bg-[#111111] border border-[#262626] text-[#EFEFEF] px-5 py-3 pl-12 focus:border-[#CCFF00] focus:outline-none transition-colors" style="font-family:Inter,sans-serif">
+<svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#888888]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+</div>
+</div>
+</section>
+
+<!-- Filters -->
+<section class="border-b border-[#262626] py-4">
+<div class="max-w-6xl mx-auto px-6">
+<div class="flex flex-wrap gap-2" id="filter-buttons">
+<button class="filter-btn active bg-[#CCFF00] text-black font-bold px-4 py-2 text-sm transition-colors" data-filter="all">Tous</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-4 py-2 text-sm transition-colors" data-filter="section-dev">MVP & Dev</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-4 py-2 text-sm transition-colors" data-filter="section-web">Sites Web</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="analytics">Analytics</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="avance">Fonctions Avancees</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="comparison">Comparatifs</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="conversion">Conversion</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="creation">Creation Web</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="design">Design & UX</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="growth">Growth</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="legal">Legal & RGPD</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="maintenance">Maintenance</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="mobile">Mobile</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="mvp">MVP & Startup</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="nocode">No-Code</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="prestataire">Prestataires</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="pricing">Budget Dev</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="prix">Prix & Devis</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="process">Process & Methodo</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="refonte">Refonte</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="saas">SaaS</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="secteur">Par Secteur</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="seo">SEO</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="startup">Startup</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="tech">Stack Technique</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="technique">Technique</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="techno">Technologies</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="types">Types de Sites</button>
+<button class="filter-btn bg-[#262626] text-[#888888] hover:text-[#EFEFEF] font-bold px-3 py-1 text-xs transition-colors" data-filter="webapp">Web App</button>
+
+</div>
+</div>
+</section>
+
+<!-- Articles count -->
+<div class="max-w-6xl mx-auto px-6 py-4">
+<p class="text-[#888888] text-sm"><span id="article-count">150</span> articles</p>
+</div>
+
+<!-- Articles Grid -->
+<section class="max-w-6xl mx-auto px-6 pb-20">
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="articles-grid">
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mvp" data-section="dev" data-title="créer un mvp : le guide complet 2026">
+<a href="/blog/creer-mvp-guide-complet-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Créer un MVP : Le Guide Complet 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">MVP & Startup</span>
+<span class="text-[#888888] text-xs">2026-03-06</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Créer un MVP : Le Guide Complet 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mvp" data-section="dev" data-title="mvp en 48h : est-ce vraiment possible ?">
+<a href="/blog/mvp-en-48h-est-ce-possible" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="MVP en 48h : Est-ce Vraiment Possible ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">MVP & Startup</span>
+<span class="text-[#888888] text-xs">2026-03-05</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">MVP en 48h : Est-ce Vraiment Possible ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="pricing" data-section="dev" data-title="combien coûte un mvp en 2026 ? tarifs réels">
+<a href="/blog/combien-coute-un-mvp-en-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Combien Coûte un MVP en 2026 ? Tarifs Réels" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Budget Dev</span>
+<span class="text-[#888888] text-xs">2026-03-04</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Combien Coûte un MVP en 2026 ? Tarifs Réels</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mvp" data-section="dev" data-title="mvp startup : les 10 erreurs qui tuéent votre projet">
+<a href="/blog/mvp-startup-erreurs-a-eviter" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="MVP Startup : Les 10 Erreurs qui Tuéent votre Projet" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">MVP & Startup</span>
+<span class="text-[#888888] text-xs">2026-03-03</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">MVP Startup : Les 10 Erreurs qui Tuéent votre Projet</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mvp" data-section="dev" data-title="mvp vs prototype vs poc : quelle différence ?">
+<a href="/blog/mvp-vs-prototype-vs-poc" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="MVP vs Prototype vs POC : Quelle Différence ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">MVP & Startup</span>
+<span class="text-[#888888] text-xs">2026-03-02</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">MVP vs Prototype vs POC : Quelle Différence ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="valider son idée de startup avant de coder">
+<a href="/blog/valider-idee-startup-avant-coder" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Valider son Idée de Startup Avant de Coder" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2026-03-01</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Valider son Idée de Startup Avant de Coder</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="product market fit : comment le trouver et le mesurer">
+<a href="/blog/product-market-fit-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Product Market Fit : Comment le Trouver et le Mesurer" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2026-02-28</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Product Market Fit : Comment le Trouver et le Mesurer</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="méthode lean startup en 2026 : ce qui a changé">
+<a href="/blog/lean-startup-methode-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Méthode Lean Startup en 2026 : Ce qui a Changé" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2026-02-27</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Méthode Lean Startup en 2026 : Ce qui a Changé</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="développer un saas de zéro : roadmap complète">
+<a href="/blog/developper-saas-de-zero" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Développer un SaaS de Zéro : Roadmap Complète" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-02-26</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Développer un SaaS de Zéro : Roadmap Complète</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="créer un saas sans cto : guide pratique">
+<a href="/blog/creer-saas-sans-cto" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Créer un SaaS sans CTO : Guide Pratique" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-02-25</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Créer un SaaS sans CTO : Guide Pratique</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="saas sur mesure vs template : quel choix ?">
+<a href="/blog/saas-sur-mesure-vs-template" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="SaaS sur Mesure vs Template : Quel Choix ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-02-24</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">SaaS sur Mesure vs Template : Quel Choix ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="architecture saas multi-tenant : guide technique">
+<a href="/blog/architecture-saas-multi-tenant" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Architecture SaaS Multi-Tenant : Guide Technique" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-02-23</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Architecture SaaS Multi-Tenant : Guide Technique</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="monétiser un saas : 7 modèles de pricing qui marchent">
+<a href="/blog/monetiser-saas-modeles-pricing" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Monétiser un SaaS : 7 Modèles de Pricing qui Marchent" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-02-22</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Monétiser un SaaS : 7 Modèles de Pricing qui Marchent</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="saas metrics : les kpi essentiels pour piloter sa croissance">
+<a href="/blog/saas-metrics-kpi-essentiels" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="SaaS Metrics : Les KPI Essentiels pour Piloter sa Croissance" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-02-21</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">SaaS Metrics : Les KPI Essentiels pour Piloter sa Croissance</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="churn rate saas : comment le réduire de 50%">
+<a href="/blog/churn-rate-saas-reduire" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Churn Rate SaaS : Comment le Réduire de 50%" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-02-20</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Churn Rate SaaS : Comment le Réduire de 50%</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="pricing" data-section="dev" data-title="prix développement application web en 2026">
+<a href="/blog/prix-developpement-application-web-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Prix Développement Application Web en 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Budget Dev</span>
+<span class="text-[#888888] text-xs">2026-02-19</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Prix Développement Application Web en 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="pricing" data-section="dev" data-title="coût application mobile en france : guide complet">
+<a href="/blog/cout-application-mobile-france" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Coût Application Mobile en France : Guide Complet" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Budget Dev</span>
+<span class="text-[#888888] text-xs">2026-02-18</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Coût Application Mobile en France : Guide Complet</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="pricing" data-section="dev" data-title="budget startup tech : combien prévoir la première année">
+<a href="/blog/budget-startup-tech-premier-an" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Budget Startup Tech : Combien Prévoir la Première Année" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Budget Dev</span>
+<span class="text-[#888888] text-xs">2026-02-17</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Budget Startup Tech : Combien Prévoir la Première Année</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="pricing" data-section="dev" data-title="devis application web : comment le décrypter">
+<a href="/blog/devis-application-web-comprendre" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Devis Application Web : Comment le Décrypter" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Budget Dev</span>
+<span class="text-[#888888] text-xs">2026-02-16</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Devis Application Web : Comment le Décrypter</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="pricing" data-section="dev" data-title="réduire les coûts de développement de 60%">
+<a href="/blog/reduire-couts-developpement-application" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Réduire les Coûts de Développement de 60%" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Budget Dev</span>
+<span class="text-[#888888] text-xs">2026-02-15</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Réduire les Coûts de Développement de 60%</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="webapp" data-section="dev" data-title="développement application web : les étapes clés">
+<a href="/blog/developpement-application-web-etapes" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Développement Application Web : Les Étapes Clés" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Web App</span>
+<span class="text-[#888888] text-xs">2026-02-14</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Développement Application Web : Les Étapes Clés</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="webapp" data-section="dev" data-title="progressive web app : pourquoi et comment en 2026">
+<a href="/blog/progressive-web-app-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Progressive Web App : Pourquoi et Comment en 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Web App</span>
+<span class="text-[#888888] text-xs">2026-02-13</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Progressive Web App : Pourquoi et Comment en 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="webapp" data-section="dev" data-title="application web responsive : l'approche mobile-first">
+<a href="/blog/application-web-responsive-mobile-first" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Application Web Responsive : L'Approche Mobile-First" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Web App</span>
+<span class="text-[#888888] text-xs">2026-02-12</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Application Web Responsive : L'Approche Mobile-First</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="webapp" data-section="dev" data-title="spa vs mpa : quelle architecture choisir ?">
+<a href="/blog/single-page-application-vs-multi-page" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="SPA vs MPA : Quelle Architecture Choisir ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Web App</span>
+<span class="text-[#888888] text-xs">2026-02-11</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">SPA vs MPA : Quelle Architecture Choisir ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="api rest vs graphql : guide du choix backend">
+<a href="/blog/api-rest-graphql-backend" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="API REST vs GraphQL : Guide du Choix Backend" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-02-10</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">API REST vs GraphQL : Guide du Choix Backend</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mobile" data-section="dev" data-title="app mobile native vs cross-platform : le verdict 2026">
+<a href="/blog/application-mobile-native-vs-cross-platform" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="App Mobile Native vs Cross-Platform : Le Verdict 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Mobile</span>
+<span class="text-[#888888] text-xs">2026-02-09</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">App Mobile Native vs Cross-Platform : Le Verdict 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mobile" data-section="dev" data-title="react native vs flutter en 2026 : comparatif complet">
+<a href="/blog/react-native-vs-flutter-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="React Native vs Flutter en 2026 : Comparatif Complet" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Mobile</span>
+<span class="text-[#888888] text-xs">2026-02-08</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">React Native vs Flutter en 2026 : Comparatif Complet</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mobile" data-section="dev" data-title="créer une application mobile ios et android">
+<a href="/blog/creer-application-mobile-ios-android" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Créer une Application Mobile iOS et Android" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Mobile</span>
+<span class="text-[#888888] text-xs">2026-02-07</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Créer une Application Mobile iOS et Android</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mobile" data-section="dev" data-title="publier une app sur l'app store et google play">
+<a href="/blog/publier-application-app-store-google-play" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Publier une App sur l'App Store et Google Play" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Mobile</span>
+<span class="text-[#888888] text-xs">2026-02-06</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Publier une App sur l'App Store et Google Play</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mobile" data-section="dev" data-title="application mobile offline-first : architecture et implémentation">
+<a href="/blog/application-mobile-offline-first" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Application Mobile Offline-First : Architecture et Implémentation" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Mobile</span>
+<span class="text-[#888888] text-xs">2026-02-05</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Application Mobile Offline-First : Architecture et Implémentation</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="nocode" data-section="dev" data-title="no-code vs code : le comparatif honnête 2026">
+<a href="/blog/no-code-vs-code-comparatif" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="No-Code vs Code : Le Comparatif Honnête 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">No-Code</span>
+<span class="text-[#888888] text-xs">2026-02-04</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">No-Code vs Code : Le Comparatif Honnête 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="nocode" data-section="dev" data-title="limites du no-code (bubble, webflow) : la vérité">
+<a href="/blog/limites-no-code-bubble-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Limites du No-Code (Bubble, Webflow) : La Vérité" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">No-Code</span>
+<span class="text-[#888888] text-xs">2026-02-03</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Limites du No-Code (Bubble, Webflow) : La Vérité</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="nocode" data-section="dev" data-title="migration no-code vers code : quand et comment">
+<a href="/blog/migration-no-code-vers-code" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Migration No-Code vers Code : Quand et Comment" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">No-Code</span>
+<span class="text-[#888888] text-xs">2026-02-02</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Migration No-Code vers Code : Quand et Comment</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="nocode" data-section="dev" data-title="bubble vs développement sur mesure : analyse complète">
+<a href="/blog/bubble-vs-developpement-sur-mesure" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bubble vs Développement Sur Mesure : Analyse Complète" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">No-Code</span>
+<span class="text-[#888888] text-xs">2026-02-01</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Bubble vs Développement Sur Mesure : Analyse Complète</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="nocode" data-section="dev" data-title="quand passer du no-code au code ? les signaux">
+<a href="/blog/quand-passer-no-code-au-code" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Quand Passer du No-Code au Code ? Les Signaux" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">No-Code</span>
+<span class="text-[#888888] text-xs">2026-01-31</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Quand Passer du No-Code au Code ? Les Signaux</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="cto freelance : trouver le bon pour votre startup">
+<a href="/blog/cto-freelance-startup" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="CTO Freelance : Trouver le Bon pour votre Startup" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2026-01-30</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">CTO Freelance : Trouver le Bon pour votre Startup</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="trouver un cofondateur technique : guide 2026">
+<a href="/blog/cofondateur-technique-trouver" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Trouver un Cofondateur Technique : Guide 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2026-01-29</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Trouver un Cofondateur Technique : Guide 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="lever des fonds avec un mvp : ce que veulent les vcs">
+<a href="/blog/lever-fonds-avec-mvp" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lever des Fonds avec un MVP : Ce que Veulent les VCs" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2026-01-28</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Lever des Fonds avec un MVP : Ce que Veulent les VCs</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="pitch deck startup tech : template et conseils">
+<a href="/blog/pitch-deck-startup-tech" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pitch Deck Startup Tech : Template et Conseils" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2026-01-27</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Pitch Deck Startup Tech : Template et Conseils</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="incubateurs et accélérateurs en france : le guide 2026">
+<a href="/blog/incubateur-accelerateur-france-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Incubateurs et Accélérateurs en France : Le Guide 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2026-01-26</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Incubateurs et Accélérateurs en France : Le Guide 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="next.js : pourquoi c'est le framework #1 en 2026">
+<a href="/blog/nextjs-pourquoi-choisir-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Next.js : Pourquoi C'est le Framework #1 en 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-25</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Next.js : Pourquoi C'est le Framework #1 en 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="supabase vs firebase : quel backend choisir ?">
+<a href="/blog/supabase-vs-firebase-backend" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Supabase vs Firebase : Quel Backend Choisir ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-24</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Supabase vs Firebase : Quel Backend Choisir ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="tailwind css : pourquoi ça accélère le développement de 3x">
+<a href="/blog/tailwind-css-productivite" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Tailwind CSS : Pourquoi Ça Accélère le Développement de 3x" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-23</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Tailwind CSS : Pourquoi Ça Accélère le Développement de 3x</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="typescript : pourquoi l'adopter pour votre projet">
+<a href="/blog/typescript-avantages-projet" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="TypeScript : Pourquoi l'Adopter pour votre Projet" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-22</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">TypeScript : Pourquoi l'Adopter pour votre Projet</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="stack technique startup 2026 : les meilleurs choix">
+<a href="/blog/stack-technique-startup-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Stack Technique Startup 2026 : Les Meilleurs Choix" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-21</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Stack Technique Startup 2026 : Les Meilleurs Choix</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="vercel : déployer une application en 5 minutes">
+<a href="/blog/vercel-deploiement-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Vercel : Déployer une Application en 5 Minutes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-20</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Vercel : Déployer une Application en 5 Minutes</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="postgresql vs mongodb : quelle base de données ?">
+<a href="/blog/postgresql-vs-mongodb-choix" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="PostgreSQL vs MongoDB : Quelle Base de Données ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-19</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">PostgreSQL vs MongoDB : Quelle Base de Données ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="intégrer stripe : guide complet paiement en ligne">
+<a href="/blog/stripe-integration-paiement" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Intégrer Stripe : Guide Complet Paiement en Ligne" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-18</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Intégrer Stripe : Guide Complet Paiement en Ligne</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="authentification web : oauth, jwt, magic links">
+<a href="/blog/authentification-application-web-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Authentification Web : OAuth, JWT, Magic Links" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-17</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Authentification Web : OAuth, JWT, Magic Links</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="hébergement application web : vercel vs aws vs railway">
+<a href="/blog/hebergement-application-web-comparatif" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Hébergement Application Web : Vercel vs AWS vs Railway" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-16</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Hébergement Application Web : Vercel vs AWS vs Railway</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="comparison" data-section="dev" data-title="agence de développement vs freelance : quel choix ?">
+<a href="/blog/agence-developpement-vs-freelance" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Agence de Développement vs Freelance : Quel Choix ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Comparatifs</span>
+<span class="text-[#888888] text-xs">2026-01-15</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Agence de Développement vs Freelance : Quel Choix ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="comparison" data-section="dev" data-title="développement offshore vs france : analyse complète">
+<a href="/blog/developpement-offshore-vs-france" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Développement Offshore vs France : Analyse Complète" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Comparatifs</span>
+<span class="text-[#888888] text-xs">2026-01-14</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Développement Offshore vs France : Analyse Complète</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="comparison" data-section="dev" data-title="meilleures agences développement mvp en france 2026">
+<a href="/blog/meilleure-agence-developpement-mvp-france" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Meilleures Agences Développement MVP en France 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Comparatifs</span>
+<span class="text-[#888888] text-xs">2026-01-13</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Meilleures Agences Développement MVP en France 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="comparison" data-section="dev" data-title="freelance développeur web : tarifs 2026">
+<a href="/blog/freelance-developpeur-web-tarif-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Freelance Développeur Web : Tarifs 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Comparatifs</span>
+<span class="text-[#888888] text-xs">2026-01-12</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Freelance Développeur Web : Tarifs 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="process" data-section="dev" data-title="cahier des charges application web : template gratuit">
+<a href="/blog/cahier-des-charges-application-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cahier des Charges Application Web : Template Gratuit" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Process & Methodo</span>
+<span class="text-[#888888] text-xs">2026-01-11</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Cahier des Charges Application Web : Template Gratuit</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="process" data-section="dev" data-title="wireframes et maquettes : guide pour non-designers">
+<a href="/blog/wireframe-maquette-application" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wireframes et Maquettes : Guide pour Non-Designers" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Process & Methodo</span>
+<span class="text-[#888888] text-xs">2026-01-10</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Wireframes et Maquettes : Guide pour Non-Designers</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="process" data-section="dev" data-title="méthodologie agile/scrum pour votre développement">
+<a href="/blog/methodologie-agile-scrum-developpement" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Méthodologie Agile/Scrum pour votre Développement" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Process & Methodo</span>
+<span class="text-[#888888] text-xs">2026-01-09</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Méthodologie Agile/Scrum pour votre Développement</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="process" data-section="dev" data-title="tests et qualité application web : guide complet">
+<a href="/blog/tests-qualite-application-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Tests et Qualité Application Web : Guide Complet" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Process & Methodo</span>
+<span class="text-[#888888] text-xs">2026-01-08</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Tests et Qualité Application Web : Guide Complet</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="ci/cd : déploiement continu pour startups">
+<a href="/blog/deploiement-continu-ci-cd" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="CI/CD : Déploiement Continu pour Startups" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-07</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">CI/CD : Déploiement Continu pour Startups</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="sécurité application web : top 10 owasp 2026">
+<a href="/blog/securite-application-web-owasp" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sécurité Application Web : Top 10 OWASP 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2026-01-06</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Sécurité Application Web : Top 10 OWASP 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="legal" data-section="web" data-title="rgpd et application web : checklist conformité">
+<a href="/blog/rgpd-application-web-conformite" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=800" alt="RGPD et Application Web : Checklist Conformité" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Legal & RGPD</span>
+<span class="text-[#888888] text-xs">2026-01-05</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">RGPD et Application Web : Checklist Conformité</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="legal" data-section="web" data-title="mentions légales et cgu pour votre application">
+<a href="/blog/mentions-legales-cgu-application" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mentions Légales et CGU pour votre Application" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Legal & RGPD</span>
+<span class="text-[#888888] text-xs">2026-01-04</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Mentions Légales et CGU pour votre Application</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="lancer un saas : la checklist des 50 étapes">
+<a href="/blog/lancer-saas-checklist-complete" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lancer un SaaS : La Checklist des 50 Étapes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-01-03</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Lancer un SaaS : La Checklist des 50 Étapes</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="saas b2b vs b2c : stratégies de développement différentes">
+<a href="/blog/saas-b2b-vs-b2c-differences" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="SaaS B2B vs B2C : Stratégies de Développement Différentes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2026-01-02</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">SaaS B2B vs B2C : Stratégies de Développement Différentes</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="webapp" data-section="dev" data-title="créer une marketplace : guide technique et business">
+<a href="/blog/marketplace-creation-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Créer une Marketplace : Guide Technique et Business" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Web App</span>
+<span class="text-[#888888] text-xs">2026-01-01</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Créer une Marketplace : Guide Technique et Business</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="webapp" data-section="dev" data-title="application e-commerce sur mesure vs shopify">
+<a href="/blog/application-e-commerce-sur-mesure" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Application E-Commerce Sur Mesure vs Shopify" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Web App</span>
+<span class="text-[#888888] text-xs">2025-12-31</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Application E-Commerce Sur Mesure vs Shopify</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="webapp" data-section="dev" data-title="créer un dashboard analytics : guide complet">
+<a href="/blog/dashboard-analytics-creation" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Créer un Dashboard Analytics : Guide Complet" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Web App</span>
+<span class="text-[#888888] text-xs">2025-12-30</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Créer un Dashboard Analytics : Guide Complet</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="chatbot ia : comment l'intégrer à votre application">
+<a href="/blog/chatbot-ia-integrer-application" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Chatbot IA : Comment l'Intégrer à votre Application" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-29</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Chatbot IA : Comment l'Intégrer à votre Application</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="ia générative : intégrer chatgpt à votre saas">
+<a href="/blog/ia-generative-integration-saas" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="IA Générative : Intégrer ChatGPT à votre SaaS" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-28</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">IA Générative : Intégrer ChatGPT à votre SaaS</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="automatisation business : zapier, make et n8n">
+<a href="/blog/automatisation-business-zapier-make" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Automatisation Business : Zapier, Make et N8N" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-27</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Automatisation Business : Zapier, Make et N8N</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="growth hacking saas : 15 stratégies qui marchent">
+<a href="/blog/growth-hacking-saas-strategies" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Growth Hacking SaaS : 15 Stratégies qui Marchent" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-26</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Growth Hacking SaaS : 15 Stratégies qui Marchent</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="acquérir ses 100 premiers utilisateurs saas">
+<a href="/blog/acquisition-premiers-utilisateurs-saas" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Acquérir ses 100 Premiers Utilisateurs SaaS" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-25</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Acquérir ses 100 Premiers Utilisateurs SaaS</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="seo pour saas : la stratégie qui génère des leads">
+<a href="/blog/seo-saas-strategy" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="SEO pour SaaS : La Stratégie qui Génère des Leads" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-24</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">SEO pour SaaS : La Stratégie qui Génère des Leads</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="content marketing pour startup tech : guide complet">
+<a href="/blog/content-marketing-startup-tech" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Content Marketing pour Startup Tech : Guide Complet" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-23</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Content Marketing pour Startup Tech : Guide Complet</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="product-led growth : faire croître un saas par le produit">
+<a href="/blog/product-led-growth-saas" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Product-Led Growth : Faire Croître un SaaS par le Produit" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-22</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Product-Led Growth : Faire Croître un SaaS par le Produit</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="onboarding utilisateurs saas : convertir les essais en clients">
+<a href="/blog/onboarding-utilisateurs-saas" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Onboarding Utilisateurs SaaS : Convertir les Essais en Clients" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-21</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Onboarding Utilisateurs SaaS : Convertir les Essais en Clients</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="landing page saas : les éléments qui convertissent">
+<a href="/blog/landing-page-saas-convertir" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Landing Page SaaS : Les Éléments qui Convertissent" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-20</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Landing Page SaaS : Les Éléments qui Convertissent</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="a/b testing application web : méthodologie complète">
+<a href="/blog/a-b-testing-application-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="A/B Testing Application Web : Méthodologie Complète" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-19</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">A/B Testing Application Web : Méthodologie Complète</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="analytics application web : les outils essentiels">
+<a href="/blog/analytics-application-web-outils" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Analytics Application Web : Les Outils Essentiels" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-18</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Analytics Application Web : Les Outils Essentiels</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="scalabilité application web : préparer la croissance">
+<a href="/blog/scalabilite-application-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Scalabilité Application Web : Préparer la Croissance" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-17</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Scalabilité Application Web : Préparer la Croissance</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="dette technique : comment la gérer sans couler">
+<a href="/blog/dette-technique-gerer" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dette Technique : Comment la Gérer Sans Couler" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-16</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Dette Technique : Comment la Gérer Sans Couler</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="refactoring : moderniser une application legacy">
+<a href="/blog/refactoring-application-legacy" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Refactoring : Moderniser une Application Legacy" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-15</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Refactoring : Moderniser une Application Legacy</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="microservices vs monolithe : le bon choix en 2026">
+<a href="/blog/microservices-vs-monolithe" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Microservices vs Monolithe : Le Bon Choix en 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-14</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Microservices vs Monolithe : Le Bon Choix en 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="architecture serverless : guide complet pour startups">
+<a href="/blog/serverless-architecture-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Architecture Serverless : Guide Complet pour Startups" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-13</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Architecture Serverless : Guide Complet pour Startups</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="design" data-section="web" data-title="créer un design system pour votre application">
+<a href="/blog/design-system-creer-application" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Créer un Design System pour votre Application" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Design & UX</span>
+<span class="text-[#888888] text-xs">2025-12-12</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Créer un Design System pour votre Application</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="design" data-section="web" data-title="ux design application web : les 10 principes clés">
+<a href="/blog/ux-design-application-web-principes" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="UX Design Application Web : Les 10 Principes Clés" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Design & UX</span>
+<span class="text-[#888888] text-xs">2025-12-11</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">UX Design Application Web : Les 10 Principes Clés</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="design" data-section="web" data-title="tendances ui 2026 : ce qui convertit vraiment">
+<a href="/blog/ui-tendances-2026-application" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Tendances UI 2026 : Ce qui Convertit Vraiment" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Design & UX</span>
+<span class="text-[#888888] text-xs">2025-12-10</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Tendances UI 2026 : Ce qui Convertit Vraiment</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="design" data-section="web" data-title="accessibilité web wcag : le guide pour développeurs">
+<a href="/blog/accessibilite-web-wcag-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Accessibilité Web WCAG : Le Guide pour Développeurs" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Design & UX</span>
+<span class="text-[#888888] text-xs">2025-12-09</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Accessibilité Web WCAG : Le Guide pour Développeurs</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="design" data-section="web" data-title="dark mode : pourquoi et comment l'implémenter">
+<a href="/blog/dark-mode-implementation-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dark Mode : Pourquoi et Comment l'Implémenter" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Design & UX</span>
+<span class="text-[#888888] text-xs">2025-12-08</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Dark Mode : Pourquoi et Comment l'Implémenter</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="performance web : optimiser pour un score lighthouse 100">
+<a href="/blog/performance-web-optimisation" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Performance Web : Optimiser pour un Score Lighthouse 100" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-07</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Performance Web : Optimiser pour un Score Lighthouse 100</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="growth" data-section="dev" data-title="temps de chargement : l'impact sur vos conversions">
+<a href="/blog/temps-chargement-impact-conversion" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Temps de Chargement : L'Impact sur vos Conversions" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Growth</span>
+<span class="text-[#888888] text-xs">2025-12-06</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Temps de Chargement : L'Impact sur vos Conversions</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="tech" data-section="dev" data-title="application temps réel : websocket et server-sent events">
+<a href="/blog/application-temps-reel-websocket" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Application Temps Réel : WebSocket et Server-Sent Events" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span>
+<span class="text-[#888888] text-xs">2025-12-05</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Application Temps Réel : WebSocket et Server-Sent Events</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="paiement en ligne saas : stripe, paddle, lemonsqueezy">
+<a href="/blog/paiement-en-ligne-saas-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Paiement en Ligne SaaS : Stripe, Paddle, LemonSqueezy" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2025-12-04</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Paiement en Ligne SaaS : Stripe, Paddle, LemonSqueezy</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="saas" data-section="dev" data-title="multi-tenant saas : l'architecture qui scale">
+<a href="/blog/multi-tenant-saas-architecture" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Multi-Tenant SaaS : L'Architecture qui Scale" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span>
+<span class="text-[#888888] text-xs">2025-12-03</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Multi-Tenant SaaS : L'Architecture qui Scale</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mvp" data-section="dev" data-title="mvp : comment prioriser ses features (framework moscow)">
+<a href="/blog/mvp-features-prioritiser" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="MVP : Comment Prioriser ses Features (Framework MoSCoW)" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">MVP & Startup</span>
+<span class="text-[#888888] text-xs">2025-12-02</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">MVP : Comment Prioriser ses Features (Framework MoSCoW)</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mvp" data-section="dev" data-title="user story mapping : planifier son mvp efficacement">
+<a href="/blog/user-story-mapping-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="User Story Mapping : Planifier son MVP Efficacement" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">MVP & Startup</span>
+<span class="text-[#888888] text-xs">2025-12-01</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">User Story Mapping : Planifier son MVP Efficacement</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="mvp" data-section="dev" data-title="feedback utilisateur mvp : comment le collecter et l'analyser">
+<a href="/blog/feedback-utilisateur-mvp-collecter" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Feedback Utilisateur MVP : Comment le Collecter et l'Analyser" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">MVP & Startup</span>
+<span class="text-[#888888] text-xs">2025-11-30</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Feedback Utilisateur MVP : Comment le Collecter et l'Analyser</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="pivoter sa startup : quand et comment">
+<a href="/blog/pivoter-startup-quand-comment" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pivoter sa Startup : Quand et Comment" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2025-11-29</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Pivoter sa Startup : Quand et Comment</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="analyse concurrentielle startup : méthodologie complète">
+<a href="/blog/concurrence-analyse-startup" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Analyse Concurrentielle Startup : Méthodologie Complète" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2025-11-28</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Analyse Concurrentielle Startup : Méthodologie Complète</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="startup" data-section="dev" data-title="business model canvas : template et guide pratique">
+<a href="/blog/business-model-canvas-startup" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Business Model Canvas : Template et Guide Pratique" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span>
+<span class="text-[#888888] text-xs">2025-11-27</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Business Model Canvas : Template et Guide Pratique</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="creation" data-section="web" data-title="création de site web sur mesure : le guide complet 2026">
+<a href="/blog/creation-site-web-sur-mesure-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Création de Site Web Sur Mesure : Le Guide Complet 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Creation Web</span>
+<span class="text-[#888888] text-xs">2025-11-26</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Création de Site Web Sur Mesure : Le Guide Complet 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="creation" data-section="web" data-title="site web sur mesure vs template : quel choix pour votre entreprise ?">
+<a href="/blog/site-web-sur-mesure-vs-template" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Web Sur Mesure vs Template : Quel Choix pour Votre Entreprise ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Creation Web</span>
+<span class="text-[#888888] text-xs">2025-11-25</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Web Sur Mesure vs Template : Quel Choix pour Votre Entreprise ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="prix" data-section="web" data-title="combien coûte un site web sur mesure en 2026 ?">
+<a href="/blog/combien-coute-un-site-web-sur-mesure" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Combien Coûte un Site Web Sur Mesure en 2026 ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Prix & Devis</span>
+<span class="text-[#888888] text-xs">2025-11-24</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Combien Coûte un Site Web Sur Mesure en 2026 ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="prix" data-section="web" data-title="prix création site internet professionnel : tarifs et budget">
+<a href="/blog/prix-creation-site-internet-professionnel" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Prix Création Site Internet Professionnel : Tarifs et Budget" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Prix & Devis</span>
+<span class="text-[#888888] text-xs">2025-11-23</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Prix Création Site Internet Professionnel : Tarifs et Budget</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="prix" data-section="web" data-title="devis site web : comment comprendre et comparer les offres">
+<a href="/blog/devis-site-web-comprendre-et-comparer" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Devis Site Web : Comment Comprendre et Comparer les Offres" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Prix & Devis</span>
+<span class="text-[#888888] text-xs">2025-11-22</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Devis Site Web : Comment Comprendre et Comparer les Offres</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="prestataire" data-section="web" data-title="agence web vs freelance : qui choisir pour votre site ?">
+<a href="/blog/agence-web-vs-freelance-site-internet" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Agence Web vs Freelance : Qui Choisir pour Votre Site ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Prestataires</span>
+<span class="text-[#888888] text-xs">2025-11-21</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Agence Web vs Freelance : Qui Choisir pour Votre Site ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="prestataire" data-section="web" data-title="comment choisir la bonne agence de création de site web">
+<a href="/blog/choisir-agence-creation-site-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Comment Choisir la Bonne Agence de Création de Site Web" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Prestataires</span>
+<span class="text-[#888888] text-xs">2025-11-20</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Comment Choisir la Bonne Agence de Création de Site Web</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="types" data-section="web" data-title="site vitrine professionnel : pourquoi et comment en créer un">
+<a href="/blog/site-vitrine-professionnel-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/39284/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Vitrine Professionnel : Pourquoi et Comment en Créer Un" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Types de Sites</span>
+<span class="text-[#888888] text-xs">2025-11-19</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Vitrine Professionnel : Pourquoi et Comment en Créer Un</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="types" data-section="web" data-title="site e-commerce sur mesure : avantages et fonctionnalités clés">
+<a href="/blog/site-e-commerce-sur-mesure" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/39284/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site E-commerce Sur Mesure : Avantages et Fonctionnalités Clés" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Types de Sites</span>
+<span class="text-[#888888] text-xs">2025-11-18</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site E-commerce Sur Mesure : Avantages et Fonctionnalités Clés</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="types" data-section="web" data-title="création de site web pour pme/tpe : guide pratique 2026">
+<a href="/blog/site-web-pme-tpe-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/39284/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Création de Site Web pour PME/TPE : Guide Pratique 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Types de Sites</span>
+<span class="text-[#888888] text-xs">2025-11-17</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Création de Site Web pour PME/TPE : Guide Pratique 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="refonte" data-section="web" data-title="refonte de site web : quand et comment refondre votre site">
+<a href="/blog/refonte-site-web-quand-comment" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Refonte de Site Web : Quand et Comment Refondre Votre Site" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Refonte</span>
+<span class="text-[#888888] text-xs">2025-11-16</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Refonte de Site Web : Quand et Comment Refondre Votre Site</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="refonte" data-section="web" data-title="migration de site web sans perdre votre seo : guide étape par étape">
+<a href="/blog/migration-site-web-sans-perdre-seo" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Migration de Site Web Sans Perdre Votre SEO : Guide Étape par Étape" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Refonte</span>
+<span class="text-[#888888] text-xs">2025-11-15</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Migration de Site Web Sans Perdre Votre SEO : Guide Étape par Étape</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="technique" data-section="web" data-title="site web responsive et mobile-first : standard incontournable 2026">
+<a href="/blog/site-web-responsive-mobile-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Web Responsive et Mobile-First : Standard Incontournable 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technique</span>
+<span class="text-[#888888] text-xs">2025-11-14</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Web Responsive et Mobile-First : Standard Incontournable 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="technique" data-section="web" data-title="performance site web : optimiser la vitesse de chargement">
+<a href="/blog/performance-site-web-vitesse-chargement" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Performance Site Web : Optimiser la Vitesse de Chargement" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technique</span>
+<span class="text-[#888888] text-xs">2025-11-13</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Performance Site Web : Optimiser la Vitesse de Chargement</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="technique" data-section="web" data-title="sécurité site web : https, ssl et bonnes pratiques">
+<a href="/blog/securite-site-web-https-ssl" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sécurité Site Web : HTTPS, SSL et Bonnes Pratiques" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technique</span>
+<span class="text-[#888888] text-xs">2025-11-12</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Sécurité Site Web : HTTPS, SSL et Bonnes Pratiques</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="technique" data-section="web" data-title="hébergement site web : comparatif des meilleures solutions 2026">
+<a href="/blog/hebergement-site-web-comparatif" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Hébergement Site Web : Comparatif des Meilleures Solutions 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technique</span>
+<span class="text-[#888888] text-xs">2025-11-11</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Hébergement Site Web : Comparatif des Meilleures Solutions 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="technique" data-section="web" data-title="comment choisir le bon nom de domaine pour votre site web">
+<a href="/blog/nom-domaine-choisir-site-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Comment Choisir le Bon Nom de Domaine pour Votre Site Web" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technique</span>
+<span class="text-[#888888] text-xs">2025-11-10</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Comment Choisir le Bon Nom de Domaine pour Votre Site Web</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="techno" data-section="web" data-title="wordpress vs développement sur mesure : avantages et limites">
+<a href="/blog/wordpress-vs-developpement-sur-mesure" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="WordPress vs Développement Sur Mesure : Avantages et Limites" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technologies</span>
+<span class="text-[#888888] text-xs">2025-11-09</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">WordPress vs Développement Sur Mesure : Avantages et Limites</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="techno" data-section="web" data-title="react et next.js pour un site web moderne et performant">
+<a href="/blog/react-nextjs-site-web-moderne" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="React et Next.js pour un Site Web Moderne et Performant" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technologies</span>
+<span class="text-[#888888] text-xs">2025-11-08</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">React et Next.js pour un Site Web Moderne et Performant</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="techno" data-section="web" data-title="cms vs code : quel choix pour votre site web en 2026 ?">
+<a href="/blog/cms-vs-code-quel-choix-site-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="CMS vs Code : Quel Choix pour Votre Site Web en 2026 ?" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technologies</span>
+<span class="text-[#888888] text-xs">2025-11-07</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">CMS vs Code : Quel Choix pour Votre Site Web en 2026 ?</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="techno" data-section="web" data-title="webflow vs site codé sur mesure : comparatif honnête">
+<a href="/blog/webflow-vs-site-code-sur-mesure" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Webflow vs Site Codé Sur Mesure : Comparatif Honnête" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Technologies</span>
+<span class="text-[#888888] text-xs">2025-11-06</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Webflow vs Site Codé Sur Mesure : Comparatif Honnête</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="seo" data-section="web" data-title="seo site web : guide complet du référencement naturel 2026">
+<a href="/blog/seo-site-web-guide-referencement" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800" alt="SEO Site Web : Guide Complet du Référencement Naturel 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SEO</span>
+<span class="text-[#888888] text-xs">2025-11-05</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">SEO Site Web : Guide Complet du Référencement Naturel 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="seo" data-section="web" data-title="seo technique : checklist complète pour votre site web">
+<a href="/blog/seo-technique-site-web-checklist" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800" alt="SEO Technique : Checklist Complète pour Votre Site Web" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SEO</span>
+<span class="text-[#888888] text-xs">2025-11-04</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">SEO Technique : Checklist Complète pour Votre Site Web</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="seo" data-section="web" data-title="seo local : faire apparaître votre site sur google maps">
+<a href="/blog/seo-local-site-web-google-maps" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800" alt="SEO Local : Faire Apparaître Votre Site sur Google Maps" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SEO</span>
+<span class="text-[#888888] text-xs">2025-11-03</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">SEO Local : Faire Apparaître Votre Site sur Google Maps</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="seo" data-section="web" data-title="recherche de mots-clés : stratégie seo pour votre site web">
+<a href="/blog/mots-cles-site-web-recherche-strategie" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Recherche de Mots-Clés : Stratégie SEO pour Votre Site Web" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SEO</span>
+<span class="text-[#888888] text-xs">2025-11-02</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Recherche de Mots-Clés : Stratégie SEO pour Votre Site Web</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="seo" data-section="web" data-title="backlinks et netlinking : booster l'autorité de votre site">
+<a href="/blog/backlinks-site-web-strategie-netlinking" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Backlinks et Netlinking : Booster l'Autorité de Votre Site" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SEO</span>
+<span class="text-[#888888] text-xs">2025-11-01</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Backlinks et Netlinking : Booster l'Autorité de Votre Site</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="design" data-section="web" data-title="ux design : concevoir un site web qui convertit">
+<a href="/blog/ux-design-site-web-conversion" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="UX Design : Concevoir un Site Web qui Convertit" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Design & UX</span>
+<span class="text-[#888888] text-xs">2025-10-31</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">UX Design : Concevoir un Site Web qui Convertit</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="design" data-section="web" data-title="tendances web design 2026 : ce qui marche vraiment">
+<a href="/blog/tendances-web-design-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Tendances Web Design 2026 : Ce qui Marche Vraiment" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Design & UX</span>
+<span class="text-[#888888] text-xs">2025-10-30</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Tendances Web Design 2026 : Ce qui Marche Vraiment</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="design" data-section="web" data-title="charte graphique site web : créer une identité visuelle forte">
+<a href="/blog/charte-graphique-site-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Charte Graphique Site Web : Créer une Identité Visuelle Forte" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Design & UX</span>
+<span class="text-[#888888] text-xs">2025-10-29</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Charte Graphique Site Web : Créer une Identité Visuelle Forte</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="conversion" data-section="web" data-title="landing page : créer une page qui convertit vos visiteurs">
+<a href="/blog/landing-page-site-web-convertir" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Landing Page : Créer une Page qui Convertit Vos Visiteurs" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Conversion</span>
+<span class="text-[#888888] text-xs">2025-10-28</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Landing Page : Créer une Page qui Convertit Vos Visiteurs</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="conversion" data-section="web" data-title="formulaire de contact : optimiser pour plus de conversions">
+<a href="/blog/formulaire-contact-site-web-optimiser" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Formulaire de Contact : Optimiser pour Plus de Conversions" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Conversion</span>
+<span class="text-[#888888] text-xs">2025-10-27</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Formulaire de Contact : Optimiser pour Plus de Conversions</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="conversion" data-section="web" data-title="taux de conversion site web : comment l'améliorer concrètement">
+<a href="/blog/taux-conversion-site-web-ameliorer" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Taux de Conversion Site Web : Comment l'Améliorer Concrètement" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Conversion</span>
+<span class="text-[#888888] text-xs">2025-10-26</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Taux de Conversion Site Web : Comment l'Améliorer Concrètement</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="conversion" data-section="web" data-title="transformer votre site web en générateur de leads">
+<a href="/blog/site-web-generateur-leads" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Transformer Votre Site Web en Générateur de Leads" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Conversion</span>
+<span class="text-[#888888] text-xs">2025-10-25</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Transformer Votre Site Web en Générateur de Leads</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="conversion" data-section="web" data-title="call-to-action : bonnes pratiques pour votre site web">
+<a href="/blog/call-to-action-site-web-bonnes-pratiques" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Call-to-Action : Bonnes Pratiques pour Votre Site Web" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Conversion</span>
+<span class="text-[#888888] text-xs">2025-10-24</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Call-to-Action : Bonnes Pratiques pour Votre Site Web</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="secteur" data-section="web" data-title="création de site web pour restaurant : guide spécialisé">
+<a href="/blog/site-web-restaurant-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Création de Site Web pour Restaurant : Guide Spécialisé" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Par Secteur</span>
+<span class="text-[#888888] text-xs">2025-10-23</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Création de Site Web pour Restaurant : Guide Spécialisé</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="secteur" data-section="web" data-title="site web pour artisan et btp : attirer des clients locaux">
+<a href="/blog/site-web-artisan-btp-guide" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Web pour Artisan et BTP : Attirer des Clients Locaux" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Par Secteur</span>
+<span class="text-[#888888] text-xs">2025-10-22</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Web pour Artisan et BTP : Attirer des Clients Locaux</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="secteur" data-section="web" data-title="site web pour professions libérales : avocats, médecins, experts">
+<a href="/blog/site-web-cabinet-avocat-medical" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Web pour Professions Libérales : Avocats, Médecins, Experts" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Par Secteur</span>
+<span class="text-[#888888] text-xs">2025-10-21</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Web pour Professions Libérales : Avocats, Médecins, Experts</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="secteur" data-section="web" data-title="site web pour agence immobilière : fonctionnalités essentielles">
+<a href="/blog/site-web-immobilier-agence" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Web pour Agence Immobilière : Fonctionnalités Essentielles" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Par Secteur</span>
+<span class="text-[#888888] text-xs">2025-10-20</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Web pour Agence Immobilière : Fonctionnalités Essentielles</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="secteur" data-section="web" data-title="site web pour coach et consultant : personal branding digital">
+<a href="/blog/site-web-coach-consultant-personal-branding" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Web pour Coach et Consultant : Personal Branding Digital" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Par Secteur</span>
+<span class="text-[#888888] text-xs">2025-10-19</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Web pour Coach et Consultant : Personal Branding Digital</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="maintenance" data-section="web" data-title="maintenance site web : pourquoi et comment entretenir votre site">
+<a href="/blog/maintenance-site-web-pourquoi-comment" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Maintenance Site Web : Pourquoi et Comment Entretenir Votre Site" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Maintenance</span>
+<span class="text-[#888888] text-xs">2025-10-18</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Maintenance Site Web : Pourquoi et Comment Entretenir Votre Site</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="maintenance" data-section="web" data-title="mise à jour site web : bonnes pratiques et fréquence idéale">
+<a href="/blog/mise-a-jour-site-web-bonnes-pratiques" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mise à Jour Site Web : Bonnes Pratiques et Fréquence Idéale" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Maintenance</span>
+<span class="text-[#888888] text-xs">2025-10-17</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Mise à Jour Site Web : Bonnes Pratiques et Fréquence Idéale</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="analytics" data-section="web" data-title="analytics site web : mesurer et analyser vos performances">
+<a href="/blog/analytics-site-web-mesurer-performance" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Analytics Site Web : Mesurer et Analyser Vos Performances" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Analytics</span>
+<span class="text-[#888888] text-xs">2025-10-16</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Analytics Site Web : Mesurer et Analyser Vos Performances</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="analytics" data-section="web" data-title="google search console : guide pratique pour votre site web">
+<a href="/blog/google-search-console-site-web" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Google Search Console : Guide Pratique pour Votre Site Web" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Analytics</span>
+<span class="text-[#888888] text-xs">2025-10-15</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Google Search Console : Guide Pratique pour Votre Site Web</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="legal" data-section="web" data-title="rgpd et site web : mise en conformité complète 2026">
+<a href="/blog/rgpd-site-web-conformite-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=800" alt="RGPD et Site Web : Mise en Conformité Complète 2026" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Legal & RGPD</span>
+<span class="text-[#888888] text-xs">2025-10-14</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">RGPD et Site Web : Mise en Conformité Complète 2026</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="legal" data-section="web" data-title="mentions légales site web : ce qui est obligatoire en france">
+<a href="/blog/mentions-legales-site-web-obligatoires" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mentions Légales Site Web : Ce qui est Obligatoire en France" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Legal & RGPD</span>
+<span class="text-[#888888] text-xs">2025-10-13</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Mentions Légales Site Web : Ce qui est Obligatoire en France</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="legal" data-section="web" data-title="accessibilité site web : normes rgaa et wcag à respecter">
+<a href="/blog/accessibilite-site-web-rgaa-wcag" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Accessibilité Site Web : Normes RGAA et WCAG à Respecter" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Legal & RGPD</span>
+<span class="text-[#888888] text-xs">2025-10-12</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Accessibilité Site Web : Normes RGAA et WCAG à Respecter</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="avance" data-section="web" data-title="site web multilingue : développer votre présence internationale">
+<a href="/blog/site-web-multilingue-international" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Web Multilingue : Développer Votre Présence Internationale" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Fonctions Avancees</span>
+<span class="text-[#888888] text-xs">2025-10-11</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Web Multilingue : Développer Votre Présence Internationale</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="avance" data-section="web" data-title="site web avec espace client : fonctionnalités et développement">
+<a href="/blog/site-web-avec-espace-client" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Site Web avec Espace Client : Fonctionnalités et Développement" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Fonctions Avancees</span>
+<span class="text-[#888888] text-xs">2025-10-10</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Site Web avec Espace Client : Fonctionnalités et Développement</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="avance" data-section="web" data-title="chatbot sur votre site web : intégrer l'ia pour convertir plus">
+<a href="/blog/chatbot-site-web-integrer" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Chatbot sur Votre Site Web : Intégrer l'IA pour Convertir Plus" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Fonctions Avancees</span>
+<span class="text-[#888888] text-xs">2025-10-09</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Chatbot sur Votre Site Web : Intégrer l'IA pour Convertir Plus</h3>
+</div>
+</a>
+</article>
+<article class="article-card border border-[#262626] hover:border-[#CCFF00]/50 transition-all group" data-category="creation" data-section="web" data-title="pourquoi avoir un site web en 2026 ? les raisons qui comptent">
+<a href="/blog/pourquoi-avoir-site-web-2026" class="block">
+<div class="overflow-hidden">
+<img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pourquoi Avoir un Site Web en 2026 ? Les Raisons qui Comptent" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+</div>
+<div class="p-5">
+<div class="flex items-center gap-3 mb-3">
+<span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Creation Web</span>
+<span class="text-[#888888] text-xs">2025-10-08</span>
+</div>
+<h3 class="text-[#EFEFEF] font-bold text-lg leading-tight group-hover:text-[#CCFF00] transition-colors">Pourquoi Avoir un Site Web en 2026 ? Les Raisons qui Comptent</h3>
+</div>
+</a>
+</article>
+
+</div>
+</section>
+
+<!-- CTA -->
+<section class="border-t border-[#262626] py-16">
+<div class="max-w-4xl mx-auto px-6 text-center">
+<h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Clash Display',sans-serif">Un projet en tete ?</h2>
+<p class="text-[#888888] text-lg mb-8">Que ce soit un site web sur mesure ou un MVP, on en discute.</p>
+<a href="https://cal.com/dutygroup/appel-quickship-site-web" target="_blank" class="inline-block bg-[#CCFF00] text-black font-bold px-8 py-4 hover:bg-[#B8E600] transition-colors">Reserver un Appel Decouverte &rarr;</a>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="border-t border-[#262626] py-8">
+<div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+<a href="/" class="flex items-center gap-2">
+<img src="/logo.svg" alt="QuickShip" class="h-6" onerror="this.style.display='none'">
+<span class="font-bold" style="font-family:'Clash Display',sans-serif">QuickShip</span>
+</a>
+<p class="text-[#888888] text-sm">&copy; 2026 QuickShip. Sites web sur mesure &amp; MVPs.</p>
+</div>
+</footer>
+
+<!-- Filter + Search JS -->
+<script>
+(function() {
+  const cards = document.querySelectorAll('.article-card');
+  const buttons = document.querySelectorAll('.filter-btn');
+  const searchInput = document.getElementById('search-input');
+  const countEl = document.getElementById('article-count');
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  function applyFilters() {
+    let visible = 0;
+    cards.forEach(card => {
+      const cat = card.dataset.category;
+      const section = card.dataset.section;
+      const title = card.dataset.title;
+
+      let matchesFilter = activeFilter === 'all'
+        || cat === activeFilter
+        || (activeFilter === 'section-dev' && section === 'dev')
+        || (activeFilter === 'section-web' && section === 'web');
+
+      let matchesSearch = !searchQuery || title.includes(searchQuery.toLowerCase());
+
+      if (matchesFilter && matchesSearch) {
+        card.classList.remove('hidden-filter');
+        visible++;
+      } else {
+        card.classList.add('hidden-filter');
+      }
+    });
+    countEl.textContent = visible;
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    applyFilters();
+  });
+})();
+</script>
+</body>
+</html>

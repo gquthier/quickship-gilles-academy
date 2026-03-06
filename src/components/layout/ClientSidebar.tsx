@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
+  Video,
   LayoutDashboard,
   FolderKanban,
   LifeBuoy,
@@ -19,15 +20,9 @@ import { Avatar } from '@/components/ui/Avatar'
 import { cn } from '@/lib/utils'
 
 const navigation = [
-  { name: 'Vue d\'ensemble', href: '/overview', icon: LayoutDashboard },
-  { name: 'Mes projets', href: '/projects', icon: FolderKanban },
-  { name: 'Modifications', href: '/updates', icon: RefreshCw },
+  { name: 'Formation', href: '/academy', icon: Video },
+  { name: 'Mon Profil', href: '/settings', icon: Settings },
   { name: 'Support', href: '/support', icon: LifeBuoy },
-  { name: 'Assistant IA', href: '/assistant', icon: Sparkles },
-  { name: 'Hub', href: '/hub', icon: Layers },
-  { name: 'Integrations', href: '/integrations', icon: Plug },
-  { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
-  { name: 'Parametres', href: '/settings', icon: Settings },
 ]
 
 interface ClientSidebarProps {
@@ -60,14 +55,13 @@ export function ClientSidebar({ user, onSignOut, mobileOpen, onMobileClose }: Cl
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-5 border-b-3 border-surface-border">
           <Link
-            href="/overview"
+            href="/academy"
             className="flex items-center gap-2"
             onClick={onMobileClose}
           >
             <div className="w-7 h-7 bg-accent border-3 border-accent" />
-            <span className="font-display font-black text-lg uppercase tracking-tight">
-              <span className="text-accent">Quick</span>
-              <span className="text-text-primary">Ship</span>
+            <span className="font-display font-black text-lg uppercase tracking-tight text-white">
+              GILLES <span className="text-accent">ACADEMY</span>
             </span>
           </Link>
           <button

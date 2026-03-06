@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-black scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD : Déploiement Continu pour Startups | QuickShip Blog</title>
+<meta name="description" content="CI/CD : Déploiement Continu pour Startups. Guide complet par QuickShip, l'agence qui livre des MVPs en 48h pour 990EUR.">
+<meta property="og:title" content="CI/CD : Déploiement Continu pour Startups">
+<meta property="og:description" content="Guide complet par QuickShip — MVP en 48h pour 990EUR.">
+<meta property="og:image" content="https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.quickship.fun/blog/deploiement-continu-ci-cd">
+<meta property="article:published_time" content="2026-01-13">
+<link rel="canonical" href="https://www.quickship.fun/blog/deploiement-continu-ci-cd">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,500,600,1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        bg: '#0A0A0A', surface: '#111111', accent: '#CCFF00',
+        'accent-hover': '#B8E600', 'text-primary': '#EFEFEF',
+        'text-secondary': '#888888',
+      },
+      fontFamily: {
+        display: ['Clash Display', 'Inter', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      }
+    }
+  }
+}
+</script>
+<style>
+body { font-family: 'Inter', sans-serif; }
+h1, h2, h3 { font-family: 'Clash Display', sans-serif; }
+article h2 { font-size: 1.75rem; font-weight: 700; color: #CCFF00; margin-top: 2.5rem; margin-bottom: 1rem; }
+article h3 { font-size: 1.25rem; font-weight: 600; color: #EFEFEF; margin-top: 2rem; margin-bottom: 0.75rem; }
+article p { color: #B0B0B0; line-height: 1.8; margin-bottom: 1.25rem; }
+article ul, article ol { color: #B0B0B0; margin-bottom: 1.25rem; padding-left: 1.5rem; }
+article li { margin-bottom: 0.5rem; line-height: 1.7; }
+article a { color: #CCFF00; text-decoration: underline; }
+</style>
+</head>
+<body class="bg-[#0A0A0A] text-[#EFEFEF]">
+
+<!-- Nav -->
+<nav class="border-b border-[#262626] py-4">
+<div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+<a href="/" class="flex items-center gap-2">
+<img src="/logo.svg" alt="QuickShip" class="h-8" onerror="this.style.display='none'">
+<span class="font-bold text-xl" style="font-family:'Clash Display',sans-serif">QuickShip</span>
+</a>
+<div class="flex items-center gap-6">
+<a href="/blog" class="text-[#888888] hover:text-[#EFEFEF] transition-colors text-sm">Blog</a>
+<a href="https://cal.com/dutygroup/appel-quickship-site-web" target="_blank" class="bg-[#CCFF00] text-black font-bold px-4 py-2 text-sm hover:bg-[#B8E600] transition-colors">Reserver un Appel</a>
+</div>
+</div>
+</nav>
+
+<!-- Article -->
+<main class="max-w-3xl mx-auto px-6 py-16">
+
+<!-- Breadcrumb -->
+<div class="flex items-center gap-2 text-sm text-[#888888] mb-8">
+<a href="/" class="hover:text-[#CCFF00]">Accueil</a>
+<span>/</span>
+<a href="/blog" class="hover:text-[#CCFF00]">Blog</a>
+<span>/</span>
+<span class="text-[#EFEFEF]">Tech</span>
+</div>
+
+<!-- Hero image -->
+<img src="https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop" alt="CI/CD : Déploiement Continu pour Startups" class="w-full h-64 md:h-80 object-cover border border-[#262626] mb-8" loading="lazy">
+
+<!-- Meta -->
+<div class="flex items-center gap-4 mb-6">
+<span class="bg-[#CCFF00]/10 text-[#CCFF00] px-3 py-1 text-xs font-bold uppercase tracking-wider border border-[#CCFF00]/20">Tech</span>
+<span class="text-[#888888] text-sm">13 janvier 2026</span>
+<span class="text-[#888888] text-sm">&bull; 8 min de lecture</span>
+</div>
+
+<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-8" style="font-family:'Clash Display',sans-serif">CI/CD : Déploiement Continu pour Startups</h1>
+
+<article class="prose prose-invert max-w-none">
+
+<p>Le choix de la stack technique est une decision strategique qui impacte la vitesse de developpement, la scalabilite, les couts d'hebergement, et la facilite de recrutement. En 2026, l'ecosysteme est plus riche que jamais -- mais aussi plus fragmenté.</p>
+<p>C'est exactement le type de projet qu'on traite chez QuickShip. Pas de cahier des charges de 50 pages, pas de reunions inutiles. Un brief clair, un MVP fonctionnel en 48h, et vous etes sur le marche avant que vos concurrents aient fini leur premier sprint.</p>
+<p>La bonne nouvelle, c'est qu'il existe aujourd'hui un consensus assez clair sur les meilleures technologies pour chaque cas d'usage. La mauvaise nouvelle, c'est que beaucoup de fondateurs font encore des choix technologiques bases sur le hype plutot que sur la pertinence.</p>
+
+<h2>Le Stack Moderne en 2026</h2>
+<p>Le frontend est domine par React et son ecosysteme. Next.js s'est impose comme le framework de reference pour les applications web -- il gere le routing, le rendu serveur, l'optimisation des images, et le deploiement. Vue.js (avec Nuxt) reste une alternative solide, surtout en France ou la communaute est active. Svelte gagne du terrain pour les projets ou la performance est critique.</p>
+<p>Cote backend, la tendance est au "backend as a service". Supabase (PostgreSQL + auth + storage + realtime) et Firebase (NoSQL + auth + hosting) permettent de lancer un backend en quelques heures au lieu de quelques semaines. Pour les projets plus complexes, Node.js (Express, Fastify) et Python (FastAPI, Django) restent les choix les plus populaires.</p>
+<p>Les bases de donnees relationnelles (PostgreSQL) dominent le marche des applications transactionnelles. MongoDB reste pertinent pour les cas d'usage specifiques (donnees non structurees, prototypage rapide), mais PostgreSQL avec JSONB couvre 95% des besoins.</p>
+<p>L'hebergement s'est simplifie avec les plateformes edge : Vercel, Netlify, Cloudflare Pages. Le deploiement est automatique (push sur Git), la scalabilite est geree par la plateforme, et les couts sont previsibles. AWS et GCP restent necessaires pour les architectures complexes, mais pour un MVP ou un SaaS en croissance, les plateformes edge sont largement suffisantes.</p>
+
+<h2>Performance et Optimisation</h2>
+<p>La performance d'une application web impacte directement les conversions et la satisfaction utilisateur. Google penalise les sites lents dans ses resultats de recherche, et les utilisateurs abandonnent une page qui met plus de 3 secondes a charger.</p>
+<p>Les Core Web Vitals de Google mesurent trois aspects de la performance. Le LCP (Largest Contentful Paint) mesure le temps d'affichage du plus grand element visible -- visez moins de 2.5 secondes. Le FID (First Input Delay) mesure le temps de reaction au premier clic -- visez moins de 100ms. Le CLS (Cumulative Layout Shift) mesure la stabilite visuelle -- visez moins de 0.1.</p>
+<p>Pour optimiser la performance, commencez par les fondamentaux. Utilisez le Server-Side Rendering (SSR) ou le Static Site Generation (SSG) avec Next.js pour accelerer le premier affichage. Optimisez les images (format WebP, lazy loading, tailles adaptatives). Minimisez le JavaScript envoye au navigateur (code splitting, tree shaking). Utilisez un CDN pour servir les assets statiques depuis le serveur le plus proche de l'utilisateur.</p>
+<p>Chez QuickShip, chaque MVP que nous livrons atteint un score Lighthouse Performance superieur a 90. C'est un standard non negociable.</p>
+
+<h2>Securite et Bonnes Pratiques</h2>
+<p>La securite n'est pas un luxe reserve aux grandes entreprises -- c'est une obligation legale (RGPD) et un prerequis pour la confiance de vos utilisateurs.</p>
+<p>Les vulnerabilites les plus courantes dans les applications web sont listees dans le Top 10 OWASP. L'injection SQL est evitee en utilisant des requetes parametrees (ce que fait automatiquement Supabase). Le XSS (Cross-Site Scripting) est prevenu en echappant les donnees utilisateur affichees dans le HTML. Le CSRF (Cross-Site Request Forgery) est bloque par des tokens anti-CSRF. Les failles d'authentification sont evitees en utilisant des solutions eprouvees (Supabase Auth, Auth0) plutot que du code custom.</p>
+<p>Le HTTPS est obligatoire -- Vercel et les plateformes modernes le fournissent par defaut. Les mots de passe doivent etre hashes avec bcrypt ou argon2. Les secrets (cles API, credentials de base de donnees) ne doivent jamais etre commites dans le code source -- utilisez des variables d'environnement.</p>
+<p>La conformite RGPD impose de collecter le consentement pour les cookies, de permettre aux utilisateurs de supprimer leurs donnees, et de documenter vos traitements de donnees. Pour un MVP, un bandeau de consentement et une politique de confidentialite simple suffisent.</p>
+
+<!-- FAQ -->
+<h2>Questions Frequentes</h2>
+<div class="grid gap-4 not-prose">
+
+<div class="border border-[#262626] p-6 hover:border-[#CCFF00]/30 transition-colors">
+<h3 class="text-lg font-bold text-[#EFEFEF] mb-3">Vous faites aussi des applications mobiles ?</h3>
+<p class="text-[#888888] leading-relaxed">Oui, nous developpons des applications mobiles avec React Native (cross-platform iOS + Android). Le tarif et le delai dependent de la complexite. [Contactez-nous](https://cal.com/dutygroup/appel-quickship-site-web) pour en discuter.</p>
+</div>
+<div class="border border-[#262626] p-6 hover:border-[#CCFF00]/30 transition-colors">
+<h3 class="text-lg font-bold text-[#EFEFEF] mb-3">Et apres le MVP, que se passe-t-il ?</h3>
+<p class="text-[#888888] leading-relaxed">Vous avez plusieurs options : iterer avec nous (packages d'evolution), recruter un developpeur qui reprend le code (stack standard, facile a reprendre), ou continuer seul si vous avez les competences techniques. Le code est le votre, vous faites ce que vous voulez.</p>
+</div>
+<div class="border border-[#262626] p-6 hover:border-[#CCFF00]/30 transition-colors">
+<h3 class="text-lg font-bold text-[#EFEFEF] mb-3">Combien coute un MVP avec QuickShip ?</h3>
+<p class="text-[#888888] leading-relaxed">Notre offre standard est a 990EUR pour un MVP fonctionnel livre en 48h. Cela inclut l'authentification, la base de donnees, l'interface utilisateur, et le deploiement. Pour des projets plus complexes, nous proposons des packages sur mesure. [Reservez un appel](https://cal.com/dutygroup/appel-quickship-site-web) pour discuter de votre projet.</p>
+</div>
+<div class="border border-[#262626] p-6 hover:border-[#CCFF00]/30 transition-colors">
+<h3 class="text-lg font-bold text-[#EFEFEF] mb-3">48h, c'est vraiment possible ?</h3>
+<p class="text-[#888888] leading-relaxed">Oui. Notre process est rode et notre stack standardisee. Pour un MVP de 3 a 5 features, 48h est notre engagement standard. Des projets plus complexes peuvent prendre 5 a 10 jours. [Discutons de votre projet](https://cal.com/dutygroup/appel-quickship-site-web) pour un devis precis.</p>
+</div>
+</div>
+
+<!-- CTA -->
+<div class="mt-16 border border-[#CCFF00]/30 bg-[#CCFF00]/5 p-8 md:p-12 text-center not-prose">
+<h2 class="text-2xl md:text-3xl font-bold text-[#EFEFEF] mb-4" style="font-family:'Clash Display',sans-serif">Pret a Lancer votre Projet ?</h2>
+<p class="text-[#888888] text-lg leading-relaxed mb-6">Pret a transformer votre idee en produit ? Chez QuickShip, on livre des MVPs fonctionnels en 48h pour 990EUR. Du vrai code, pas du vibe code.</p><a href="https://cal.com/dutygroup/appel-quickship-site-web" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#CCFF00] text-black font-bold px-8 py-4 hover:bg-[#B8E600] transition-colors">Discuter de mon Projet &rarr;</a>
+</div>
+
+<div class="mt-12 pt-8 border-t border-[#262626]">
+<h3 class="text-2xl font-bold text-[#EFEFEF] mb-6" style="font-family:'Clash Display',sans-serif">Articles Connexes</h3>
+<div class="grid md:grid-cols-2 gap-4">
+<a href="/blog/creer-saas-sans-cto" class="block p-4 border border-[#262626] hover:border-[#CCFF00]/50 transition-colors group"><span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">SaaS</span><h4 class="text-[#EFEFEF] font-bold mt-1 group-hover:text-[#CCFF00] transition-colors">Créer un SaaS sans CTO : Guide Pratique</h4></a><a href="/blog/pitch-deck-startup-tech" class="block p-4 border border-[#262626] hover:border-[#CCFF00]/50 transition-colors group"><span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span><h4 class="text-[#EFEFEF] font-bold mt-1 group-hover:text-[#CCFF00] transition-colors">Pitch Deck Startup Tech : Template et Conseils</h4></a><a href="/blog/supabase-vs-firebase-backend" class="block p-4 border border-[#262626] hover:border-[#CCFF00]/50 transition-colors group"><span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span><h4 class="text-[#EFEFEF] font-bold mt-1 group-hover:text-[#CCFF00] transition-colors">Supabase vs Firebase : Quel Backend Choisir ?</h4></a><a href="/blog/ia-generative-integration-saas" class="block p-4 border border-[#262626] hover:border-[#CCFF00]/50 transition-colors group"><span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Stack Technique</span><h4 class="text-[#EFEFEF] font-bold mt-1 group-hover:text-[#CCFF00] transition-colors">IA Générative : Intégrer ChatGPT à votre SaaS</h4></a><a href="/blog/concurrence-analyse-startup" class="block p-4 border border-[#262626] hover:border-[#CCFF00]/50 transition-colors group"><span class="text-[#CCFF00] text-xs font-bold uppercase tracking-wider">Startup</span><h4 class="text-[#EFEFEF] font-bold mt-1 group-hover:text-[#CCFF00] transition-colors">Analyse Concurrentielle Startup : Méthodologie Complète</h4></a>
+</div>
+</div>
+</article>
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-[#262626] py-12 mt-16">
+<div class="max-w-6xl mx-auto px-6 text-center">
+<p class="text-[#888888] text-sm">&copy; 2026 QuickShip. MVP en 48h pour 990&euro;.</p>
+<div class="mt-4 flex justify-center gap-6">
+<a href="/" class="text-[#888888] hover:text-[#CCFF00] text-sm">Accueil</a>
+<a href="/blog" class="text-[#888888] hover:text-[#CCFF00] text-sm">Blog</a>
+<a href="https://cal.com/dutygroup/appel-quickship-site-web" class="text-[#888888] hover:text-[#CCFF00] text-sm">Contact</a>
+</div>
+</div>
+</footer>
+
+</body>
+</html>
